@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://flipper-app.lovable.app/sitemap.xml

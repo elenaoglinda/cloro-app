@@ -97,6 +97,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap",
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Flipper",
+          url: "https://flipper-app.lovable.app/",
+          description:
+            "Sistema operativo para empresas de mantenimiento de piscinas en España.",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Flipper",
+          url: "https://flipper-app.lovable.app/",
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
