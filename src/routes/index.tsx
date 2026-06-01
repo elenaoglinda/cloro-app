@@ -613,7 +613,7 @@ function CTA() {
         <div className="relative grid lg:grid-cols-[1.4fr_1fr] gap-10 items-center">
           <div>
             <h2 className="text-4xl lg:text-5xl text-white text-balance">
-              Deja la libreta. Recupera los domingos.
+              Opera como una empresa de 20 técnicos. Aunque seas tres.
             </h2>
             <p className="mt-4 text-white/85 max-w-xl">
               Prueba Flipper gratis durante 14 días. Sin tarjeta, sin permanencia y con migración
