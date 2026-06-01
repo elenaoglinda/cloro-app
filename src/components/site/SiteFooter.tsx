@@ -12,8 +12,8 @@ export function SiteFooter() {
             <span className="font-display text-2xl">Flipper</span>
           </div>
           <p className="mt-4 text-sm text-muted-foreground max-w-sm">
-            La plataforma de gestión integral para empresas de mantenimiento de piscinas en España.
-            Cumplimiento SILOÉ, facturación VeriFactu y WhatsApp en un solo lugar.
+            El sistema operativo para empresas de mantenimiento de piscinas en España.
+            Rutas, química, facturación, SILOÉ y WhatsApp en una sola plataforma.
           </p>
         </div>
         <div>

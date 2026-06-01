@@ -12,17 +12,17 @@ import technicianApp from "@/assets/technician-app.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Flipper — Software de gestión para empresas de piscinas en España" },
+      { title: "Flipper — Sistema operativo para empresas de mantenimiento de piscinas" },
       {
         name: "description",
         content:
-          "Flipper digitaliza tu empresa de mantenimiento de piscinas: rutas, parte químico, informes SILOÉ, facturación VeriFactu, Bizum y un agente WhatsApp que reserva visitas por ti.",
+          "El sistema operativo de tu empresa de mantenimiento de piscinas. Gestiona rutas, parte químico, facturación VeriFactu, informes SILOÉ y un agente WhatsApp que capta y agenda clientes.",
       },
-      { property: "og:title", content: "Flipper — Gestión de piscinas, sin papeles" },
+      { property: "og:title", content: "Flipper — El sistema operativo de tu empresa de piscinas" },
       {
         property: "og:description",
         content:
-          "La plataforma todo-en-uno para piscineros en España. Cumplimiento SILOÉ automático y agente WhatsApp con calendario integrado.",
+          "Gestiona rutas, parámetros químicos, facturación VeriFactu e informes SILOÉ desde un único lugar. Con agente de WhatsApp para captar y agendar clientes 24/7.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -62,12 +62,11 @@ function Hero() {
             <Sparkles className="size-3.5" /> Diseñado para el mercado español
           </span>
           <h1 className="mt-6 text-5xl lg:text-7xl font-display leading-[1.02] text-balance">
-            Tu empresa de piscinas, <em className="text-primary not-italic">sin papeles</em>.
+            El sistema operativo de tu empresa de <em className="text-primary not-italic">mantenimiento de piscinas</em>.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl text-balance">
-            Flipper sustituye la libreta, el WhatsApp del jefe y el Excel de los lunes. Rutas optimizadas,
-            parte químico digital, informes SILOÉ automáticos y un agente de WhatsApp que reserva
-            visitas mientras duermes.
+            Gestiona rutas, parámetros químicos, facturación VeriFactu e informes SILOÉ desde un único
+            lugar. Con un agente de WhatsApp que capta y agenda nuevos clientes mientras atiendes los actuales.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
@@ -166,10 +165,10 @@ function Problem() {
     <section className="max-w-7xl mx-auto px-6 py-24">
       <div className="max-w-2xl">
         <p className="text-sm font-medium text-accent">El sector hoy</p>
-        <h2 className="mt-2 text-4xl lg:text-5xl">Mantenimiento de piscinas en España: papel, prisas y multas evitables.</h2>
+        <h2 className="mt-2 text-4xl lg:text-5xl">El 90 % del sector opera como hace 20 años. El otro 10 % ya usa Flipper.</h2>
         <p className="mt-4 text-muted-foreground">
-          El 90% del sector funciona como hace 20 años. Flipper sustituye cinco procesos manuales
-          en una sola herramienta pensada para el piscinero español.
+          Las empresas que crecen no lo hacen contratando más técnicos: lo hacen optimizando
+          sus procesos. Flipper centraliza rutas, química, cobros y cumplimiento en una sola plataforma.
         </p>
       </div>
       <div className="mt-12 grid md:grid-cols-3 gap-6">
@@ -202,9 +201,9 @@ function Features() {
   return (
     <section id="caracteristicas" className="bg-surface py-24">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-2xl">
+      <div className="max-w-2xl">
           <p className="text-sm font-medium text-accent">La plataforma</p>
-          <h2 className="mt-2 text-4xl lg:text-5xl">Todo lo que tu empresa necesita, en una pantalla.</h2>
+          <h2 className="mt-2 text-4xl lg:text-5xl">Una sola plataforma para operar, cumplir y crecer.</h2>
         </div>
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((f) => (
@@ -614,7 +613,7 @@ function CTA() {
         <div className="relative grid lg:grid-cols-[1.4fr_1fr] gap-10 items-center">
           <div>
             <h2 className="text-4xl lg:text-5xl text-white text-balance">
-              Deja la libreta. Recupera los domingos.
+              Opera como una empresa de 20 técnicos. Aunque seas tres.
             </h2>
             <p className="mt-4 text-white/85 max-w-xl">
               Prueba Flipper gratis durante 14 días. Sin tarjeta, sin permanencia y con migración
