@@ -9,23 +9,77 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import heroPool from "@/assets/hero-pool.jpg";
 import technicianApp from "@/assets/technician-app.jpg";
 
+const FAQS = [
+  {
+    q: "¿Flipper genera el informe SILOÉ exactamente como lo pide Sanidad?",
+    a: "Sí. Generamos el XML conforme al Anexo IV del RD 742/2013 listo para subir al portal SILOÉ, más un Excel por vaso para tu archivo. Validamos en tiempo real lecturas fuera de rango, días sin parte y analíticas mensuales pendientes.",
+  },
+  {
+    q: "¿El agente de WhatsApp habla con mis clientes en mi nombre?",
+    a: "Sí, usa el número de WhatsApp Business de tu empresa. Tú defines el tono, los precios orientativos y los huecos disponibles. Las urgencias y los casos complejos se te escalan automáticamente.",
+  },
+  {
+    q: "¿Funciona si mi técnico está en un chalet sin cobertura?",
+    a: "La app móvil tiene modo offline real. Las lecturas, fotos y firmas se guardan en el dispositivo y se sincronizan en menos de 10 segundos en cuanto vuelve la señal.",
+  },
+  {
+    q: "¿Puedo facturar a una comunidad de propietarios?",
+    a: "Por supuesto. Soporta NIF de la comunidad, varios contactos (administrador, presidente, conserje) y acceso del portal para que cualquier vecino pueda ver los informes de su piscina.",
+  },
+  {
+    q: "¿Mis datos están en España?",
+    a: "Sí. Toda la infraestructura está en regiones de la UE (Madrid / Irlanda). Cumplimos RGPD, hay derecho al olvido en un clic y firmamos DPA con todos los sub-encargados (Stripe, WhatsApp, AWS).",
+  },
+  {
+    q: "¿Cuánto tiempo tarda en migrar mi cartera?",
+    a: "Importamos tu Excel de clientes y rutas en una sesión guiada de 30 minutos. La mayoría de empresas están operativas en menos de una semana.",
+  },
+];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Flipper — Sistema operativo para empresas de mantenimiento de piscinas" },
+      { title: "Flipper — Gestión de mantenimiento de piscinas" },
       {
         name: "description",
         content:
-          "El sistema operativo de tu empresa de mantenimiento de piscinas. Gestiona rutas, parte químico, facturación VeriFactu, informes SILOÉ y un agente WhatsApp que capta y agenda clientes.",
+          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, SILOÉ, VeriFactu y agenda clientes por WhatsApp.",
       },
-      { property: "og:title", content: "Flipper — El sistema operativo de tu empresa de piscinas" },
+      { property: "og:title", content: "Flipper — Gestión de mantenimiento de piscinas" },
       {
         property: "og:description",
         content:
-          "Gestiona rutas, parámetros químicos, facturación VeriFactu e informes SILOÉ desde un único lugar. Con agente de WhatsApp para captar y agendar clientes 24/7.",
+          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, SILOÉ, VeriFactu y agenda clientes por WhatsApp.",
       },
+      { property: "og:url", content: "https://flipper-app.lovable.app/" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "https://flipper-app.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "Flipper",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web, iOS, Android",
+          offers: { "@type": "Offer", priceCurrency: "EUR" },
+        }),
+      },
     ],
   }),
   component: Landing,
@@ -555,32 +609,7 @@ function Pricing() {
 
 /* ---------------- FAQ ---------------- */
 function FAQ() {
-  const faqs = [
-    {
-      q: "¿Flipper genera el informe SILOÉ exactamente como lo pide Sanidad?",
-      a: "Sí. Generamos el XML conforme al Anexo IV del RD 742/2013 listo para subir al portal SILOÉ, más un Excel por vaso para tu archivo. Validamos en tiempo real lecturas fuera de rango, días sin parte y analíticas mensuales pendientes.",
-    },
-    {
-      q: "¿El agente de WhatsApp habla con mis clientes en mi nombre?",
-      a: "Sí, usa el número de WhatsApp Business de tu empresa. Tú defines el tono, los precios orientativos y los huecos disponibles. Las urgencias y los casos complejos se te escalan automáticamente.",
-    },
-    {
-      q: "¿Funciona si mi técnico está en un chalet sin cobertura?",
-      a: "La app móvil tiene modo offline real. Las lecturas, fotos y firmas se guardan en el dispositivo y se sincronizan en menos de 10 segundos en cuanto vuelve la señal.",
-    },
-    {
-      q: "¿Puedo facturar a una comunidad de propietarios?",
-      a: "Por supuesto. Soporta NIF de la comunidad, varios contactos (administrador, presidente, conserje) y acceso del portal para que cualquier vecino pueda ver los informes de su piscina.",
-    },
-    {
-      q: "¿Mis datos están en España?",
-      a: "Sí. Toda la infraestructura está en regiones de la UE (Madrid / Irlanda). Cumplimos RGPD, hay derecho al olvido en un clic y firmamos DPA con todos los sub-encargados (Stripe, WhatsApp, AWS).",
-    },
-    {
-      q: "¿Cuánto tiempo tarda en migrar mi cartera?",
-      a: "Importamos tu Excel de clientes y rutas en una sesión guiada de 30 minutos. La mayoría de empresas están operativas en menos de una semana.",
-    },
-  ];
+  const faqs = FAQS;
   return (
     <section className="max-w-3xl mx-auto px-6 py-24">
       <div className="text-center">
