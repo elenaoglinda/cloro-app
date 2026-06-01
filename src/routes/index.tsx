@@ -62,12 +62,11 @@ function Hero() {
             <Sparkles className="size-3.5" /> Diseñado para el mercado español
           </span>
           <h1 className="mt-6 text-5xl lg:text-7xl font-display leading-[1.02] text-balance">
-            Tu empresa de piscinas, <em className="text-primary not-italic">sin papeles</em>.
+            El sistema operativo de tu empresa de <em className="text-primary not-italic">mantenimiento de piscinas</em>.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl text-balance">
-            Flipper sustituye la libreta, el WhatsApp del jefe y el Excel de los lunes. Rutas optimizadas,
-            parte químico digital, informes SILOÉ automáticos y un agente de WhatsApp que reserva
-            visitas mientras duermes.
+            Gestiona rutas, parámetros químicos, facturación VeriFactu e informes SILOÉ desde un único
+            lugar. Con un agente de WhatsApp que capta y agenda nuevos clientes mientras atiendes los actuales.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
