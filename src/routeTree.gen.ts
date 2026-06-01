@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComparativaEvisaneRouteImport } from './routes/comparativa.evisane'
+import { Route as ComparativaEisiHotelRouteImport } from './routes/comparativa.eisi-hotel'
+import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/comparativa.autocontrolpiscinas'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -22,31 +25,75 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComparativaEvisaneRoute = ComparativaEvisaneRouteImport.update({
+  id: '/comparativa/evisane',
+  path: '/comparativa/evisane',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComparativaEisiHotelRoute = ComparativaEisiHotelRouteImport.update({
+  id: '/comparativa/eisi-hotel',
+  path: '/comparativa/eisi-hotel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComparativaAutocontrolpiscinasRoute =
+  ComparativaAutocontrolpiscinasRouteImport.update({
+    id: '/comparativa/autocontrolpiscinas',
+    path: '/comparativa/autocontrolpiscinas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
+  '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
+  '/comparativa/evisane': typeof ComparativaEvisaneRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
+  '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
+  '/comparativa/evisane': typeof ComparativaEvisaneRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
+  '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
+  '/comparativa/evisane': typeof ComparativaEvisaneRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/sitemap.xml'
+    | '/comparativa/autocontrolpiscinas'
+    | '/comparativa/eisi-hotel'
+    | '/comparativa/evisane'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml'
-  id: '__root__' | '/' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/sitemap.xml'
+    | '/comparativa/autocontrolpiscinas'
+    | '/comparativa/eisi-hotel'
+    | '/comparativa/evisane'
+  id:
+    | '__root__'
+    | '/'
+    | '/sitemap.xml'
+    | '/comparativa/autocontrolpiscinas'
+    | '/comparativa/eisi-hotel'
+    | '/comparativa/evisane'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ComparativaAutocontrolpiscinasRoute: typeof ComparativaAutocontrolpiscinasRoute
+  ComparativaEisiHotelRoute: typeof ComparativaEisiHotelRoute
+  ComparativaEvisaneRoute: typeof ComparativaEvisaneRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +112,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/comparativa/evisane': {
+      id: '/comparativa/evisane'
+      path: '/comparativa/evisane'
+      fullPath: '/comparativa/evisane'
+      preLoaderRoute: typeof ComparativaEvisaneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comparativa/eisi-hotel': {
+      id: '/comparativa/eisi-hotel'
+      path: '/comparativa/eisi-hotel'
+      fullPath: '/comparativa/eisi-hotel'
+      preLoaderRoute: typeof ComparativaEisiHotelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comparativa/autocontrolpiscinas': {
+      id: '/comparativa/autocontrolpiscinas'
+      path: '/comparativa/autocontrolpiscinas'
+      fullPath: '/comparativa/autocontrolpiscinas'
+      preLoaderRoute: typeof ComparativaAutocontrolpiscinasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ComparativaAutocontrolpiscinasRoute: ComparativaAutocontrolpiscinasRoute,
+  ComparativaEisiHotelRoute: ComparativaEisiHotelRoute,
+  ComparativaEvisaneRoute: ComparativaEvisaneRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

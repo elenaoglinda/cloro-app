@@ -26,12 +26,12 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-medium mb-3">Empresa</h4>
+          <h4 className="text-sm font-medium mb-3">Comparativas</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><a href="#" className="hover:text-foreground">Sobre Flipper</a></li>
+            <li><a href="/comparativa/autocontrolpiscinas" className="hover:text-foreground">vs AutocontrolPiscinas</a></li>
+            <li><a href="/comparativa/evisane" className="hover:text-foreground">vs EviSane</a></li>
+            <li><a href="/comparativa/eisi-hotel" className="hover:text-foreground">vs EISI Hotel</a></li>
             <li><a href="#" className="hover:text-foreground">Contacto</a></li>
-            <li><a href="#" className="hover:text-foreground">Privacidad (RGPD)</a></li>
-            <li><a href="#" className="hover:text-foreground">Términos</a></li>
           </ul>
         </div>
       </div>
