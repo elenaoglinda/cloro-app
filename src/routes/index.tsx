@@ -12,17 +12,17 @@ import technicianApp from "@/assets/technician-app.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Flipper — Software de gestión para empresas de piscinas en España" },
+      { title: "Flipper — Sistema operativo para empresas de mantenimiento de piscinas" },
       {
         name: "description",
         content:
-          "Flipper digitaliza tu empresa de mantenimiento de piscinas: rutas, parte químico, informes SILOÉ, facturación VeriFactu, Bizum y un agente WhatsApp que reserva visitas por ti.",
+          "El sistema operativo de tu empresa de mantenimiento de piscinas. Gestiona rutas, parte químico, facturación VeriFactu, informes SILOÉ y un agente WhatsApp que capta y agenda clientes.",
       },
-      { property: "og:title", content: "Flipper — Gestión de piscinas, sin papeles" },
+      { property: "og:title", content: "Flipper — El sistema operativo de tu empresa de piscinas" },
       {
         property: "og:description",
         content:
-          "La plataforma todo-en-uno para piscineros en España. Cumplimiento SILOÉ automático y agente WhatsApp con calendario integrado.",
+          "Gestiona rutas, parámetros químicos, facturación VeriFactu e informes SILOÉ desde un único lugar. Con agente de WhatsApp para captar y agendar clientes 24/7.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
