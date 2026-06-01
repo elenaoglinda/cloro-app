@@ -94,7 +94,7 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
+    font-feature-settings: "liga" 1, "kern" 1;
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3 {
