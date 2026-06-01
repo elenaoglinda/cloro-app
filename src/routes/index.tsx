@@ -201,9 +201,9 @@ function Features() {
   return (
     <section id="caracteristicas" className="bg-surface py-24">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-2xl">
+      <div className="max-w-2xl">
           <p className="text-sm font-medium text-accent">La plataforma</p>
-          <h2 className="mt-2 text-4xl lg:text-5xl">Todo lo que tu empresa necesita, en una pantalla.</h2>
+          <h2 className="mt-2 text-4xl lg:text-5xl">Una sola plataforma para operar, cumplir y crecer.</h2>
         </div>
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((f) => (
