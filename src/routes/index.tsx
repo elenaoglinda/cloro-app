@@ -165,10 +165,10 @@ function Problem() {
     <section className="max-w-7xl mx-auto px-6 py-24">
       <div className="max-w-2xl">
         <p className="text-sm font-medium text-accent">El sector hoy</p>
-        <h2 className="mt-2 text-4xl lg:text-5xl">Mantenimiento de piscinas en España: papel, prisas y multas evitables.</h2>
+        <h2 className="mt-2 text-4xl lg:text-5xl">El 90 % del sector opera como hace 20 años. El otro 10 % ya usa Flipper.</h2>
         <p className="mt-4 text-muted-foreground">
-          El 90% del sector funciona como hace 20 años. Flipper sustituye cinco procesos manuales
-          en una sola herramienta pensada para el piscinero español.
+          Las empresas que crecen no lo hacen contratando más técnicos: lo hacen optimizando
+          sus procesos. Flipper centraliza rutas, química, cobros y cumplimiento en una sola plataforma.
         </p>
       </div>
       <div className="mt-12 grid md:grid-cols-3 gap-6">
