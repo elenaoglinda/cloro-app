@@ -79,6 +79,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Flipper — Gestión de piscinas para España" },
       { name: "description", content: "Software todo-en-uno para empresas de mantenimiento de piscinas: rutas, SILOÉ, VeriFactu y agente WhatsApp." },
+      { property: "og:title", content: "Flipper — Gestión de piscinas para España" },
+      { name: "twitter:title", content: "Flipper — Gestión de piscinas para España" },
+      { property: "og:description", content: "Software todo-en-uno para empresas de mantenimiento de piscinas: rutas, SILOÉ, VeriFactu y agente WhatsApp." },
+      { name: "twitter:description", content: "Software todo-en-uno para empresas de mantenimiento de piscinas: rutas, SILOÉ, VeriFactu y agente WhatsApp." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/699d05c8-751e-4fea-aea2-6b01897cc2c9/id-preview-017a0033--e40d4daa-e17b-4a1a-a897-80702d0ac07a.lovable.app-1780345749904.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/699d05c8-751e-4fea-aea2-6b01897cc2c9/id-preview-017a0033--e40d4daa-e17b-4a1a-a897-80702d0ac07a.lovable.app-1780345749904.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -86,7 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap",
       },
     ],
   }),
