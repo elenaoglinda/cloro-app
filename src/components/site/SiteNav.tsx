@@ -9,7 +9,7 @@ export function SiteNav() {
           <span className="size-8 rounded-lg bg-gradient-pool flex items-center justify-center shadow-soft">
             <Waves className="size-4 text-primary-foreground" strokeWidth={2.5} />
           </span>
-          <span className="font-display text-2xl tracking-tight">Flipper</span>
+          <span className="font-display text-2xl tracking-tight">Cloro</span>
         </Link>
         <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           <a href="/#caracteristicas" className="hover:text-foreground transition">Características</a>

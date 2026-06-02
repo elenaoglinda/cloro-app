@@ -7,7 +7,7 @@ export type CellValue = boolean | "partial" | string;
 export interface ComparisonRow {
   feature: string;
   detail?: string;
-  flipper: CellValue;
+  cloro: CellValue;
   competitor: CellValue;
 }
 
@@ -23,7 +23,7 @@ export interface ComparisonPageProps {
   summary: string[];
   sections: ComparisonSection[];
   verdict: string;
-  bestFor: { flipper: string; competitor: string };
+  bestFor: { cloro: string; competitor: string };
 }
 
 function Cell({ value }: { value: CellValue }) {
@@ -73,7 +73,7 @@ export function ComparisonPage({
             Comparativa
           </p>
           <h1 className="font-display text-5xl md:text-6xl leading-[1.05] tracking-tight">
-            Flipper <span className="text-muted-foreground">vs</span> {competitorName}
+            Cloro <span className="text-muted-foreground">vs</span> {competitorName}
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl">{competitorTagline}</p>
           <p className="mt-6 text-base text-foreground/80 max-w-3xl leading-relaxed">{intro}</p>
@@ -95,7 +95,7 @@ export function ComparisonPage({
               href="/#cta"
               className="inline-flex items-center justify-center h-10 px-5 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition shadow-soft"
             >
-              Prueba Flipper gratis <ArrowRight className="size-4 ml-1.5" />
+              Prueba Cloro gratis <ArrowRight className="size-4 ml-1.5" />
             </a>
             <a
               href="/#precios"
@@ -117,7 +117,7 @@ export function ComparisonPage({
                   Característica
                 </div>
                 <div className="px-5 py-3 text-xs uppercase tracking-wider text-foreground font-semibold">
-                  Flipper
+                  Cloro
                 </div>
                 <div className="px-5 py-3 text-xs uppercase tracking-wider text-muted-foreground font-medium">
                   {competitorName}
@@ -137,7 +137,7 @@ export function ComparisonPage({
                     )}
                   </div>
                   <div className="px-5 py-4">
-                    <Cell value={row.flipper} />
+                    <Cell value={row.cloro} />
                   </div>
                   <div className="px-5 py-4">
                     <Cell value={row.competitor} />
@@ -150,8 +150,8 @@ export function ComparisonPage({
 
         <div className="mt-16 grid gap-5 md:grid-cols-2">
           <div className="border border-border/60 rounded-xl p-6 bg-surface">
-            <h3 className="font-display text-xl mb-2">Elige Flipper si…</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{bestFor.flipper}</p>
+            <h3 className="font-display text-xl mb-2">Elige Cloro si…</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{bestFor.cloro}</p>
           </div>
           <div className="border border-border/60 rounded-xl p-6 bg-surface">
             <h3 className="font-display text-xl mb-2">Elige {competitorName} si…</h3>
@@ -167,7 +167,7 @@ export function ComparisonPage({
               href="/#cta"
               className="inline-flex items-center justify-center h-10 px-5 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition shadow-soft"
             >
-              Prueba Flipper gratis <ArrowRight className="size-4 ml-1.5" />
+              Prueba Cloro gratis <ArrowRight className="size-4 ml-1.5" />
             </a>
           </div>
         </div>
