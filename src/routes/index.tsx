@@ -127,7 +127,7 @@ function Hero() {
               href="#cta"
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-foreground text-background font-medium shadow-soft hover:opacity-90 transition"
             >
-              Empezar gratis 14 días <ArrowRight className="size-4" />
+              Empezar gratis 7 días <ArrowRight className="size-4" />
             </a>
             <a
               href="#whatsapp"
@@ -558,7 +558,7 @@ function Pricing() {
           <p className="text-sm font-medium text-accent">Precios</p>
           <h2 className="mt-2 text-4xl lg:text-5xl">Pagas por piscina. Sin permanencia.</h2>
           <p className="mt-4 text-muted-foreground">
-            14 días de prueba gratis. Sin tarjeta. Cancela cuando quieras.
+            7 días de prueba gratis. Sin tarjeta. Cancela cuando quieras.
           </p>
         </div>
         <div className="mt-12 grid md:grid-cols-3 gap-6">
@@ -645,7 +645,7 @@ function CTA() {
               Opera como una empresa de 20 técnicos. Aunque seas tres.
             </h2>
             <p className="mt-4 text-white/85 max-w-xl">
-              Prueba Flipper gratis durante 14 días. Sin tarjeta, sin permanencia y con migración
+              Prueba Flipper gratis durante 7 días. Sin tarjeta, sin permanencia y con migración
               de tu cartera incluida. En menos de una semana estarás operativo.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
