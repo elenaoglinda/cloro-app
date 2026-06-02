@@ -104,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "Cloro",
-          url: "https://cloro-app.lovable.app/",
+          url: "https://cloro.app/",
           description:
             "Sistema operativo para empresas de mantenimiento de piscinas en España.",
         }),
@@ -115,7 +115,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: "Cloro",
-          url: "https://cloro-app.lovable.app/",
+          url: "https://cloro.app/",
         }),
       },
     ],

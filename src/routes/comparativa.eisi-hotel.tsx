@@ -19,11 +19,11 @@ export const Route = createFileRoute("/comparativa/eisi-hotel")({
         content:
           "Análisis honesto entre Cloro y EISI Hotel para piscinas de hoteles y empresas de mantenimiento.",
       },
-      { property: "og:url", content: `https://cloro-app.lovable.app${URL_PATH}` },
+      { property: "og:url", content: `https://cloro.app${URL_PATH}` },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: `https://cloro-app.lovable.app${URL_PATH}` }],
+    links: [{ rel: "canonical", href: `https://cloro.app${URL_PATH}` }],
   }),
   component: Page,
 });

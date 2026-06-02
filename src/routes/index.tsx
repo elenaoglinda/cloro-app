@@ -83,11 +83,11 @@ export const Route = createFileRoute("/")({
         content:
           "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, SILOÉ, VeriFactu y agenda clientes por WhatsApp.",
       },
-      { property: "og:url", content: "https://cloro-app.lovable.app/" },
+      { property: "og:url", content: "https://cloro.app/" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://cloro-app.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://cloro.app/" }],
     scripts: [
       {
         type: "application/ld+json",
