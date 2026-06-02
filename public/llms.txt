@@ -1,8 +1,8 @@
-# Flipper
+# Cloro
 
 > Sistema operativo para empresas de mantenimiento de piscinas en España: rutas, parte químico digital, informes SILOÉ (RD 742/2013), facturación VeriFactu y agente de WhatsApp que capta y agenda clientes 24/7.
 
-Flipper digitaliza la operación diaria de empresas de mantenimiento de piscinas (comunidades, hoteles, chalets): planifica rutas, registra parámetros químicos con firma en obra, genera el XML SILOÉ listo para subir a Sanidad, emite facturas conformes a VeriFactu y atiende a los clientes por WhatsApp con un agente que reserva visitas en el calendario del equipo.
+Cloro digitaliza la operación diaria de empresas de mantenimiento de piscinas (comunidades, hoteles, chalets): planifica rutas, registra parámetros químicos con firma en obra, genera el XML SILOÉ listo para subir a Sanidad, emite facturas conformes a VeriFactu y atiende a los clientes por WhatsApp con un agente que reserva visitas en el calendario del equipo.
 
 ## Pages
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://flipper-app.lovable.app/sitemap.xml
+Sitemap: https://cloro.app/sitemap.xml

@@ -9,7 +9,7 @@ export function SiteFooter() {
             <span className="size-8 rounded-lg bg-gradient-pool flex items-center justify-center">
               <Waves className="size-4 text-primary-foreground" strokeWidth={2.5} />
             </span>
-            <span className="font-display text-2xl">Flipper</span>
+            <span className="font-display text-2xl">Cloro</span>
           </div>
           <p className="mt-4 text-sm text-muted-foreground max-w-sm">
             El sistema operativo para empresas de mantenimiento de piscinas en España.
@@ -37,7 +37,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-border/60">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} Flipper. Hecho en España. Datos alojados en la UE.</p>
+          <p>© {new Date().getFullYear()} Cloro. Hecho en España. Datos alojados en la UE.</p>
           <p>RD 742/2013 · SILOÉ · VeriFactu · Bizum · SEPA</p>
         </div>
       </div>

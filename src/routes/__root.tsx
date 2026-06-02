@@ -77,10 +77,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Flipper — Gestión de piscinas para España" },
+      { title: "Cloro — Gestión de piscinas para España" },
       { name: "description", content: "Software todo-en-uno para empresas de mantenimiento de piscinas: rutas, SILOÉ, VeriFactu y agente WhatsApp." },
-      { property: "og:title", content: "Flipper — Gestión de piscinas para España" },
-      { name: "twitter:title", content: "Flipper — Gestión de piscinas para España" },
+      { property: "og:title", content: "Cloro — Gestión de piscinas para España" },
+      { name: "twitter:title", content: "Cloro — Gestión de piscinas para España" },
       { property: "og:description", content: "Software todo-en-uno para empresas de mantenimiento de piscinas: rutas, SILOÉ, VeriFactu y agente WhatsApp." },
       { name: "twitter:description", content: "Software todo-en-uno para empresas de mantenimiento de piscinas: rutas, SILOÉ, VeriFactu y agente WhatsApp." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/699d05c8-751e-4fea-aea2-6b01897cc2c9/id-preview-017a0033--e40d4daa-e17b-4a1a-a897-80702d0ac07a.lovable.app-1780345749904.png" },
@@ -103,8 +103,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "Flipper",
-          url: "https://flipper-app.lovable.app/",
+          name: "Cloro",
+          url: "https://cloro.app/",
           description:
             "Sistema operativo para empresas de mantenimiento de piscinas en España.",
         }),
@@ -114,8 +114,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "Flipper",
-          url: "https://flipper-app.lovable.app/",
+          name: "Cloro",
+          url: "https://cloro.app/",
         }),
       },
     ],

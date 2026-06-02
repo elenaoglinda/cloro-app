@@ -12,26 +12,26 @@ import technicianApp from "@/assets/technician-app.jpg";
 const FAQS = [
   {
     q: "¿Cuál es el mejor software para empresas de mantenimiento de piscinas en España?",
-    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Flipper está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ, factura con VeriFactu y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria ni la facturación electrónica española.",
+    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ, factura con VeriFactu y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria ni la facturación electrónica española.",
   },
   {
-    q: "¿Flipper genera el informe SILOÉ exactamente como lo pide Sanidad?",
+    q: "¿Cloro genera el informe SILOÉ exactamente como lo pide Sanidad?",
     a: "Sí. Generamos el XML conforme al Anexo IV del RD 742/2013 listo para subir al portal SILOÉ, más un Excel por vaso para tu archivo. Validamos en tiempo real lecturas fuera de rango, días sin parte y analíticas mensuales pendientes, para que no te llegue un requerimiento de la consejería.",
   },
   {
     q: "¿Es obligatorio llevar el registro de parámetros de piscinas en España?",
-    a: "Sí, el RD 742/2013 obliga al titular de cualquier piscina de uso público (hoteles, cámpings, comunidades de más de 30 viviendas, gimnasios, polideportivos) a registrar pH, cloro libre y combinado, temperatura, turbidez y aforo cada día de apertura, además de analíticas mensuales por laboratorio acreditado. Flipper automatiza tanto el parte diario del técnico como la subida a SILOÉ.",
+    a: "Sí, el RD 742/2013 obliga al titular de cualquier piscina de uso público (hoteles, cámpings, comunidades de más de 30 viviendas, gimnasios, polideportivos) a registrar pH, cloro libre y combinado, temperatura, turbidez y aforo cada día de apertura, además de analíticas mensuales por laboratorio acreditado. Cloro automatiza tanto el parte diario del técnico como la subida a SILOÉ.",
   },
   {
-    q: "¿En qué se diferencia Flipper de Skimmer, Pool Office o ServiceTitan?",
-    a: "Skimmer y Pool Office son excelentes apps de campo pensadas para el mercado norteamericano: no cubren SILOÉ, RD 742/2013, VeriFactu, comunidades de propietarios ni facturación en euros con IVA. ServiceTitan es un ERP para grandes empresas multi-oficio con un coste muy superior. Flipper es vertical para piscinas y para España, con un precio pensado para autónomos y empresas familiares.",
+    q: "¿En qué se diferencia Cloro de Skimmer, Pool Office o ServiceTitan?",
+    a: "Skimmer y Pool Office son excelentes apps de campo pensadas para el mercado norteamericano: no cubren SILOÉ, RD 742/2013, VeriFactu, comunidades de propietarios ni facturación en euros con IVA. ServiceTitan es un ERP para grandes empresas multi-oficio con un coste muy superior. Cloro es vertical para piscinas y para España, con un precio pensado para autónomos y empresas familiares.",
   },
   {
     q: "¿Sirve también para una sola persona con 30-60 piscinas?",
     a: "Sí, es nuestro perfil Solo (autónomo). Por 19 €/mes + 0,99 € por piscina tienes rutas optimizadas con Google Routes, parte diario con foto y firma, facturación VeriFactu y portal de cliente. La mayoría de autónomos recupera 4-6 horas a la semana sólo eliminando el Excel y los WhatsApp sueltos.",
   },
   {
-    q: "¿Cómo optimiza Flipper las rutas de mantenimiento?",
+    q: "¿Cómo optimiza Cloro las rutas de mantenimiento?",
     a: "Usamos Google Routes API con tráfico en tiempo real, ventanas horarias por cliente (comunidades que sólo abren mañanas, hoteles con check-in a partir de las 14h) y el tiempo medio real de cada piscina. Una ruta típica de 18 piscinas baja de ~7,5 h a ~5,5 h. El técnico ve la siguiente parada con navegación nativa (Google Maps o Waze).",
   },
   {
@@ -40,7 +40,7 @@ const FAQS = [
   },
   {
     q: "¿Funciona si mi técnico está en un chalet sin cobertura?",
-    a: "Sí. La app móvil tiene modo offline real: lecturas, fotos, firmas, productos aplicados y partes se guardan en el dispositivo y se sincronizan en menos de 10 segundos cuando vuelve la señal. Es la queja número uno que vemos en Reddit sobre apps americanas y europeas: Flipper se diseñó offline-first.",
+    a: "Sí. La app móvil tiene modo offline real: lecturas, fotos, firmas, productos aplicados y partes se guardan en el dispositivo y se sincronizan en menos de 10 segundos cuando vuelve la señal. Es la queja número uno que vemos en Reddit sobre apps americanas y europeas: Cloro se diseñó offline-first.",
   },
   {
     q: "¿Puedo facturar a una comunidad de propietarios con VeriFactu?",
@@ -48,7 +48,7 @@ const FAQS = [
   },
   {
     q: "¿Cuánto cuesta un software de gestión de piscinas?",
-    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Flipper arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ, VeriFactu y portal de cliente sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
+    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Cloro arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ, VeriFactu y portal de cliente sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
   },
   {
     q: "¿Cómo se gestiona la dosificación de cloro y pH desde la app?",
@@ -71,23 +71,23 @@ const FAQS = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Flipper — Gestión de mantenimiento de piscinas" },
+      { title: "Cloro — Gestión de mantenimiento de piscinas" },
       {
         name: "description",
         content:
           "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, SILOÉ, VeriFactu y agenda clientes por WhatsApp.",
       },
-      { property: "og:title", content: "Flipper — Gestión de mantenimiento de piscinas" },
+      { property: "og:title", content: "Cloro — Gestión de mantenimiento de piscinas" },
       {
         property: "og:description",
         content:
           "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, SILOÉ, VeriFactu y agenda clientes por WhatsApp.",
       },
-      { property: "og:url", content: "https://flipper-app.lovable.app/" },
+      { property: "og:url", content: "https://cloro.app/" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://flipper-app.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://cloro.app/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -106,7 +106,7 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          name: "Flipper",
+          name: "Cloro",
           applicationCategory: "BusinessApplication",
           operatingSystem: "Web, iOS, Android",
           offers: { "@type": "Offer", priceCurrency: "EUR" },
@@ -251,10 +251,10 @@ function Problem() {
     <section className="max-w-7xl mx-auto px-6 py-24">
       <div className="max-w-2xl">
         <p className="text-sm font-medium text-accent">El sector hoy</p>
-        <h2 className="mt-2 text-4xl lg:text-5xl">El 90 % del sector opera como hace 20 años. El otro 10 % ya usa Flipper.</h2>
+        <h2 className="mt-2 text-4xl lg:text-5xl">El 90 % del sector opera como hace 20 años. El otro 10 % ya usa Cloro.</h2>
         <p className="mt-4 text-muted-foreground">
           Las empresas que crecen no lo hacen contratando más técnicos: lo hacen optimizando
-          sus procesos. Flipper centraliza rutas, química, cobros y cumplimiento en una sola plataforma.
+          sus procesos. Cloro centraliza rutas, química, cobros y cumplimiento en una sola plataforma.
         </p>
       </div>
       <div className="mt-12 grid md:grid-cols-3 gap-6">
@@ -325,7 +325,7 @@ function Features() {
           <div className="relative min-h-[360px] bg-gradient-pool">
             <img
               src={technicianApp}
-              alt="Técnico de piscinas usando la app Flipper en el móvil"
+              alt="Técnico de piscinas usando la app Cloro en el móvil"
               loading="lazy"
               width={1200}
               height={900}
@@ -347,7 +347,7 @@ function WhatsAppAgent() {
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[color:var(--whatsapp)]/15 text-[color:var(--whatsapp)] text-xs font-medium">
             <MessageCircle className="size-3.5" /> Nuevo · Agente IA en WhatsApp
           </span>
-          <h2 className="mt-4 text-4xl lg:text-5xl">El cliente escribe a WhatsApp. Flipper reserva la visita.</h2>
+          <h2 className="mt-4 text-4xl lg:text-5xl">El cliente escribe a WhatsApp. Cloro reserva la visita.</h2>
           <p className="mt-4 text-muted-foreground">
             En España todo se hace por WhatsApp. Nuestro agente conversacional atiende a tus clientes
             24/7, entiende lo que necesitan, propone huecos reales en tu calendario y reserva la visita
@@ -355,7 +355,7 @@ function WhatsAppAgent() {
           </p>
           <ul className="mt-6 space-y-4">
             {[
-              { icon: Calendar, t: "Conectado a tu calendario", d: "Sincroniza con Google Calendar y la planificación de Flipper. Solo propone huecos compatibles con la ruta del día." },
+              { icon: Calendar, t: "Conectado a tu calendario", d: "Sincroniza con Google Calendar y la planificación de Cloro. Solo propone huecos compatibles con la ruta del día." },
               { icon: Clock, t: "Atención 24/7 en castellano", d: "Resuelve dudas frecuentes (precios orientativos, qué incluye una visita, urgencias) sin que tú tengas que cogerlo a las 22:00." },
               { icon: FileSpreadsheet, t: "Brief completo al técnico", d: "Tipo de piscina, volumen, último análisis, fotos enviadas por el cliente y dirección con coordenadas." },
               { icon: BellRing, t: "Recordatorios y confirmaciones", d: "Recordatorio 24h antes, confirmación de llegada y envío del informe al terminar." },
@@ -382,7 +382,7 @@ function WhatsAppAgent() {
                   <Waves className="size-4 text-white" />
                 </div>
                 <div>
-                  <div className="text-white text-sm font-medium">Flipper · Reservas</div>
+                  <div className="text-white text-sm font-medium">Cloro · Reservas</div>
                   <div className="text-[10px] text-emerald-400">en línea</div>
                 </div>
               </div>
@@ -435,7 +435,7 @@ function Compliance() {
           <h2 className="mt-4 text-4xl lg:text-5xl text-white">El informe SILOÉ deja de ser un fin de semana de marzo.</h2>
           <p className="mt-4 text-white/80 max-w-xl">
             Cada lectura del técnico alimenta directamente el motor de cumplimiento. El 1 de abril
-            haces clic y Flipper te entrega el XML listo para subir al portal del Ministerio
+            haces clic y Cloro te entrega el XML listo para subir al portal del Ministerio
             y el Excel por vaso para tu archivo.
           </p>
           <ul className="mt-8 space-y-3">
@@ -496,15 +496,15 @@ function Compliance() {
 
 /* ---------------- COMPARISON ---------------- */
 function Comparison() {
-  const rows: Array<{ feature: string; flipper: boolean | string; autocontrol: boolean | string; evisane: boolean | string; eisi: boolean | string }> = [
-    { feature: "Informe SILOÉ (XML + Excel)", flipper: true, autocontrol: true, evisane: true, eisi: true },
-    { feature: "Optimización de rutas con IA", flipper: true, autocontrol: false, evisane: false, eisi: false },
-    { feature: "App offline para técnicos", flipper: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial" },
-    { feature: "Agente WhatsApp con calendario", flipper: true, autocontrol: false, evisane: false, eisi: false },
-    { feature: "Bizum + SEPA + VeriFactu", flipper: true, autocontrol: false, evisane: false, eisi: false },
-    { feature: "Portal cliente y comunidades", flipper: true, autocontrol: false, evisane: false, eisi: "Hoteles" },
-    { feature: "Cobros recurrentes automáticos", flipper: true, autocontrol: false, evisane: false, eisi: false },
-    { feature: "En castellano nativo + soporte ES", flipper: true, autocontrol: true, evisane: true, eisi: true },
+  const rows: Array<{ feature: string; cloro: boolean | string; autocontrol: boolean | string; evisane: boolean | string; eisi: boolean | string }> = [
+    { feature: "Informe SILOÉ (XML + Excel)", cloro: true, autocontrol: true, evisane: true, eisi: true },
+    { feature: "Optimización de rutas con IA", cloro: true, autocontrol: false, evisane: false, eisi: false },
+    { feature: "App offline para técnicos", cloro: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial" },
+    { feature: "Agente WhatsApp con calendario", cloro: true, autocontrol: false, evisane: false, eisi: false },
+    { feature: "Bizum + SEPA + VeriFactu", cloro: true, autocontrol: false, evisane: false, eisi: false },
+    { feature: "Portal cliente y comunidades", cloro: true, autocontrol: false, evisane: false, eisi: "Hoteles" },
+    { feature: "Cobros recurrentes automáticos", cloro: true, autocontrol: false, evisane: false, eisi: false },
+    { feature: "En castellano nativo + soporte ES", cloro: true, autocontrol: true, evisane: true, eisi: true },
   ];
 
   const Cell = ({ v }: { v: boolean | string }) =>
@@ -521,7 +521,7 @@ function Comparison() {
           <p className="text-sm font-medium text-accent">Comparativa</p>
           <h2 className="mt-2 text-4xl lg:text-5xl">El único que cubre el día completo del piscinero.</h2>
           <p className="mt-4 text-muted-foreground">
-            Otras herramientas resuelven solo el informe SILOÉ. Flipper gestiona también la ruta, el
+            Otras herramientas resuelven solo el informe SILOÉ. Cloro gestiona también la ruta, el
             cobro y la comunicación con el cliente.
           </p>
         </div>
@@ -531,7 +531,7 @@ function Comparison() {
             <thead>
               <tr className="border-b border-border bg-surface">
                 <th className="text-left p-4 font-medium">Función</th>
-                <th className="p-4 font-display text-lg text-primary">Flipper</th>
+                <th className="p-4 font-display text-lg text-primary">Cloro</th>
                 <th className="p-4 font-medium text-muted-foreground">Autocontrol Piscinas</th>
                 <th className="p-4 font-medium text-muted-foreground">EviSane</th>
                 <th className="p-4 font-medium text-muted-foreground">EISI HOTEL</th>
@@ -541,7 +541,7 @@ function Comparison() {
               {rows.map((r) => (
                 <tr key={r.feature} className="border-b border-border last:border-0">
                   <td className="p-4">{r.feature}</td>
-                  <td className="p-4 text-center bg-primary/5"><Cell v={r.flipper} /></td>
+                  <td className="p-4 text-center bg-primary/5"><Cell v={r.cloro} /></td>
                   <td className="p-4 text-center"><Cell v={r.autocontrol} /></td>
                   <td className="p-4 text-center"><Cell v={r.evisane} /></td>
                   <td className="p-4 text-center"><Cell v={r.eisi} /></td>
@@ -677,7 +677,7 @@ function CTA() {
               Opera como una empresa de 20 técnicos. Aunque seas tres.
             </h2>
             <p className="mt-4 text-white/85 max-w-xl">
-              Prueba Flipper gratis durante 7 días. Sin tarjeta, sin permanencia y con migración
+              Prueba Cloro gratis durante 7 días. Sin tarjeta, sin permanencia y con migración
               de tu cartera incluida. En menos de una semana estarás operativo.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
