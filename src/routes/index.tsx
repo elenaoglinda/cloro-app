@@ -11,28 +11,60 @@ import technicianApp from "@/assets/technician-app.jpg";
 
 const FAQS = [
   {
+    q: "¿Cuál es el mejor software para empresas de mantenimiento de piscinas en España?",
+    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Flipper está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ, factura con VeriFactu y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria ni la facturación electrónica española.",
+  },
+  {
     q: "¿Flipper genera el informe SILOÉ exactamente como lo pide Sanidad?",
-    a: "Sí. Generamos el XML conforme al Anexo IV del RD 742/2013 listo para subir al portal SILOÉ, más un Excel por vaso para tu archivo. Validamos en tiempo real lecturas fuera de rango, días sin parte y analíticas mensuales pendientes.",
+    a: "Sí. Generamos el XML conforme al Anexo IV del RD 742/2013 listo para subir al portal SILOÉ, más un Excel por vaso para tu archivo. Validamos en tiempo real lecturas fuera de rango, días sin parte y analíticas mensuales pendientes, para que no te llegue un requerimiento de la consejería.",
+  },
+  {
+    q: "¿Es obligatorio llevar el registro de parámetros de piscinas en España?",
+    a: "Sí, el RD 742/2013 obliga al titular de cualquier piscina de uso público (hoteles, cámpings, comunidades de más de 30 viviendas, gimnasios, polideportivos) a registrar pH, cloro libre y combinado, temperatura, turbidez y aforo cada día de apertura, además de analíticas mensuales por laboratorio acreditado. Flipper automatiza tanto el parte diario del técnico como la subida a SILOÉ.",
+  },
+  {
+    q: "¿En qué se diferencia Flipper de Skimmer, Pool Office o ServiceTitan?",
+    a: "Skimmer y Pool Office son excelentes apps de campo pensadas para el mercado norteamericano: no cubren SILOÉ, RD 742/2013, VeriFactu, comunidades de propietarios ni facturación en euros con IVA. ServiceTitan es un ERP para grandes empresas multi-oficio con un coste muy superior. Flipper es vertical para piscinas y para España, con un precio pensado para autónomos y empresas familiares.",
+  },
+  {
+    q: "¿Sirve también para una sola persona con 30-60 piscinas?",
+    a: "Sí, es nuestro perfil Solo (autónomo). Por 19 €/mes + 0,99 € por piscina tienes rutas optimizadas con Google Routes, parte diario con foto y firma, facturación VeriFactu y portal de cliente. La mayoría de autónomos recupera 4-6 horas a la semana sólo eliminando el Excel y los WhatsApp sueltos.",
+  },
+  {
+    q: "¿Cómo optimiza Flipper las rutas de mantenimiento?",
+    a: "Usamos Google Routes API con tráfico en tiempo real, ventanas horarias por cliente (comunidades que sólo abren mañanas, hoteles con check-in a partir de las 14h) y el tiempo medio real de cada piscina. Una ruta típica de 18 piscinas baja de ~7,5 h a ~5,5 h. El técnico ve la siguiente parada con navegación nativa (Google Maps o Waze).",
   },
   {
     q: "¿El agente de WhatsApp habla con mis clientes en mi nombre?",
-    a: "Sí, usa el número de WhatsApp Business de tu empresa. Tú defines el tono, los precios orientativos y los huecos disponibles. Las urgencias y los casos complejos se te escalan automáticamente.",
+    a: "Sí, usa el número de WhatsApp Business de tu empresa y responde 24/7 a preguntas frecuentes (precios orientativos, próxima visita, resultado de la última analítica), agenda visitas en huecos que tú defines y escala automáticamente urgencias o casos complejos a tu móvil. Tú validas el tono antes de activarlo.",
   },
   {
     q: "¿Funciona si mi técnico está en un chalet sin cobertura?",
-    a: "La app móvil tiene modo offline real. Las lecturas, fotos y firmas se guardan en el dispositivo y se sincronizan en menos de 10 segundos en cuanto vuelve la señal.",
+    a: "Sí. La app móvil tiene modo offline real: lecturas, fotos, firmas, productos aplicados y partes se guardan en el dispositivo y se sincronizan en menos de 10 segundos cuando vuelve la señal. Es la queja número uno que vemos en Reddit sobre apps americanas y europeas: Flipper se diseñó offline-first.",
   },
   {
-    q: "¿Puedo facturar a una comunidad de propietarios?",
-    a: "Por supuesto. Soporta NIF de la comunidad, varios contactos (administrador, presidente, conserje) y acceso del portal para que cualquier vecino pueda ver los informes de su piscina.",
+    q: "¿Puedo facturar a una comunidad de propietarios con VeriFactu?",
+    a: "Sí. Soporta NIF de la comunidad, varios contactos (administrador, presidente, conserje), facturación recurrente y emisión VeriFactu firmada y enviada a la AEAT en tiempo real. El administrador y los vecinos pueden acceder al portal para ver informes, analíticas y facturas de su piscina.",
   },
   {
-    q: "¿Mis datos están en España?",
-    a: "Sí. Toda la infraestructura está en regiones de la UE (Madrid / Irlanda). Cumplimos RGPD, hay derecho al olvido en un clic y firmamos DPA con todos los sub-encargados (Stripe, WhatsApp, AWS).",
+    q: "¿Cuánto cuesta un software de gestión de piscinas?",
+    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Flipper arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ, VeriFactu y portal de cliente sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
   },
   {
-    q: "¿Cuánto tiempo tarda en migrar mi cartera?",
-    a: "Importamos tu Excel de clientes y rutas en una sesión guiada de 30 minutos. La mayoría de empresas están operativas en menos de una semana.",
+    q: "¿Cómo se gestiona la dosificación de cloro y pH desde la app?",
+    a: "El técnico introduce las lecturas y la app calcula automáticamente la dosis recomendada de hipoclorito, ácido o reductor según el volumen del vaso, la temperatura y los rangos legales. Queda registrado el producto aplicado, lote y cantidad, lo que cubre la trazabilidad exigida por Sanidad y los seguros.",
+  },
+  {
+    q: "¿Mis datos están en España y cumplen RGPD?",
+    a: "Sí. Toda la infraestructura está en regiones de la UE (Madrid / Irlanda). Cumplimos RGPD, hay derecho al olvido en un clic y firmamos DPA con todos los sub-encargados (Stripe, WhatsApp, AWS). Nunca vendemos datos ni los usamos para entrenar modelos.",
+  },
+  {
+    q: "¿Cuánto tiempo tarda en migrar mi cartera desde Excel u otro programa?",
+    a: "Importamos tu Excel de clientes, vasos y rutas en una sesión guiada de 30 minutos. La mayoría de autónomos están operativos al día siguiente; empresas con 5 técnicos y 200+ piscinas, en menos de una semana. Si vienes de EviSane, AutocontrolPiscinas o EISI Hotel, tenemos plantillas de importación específicas.",
+  },
+  {
+    q: "¿Funciona para hoteles con varias piscinas y SLA estrictos?",
+    a: "Sí, es nuestro plan Pro. Soporta multi-establecimiento, multi-vaso, SLA por contrato, auditorías hoteleras (Booking, Riu, Meliá), partes firmados por el jefe de mantenimiento del hotel y exportación directa para el responsable de calidad. Pensado para operadores con +500 vasos y presencia multi-provincia.",
   },
 ];
 
