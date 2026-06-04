@@ -3,7 +3,7 @@ import { Waves } from "lucide-react";
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/60 bg-surface mt-24">
-      <div className="max-w-7xl mx-auto px-6 py-14 grid gap-10 md:grid-cols-4">
+      <div className="max-w-7xl mx-auto px-6 py-14 grid gap-10 md:grid-cols-5">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
             <span className="size-8 rounded-lg bg-gradient-pool flex items-center justify-center">
@@ -31,7 +31,13 @@ export function SiteFooter() {
             <li><a href="/comparativa/autocontrolpiscinas" className="hover:text-foreground">vs AutocontrolPiscinas</a></li>
             <li><a href="/comparativa/evisane" className="hover:text-foreground">vs EviSane</a></li>
             <li><a href="/comparativa/eisi-hotel" className="hover:text-foreground">vs EISI Hotel</a></li>
-            <li><a href="#" className="hover:text-foreground">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-sm font-medium mb-3">Empresa</h4>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li><a href="/contacto" className="hover:text-foreground">Contacto</a></li>
+            <li><a href="mailto:hola@cloro.app" className="hover:text-foreground">hola@cloro.app</a></li>
           </ul>
         </div>
       </div>

@@ -10,14 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComparativaEvisaneRouteImport } from './routes/comparativa.evisane'
 import { Route as ComparativaEisiHotelRouteImport } from './routes/comparativa.eisi-hotel'
 import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/comparativa.autocontrolpiscinas'
+import { Route as AdminMensajesRouteImport } from './routes/admin.mensajes'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -41,17 +48,26 @@ const ComparativaAutocontrolpiscinasRoute =
     path: '/comparativa/autocontrolpiscinas',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminMensajesRoute = AdminMensajesRouteImport.update({
+  id: '/admin/mensajes',
+  path: '/admin/mensajes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/mensajes': typeof AdminMensajesRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/mensajes': typeof AdminMensajesRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
@@ -59,7 +75,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/mensajes': typeof AdminMensajesRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
@@ -68,21 +86,27 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/contacto'
     | '/sitemap.xml'
+    | '/admin/mensajes'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/contacto'
     | '/sitemap.xml'
+    | '/admin/mensajes'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
   id:
     | '__root__'
     | '/'
+    | '/contacto'
     | '/sitemap.xml'
+    | '/admin/mensajes'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
@@ -90,7 +114,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactoRoute: typeof ContactoRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AdminMensajesRoute: typeof AdminMensajesRoute
   ComparativaAutocontrolpiscinasRoute: typeof ComparativaAutocontrolpiscinasRoute
   ComparativaEisiHotelRoute: typeof ComparativaEisiHotelRoute
   ComparativaEvisaneRoute: typeof ComparativaEvisaneRoute
@@ -103,6 +129,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -133,12 +166,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComparativaAutocontrolpiscinasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/mensajes': {
+      id: '/admin/mensajes'
+      path: '/admin/mensajes'
+      fullPath: '/admin/mensajes'
+      preLoaderRoute: typeof AdminMensajesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactoRoute: ContactoRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AdminMensajesRoute: AdminMensajesRoute,
   ComparativaAutocontrolpiscinasRoute: ComparativaAutocontrolpiscinasRoute,
   ComparativaEisiHotelRoute: ComparativaEisiHotelRoute,
   ComparativaEvisaneRoute: ComparativaEvisaneRoute,
