@@ -279,11 +279,10 @@ function Features() {
     { icon: Beaker, t: "Parte químico digital", d: "Cloro, pH, ORP, turbidez, isocianurato y temperatura. Alertas si las lecturas se salen del rango RD 742/2013." },
     { icon: FileCheck2, t: "Informes SILOÉ automáticos", d: "Genera el Anexo IV completo (XML + Excel por vaso) listo para subir al portal del Ministerio." },
     { icon: MessageCircle, t: "WhatsApp Business nativo", d: "Notificaciones, informes de servicio y recordatorios por el canal que el cliente sí abre." },
-    { icon: CreditCard, t: "Bizum, SEPA, Stripe", d: "Cobros recurrentes en autopiloto. Recordatorios automáticos. VeriFactu integrado para facturación." },
-    { icon: Wifi, t: "Modo sin cobertura", d: "El técnico anota en el chalet sin Wi-Fi. Se sincroniza solo al volver al pueblo." },
-    { icon: Building2, t: "Comunidades de propietarios", d: "Factura al NIF de la comunidad, varios contactos (administrador, presidente, conserje) y acceso para vecinos." },
-    { icon: ShieldCheck, t: "RGPD por diseño", d: "Datos alojados en la UE, consentimiento explícito, derecho al olvido en un clic." },
+    { icon: CreditCard, t: "Cobros y VeriFactu", d: "Bizum, SEPA y Stripe en autopiloto, con recordatorios automáticos y facturación VeriFactu integrada." },
+    { icon: Building2, t: "Comunidades de propietarios", d: "Factura al NIF de la comunidad con varios contactos (administrador, presidente, conserje) y acceso para vecinos." },
   ];
+
   return (
     <section id="caracteristicas" className="bg-surface py-24">
       <div className="max-w-7xl mx-auto px-6">
