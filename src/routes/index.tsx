@@ -290,7 +290,7 @@ function Features() {
           <p className="text-sm font-medium text-accent">La plataforma</p>
           <h2 className="mt-2 text-4xl lg:text-5xl">Una sola plataforma para operar, cumplir y crecer.</h2>
         </div>
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((f) => (
             <div key={f.t} className="rounded-2xl bg-card border border-border p-6 shadow-soft hover:shadow-card transition">
               <div className="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
