@@ -36,7 +36,11 @@ export const createInvite = createServerFn({ method: "POST" })
     const { data: prof } = await supabase
       .from("profiles").select("default_org_id").eq("id", userId).maybeSingle();
     if (!prof?.default_org_id) throw new Error("Sin organización");
-    const { data: row, error } = await supabase
+    // Use admin client for the write + select to avoid triggering the
+    // "invitee reads own invite by email" RLS policy, which references
+    // auth.users and is not readable by the authenticated role.
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: row, error } = await supabaseAdmin
       .from("org_invites")
       .upsert(
         { org_id: prof.default_org_id, email: data.email, role: data.role, invited_by: userId },
@@ -44,7 +48,10 @@ export const createInvite = createServerFn({ method: "POST" })
       )
       .select("id, token")
       .single();
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error("createInvite error", error);
+      throw new Error("No se pudo crear la invitación. Inténtalo de nuevo.");
+    }
     return { id: row.id, token: row.token };
   });
 
