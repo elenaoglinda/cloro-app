@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Waves, MapPin, Beaker, FileCheck2, MessageCircle, CreditCard,
   Wifi, ShieldCheck, Calendar, BellRing, Building2, Check, X,
@@ -155,12 +155,13 @@ function Hero() {
             lugar. Con un agente de WhatsApp que capta y agenda nuevos clientes mientras atiendes los actuales.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="#cta"
+            <Link
+              to="/auth"
+              search={{ mode: "registro" }}
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-foreground text-background font-medium shadow-soft hover:opacity-90 transition"
             >
               Empezar gratis 7 días <ArrowRight className="size-4" />
-            </a>
+            </Link>
             <a
               href="#whatsapp"
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-card border border-border font-medium hover:bg-muted transition"
@@ -610,14 +611,15 @@ function Pricing() {
               <div className={`text-sm mt-1 ${t.featured ? "text-background/70" : "text-muted-foreground"}`}>
                 + {t.perPool}€ por piscina / mes
               </div>
-              <a
-                href="#cta"
+              <Link
+                to="/auth"
+                search={{ mode: "registro" }}
                 className={`mt-6 inline-flex w-full items-center justify-center h-11 rounded-lg font-medium transition ${
                   t.featured ? "bg-background text-foreground hover:opacity-90" : "bg-foreground text-background hover:opacity-90"
                 }`}
               >
                 Empezar gratis
-              </a>
+              </Link>
               <ul className="mt-6 space-y-2 text-sm">
                 {t.features.map((f) => (
                   <li key={f} className="flex gap-2">
@@ -680,12 +682,13 @@ function CTA() {
               de tu cartera incluida. En menos de una semana estarás operativo.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="#"
+              <Link
+                to="/auth"
+                search={{ mode: "registro" }}
                 className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-background text-foreground font-medium hover:opacity-90 transition"
               >
                 Empezar gratis <ArrowRight className="size-4" />
-              </a>
+              </Link>
               <a
                 href="#"
                 className="inline-flex items-center gap-2 h-12 px-6 rounded-lg border border-white/30 text-white hover:bg-white/10 transition"
