@@ -42,7 +42,12 @@ function AuthPage() {
         navigate({ to: "/app" });
       }
     } catch (err: any) {
-      toast.error(err?.message ?? "Error");
+      const msg = err?.message ?? "Error";
+      toast.error(
+        msg === "Email not confirmed"
+          ? "Email no confirmado. Revisa tu bandeja de entrada."
+          : msg,
+      );
     } finally {
       setLoading(false);
     }
