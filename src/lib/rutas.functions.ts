@@ -123,15 +123,22 @@ export const optimizeRuta = createServerFn({ method: "POST" })
     const { supabase } = context;
     const { data: paradas, error } = await supabase
       .from("ruta_paradas")
-      .select("id, orden, piscinas(lat, lng)")
+      .select("id, orden, piscina_id")
       .eq("ruta_id", data.id)
       .order("orden");
     if (error) throw new Error(error.message);
-    const valid = (paradas ?? []).filter(
-      (p: any) => p.piscinas?.lat != null && p.piscinas?.lng != null,
-    );
+    const ids = (paradas ?? []).map((p: any) => p.piscina_id);
+    if (!ids.length) throw new Error("Sin paradas.");
+    const { data: pisc } = await supabase
+      .from("piscinas")
+      .select("id, lat, lng")
+      .in("id", ids);
+    const piscMap = new Map((pisc ?? []).map((p: any) => [p.id, p]));
+    const valid = (paradas ?? [])
+      .map((p: any) => ({ ...p, pisc: piscMap.get(p.piscina_id) }))
+      .filter((p: any) => p.pisc?.lat != null && p.pisc?.lng != null);
     if (valid.length < 3) {
-      throw new Error("Necesitas al menos 3 paradas con dirección geolocalizada para optimizar.");
+      throw new Error("Necesitas al menos 3 paradas con coordenadas para optimizar.");
     }
 
     const origin = valid[0];
@@ -143,10 +150,10 @@ export const optimizeRuta = createServerFn({ method: "POST" })
     if (!lovableKey || !gmapsKey) throw new Error("Google Maps no está configurado.");
 
     const body = {
-      origin: { location: { latLng: { latitude: Number(origin.piscinas.lat), longitude: Number(origin.piscinas.lng) } } },
-      destination: { location: { latLng: { latitude: Number(destination.piscinas.lat), longitude: Number(destination.piscinas.lng) } } },
+      origin: { location: { latLng: { latitude: Number(origin.pisc.lat), longitude: Number(origin.pisc.lng) } } },
+      destination: { location: { latLng: { latitude: Number(destination.pisc.lat), longitude: Number(destination.pisc.lng) } } },
       intermediates: intermediates.map((p: any) => ({
-        location: { latLng: { latitude: Number(p.piscinas.lat), longitude: Number(p.piscinas.lng) } },
+        location: { latLng: { latitude: Number(p.pisc.lat), longitude: Number(p.pisc.lng) } },
       })),
       travelMode: "DRIVE",
       optimizeWaypointOrder: true,
