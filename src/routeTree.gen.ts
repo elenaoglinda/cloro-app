@@ -21,9 +21,9 @@ import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/com
 import { Route as AdminMensajesRouteImport } from './routes/admin.mensajes'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
-import { Route as AuthenticatedAppRutasRouteImport } from './routes/_authenticated/app.rutas'
 import { Route as AuthenticatedAppPiscinasRouteImport } from './routes/_authenticated/app.piscinas'
 import { Route as AuthenticatedAppAjustesRouteImport } from './routes/_authenticated/app.ajustes'
+import { Route as AuthenticatedAppRutasIndexRouteImport } from './routes/_authenticated/app.rutas.index'
 import { Route as AuthenticatedAppPartesIndexRouteImport } from './routes/_authenticated/app.partes.index'
 import { Route as AuthenticatedAppClientesIndexRouteImport } from './routes/_authenticated/app.clientes.index'
 import { Route as AuthenticatedAppRutasIdRouteImport } from './routes/_authenticated/app.rutas.$id'
@@ -91,11 +91,6 @@ const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
-const AuthenticatedAppRutasRoute = AuthenticatedAppRutasRouteImport.update({
-  id: '/rutas',
-  path: '/rutas',
-  getParentRoute: () => AuthenticatedAppRoute,
-} as any)
 const AuthenticatedAppPiscinasRoute =
   AuthenticatedAppPiscinasRouteImport.update({
     id: '/piscinas',
@@ -107,6 +102,12 @@ const AuthenticatedAppAjustesRoute = AuthenticatedAppAjustesRouteImport.update({
   path: '/ajustes',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
+const AuthenticatedAppRutasIndexRoute =
+  AuthenticatedAppRutasIndexRouteImport.update({
+    id: '/rutas/',
+    path: '/rutas/',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
 const AuthenticatedAppPartesIndexRoute =
   AuthenticatedAppPartesIndexRouteImport.update({
     id: '/partes/',
@@ -120,9 +121,9 @@ const AuthenticatedAppClientesIndexRoute =
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
 const AuthenticatedAppRutasIdRoute = AuthenticatedAppRutasIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => AuthenticatedAppRutasRoute,
+  id: '/rutas/$id',
+  path: '/rutas/$id',
+  getParentRoute: () => AuthenticatedAppRoute,
 } as any)
 const AuthenticatedAppPartesNuevoRoute =
   AuthenticatedAppPartesNuevoRouteImport.update({
@@ -156,7 +157,6 @@ export interface FileRoutesByFullPath {
   '/invitacion/$token': typeof InvitacionTokenRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
-  '/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/app/': typeof AuthenticatedAppIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
@@ -164,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes/': typeof AuthenticatedAppPartesIndexRoute
+  '/app/rutas/': typeof AuthenticatedAppRutasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -177,7 +178,6 @@ export interface FileRoutesByTo {
   '/invitacion/$token': typeof InvitacionTokenRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
-  '/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/app': typeof AuthenticatedAppIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
@@ -185,6 +185,7 @@ export interface FileRoutesByTo {
   '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/app/clientes': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes': typeof AuthenticatedAppPartesIndexRoute
+  '/app/rutas': typeof AuthenticatedAppRutasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -201,7 +202,6 @@ export interface FileRoutesById {
   '/invitacion/$token': typeof InvitacionTokenRoute
   '/_authenticated/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/_authenticated/app/piscinas': typeof AuthenticatedAppPiscinasRoute
-  '/_authenticated/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
   '/_authenticated/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/_authenticated/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
@@ -209,6 +209,7 @@ export interface FileRoutesById {
   '/_authenticated/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/_authenticated/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/_authenticated/app/partes/': typeof AuthenticatedAppPartesIndexRoute
+  '/_authenticated/app/rutas/': typeof AuthenticatedAppRutasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -225,7 +226,6 @@ export interface FileRouteTypes {
     | '/invitacion/$token'
     | '/app/ajustes'
     | '/app/piscinas'
-    | '/app/rutas'
     | '/app/'
     | '/app/clientes/$id'
     | '/app/partes/$id'
@@ -233,6 +233,7 @@ export interface FileRouteTypes {
     | '/app/rutas/$id'
     | '/app/clientes/'
     | '/app/partes/'
+    | '/app/rutas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -246,7 +247,6 @@ export interface FileRouteTypes {
     | '/invitacion/$token'
     | '/app/ajustes'
     | '/app/piscinas'
-    | '/app/rutas'
     | '/app'
     | '/app/clientes/$id'
     | '/app/partes/$id'
@@ -254,6 +254,7 @@ export interface FileRouteTypes {
     | '/app/rutas/$id'
     | '/app/clientes'
     | '/app/partes'
+    | '/app/rutas'
   id:
     | '__root__'
     | '/'
@@ -269,7 +270,6 @@ export interface FileRouteTypes {
     | '/invitacion/$token'
     | '/_authenticated/app/ajustes'
     | '/_authenticated/app/piscinas'
-    | '/_authenticated/app/rutas'
     | '/_authenticated/app/'
     | '/_authenticated/app/clientes/$id'
     | '/_authenticated/app/partes/$id'
@@ -277,6 +277,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/rutas/$id'
     | '/_authenticated/app/clientes/'
     | '/_authenticated/app/partes/'
+    | '/_authenticated/app/rutas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -378,13 +379,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
-    '/_authenticated/app/rutas': {
-      id: '/_authenticated/app/rutas'
-      path: '/rutas'
-      fullPath: '/app/rutas'
-      preLoaderRoute: typeof AuthenticatedAppRutasRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
-    }
     '/_authenticated/app/piscinas': {
       id: '/_authenticated/app/piscinas'
       path: '/piscinas'
@@ -397,6 +391,13 @@ declare module '@tanstack/react-router' {
       path: '/ajustes'
       fullPath: '/app/ajustes'
       preLoaderRoute: typeof AuthenticatedAppAjustesRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/rutas/': {
+      id: '/_authenticated/app/rutas/'
+      path: '/rutas'
+      fullPath: '/app/rutas/'
+      preLoaderRoute: typeof AuthenticatedAppRutasIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
     '/_authenticated/app/partes/': {
@@ -415,10 +416,10 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/app/rutas/$id': {
       id: '/_authenticated/app/rutas/$id'
-      path: '/$id'
+      path: '/rutas/$id'
       fullPath: '/app/rutas/$id'
       preLoaderRoute: typeof AuthenticatedAppRutasIdRouteImport
-      parentRoute: typeof AuthenticatedAppRutasRoute
+      parentRoute: typeof AuthenticatedAppRoute
     }
     '/_authenticated/app/partes/nuevo': {
       id: '/_authenticated/app/partes/nuevo'
@@ -444,41 +445,30 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface AuthenticatedAppRutasRouteChildren {
-  AuthenticatedAppRutasIdRoute: typeof AuthenticatedAppRutasIdRoute
-}
-
-const AuthenticatedAppRutasRouteChildren: AuthenticatedAppRutasRouteChildren = {
-  AuthenticatedAppRutasIdRoute: AuthenticatedAppRutasIdRoute,
-}
-
-const AuthenticatedAppRutasRouteWithChildren =
-  AuthenticatedAppRutasRoute._addFileChildren(
-    AuthenticatedAppRutasRouteChildren,
-  )
-
 interface AuthenticatedAppRouteChildren {
   AuthenticatedAppAjustesRoute: typeof AuthenticatedAppAjustesRoute
   AuthenticatedAppPiscinasRoute: typeof AuthenticatedAppPiscinasRoute
-  AuthenticatedAppRutasRoute: typeof AuthenticatedAppRutasRouteWithChildren
   AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
   AuthenticatedAppClientesIdRoute: typeof AuthenticatedAppClientesIdRoute
   AuthenticatedAppPartesIdRoute: typeof AuthenticatedAppPartesIdRoute
   AuthenticatedAppPartesNuevoRoute: typeof AuthenticatedAppPartesNuevoRoute
+  AuthenticatedAppRutasIdRoute: typeof AuthenticatedAppRutasIdRoute
   AuthenticatedAppClientesIndexRoute: typeof AuthenticatedAppClientesIndexRoute
   AuthenticatedAppPartesIndexRoute: typeof AuthenticatedAppPartesIndexRoute
+  AuthenticatedAppRutasIndexRoute: typeof AuthenticatedAppRutasIndexRoute
 }
 
 const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
   AuthenticatedAppAjustesRoute: AuthenticatedAppAjustesRoute,
   AuthenticatedAppPiscinasRoute: AuthenticatedAppPiscinasRoute,
-  AuthenticatedAppRutasRoute: AuthenticatedAppRutasRouteWithChildren,
   AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
   AuthenticatedAppClientesIdRoute: AuthenticatedAppClientesIdRoute,
   AuthenticatedAppPartesIdRoute: AuthenticatedAppPartesIdRoute,
   AuthenticatedAppPartesNuevoRoute: AuthenticatedAppPartesNuevoRoute,
+  AuthenticatedAppRutasIdRoute: AuthenticatedAppRutasIdRoute,
   AuthenticatedAppClientesIndexRoute: AuthenticatedAppClientesIndexRoute,
   AuthenticatedAppPartesIndexRoute: AuthenticatedAppPartesIndexRoute,
+  AuthenticatedAppRutasIndexRoute: AuthenticatedAppRutasIndexRoute,
 }
 
 const AuthenticatedAppRouteWithChildren =
