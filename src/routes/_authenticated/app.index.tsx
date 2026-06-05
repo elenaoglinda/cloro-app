@@ -5,6 +5,7 @@ import { Users, ClipboardList, Droplets, Plus } from "lucide-react";
 import { getMyContext } from "@/lib/orgs.functions";
 import { listClientes } from "@/lib/clientes.functions";
 import { listPartes } from "@/lib/partes.functions";
+import { listPiscinas } from "@/lib/piscinas.functions";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/app/")({
@@ -15,10 +16,12 @@ function Dashboard() {
   const ctxFn = useServerFn(getMyContext);
   const clientesFn = useServerFn(listClientes);
   const partesFn = useServerFn(listPartes);
+  const piscinasFn = useServerFn(listPiscinas);
 
   const ctx = useQuery({ queryKey: ["ctx"], queryFn: () => ctxFn() });
   const clientes = useQuery({ queryKey: ["clientes"], queryFn: () => clientesFn({ data: {} }) });
   const partes = useQuery({ queryKey: ["partes"], queryFn: () => partesFn() });
+  const piscinas = useQuery({ queryKey: ["piscinas-all"], queryFn: () => piscinasFn() });
 
   return (
     <div className="max-w-5xl mx-auto space-y-8">
@@ -39,7 +42,7 @@ function Dashboard() {
       <div className="grid sm:grid-cols-3 gap-4">
         <StatCard icon={Users} label="Clientes" value={clientes.data?.clientes.length ?? 0} to="/app/clientes" />
         <StatCard icon={ClipboardList} label="Partes" value={partes.data?.partes.length ?? 0} to="/app/partes" />
-        <StatCard icon={Droplets} label="Piscinas activas" value={"—"} to="/app/piscinas" />
+        <StatCard icon={Droplets} label="Piscinas activas" value={piscinas.data?.piscinas.length ?? 0} to="/app/piscinas" />
       </div>
 
       <section>

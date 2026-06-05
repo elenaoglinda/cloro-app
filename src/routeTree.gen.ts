@@ -24,6 +24,7 @@ import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedAppRutasRouteImport } from './routes/_authenticated/app.rutas'
 import { Route as AuthenticatedAppPiscinasRouteImport } from './routes/_authenticated/app.piscinas'
 import { Route as AuthenticatedAppAjustesRouteImport } from './routes/_authenticated/app.ajustes'
+import { Route as AuthenticatedAppRutasIndexRouteImport } from './routes/_authenticated/app.rutas.index'
 import { Route as AuthenticatedAppPartesIndexRouteImport } from './routes/_authenticated/app.partes.index'
 import { Route as AuthenticatedAppClientesIndexRouteImport } from './routes/_authenticated/app.clientes.index'
 import { Route as AuthenticatedAppRutasIdRouteImport } from './routes/_authenticated/app.rutas.$id'
@@ -107,6 +108,12 @@ const AuthenticatedAppAjustesRoute = AuthenticatedAppAjustesRouteImport.update({
   path: '/ajustes',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
+const AuthenticatedAppRutasIndexRoute =
+  AuthenticatedAppRutasIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedAppRutasRoute,
+  } as any)
 const AuthenticatedAppPartesIndexRoute =
   AuthenticatedAppPartesIndexRouteImport.update({
     id: '/partes/',
@@ -164,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes/': typeof AuthenticatedAppPartesIndexRoute
+  '/app/rutas/': typeof AuthenticatedAppRutasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -177,7 +185,6 @@ export interface FileRoutesByTo {
   '/invitacion/$token': typeof InvitacionTokenRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
-  '/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/app': typeof AuthenticatedAppIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
@@ -185,6 +192,7 @@ export interface FileRoutesByTo {
   '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/app/clientes': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes': typeof AuthenticatedAppPartesIndexRoute
+  '/app/rutas': typeof AuthenticatedAppRutasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -209,6 +217,7 @@ export interface FileRoutesById {
   '/_authenticated/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/_authenticated/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/_authenticated/app/partes/': typeof AuthenticatedAppPartesIndexRoute
+  '/_authenticated/app/rutas/': typeof AuthenticatedAppRutasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -233,6 +242,7 @@ export interface FileRouteTypes {
     | '/app/rutas/$id'
     | '/app/clientes/'
     | '/app/partes/'
+    | '/app/rutas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -246,7 +256,6 @@ export interface FileRouteTypes {
     | '/invitacion/$token'
     | '/app/ajustes'
     | '/app/piscinas'
-    | '/app/rutas'
     | '/app'
     | '/app/clientes/$id'
     | '/app/partes/$id'
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
     | '/app/rutas/$id'
     | '/app/clientes'
     | '/app/partes'
+    | '/app/rutas'
   id:
     | '__root__'
     | '/'
@@ -277,6 +287,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/rutas/$id'
     | '/_authenticated/app/clientes/'
     | '/_authenticated/app/partes/'
+    | '/_authenticated/app/rutas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -399,6 +410,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppAjustesRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/_authenticated/app/rutas/': {
+      id: '/_authenticated/app/rutas/'
+      path: '/'
+      fullPath: '/app/rutas/'
+      preLoaderRoute: typeof AuthenticatedAppRutasIndexRouteImport
+      parentRoute: typeof AuthenticatedAppRutasRoute
+    }
     '/_authenticated/app/partes/': {
       id: '/_authenticated/app/partes/'
       path: '/partes'
@@ -446,10 +464,12 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAppRutasRouteChildren {
   AuthenticatedAppRutasIdRoute: typeof AuthenticatedAppRutasIdRoute
+  AuthenticatedAppRutasIndexRoute: typeof AuthenticatedAppRutasIndexRoute
 }
 
 const AuthenticatedAppRutasRouteChildren: AuthenticatedAppRutasRouteChildren = {
   AuthenticatedAppRutasIdRoute: AuthenticatedAppRutasIdRoute,
+  AuthenticatedAppRutasIndexRoute: AuthenticatedAppRutasIndexRoute,
 }
 
 const AuthenticatedAppRutasRouteWithChildren =
@@ -510,13 +530,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
