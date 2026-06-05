@@ -11,11 +11,22 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComparativaEvisaneRouteImport } from './routes/comparativa.evisane'
 import { Route as ComparativaEisiHotelRouteImport } from './routes/comparativa.eisi-hotel'
 import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/comparativa.autocontrolpiscinas'
 import { Route as AdminMensajesRouteImport } from './routes/admin.mensajes'
+import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
+import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
+import { Route as AuthenticatedAppPiscinasRouteImport } from './routes/_authenticated/app.piscinas'
+import { Route as AuthenticatedAppAjustesRouteImport } from './routes/_authenticated/app.ajustes'
+import { Route as AuthenticatedAppPartesIndexRouteImport } from './routes/_authenticated/app.partes.index'
+import { Route as AuthenticatedAppClientesIndexRouteImport } from './routes/_authenticated/app.clientes.index'
+import { Route as AuthenticatedAppPartesNuevoRouteImport } from './routes/_authenticated/app.partes.nuevo'
+import { Route as AuthenticatedAppPartesIdRouteImport } from './routes/_authenticated/app.partes.$id'
+import { Route as AuthenticatedAppClientesIdRouteImport } from './routes/_authenticated/app.clientes.$id'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -25,6 +36,15 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ContactoRoute = ContactoRouteImport.update({
   id: '/contacto',
   path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -53,67 +73,180 @@ const AdminMensajesRoute = AdminMensajesRouteImport.update({
   path: '/admin/mensajes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAppRoute,
+} as any)
+const AuthenticatedAppPiscinasRoute =
+  AuthenticatedAppPiscinasRouteImport.update({
+    id: '/piscinas',
+    path: '/piscinas',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppAjustesRoute = AuthenticatedAppAjustesRouteImport.update({
+  id: '/ajustes',
+  path: '/ajustes',
+  getParentRoute: () => AuthenticatedAppRoute,
+} as any)
+const AuthenticatedAppPartesIndexRoute =
+  AuthenticatedAppPartesIndexRouteImport.update({
+    id: '/partes/',
+    path: '/partes/',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppClientesIndexRoute =
+  AuthenticatedAppClientesIndexRouteImport.update({
+    id: '/clientes/',
+    path: '/clientes/',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppPartesNuevoRoute =
+  AuthenticatedAppPartesNuevoRouteImport.update({
+    id: '/partes/nuevo',
+    path: '/partes/nuevo',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppPartesIdRoute =
+  AuthenticatedAppPartesIdRouteImport.update({
+    id: '/partes/$id',
+    path: '/partes/$id',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppClientesIdRoute =
+  AuthenticatedAppClientesIdRouteImport.update({
+    id: '/clientes/$id',
+    path: '/clientes/$id',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/app': typeof AuthenticatedAppRouteWithChildren
   '/admin/mensajes': typeof AdminMensajesRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
+  '/app/ajustes': typeof AuthenticatedAppAjustesRoute
+  '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
+  '/app/': typeof AuthenticatedAppIndexRoute
+  '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
+  '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
+  '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
+  '/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
+  '/app/partes/': typeof AuthenticatedAppPartesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/mensajes': typeof AdminMensajesRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
+  '/app/ajustes': typeof AuthenticatedAppAjustesRoute
+  '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
+  '/app': typeof AuthenticatedAppIndexRoute
+  '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
+  '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
+  '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
+  '/app/clientes': typeof AuthenticatedAppClientesIndexRoute
+  '/app/partes': typeof AuthenticatedAppPartesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
   '/admin/mensajes': typeof AdminMensajesRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
+  '/_authenticated/app/ajustes': typeof AuthenticatedAppAjustesRoute
+  '/_authenticated/app/piscinas': typeof AuthenticatedAppPiscinasRoute
+  '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
+  '/_authenticated/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
+  '/_authenticated/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
+  '/_authenticated/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
+  '/_authenticated/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
+  '/_authenticated/app/partes/': typeof AuthenticatedAppPartesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/contacto'
     | '/sitemap.xml'
+    | '/app'
     | '/admin/mensajes'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
+    | '/app/ajustes'
+    | '/app/piscinas'
+    | '/app/'
+    | '/app/clientes/$id'
+    | '/app/partes/$id'
+    | '/app/partes/nuevo'
+    | '/app/clientes/'
+    | '/app/partes/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/contacto'
     | '/sitemap.xml'
     | '/admin/mensajes'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
+    | '/app/ajustes'
+    | '/app/piscinas'
+    | '/app'
+    | '/app/clientes/$id'
+    | '/app/partes/$id'
+    | '/app/partes/nuevo'
+    | '/app/clientes'
+    | '/app/partes'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/contacto'
     | '/sitemap.xml'
+    | '/_authenticated/app'
     | '/admin/mensajes'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
+    | '/_authenticated/app/ajustes'
+    | '/_authenticated/app/piscinas'
+    | '/_authenticated/app/'
+    | '/_authenticated/app/clientes/$id'
+    | '/_authenticated/app/partes/$id'
+    | '/_authenticated/app/partes/nuevo'
+    | '/_authenticated/app/clientes/'
+    | '/_authenticated/app/partes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ContactoRoute: typeof ContactoRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AdminMensajesRoute: typeof AdminMensajesRoute
@@ -136,6 +269,20 @@ declare module '@tanstack/react-router' {
       path: '/contacto'
       fullPath: '/contacto'
       preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -173,11 +320,112 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMensajesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/app': {
+      id: '/_authenticated/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AuthenticatedAppRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/': {
+      id: '/_authenticated/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/piscinas': {
+      id: '/_authenticated/app/piscinas'
+      path: '/piscinas'
+      fullPath: '/app/piscinas'
+      preLoaderRoute: typeof AuthenticatedAppPiscinasRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/ajustes': {
+      id: '/_authenticated/app/ajustes'
+      path: '/ajustes'
+      fullPath: '/app/ajustes'
+      preLoaderRoute: typeof AuthenticatedAppAjustesRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/partes/': {
+      id: '/_authenticated/app/partes/'
+      path: '/partes'
+      fullPath: '/app/partes/'
+      preLoaderRoute: typeof AuthenticatedAppPartesIndexRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/clientes/': {
+      id: '/_authenticated/app/clientes/'
+      path: '/clientes'
+      fullPath: '/app/clientes/'
+      preLoaderRoute: typeof AuthenticatedAppClientesIndexRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/partes/nuevo': {
+      id: '/_authenticated/app/partes/nuevo'
+      path: '/partes/nuevo'
+      fullPath: '/app/partes/nuevo'
+      preLoaderRoute: typeof AuthenticatedAppPartesNuevoRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/partes/$id': {
+      id: '/_authenticated/app/partes/$id'
+      path: '/partes/$id'
+      fullPath: '/app/partes/$id'
+      preLoaderRoute: typeof AuthenticatedAppPartesIdRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/clientes/$id': {
+      id: '/_authenticated/app/clientes/$id'
+      path: '/clientes/$id'
+      fullPath: '/app/clientes/$id'
+      preLoaderRoute: typeof AuthenticatedAppClientesIdRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
   }
 }
 
+interface AuthenticatedAppRouteChildren {
+  AuthenticatedAppAjustesRoute: typeof AuthenticatedAppAjustesRoute
+  AuthenticatedAppPiscinasRoute: typeof AuthenticatedAppPiscinasRoute
+  AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
+  AuthenticatedAppClientesIdRoute: typeof AuthenticatedAppClientesIdRoute
+  AuthenticatedAppPartesIdRoute: typeof AuthenticatedAppPartesIdRoute
+  AuthenticatedAppPartesNuevoRoute: typeof AuthenticatedAppPartesNuevoRoute
+  AuthenticatedAppClientesIndexRoute: typeof AuthenticatedAppClientesIndexRoute
+  AuthenticatedAppPartesIndexRoute: typeof AuthenticatedAppPartesIndexRoute
+}
+
+const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
+  AuthenticatedAppAjustesRoute: AuthenticatedAppAjustesRoute,
+  AuthenticatedAppPiscinasRoute: AuthenticatedAppPiscinasRoute,
+  AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
+  AuthenticatedAppClientesIdRoute: AuthenticatedAppClientesIdRoute,
+  AuthenticatedAppPartesIdRoute: AuthenticatedAppPartesIdRoute,
+  AuthenticatedAppPartesNuevoRoute: AuthenticatedAppPartesNuevoRoute,
+  AuthenticatedAppClientesIndexRoute: AuthenticatedAppClientesIndexRoute,
+  AuthenticatedAppPartesIndexRoute: AuthenticatedAppPartesIndexRoute,
+}
+
+const AuthenticatedAppRouteWithChildren =
+  AuthenticatedAppRoute._addFileChildren(AuthenticatedAppRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAppRoute: typeof AuthenticatedAppRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAppRoute: AuthenticatedAppRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   ContactoRoute: ContactoRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AdminMensajesRoute: AdminMensajesRoute,
@@ -188,13 +436,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
