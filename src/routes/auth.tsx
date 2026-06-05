@@ -47,6 +47,7 @@ function AuthPage() {
         "Email not confirmed": "Email no confirmado. Revisa tu bandeja de entrada.",
         "Password is known to be weak and easy to guess, please choose a different one.":
           "La contraseña es demasiado débil. Elige una más segura.",
+        "Invalid login credentials": "Email o contraseña incorrectos.",
       };
       toast.error(translations[msg] ?? "Ha ocurrido un error. Inténtalo de nuevo.");
     } finally {
