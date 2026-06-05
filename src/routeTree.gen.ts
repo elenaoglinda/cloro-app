@@ -14,16 +14,19 @@ import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InvitacionTokenRouteImport } from './routes/invitacion.$token'
 import { Route as ComparativaEvisaneRouteImport } from './routes/comparativa.evisane'
 import { Route as ComparativaEisiHotelRouteImport } from './routes/comparativa.eisi-hotel'
 import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/comparativa.autocontrolpiscinas'
 import { Route as AdminMensajesRouteImport } from './routes/admin.mensajes'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
+import { Route as AuthenticatedAppRutasRouteImport } from './routes/_authenticated/app.rutas'
 import { Route as AuthenticatedAppPiscinasRouteImport } from './routes/_authenticated/app.piscinas'
 import { Route as AuthenticatedAppAjustesRouteImport } from './routes/_authenticated/app.ajustes'
 import { Route as AuthenticatedAppPartesIndexRouteImport } from './routes/_authenticated/app.partes.index'
 import { Route as AuthenticatedAppClientesIndexRouteImport } from './routes/_authenticated/app.clientes.index'
+import { Route as AuthenticatedAppRutasIdRouteImport } from './routes/_authenticated/app.rutas.$id'
 import { Route as AuthenticatedAppPartesNuevoRouteImport } from './routes/_authenticated/app.partes.nuevo'
 import { Route as AuthenticatedAppPartesIdRouteImport } from './routes/_authenticated/app.partes.$id'
 import { Route as AuthenticatedAppClientesIdRouteImport } from './routes/_authenticated/app.clientes.$id'
@@ -50,6 +53,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvitacionTokenRoute = InvitacionTokenRouteImport.update({
+  id: '/invitacion/$token',
+  path: '/invitacion/$token',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComparativaEvisaneRoute = ComparativaEvisaneRouteImport.update({
@@ -83,6 +91,11 @@ const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
+const AuthenticatedAppRutasRoute = AuthenticatedAppRutasRouteImport.update({
+  id: '/rutas',
+  path: '/rutas',
+  getParentRoute: () => AuthenticatedAppRoute,
+} as any)
 const AuthenticatedAppPiscinasRoute =
   AuthenticatedAppPiscinasRouteImport.update({
     id: '/piscinas',
@@ -106,6 +119,11 @@ const AuthenticatedAppClientesIndexRoute =
     path: '/clientes/',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
+const AuthenticatedAppRutasIdRoute = AuthenticatedAppRutasIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AuthenticatedAppRutasRoute,
+} as any)
 const AuthenticatedAppPartesNuevoRoute =
   AuthenticatedAppPartesNuevoRouteImport.update({
     id: '/partes/nuevo',
@@ -135,12 +153,15 @@ export interface FileRoutesByFullPath {
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
+  '/invitacion/$token': typeof InvitacionTokenRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
+  '/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/app/': typeof AuthenticatedAppIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
   '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
+  '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes/': typeof AuthenticatedAppPartesIndexRoute
 }
@@ -153,12 +174,15 @@ export interface FileRoutesByTo {
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
+  '/invitacion/$token': typeof InvitacionTokenRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
+  '/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/app': typeof AuthenticatedAppIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
   '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
+  '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/app/clientes': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes': typeof AuthenticatedAppPartesIndexRoute
 }
@@ -174,12 +198,15 @@ export interface FileRoutesById {
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
+  '/invitacion/$token': typeof InvitacionTokenRoute
   '/_authenticated/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/_authenticated/app/piscinas': typeof AuthenticatedAppPiscinasRoute
+  '/_authenticated/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
   '/_authenticated/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/_authenticated/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
   '/_authenticated/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
+  '/_authenticated/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/_authenticated/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/_authenticated/app/partes/': typeof AuthenticatedAppPartesIndexRoute
 }
@@ -195,12 +222,15 @@ export interface FileRouteTypes {
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
+    | '/invitacion/$token'
     | '/app/ajustes'
     | '/app/piscinas'
+    | '/app/rutas'
     | '/app/'
     | '/app/clientes/$id'
     | '/app/partes/$id'
     | '/app/partes/nuevo'
+    | '/app/rutas/$id'
     | '/app/clientes/'
     | '/app/partes/'
   fileRoutesByTo: FileRoutesByTo
@@ -213,12 +243,15 @@ export interface FileRouteTypes {
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
+    | '/invitacion/$token'
     | '/app/ajustes'
     | '/app/piscinas'
+    | '/app/rutas'
     | '/app'
     | '/app/clientes/$id'
     | '/app/partes/$id'
     | '/app/partes/nuevo'
+    | '/app/rutas/$id'
     | '/app/clientes'
     | '/app/partes'
   id:
@@ -233,12 +266,15 @@ export interface FileRouteTypes {
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
+    | '/invitacion/$token'
     | '/_authenticated/app/ajustes'
     | '/_authenticated/app/piscinas'
+    | '/_authenticated/app/rutas'
     | '/_authenticated/app/'
     | '/_authenticated/app/clientes/$id'
     | '/_authenticated/app/partes/$id'
     | '/_authenticated/app/partes/nuevo'
+    | '/_authenticated/app/rutas/$id'
     | '/_authenticated/app/clientes/'
     | '/_authenticated/app/partes/'
   fileRoutesById: FileRoutesById
@@ -253,6 +289,7 @@ export interface RootRouteChildren {
   ComparativaAutocontrolpiscinasRoute: typeof ComparativaAutocontrolpiscinasRoute
   ComparativaEisiHotelRoute: typeof ComparativaEisiHotelRoute
   ComparativaEvisaneRoute: typeof ComparativaEvisaneRoute
+  InvitacionTokenRoute: typeof InvitacionTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -290,6 +327,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invitacion/$token': {
+      id: '/invitacion/$token'
+      path: '/invitacion/$token'
+      fullPath: '/invitacion/$token'
+      preLoaderRoute: typeof InvitacionTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/comparativa/evisane': {
@@ -334,6 +378,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/_authenticated/app/rutas': {
+      id: '/_authenticated/app/rutas'
+      path: '/rutas'
+      fullPath: '/app/rutas'
+      preLoaderRoute: typeof AuthenticatedAppRutasRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
     '/_authenticated/app/piscinas': {
       id: '/_authenticated/app/piscinas'
       path: '/piscinas'
@@ -362,6 +413,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppClientesIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/_authenticated/app/rutas/$id': {
+      id: '/_authenticated/app/rutas/$id'
+      path: '/$id'
+      fullPath: '/app/rutas/$id'
+      preLoaderRoute: typeof AuthenticatedAppRutasIdRouteImport
+      parentRoute: typeof AuthenticatedAppRutasRoute
+    }
     '/_authenticated/app/partes/nuevo': {
       id: '/_authenticated/app/partes/nuevo'
       path: '/partes/nuevo'
@@ -386,9 +444,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedAppRutasRouteChildren {
+  AuthenticatedAppRutasIdRoute: typeof AuthenticatedAppRutasIdRoute
+}
+
+const AuthenticatedAppRutasRouteChildren: AuthenticatedAppRutasRouteChildren = {
+  AuthenticatedAppRutasIdRoute: AuthenticatedAppRutasIdRoute,
+}
+
+const AuthenticatedAppRutasRouteWithChildren =
+  AuthenticatedAppRutasRoute._addFileChildren(
+    AuthenticatedAppRutasRouteChildren,
+  )
+
 interface AuthenticatedAppRouteChildren {
   AuthenticatedAppAjustesRoute: typeof AuthenticatedAppAjustesRoute
   AuthenticatedAppPiscinasRoute: typeof AuthenticatedAppPiscinasRoute
+  AuthenticatedAppRutasRoute: typeof AuthenticatedAppRutasRouteWithChildren
   AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
   AuthenticatedAppClientesIdRoute: typeof AuthenticatedAppClientesIdRoute
   AuthenticatedAppPartesIdRoute: typeof AuthenticatedAppPartesIdRoute
@@ -400,6 +472,7 @@ interface AuthenticatedAppRouteChildren {
 const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
   AuthenticatedAppAjustesRoute: AuthenticatedAppAjustesRoute,
   AuthenticatedAppPiscinasRoute: AuthenticatedAppPiscinasRoute,
+  AuthenticatedAppRutasRoute: AuthenticatedAppRutasRouteWithChildren,
   AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
   AuthenticatedAppClientesIdRoute: AuthenticatedAppClientesIdRoute,
   AuthenticatedAppPartesIdRoute: AuthenticatedAppPartesIdRoute,
@@ -432,17 +505,8 @@ const rootRouteChildren: RootRouteChildren = {
   ComparativaAutocontrolpiscinasRoute: ComparativaAutocontrolpiscinasRoute,
   ComparativaEisiHotelRoute: ComparativaEisiHotelRoute,
   ComparativaEvisaneRoute: ComparativaEvisaneRoute,
+  InvitacionTokenRoute: InvitacionTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

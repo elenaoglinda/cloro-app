@@ -1,5 +1,5 @@
 import { Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
-import { Waves, Home, Users, Droplets, ClipboardList, Settings, LogOut } from "lucide-react";
+import { Waves, Home, Users, ClipboardList, MapPin, Settings, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ const nav = [
   { to: "/app", label: "Inicio", icon: Home, exact: true },
   { to: "/app/clientes", label: "Clientes", icon: Users },
   { to: "/app/partes", label: "Partes", icon: ClipboardList },
-  { to: "/app/piscinas", label: "Piscinas", icon: Droplets },
+  { to: "/app/rutas", label: "Rutas", icon: MapPin },
   { to: "/app/ajustes", label: "Ajustes", icon: Settings },
 ];
 
