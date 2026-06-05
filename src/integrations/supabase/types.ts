@@ -91,6 +91,42 @@ export type Database = {
         }
         Relationships: []
       }
+      org_invites: {
+        Row: {
+          accepted_at: string | null
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+          invited_by: string
+          org_id: string
+          role: Database["public"]["Enums"]["org_role"]
+          token: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          created_at?: string
+          email: string
+          expires_at?: string
+          id?: string
+          invited_by: string
+          org_id: string
+          role?: Database["public"]["Enums"]["org_role"]
+          token?: string
+        }
+        Update: {
+          accepted_at?: string | null
+          created_at?: string
+          email?: string
+          expires_at?: string
+          id?: string
+          invited_by?: string
+          org_id?: string
+          role?: Database["public"]["Enums"]["org_role"]
+          token?: string
+        }
+        Relationships: []
+      }
       org_members: {
         Row: {
           created_at: string
@@ -364,6 +400,80 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      ruta_paradas: {
+        Row: {
+          completada: boolean
+          created_at: string
+          id: string
+          orden: number
+          org_id: string
+          parte_id: string | null
+          piscina_id: string
+          ruta_id: string
+        }
+        Insert: {
+          completada?: boolean
+          created_at?: string
+          id?: string
+          orden?: number
+          org_id: string
+          parte_id?: string | null
+          piscina_id: string
+          ruta_id: string
+        }
+        Update: {
+          completada?: boolean
+          created_at?: string
+          id?: string
+          orden?: number
+          org_id?: string
+          parte_id?: string | null
+          piscina_id?: string
+          ruta_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ruta_paradas_ruta_id_fkey"
+            columns: ["ruta_id"]
+            isOneToOne: false
+            referencedRelation: "rutas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rutas: {
+        Row: {
+          created_at: string
+          fecha: string
+          id: string
+          nombre: string
+          notas: string | null
+          org_id: string
+          tecnico_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          fecha: string
+          id?: string
+          nombre: string
+          notas?: string | null
+          org_id: string
+          tecnico_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          fecha?: string
+          id?: string
+          nombre?: string
+          notas?: string | null
+          org_id?: string
+          tecnico_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
     }
     Views: {
