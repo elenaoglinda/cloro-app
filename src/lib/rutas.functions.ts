@@ -64,14 +64,24 @@ export const addParada = createServerFn({ method: "POST" })
     const { supabase, userId } = context;
     const { data: prof } = await supabase.from("profiles").select("default_org_id").eq("id", userId).maybeSingle();
     if (!prof?.default_org_id) throw new Error("Sin organización");
-    const { count } = await supabase.from("ruta_paradas").select("*", { count: "exact", head: true }).eq("ruta_id", data.ruta_id);
+    const { count, error: countErr } = await supabase
+      .from("ruta_paradas")
+      .select("*", { count: "exact", head: true })
+      .eq("ruta_id", data.ruta_id);
+    if (countErr) {
+      console.error("addParada count error", countErr);
+      throw new Error(countErr.message);
+    }
     const { error } = await supabase.from("ruta_paradas").insert({
       ruta_id: data.ruta_id,
       piscina_id: data.piscina_id,
       org_id: prof.default_org_id,
       orden: count ?? 0,
     });
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error("addParada insert error", error);
+      throw new Error(error.message);
+    }
     return { ok: true };
   });
 
