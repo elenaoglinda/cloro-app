@@ -19,10 +19,10 @@ export function SiteNav() {
           <a href="/#precios" className="hover:text-foreground transition">Precios</a>
         </div>
         <div className="flex items-center gap-3">
-          <a href="/#precios" className="hidden sm:inline text-sm text-muted-foreground hover:text-foreground transition">Iniciar sesión</a>
-          <a href="/#cta" className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition shadow-soft">
+          <Link to="/auth" className="hidden sm:inline text-sm text-muted-foreground hover:text-foreground transition">Iniciar sesión</Link>
+          <Link to="/auth" className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition shadow-soft">
             Prueba gratis
-          </a>
+          </Link>
         </div>
       </nav>
     </header>
