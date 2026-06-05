@@ -14,6 +14,53 @@ export type Database = {
   }
   public: {
     Tables: {
+      clientes: {
+        Row: {
+          archived: boolean
+          created_at: string
+          direccion: string | null
+          email: string | null
+          id: string
+          nombre: string
+          notas: string | null
+          org_id: string
+          telefono: string | null
+          updated_at: string
+        }
+        Insert: {
+          archived?: boolean
+          created_at?: string
+          direccion?: string | null
+          email?: string | null
+          id?: string
+          nombre: string
+          notas?: string | null
+          org_id: string
+          telefono?: string | null
+          updated_at?: string
+        }
+        Update: {
+          archived?: boolean
+          created_at?: string
+          direccion?: string | null
+          email?: string | null
+          id?: string
+          nombre?: string
+          notas?: string | null
+          org_id?: string
+          telefono?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clientes_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_messages: {
         Row: {
           company: string | null
@@ -44,15 +91,298 @@ export type Database = {
         }
         Relationships: []
       }
+      org_members: {
+        Row: {
+          created_at: string
+          org_id: string
+          role: Database["public"]["Enums"]["org_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          org_id: string
+          role?: Database["public"]["Enums"]["org_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          org_id?: string
+          role?: Database["public"]["Enums"]["org_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "org_members_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organizations: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          plan: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          plan?: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          plan?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      parte_fotos: {
+        Row: {
+          created_at: string
+          id: string
+          org_id: string
+          parte_id: string
+          storage_path: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          org_id: string
+          parte_id: string
+          storage_path: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          org_id?: string
+          parte_id?: string
+          storage_path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "parte_fotos_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "parte_fotos_parte_id_fkey"
+            columns: ["parte_id"]
+            isOneToOne: false
+            referencedRelation: "partes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partes: {
+        Row: {
+          alcalinidad: number | null
+          cloro_libre: number | null
+          cloro_total: number | null
+          created_at: string
+          cya: number | null
+          estado: Database["public"]["Enums"]["parte_estado"]
+          fecha: string
+          firma_cliente_url: string | null
+          id: string
+          observaciones: string | null
+          org_id: string
+          ph: number | null
+          piscina_id: string
+          productos_usados: Json
+          sal: number | null
+          tecnico_id: string | null
+          temp_c: number | null
+          updated_at: string
+        }
+        Insert: {
+          alcalinidad?: number | null
+          cloro_libre?: number | null
+          cloro_total?: number | null
+          created_at?: string
+          cya?: number | null
+          estado?: Database["public"]["Enums"]["parte_estado"]
+          fecha?: string
+          firma_cliente_url?: string | null
+          id?: string
+          observaciones?: string | null
+          org_id: string
+          ph?: number | null
+          piscina_id: string
+          productos_usados?: Json
+          sal?: number | null
+          tecnico_id?: string | null
+          temp_c?: number | null
+          updated_at?: string
+        }
+        Update: {
+          alcalinidad?: number | null
+          cloro_libre?: number | null
+          cloro_total?: number | null
+          created_at?: string
+          cya?: number | null
+          estado?: Database["public"]["Enums"]["parte_estado"]
+          fecha?: string
+          firma_cliente_url?: string | null
+          id?: string
+          observaciones?: string | null
+          org_id?: string
+          ph?: number | null
+          piscina_id?: string
+          productos_usados?: Json
+          sal?: number | null
+          tecnico_id?: string | null
+          temp_c?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partes_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partes_piscina_id_fkey"
+            columns: ["piscina_id"]
+            isOneToOne: false
+            referencedRelation: "piscinas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      piscinas: {
+        Row: {
+          alias: string
+          archived: boolean
+          cliente_id: string
+          created_at: string
+          direccion: string | null
+          id: string
+          lat: number | null
+          lng: number | null
+          notas: string | null
+          org_id: string
+          sistema_desinfeccion: string | null
+          tipo: string | null
+          updated_at: string
+          volumen_m3: number | null
+        }
+        Insert: {
+          alias: string
+          archived?: boolean
+          cliente_id: string
+          created_at?: string
+          direccion?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          notas?: string | null
+          org_id: string
+          sistema_desinfeccion?: string | null
+          tipo?: string | null
+          updated_at?: string
+          volumen_m3?: number | null
+        }
+        Update: {
+          alias?: string
+          archived?: boolean
+          cliente_id?: string
+          created_at?: string
+          direccion?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          notas?: string | null
+          org_id?: string
+          sistema_desinfeccion?: string | null
+          tipo?: string | null
+          updated_at?: string
+          volumen_m3?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "piscinas_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "piscinas_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          default_org_id: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          default_org_id?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          default_org_id?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_default_org_id_fkey"
+            columns: ["default_org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      current_org_id: { Args: never; Returns: string }
+      has_org_role: {
+        Args: {
+          _org_id: string
+          _roles: Database["public"]["Enums"]["org_role"][]
+        }
+        Returns: boolean
+      }
+      is_org_member: { Args: { _org_id: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      org_role: "owner" | "admin" | "tecnico"
+      parte_estado: "borrador" | "completado" | "firmado"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -179,6 +509,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      org_role: ["owner", "admin", "tecnico"],
+      parte_estado: ["borrador", "completado", "firmado"],
+    },
   },
 } as const
