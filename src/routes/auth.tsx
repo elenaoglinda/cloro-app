@@ -43,11 +43,12 @@ function AuthPage() {
       }
     } catch (err: any) {
       const msg = err?.message ?? "Error";
-      toast.error(
-        msg === "Email not confirmed"
-          ? "Email no confirmado. Revisa tu bandeja de entrada."
-          : msg,
-      );
+      const translations: Record<string, string> = {
+        "Email not confirmed": "Email no confirmado. Revisa tu bandeja de entrada.",
+        "Password is known to be weak and easy to guess, please choose a different one.":
+          "La contraseña es demasiado débil. Elige una más segura.",
+      };
+      toast.error(translations[msg] ?? msg);
     } finally {
       setLoading(false);
     }
