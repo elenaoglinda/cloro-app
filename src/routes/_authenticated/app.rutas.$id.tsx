@@ -1,12 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Plus, Trash2, Check } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Check, Navigation, ExternalLink, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { getRuta, addParada, toggleParada, removeParada, deleteRuta } from "@/lib/rutas.functions";
+import { getRuta, addParada, toggleParada, removeParada, deleteRuta, optimizeRuta } from "@/lib/rutas.functions";
 import { listPiscinas } from "@/lib/piscinas.functions";
 import { Button } from "@/components/ui/button";
+import { RutaMap } from "@/components/app/RutaMap";
 
 export const Route = createFileRoute("/_authenticated/app/rutas/$id")({
   component: RutaDetail,
@@ -21,10 +22,13 @@ function RutaDetail() {
   const toggleFn = useServerFn(toggleParada);
   const removeFn = useServerFn(removeParada);
   const deleteFn = useServerFn(deleteRuta);
+  const optimizeFn = useServerFn(optimizeRuta);
 
   const { data } = useQuery({ queryKey: ["ruta", id], queryFn: () => getFn({ data: { id } }) });
   const { data: pData } = useQuery({ queryKey: ["piscinas-all"], queryFn: () => piscinasFn() });
   const [picker, setPicker] = useState(false);
+  const [polyline, setPolyline] = useState<string | null>(null);
+  const [optimizing, setOptimizing] = useState(false);
 
   async function add(piscina_id: string) {
     try {
@@ -33,7 +37,6 @@ function RutaDetail() {
       await qc.invalidateQueries({ queryKey: ["ruta", id] });
       toast.success("Parada añadida");
     } catch (err: any) {
-      console.error("addParada error", err);
       toast.error(err?.message || "No se pudo añadir la parada");
     }
   }
@@ -51,9 +54,40 @@ function RutaDetail() {
     toast.success("Ruta eliminada");
     window.location.href = "/app/rutas";
   }
+  async function optimize() {
+    setOptimizing(true);
+    try {
+      const res = await optimizeFn({ data: { id } });
+      setPolyline(res.polyline ?? null);
+      await qc.invalidateQueries({ queryKey: ["ruta", id] });
+      const km = res.distanceMeters ? (res.distanceMeters / 1000).toFixed(1) : null;
+      toast.success(km ? `Ruta optimizada · ${km} km` : "Ruta optimizada");
+    } catch (err: any) {
+      toast.error(err?.message || "No se pudo optimizar");
+    } finally {
+      setOptimizing(false);
+    }
+  }
 
   if (!data) return <p className="text-sm text-muted-foreground">Cargando...</p>;
   const used = new Set(data.paradas.map((p: any) => p.piscina_id));
+  const stopsWithCoords = data.paradas
+    .filter((p: any) => p.piscinas?.lat != null && p.piscinas?.lng != null)
+    .map((p: any, i: number) => ({
+      id: p.id,
+      lat: Number(p.piscinas.lat),
+      lng: Number(p.piscinas.lng),
+      label: `${i + 1}. ${p.piscinas?.alias ?? ""}`,
+    }));
+
+  const gmapsHref = (p: any) =>
+    p.piscinas?.lat != null
+      ? `https://www.google.com/maps/dir/?api=1&destination=${p.piscinas.lat},${p.piscinas.lng}`
+      : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.piscinas?.direccion ?? "")}`;
+  const wazeHref = (p: any) =>
+    p.piscinas?.lat != null
+      ? `https://waze.com/ul?ll=${p.piscinas.lat},${p.piscinas.lng}&navigate=yes`
+      : `https://waze.com/ul?q=${encodeURIComponent(p.piscinas?.direccion ?? "")}&navigate=yes`;
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -67,6 +101,21 @@ function RutaDetail() {
         </div>
         <Button variant="ghost" size="sm" onClick={killRuta}><Trash2 className="size-4" /></Button>
       </div>
+
+      {stopsWithCoords.length > 0 && (
+        <div className="space-y-2">
+          <RutaMap stops={stopsWithCoords} polyline={polyline} />
+          <div className="flex justify-between items-center">
+            <p className="text-xs text-muted-foreground">
+              {stopsWithCoords.length} de {data.paradas.length} paradas geolocalizadas
+            </p>
+            <Button size="sm" variant="outline" onClick={optimize} disabled={optimizing || stopsWithCoords.length < 3}>
+              <Sparkles className="size-4 mr-1" />
+              {optimizing ? "Optimizando..." : "Optimizar ruta"}
+            </Button>
+          </div>
+        </div>
+      )}
 
       <div className="bg-card border border-border rounded-lg">
         <div className="flex items-center justify-between p-4 border-b border-border">
@@ -111,6 +160,14 @@ function RutaDetail() {
                   {p.piscinas?.direccion && (
                     <div className="text-xs text-muted-foreground truncate">{p.piscinas.direccion}</div>
                   )}
+                  <div className="flex gap-3 mt-1">
+                    <a href={gmapsHref(p)} target="_blank" rel="noreferrer" className="text-xs text-primary inline-flex items-center gap-1 hover:underline">
+                      <ExternalLink className="size-3" /> Google Maps
+                    </a>
+                    <a href={wazeHref(p)} target="_blank" rel="noreferrer" className="text-xs text-primary inline-flex items-center gap-1 hover:underline">
+                      <Navigation className="size-3" /> Waze
+                    </a>
+                  </div>
                 </div>
                 <Button variant="ghost" size="sm" onClick={() => remove(p.id)}>
                   <Trash2 className="size-4" />
