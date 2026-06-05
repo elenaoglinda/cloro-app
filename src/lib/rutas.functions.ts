@@ -33,7 +33,7 @@ export const getRuta = createServerFn({ method: "GET" })
     if (!ruta) throw new Error("Ruta no encontrada");
     const { data: paradas } = await context.supabase
       .from("ruta_paradas")
-      .select("id, orden, completada, piscina_id, piscinas(alias, direccion, clientes(nombre))")
+      .select("id, orden, completada, piscina_id, piscinas(alias, direccion, lat, lng, clientes(nombre))")
       .eq("ruta_id", data.id)
       .order("orden");
     return { ruta, paradas: paradas ?? [] };
