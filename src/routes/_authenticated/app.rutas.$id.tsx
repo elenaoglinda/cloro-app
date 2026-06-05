@@ -27,9 +27,15 @@ function RutaDetail() {
   const [picker, setPicker] = useState(false);
 
   async function add(piscina_id: string) {
-    await addFn({ data: { ruta_id: id, piscina_id } });
-    setPicker(false);
-    qc.invalidateQueries({ queryKey: ["ruta", id] });
+    try {
+      await addFn({ data: { ruta_id: id, piscina_id } });
+      setPicker(false);
+      await qc.invalidateQueries({ queryKey: ["ruta", id] });
+      toast.success("Parada añadida");
+    } catch (err: any) {
+      console.error("addParada error", err);
+      toast.error(err?.message || "No se pudo añadir la parada");
+    }
   }
   async function toggle(pid: string, completada: boolean) {
     await toggleFn({ data: { id: pid, completada } });
