@@ -48,7 +48,7 @@ function AuthPage() {
         "Password is known to be weak and easy to guess, please choose a different one.":
           "La contraseña es demasiado débil. Elige una más segura.",
       };
-      toast.error(translations[msg] ?? msg);
+      toast.error(translations[msg] ?? "Ha ocurrido un error. Inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }
