@@ -21,6 +21,7 @@ import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/com
 import { Route as AdminMensajesRouteImport } from './routes/admin.mensajes'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
+import { Route as AuthenticatedAppRutasRouteImport } from './routes/_authenticated/app.rutas'
 import { Route as AuthenticatedAppPiscinasRouteImport } from './routes/_authenticated/app.piscinas'
 import { Route as AuthenticatedAppAjustesRouteImport } from './routes/_authenticated/app.ajustes'
 import { Route as AuthenticatedAppRutasIndexRouteImport } from './routes/_authenticated/app.rutas.index'
@@ -91,6 +92,11 @@ const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
+const AuthenticatedAppRutasRoute = AuthenticatedAppRutasRouteImport.update({
+  id: '/rutas',
+  path: '/rutas',
+  getParentRoute: () => AuthenticatedAppRoute,
+} as any)
 const AuthenticatedAppPiscinasRoute =
   AuthenticatedAppPiscinasRouteImport.update({
     id: '/piscinas',
@@ -104,9 +110,9 @@ const AuthenticatedAppAjustesRoute = AuthenticatedAppAjustesRouteImport.update({
 } as any)
 const AuthenticatedAppRutasIndexRoute =
   AuthenticatedAppRutasIndexRouteImport.update({
-    id: '/rutas/',
-    path: '/rutas/',
-    getParentRoute: () => AuthenticatedAppRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedAppRutasRoute,
   } as any)
 const AuthenticatedAppPartesIndexRoute =
   AuthenticatedAppPartesIndexRouteImport.update({
@@ -121,9 +127,9 @@ const AuthenticatedAppClientesIndexRoute =
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
 const AuthenticatedAppRutasIdRoute = AuthenticatedAppRutasIdRouteImport.update({
-  id: '/rutas/$id',
-  path: '/rutas/$id',
-  getParentRoute: () => AuthenticatedAppRoute,
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AuthenticatedAppRutasRoute,
 } as any)
 const AuthenticatedAppPartesNuevoRoute =
   AuthenticatedAppPartesNuevoRouteImport.update({
@@ -157,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/invitacion/$token': typeof InvitacionTokenRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
+  '/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/app/': typeof AuthenticatedAppIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
@@ -202,6 +209,7 @@ export interface FileRoutesById {
   '/invitacion/$token': typeof InvitacionTokenRoute
   '/_authenticated/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/_authenticated/app/piscinas': typeof AuthenticatedAppPiscinasRoute
+  '/_authenticated/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
   '/_authenticated/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/_authenticated/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
@@ -226,6 +234,7 @@ export interface FileRouteTypes {
     | '/invitacion/$token'
     | '/app/ajustes'
     | '/app/piscinas'
+    | '/app/rutas'
     | '/app/'
     | '/app/clientes/$id'
     | '/app/partes/$id'
@@ -270,6 +279,7 @@ export interface FileRouteTypes {
     | '/invitacion/$token'
     | '/_authenticated/app/ajustes'
     | '/_authenticated/app/piscinas'
+    | '/_authenticated/app/rutas'
     | '/_authenticated/app/'
     | '/_authenticated/app/clientes/$id'
     | '/_authenticated/app/partes/$id'
@@ -379,6 +389,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/_authenticated/app/rutas': {
+      id: '/_authenticated/app/rutas'
+      path: '/rutas'
+      fullPath: '/app/rutas'
+      preLoaderRoute: typeof AuthenticatedAppRutasRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
     '/_authenticated/app/piscinas': {
       id: '/_authenticated/app/piscinas'
       path: '/piscinas'
@@ -395,10 +412,10 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/app/rutas/': {
       id: '/_authenticated/app/rutas/'
-      path: '/rutas'
+      path: '/'
       fullPath: '/app/rutas/'
       preLoaderRoute: typeof AuthenticatedAppRutasIndexRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
+      parentRoute: typeof AuthenticatedAppRutasRoute
     }
     '/_authenticated/app/partes/': {
       id: '/_authenticated/app/partes/'
@@ -416,10 +433,10 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/app/rutas/$id': {
       id: '/_authenticated/app/rutas/$id'
-      path: '/rutas/$id'
+      path: '/$id'
       fullPath: '/app/rutas/$id'
       preLoaderRoute: typeof AuthenticatedAppRutasIdRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
+      parentRoute: typeof AuthenticatedAppRutasRoute
     }
     '/_authenticated/app/partes/nuevo': {
       id: '/_authenticated/app/partes/nuevo'
@@ -445,30 +462,43 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedAppRutasRouteChildren {
+  AuthenticatedAppRutasIdRoute: typeof AuthenticatedAppRutasIdRoute
+  AuthenticatedAppRutasIndexRoute: typeof AuthenticatedAppRutasIndexRoute
+}
+
+const AuthenticatedAppRutasRouteChildren: AuthenticatedAppRutasRouteChildren = {
+  AuthenticatedAppRutasIdRoute: AuthenticatedAppRutasIdRoute,
+  AuthenticatedAppRutasIndexRoute: AuthenticatedAppRutasIndexRoute,
+}
+
+const AuthenticatedAppRutasRouteWithChildren =
+  AuthenticatedAppRutasRoute._addFileChildren(
+    AuthenticatedAppRutasRouteChildren,
+  )
+
 interface AuthenticatedAppRouteChildren {
   AuthenticatedAppAjustesRoute: typeof AuthenticatedAppAjustesRoute
   AuthenticatedAppPiscinasRoute: typeof AuthenticatedAppPiscinasRoute
+  AuthenticatedAppRutasRoute: typeof AuthenticatedAppRutasRouteWithChildren
   AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
   AuthenticatedAppClientesIdRoute: typeof AuthenticatedAppClientesIdRoute
   AuthenticatedAppPartesIdRoute: typeof AuthenticatedAppPartesIdRoute
   AuthenticatedAppPartesNuevoRoute: typeof AuthenticatedAppPartesNuevoRoute
-  AuthenticatedAppRutasIdRoute: typeof AuthenticatedAppRutasIdRoute
   AuthenticatedAppClientesIndexRoute: typeof AuthenticatedAppClientesIndexRoute
   AuthenticatedAppPartesIndexRoute: typeof AuthenticatedAppPartesIndexRoute
-  AuthenticatedAppRutasIndexRoute: typeof AuthenticatedAppRutasIndexRoute
 }
 
 const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
   AuthenticatedAppAjustesRoute: AuthenticatedAppAjustesRoute,
   AuthenticatedAppPiscinasRoute: AuthenticatedAppPiscinasRoute,
+  AuthenticatedAppRutasRoute: AuthenticatedAppRutasRouteWithChildren,
   AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
   AuthenticatedAppClientesIdRoute: AuthenticatedAppClientesIdRoute,
   AuthenticatedAppPartesIdRoute: AuthenticatedAppPartesIdRoute,
   AuthenticatedAppPartesNuevoRoute: AuthenticatedAppPartesNuevoRoute,
-  AuthenticatedAppRutasIdRoute: AuthenticatedAppRutasIdRoute,
   AuthenticatedAppClientesIndexRoute: AuthenticatedAppClientesIndexRoute,
   AuthenticatedAppPartesIndexRoute: AuthenticatedAppPartesIndexRoute,
-  AuthenticatedAppRutasIndexRoute: AuthenticatedAppRutasIndexRoute,
 }
 
 const AuthenticatedAppRouteWithChildren =
