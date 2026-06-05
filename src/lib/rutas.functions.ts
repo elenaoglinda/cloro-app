@@ -113,3 +113,75 @@ export const deleteRuta = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+const GMAPS_GATEWAY = "https://connector-gateway.lovable.dev/google_maps";
+
+export const optimizeRuta = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const { supabase } = context;
+    const { data: paradas, error } = await supabase
+      .from("ruta_paradas")
+      .select("id, orden, piscinas(lat, lng)")
+      .eq("ruta_id", data.id)
+      .order("orden");
+    if (error) throw new Error(error.message);
+    const valid = (paradas ?? []).filter(
+      (p: any) => p.piscinas?.lat != null && p.piscinas?.lng != null,
+    );
+    if (valid.length < 3) {
+      throw new Error("Necesitas al menos 3 paradas con dirección geolocalizada para optimizar.");
+    }
+
+    const origin = valid[0];
+    const destination = valid[valid.length - 1];
+    const intermediates = valid.slice(1, -1);
+
+    const lovableKey = process.env.LOVABLE_API_KEY;
+    const gmapsKey = process.env.GOOGLE_MAPS_API_KEY;
+    if (!lovableKey || !gmapsKey) throw new Error("Google Maps no está configurado.");
+
+    const body = {
+      origin: { location: { latLng: { latitude: Number(origin.piscinas.lat), longitude: Number(origin.piscinas.lng) } } },
+      destination: { location: { latLng: { latitude: Number(destination.piscinas.lat), longitude: Number(destination.piscinas.lng) } } },
+      intermediates: intermediates.map((p: any) => ({
+        location: { latLng: { latitude: Number(p.piscinas.lat), longitude: Number(p.piscinas.lng) } },
+      })),
+      travelMode: "DRIVE",
+      optimizeWaypointOrder: true,
+    };
+
+    const res = await fetch(`${GMAPS_GATEWAY}/routes/directions/v2:computeRoutes`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${lovableKey}`,
+        "X-Connection-Api-Key": gmapsKey,
+        "Content-Type": "application/json",
+        "X-Goog-FieldMask": "routes.optimizedIntermediateWaypointIndex,routes.polyline.encodedPolyline,routes.duration,routes.distanceMeters",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      const t = await res.text();
+      console.error("optimizeRuta gmaps error", res.status, t);
+      throw new Error("No se pudo optimizar la ruta.");
+    }
+    const json: any = await res.json();
+    const route = json.routes?.[0];
+    if (!route) throw new Error("Sin resultados de Google Maps.");
+
+    const optimizedIdx: number[] = route.optimizedIntermediateWaypointIndex ?? intermediates.map((_, i) => i);
+    const newOrder = [origin, ...optimizedIdx.map((i) => intermediates[i]), destination];
+
+    // Persist new orden
+    for (let i = 0; i < newOrder.length; i++) {
+      await supabase.from("ruta_paradas").update({ orden: i }).eq("id", newOrder[i].id);
+    }
+
+    return {
+      polyline: route.polyline?.encodedPolyline ?? null,
+      distanceMeters: route.distanceMeters ?? null,
+      duration: route.duration ?? null,
+    };
+  });
