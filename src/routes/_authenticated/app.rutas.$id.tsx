@@ -8,7 +8,8 @@ import { getRuta, addParada, toggleParada, removeParada, deleteRuta, optimizeRut
 import { listPiscinas } from "@/lib/piscinas.functions";
 import { Button } from "@/components/ui/button";
 import { RutaMap, type RutaMapStop } from "@/components/app/RutaMap";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 
 
 export const Route = createFileRoute("/_authenticated/app/rutas/$id")({
