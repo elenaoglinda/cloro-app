@@ -130,22 +130,28 @@ function RutaDetail() {
             return (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button size="sm" variant="outline" disabled={!available.length}>
+                  <Button size="sm" variant="outline">
                     <Plus className="size-4 mr-1" />
                     {available.length ? "Añadir piscina" : "Sin piscinas"}
                     <ChevronDown className="size-4 ml-1 opacity-60" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-[280px] max-h-[60vh]">
-                  {available.map((p: any) => (
-                    <DropdownMenuItem
-                      key={p.id}
-                      onClick={() => void add(p.id)}
-                      className="cursor-pointer"
-                    >
-                      {p.alias} — {p.clientes?.nombre}
+                  {available.length === 0 ? (
+                    <DropdownMenuItem disabled className="opacity-60">
+                      Todas las piscinas ya están en la ruta
                     </DropdownMenuItem>
-                  ))}
+                  ) : (
+                    available.map((p: any) => (
+                      <DropdownMenuItem
+                        key={p.id}
+                        onClick={() => void add(p.id)}
+                        className="cursor-pointer"
+                      >
+                        {p.alias} — {p.clientes?.nombre}
+                      </DropdownMenuItem>
+                    ))
+                  )}
                 </DropdownMenuContent>
               </DropdownMenu>
             );
