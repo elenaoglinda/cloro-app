@@ -102,12 +102,17 @@ export const addParada = createServerFn({ method: "POST" })
       console.error("addParada count error", countErr);
       throw new Error(countErr.message);
     }
-    const { error } = await supabase.from("ruta_paradas").insert({
-      ruta_id: data.ruta_id,
-      piscina_id: data.piscina_id,
-      org_id: prof.default_org_id,
-      orden: count ?? 0,
-    });
+    const { error } = await supabase
+      .from("ruta_paradas")
+      .upsert(
+        {
+          ruta_id: data.ruta_id,
+          piscina_id: data.piscina_id,
+          org_id: prof.default_org_id,
+          orden: count ?? 0,
+        },
+        { onConflict: "ruta_id,piscina_id", ignoreDuplicates: true },
+      );
     if (error) {
       console.error("addParada insert error", error);
       throw new Error(error.message);
