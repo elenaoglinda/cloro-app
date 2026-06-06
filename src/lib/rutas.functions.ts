@@ -31,12 +31,42 @@ export const getRuta = createServerFn({ method: "GET" })
       .maybeSingle();
     if (error) throw new Error(error.message);
     if (!ruta) throw new Error("Ruta no encontrada");
-    const { data: paradas } = await context.supabase
+    const { data: paradasRaw, error: pErr } = await context.supabase
       .from("ruta_paradas")
-      .select("id, orden, completada, piscina_id, piscinas(alias, direccion, lat, lng, clientes(nombre))")
+      .select("id, orden, completada, piscina_id, parte_id")
       .eq("ruta_id", data.id)
       .order("orden");
-    return { ruta, paradas: paradas ?? [] };
+    if (pErr) throw new Error(pErr.message);
+    const paradas = paradasRaw ?? [];
+    const piscinaIds = Array.from(new Set(paradas.map((p: any) => p.piscina_id).filter(Boolean)));
+    let piscMap = new Map<string, any>();
+    let cliMap = new Map<string, any>();
+    if (piscinaIds.length) {
+      const { data: piscs } = await context.supabase
+        .from("piscinas")
+        .select("id, alias, direccion, lat, lng, cliente_id")
+        .in("id", piscinaIds);
+      piscMap = new Map((piscs ?? []).map((p: any) => [p.id, p]));
+      const cliIds = Array.from(new Set((piscs ?? []).map((p: any) => p.cliente_id).filter(Boolean)));
+      if (cliIds.length) {
+        const { data: clis } = await context.supabase
+          .from("clientes")
+          .select("id, nombre")
+          .in("id", cliIds);
+        cliMap = new Map((clis ?? []).map((c: any) => [c.id, c]));
+      }
+    }
+    const paradasOut = paradas.map((p: any) => {
+      const pisc = piscMap.get(p.piscina_id);
+      const cli = pisc ? cliMap.get(pisc.cliente_id) : null;
+      return {
+        ...p,
+        piscinas: pisc
+          ? { alias: pisc.alias, direccion: pisc.direccion, lat: pisc.lat, lng: pisc.lng, clientes: cli ? { nombre: cli.nombre } : null }
+          : null,
+      };
+    });
+    return { ruta, paradas: paradasOut };
   });
 
 export const createRuta = createServerFn({ method: "POST" })
