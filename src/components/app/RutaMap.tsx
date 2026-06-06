@@ -25,7 +25,12 @@ function loadGmaps(): Promise<void> {
   if (window.google?.maps) return Promise.resolve();
   if (loaderPromise) return loaderPromise;
   loaderPromise = new Promise((resolve, reject) => {
-    const key = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY;
+    // Own API key (referrer-restricted to cloro.app + *.lovable.app domains).
+    // Safe to expose in client bundle: HTTP referrer restrictions in Google Cloud
+    // prevent use from other origins.
+    const key =
+      import.meta.env.VITE_GOOGLE_MAPS_API_KEY ||
+      "AIzaSyCZeOylI9EuakATmwExXB8c8YV9hmKweio";
     const channel = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID;
     if (!key) {
       reject(new Error("Falta API key de Google Maps"));
