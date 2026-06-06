@@ -8,7 +8,7 @@ import { getRuta, addParada, toggleParada, removeParada, deleteRuta, optimizeRut
 import { listPiscinas } from "@/lib/piscinas.functions";
 import { Button } from "@/components/ui/button";
 import { RutaMap, type RutaMapStop } from "@/components/app/RutaMap";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 
 export const Route = createFileRoute("/_authenticated/app/rutas/$id")({
   component: RutaDetail,
@@ -124,32 +124,35 @@ function RutaDetail() {
       <div className="bg-card border border-border rounded-lg">
         <div className="flex items-center justify-between gap-2 p-4 border-b border-border">
           <h2 className="text-sm font-semibold">Paradas</h2>
-          <Select
-            value=""
-            onValueChange={(v) => v && add(v)}
-            disabled={!pData?.piscinas.filter((p: any) => !used.has(p.id)).length}
-          >
-            <SelectTrigger className="w-auto min-w-[180px]">
-              <span className="inline-flex items-center">
-                <Plus className="size-4 mr-1" />
-                <SelectValue placeholder="Añadir piscina" />
-              </span>
-            </SelectTrigger>
-            <SelectContent>
-              {pData?.piscinas
-                .filter((p: any) => !used.has(p.id))
-                .map((p: any) => (
-                  <SelectItem key={p.id} value={p.id}>
-                    {p.alias} — {p.clientes?.nombre}
-                  </SelectItem>
-                ))}
-              {!pData?.piscinas.filter((p: any) => !used.has(p.id)).length && (
-                <div className="px-2 py-1.5 text-sm text-muted-foreground">
-                  No quedan piscinas por añadir.
-                </div>
-              )}
-            </SelectContent>
-          </Select>
+          {(() => {
+            const available = pData?.piscinas.filter((p: any) => !used.has(p.id)) ?? [];
+            return (
+              <div className="relative inline-flex items-center">
+                <Plus className="size-4 absolute left-2 pointer-events-none text-muted-foreground" />
+                <select
+                  value=""
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    if (v) {
+                      add(v);
+                      e.target.value = "";
+                    }
+                  }}
+                  disabled={!available.length}
+                  className="h-9 pl-8 pr-3 rounded-md border border-input bg-background text-sm min-w-[180px] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  <option value="">
+                    {available.length ? "Añadir piscina" : "Sin piscinas disponibles"}
+                  </option>
+                  {available.map((p: any) => (
+                    <option key={p.id} value={p.id}>
+                      {p.alias} — {p.clientes?.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            );
+          })()}
         </div>
 
 
