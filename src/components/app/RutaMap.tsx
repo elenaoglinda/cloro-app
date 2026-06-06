@@ -1,42 +1,35 @@
-import { useEffect, useRef } from "react";
+/// <reference types="google.maps" />
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  APIProvider,
+  Map as GMap,
+  AdvancedMarker,
+  InfoWindow,
+  useMap,
+  useMapsLibrary,
+  Pin,
+} from "@vis.gl/react-google-maps";
+import { useServerFn } from "@tanstack/react-start";
+import { setPiscinaCoords } from "@/lib/rutas.functions";
 
-declare global {
-  interface Window {
-    google: any;
-    __initRutaMap?: () => void;
-  }
-}
-
-type Stop = {
-  id: string;
-  lat: number;
-  lng: number;
-  label: string;
+export type RutaMapStop = {
+  paradaId: string;
+  piscinaId: string;
+  alias: string;
+  cliente: string;
+  direccion: string | null;
+  lat: number | null;
+  lng: number | null;
 };
 
 interface Props {
-  stops: Stop[];
+  stops: RutaMapStop[];
   polyline?: string | null;
 }
 
-let loaderPromise: Promise<void> | null = null;
-function loadGmaps(): Promise<void> {
-  if (typeof window === "undefined") return Promise.resolve();
-  if (window.google?.maps) return Promise.resolve();
-  if (loaderPromise) return loaderPromise;
-  loaderPromise = new Promise((resolve, reject) => {
-    // Own browser API key, referrer-restricted in Google Cloud to cloro.app + *.lovable.app.
-    // Safe to expose in the client bundle.
-    const key = "AIzaSyCZeOylI9EuakATmwExXB8c8YV9hmKweio";
-    window.__initRutaMap = () => resolve();
-    const s = document.createElement("script");
-    s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&loading=async&callback=__initRutaMap`;
-    s.async = true;
-    s.onerror = () => reject(new Error("No se pudo cargar Google Maps"));
-    document.head.appendChild(s);
-  });
-  return loaderPromise;
-}
+const API_KEY =
+  (import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined) ??
+  "AIzaSyCZeOylI9EuakATmwExXB8c8YV9hmKweio";
 
 function decodePolyline(encoded: string): { lat: number; lng: number }[] {
   const points: { lat: number; lng: number }[] = [];
@@ -53,59 +46,178 @@ function decodePolyline(encoded: string): { lat: number; lng: number }[] {
   return points;
 }
 
-export function RutaMap({ stops, polyline }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<any>(null);
-  const overlaysRef = useRef<any[]>([]);
+type Resolved = RutaMapStop & { lat: number; lng: number };
+
+function MapContent({
+  resolved,
+  polyline,
+}: {
+  resolved: Resolved[];
+  polyline?: string | null;
+}) {
+  const map = useMap();
+  const [openId, setOpenId] = useState<string | null>(null);
+  const polyRef = useRef<google.maps.Polyline | null>(null);
+
+  // Fit bounds whenever the set of points changes
+  useEffect(() => {
+    if (!map || resolved.length === 0) return;
+    const bounds = new google.maps.LatLngBounds();
+    resolved.forEach((s) => bounds.extend({ lat: s.lat, lng: s.lng }));
+    if (polyline) decodePolyline(polyline).forEach((p) => bounds.extend(p));
+    map.fitBounds(bounds, 48);
+  }, [map, resolved, polyline]);
+
+  // Draw polyline
+  useEffect(() => {
+    if (!map) return;
+    polyRef.current?.setMap(null);
+    polyRef.current = null;
+    const path = polyline
+      ? decodePolyline(polyline)
+      : resolved.map((s) => ({ lat: s.lat, lng: s.lng }));
+    if (path.length < 2) return;
+    polyRef.current = new google.maps.Polyline({
+      path,
+      map,
+      strokeColor: "#2563eb",
+      strokeOpacity: 0.85,
+      strokeWeight: 4,
+    });
+    return () => {
+      polyRef.current?.setMap(null);
+      polyRef.current = null;
+    };
+  }, [map, resolved, polyline]);
+
+  return (
+    <>
+      {resolved.map((s, i) => (
+        <AdvancedMarker
+          key={s.paradaId}
+          position={{ lat: s.lat, lng: s.lng }}
+          onClick={() => setOpenId(s.paradaId)}
+        >
+          <Pin background="#2563eb" borderColor="#1e40af" glyphColor="#fff">
+            <span style={{ fontWeight: 600 }}>{i + 1}</span>
+          </Pin>
+        </AdvancedMarker>
+      ))}
+      {openId &&
+        (() => {
+          const s = resolved.find((r) => r.paradaId === openId);
+          if (!s) return null;
+          return (
+            <InfoWindow
+              position={{ lat: s.lat, lng: s.lng }}
+              onCloseClick={() => setOpenId(null)}
+            >
+              <div style={{ minWidth: 160 }}>
+                <div style={{ fontWeight: 600 }}>{s.alias}</div>
+                <div style={{ fontSize: 12, color: "#555" }}>{s.cliente}</div>
+              </div>
+            </InfoWindow>
+          );
+        })()}
+    </>
+  );
+}
+
+function Geocoder({
+  stops,
+  onResolved,
+}: {
+  stops: RutaMapStop[];
+  onResolved: (resolved: Resolved[]) => void;
+}) {
+  const geocodingLib = useMapsLibrary("geocoding");
+  const persistFn = useServerFn(setPiscinaCoords);
+  // Stable key for the input set
+  const key = useMemo(
+    () =>
+      stops
+        .map((s) => `${s.paradaId}:${s.lat ?? ""}:${s.lng ?? ""}:${s.direccion ?? ""}`)
+        .join("|"),
+    [stops],
+  );
 
   useEffect(() => {
     let cancelled = false;
-    loadGmaps()
-      .then(() => {
-        if (cancelled || !ref.current) return;
-        if (!mapRef.current) {
-          mapRef.current = new window.google.maps.Map(ref.current, {
-            zoom: 12,
-            center: stops[0] ?? { lat: 40.4168, lng: -3.7038 },
-            disableDefaultUI: true,
-            zoomControl: true,
-          });
+    const ready: Resolved[] = stops
+      .filter((s) => s.lat != null && s.lng != null)
+      .map((s) => ({ ...s, lat: s.lat as number, lng: s.lng as number }));
+    const needs = stops.filter(
+      (s) => (s.lat == null || s.lng == null) && s.direccion && s.direccion.trim().length > 0,
+    );
+
+    if (!geocodingLib || needs.length === 0) {
+      // Emit in original order
+      const byId = new Map(ready.map((r) => [r.paradaId, r]));
+      onResolved(
+        stops
+          .map((s) => byId.get(s.paradaId))
+          .filter((r): r is Resolved => Boolean(r)),
+      );
+      return;
+    }
+
+    const geocoder = new geocodingLib.Geocoder();
+    (async () => {
+      const results: Resolved[] = [...ready];
+      for (const s of needs) {
+        try {
+          const { results: r } = await geocoder.geocode({ address: s.direccion! });
+          const hit = r?.[0]?.geometry?.location;
+          if (hit) {
+            const lat = hit.lat();
+            const lng = hit.lng();
+            results.push({ ...s, lat, lng });
+            // Persist for future loads (don't block UI on failure)
+            persistFn({ data: { id: s.piscinaId, lat, lng } }).catch(() => {});
+          }
+        } catch {
+          // ignore individual failures
         }
-        // Clear previous
-        overlaysRef.current.forEach((o) => o.setMap(null));
-        overlaysRef.current = [];
+        if (cancelled) return;
+      }
+      if (cancelled) return;
+      const byId = new Map(results.map((r) => [r.paradaId, r]));
+      onResolved(
+        stops
+          .map((s) => byId.get(s.paradaId))
+          .filter((r): r is Resolved => Boolean(r)),
+      );
+    })();
 
-        const bounds = new window.google.maps.LatLngBounds();
-        stops.forEach((s, i) => {
-          const m = new window.google.maps.Marker({
-            position: { lat: s.lat, lng: s.lng },
-            map: mapRef.current,
-            label: { text: String(i + 1), color: "#fff", fontWeight: "600" },
-            title: s.label,
-          });
-          overlaysRef.current.push(m);
-          bounds.extend({ lat: s.lat, lng: s.lng });
-        });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, geocodingLib]);
 
-        if (polyline) {
-          const path = decodePolyline(polyline);
-          const line = new window.google.maps.Polyline({
-            path,
-            map: mapRef.current,
-            strokeColor: "#2563eb",
-            strokeOpacity: 0.85,
-            strokeWeight: 4,
-          });
-          overlaysRef.current.push(line);
-          path.forEach((p) => bounds.extend(p));
-        }
+  return null;
+}
 
-        if (stops.length) mapRef.current.fitBounds(bounds, 48);
-      })
-      .catch((err) => console.error("Map load error", err));
-    return () => { cancelled = true; };
-  }, [stops, polyline]);
+export function RutaMap({ stops, polyline }: Props) {
+  const [resolved, setResolved] = useState<Resolved[]>([]);
 
   if (!stops.length) return null;
-  return <div ref={ref} className="w-full h-72 rounded-lg border border-border" />;
+
+  return (
+    <div className="w-full rounded-lg border border-border overflow-hidden" style={{ height: 400 }}>
+      <APIProvider apiKey={API_KEY}>
+        <GMap
+          mapId="DEMO_MAP_ID"
+          defaultCenter={{ lat: 40.4168, lng: -3.7038 }}
+          defaultZoom={6}
+          disableDefaultUI
+          zoomControl
+          gestureHandling="greedy"
+        >
+          <Geocoder stops={stops} onResolved={setResolved} />
+          {resolved.length > 0 && <MapContent resolved={resolved} polyline={polyline} />}
+        </GMap>
+      </APIProvider>
+    </div>
+  );
 }

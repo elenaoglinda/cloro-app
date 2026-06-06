@@ -7,7 +7,8 @@ import { toast } from "sonner";
 import { getRuta, addParada, toggleParada, removeParada, deleteRuta, optimizeRuta } from "@/lib/rutas.functions";
 import { listPiscinas } from "@/lib/piscinas.functions";
 import { Button } from "@/components/ui/button";
-import { RutaMap } from "@/components/app/RutaMap";
+import { RutaMap, type RutaMapStop } from "@/components/app/RutaMap";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export const Route = createFileRoute("/_authenticated/app/rutas/$id")({
   component: RutaDetail,
@@ -26,14 +27,13 @@ function RutaDetail() {
 
   const { data } = useQuery({ queryKey: ["ruta", id], queryFn: () => getFn({ data: { id } }) });
   const { data: pData } = useQuery({ queryKey: ["piscinas-all"], queryFn: () => piscinasFn() });
-  const [picker, setPicker] = useState(false);
+  
   const [polyline, setPolyline] = useState<string | null>(null);
   const [optimizing, setOptimizing] = useState(false);
 
   async function add(piscina_id: string) {
     try {
       await addFn({ data: { ruta_id: id, piscina_id } });
-      setPicker(false);
       await qc.invalidateQueries({ queryKey: ["ruta", id] });
       toast.success("Parada añadida");
     } catch (err: any) {
@@ -71,14 +71,18 @@ function RutaDetail() {
 
   if (!data) return <p className="text-sm text-muted-foreground">Cargando...</p>;
   const used = new Set(data.paradas.map((p: any) => p.piscina_id));
-  const stopsWithCoords = data.paradas
-    .filter((p: any) => p.piscinas?.lat != null && p.piscinas?.lng != null)
-    .map((p: any, i: number) => ({
-      id: p.id,
-      lat: Number(p.piscinas.lat),
-      lng: Number(p.piscinas.lng),
-      label: `${i + 1}. ${p.piscinas?.alias ?? ""}`,
-    }));
+  const mapStops: RutaMapStop[] = data.paradas.map((p: any) => ({
+    paradaId: p.id,
+    piscinaId: p.piscina_id,
+    alias: p.piscinas?.alias ?? "",
+    cliente: p.piscinas?.clientes?.nombre ?? "",
+    direccion: p.piscinas?.direccion ?? null,
+    lat: p.piscinas?.lat != null ? Number(p.piscinas.lat) : null,
+    lng: p.piscinas?.lng != null ? Number(p.piscinas.lng) : null,
+  }));
+  const geolocCount = mapStops.filter(
+    (s) => (s.lat != null && s.lng != null) || (s.direccion && s.direccion.trim().length > 0),
+  ).length;
 
   const gmapsHref = (p: any) =>
     p.piscinas?.lat != null
@@ -102,14 +106,14 @@ function RutaDetail() {
         <Button variant="ghost" size="sm" onClick={killRuta}><Trash2 className="size-4" /></Button>
       </div>
 
-      {stopsWithCoords.length > 0 && (
+      {mapStops.length > 0 && (
         <div className="space-y-2">
-          <RutaMap stops={stopsWithCoords} polyline={polyline} />
+          <RutaMap stops={mapStops} polyline={polyline} />
           <div className="flex justify-between items-center">
             <p className="text-xs text-muted-foreground">
-              {stopsWithCoords.length} de {data.paradas.length} paradas geolocalizadas
+              {geolocCount} de {data.paradas.length} paradas con dirección
             </p>
-            <Button size="sm" variant="outline" onClick={optimize} disabled={optimizing || stopsWithCoords.length < 3}>
+            <Button size="sm" variant="outline" onClick={optimize} disabled={optimizing || mapStops.length < 3}>
               <Sparkles className="size-4 mr-1" />
               {optimizing ? "Optimizando..." : "Optimizar ruta"}
             </Button>
@@ -118,26 +122,36 @@ function RutaDetail() {
       )}
 
       <div className="bg-card border border-border rounded-lg">
-        <div className="flex items-center justify-between p-4 border-b border-border">
+        <div className="flex items-center justify-between gap-2 p-4 border-b border-border">
           <h2 className="text-sm font-semibold">Paradas</h2>
-          <Button size="sm" variant="outline" onClick={() => setPicker((v) => !v)}>
-            <Plus className="size-4 mr-1" /> Añadir piscina
-          </Button>
+          <Select
+            value=""
+            onValueChange={(v) => v && add(v)}
+            disabled={!pData?.piscinas.filter((p: any) => !used.has(p.id)).length}
+          >
+            <SelectTrigger className="w-auto min-w-[180px]">
+              <span className="inline-flex items-center">
+                <Plus className="size-4 mr-1" />
+                <SelectValue placeholder="Añadir piscina" />
+              </span>
+            </SelectTrigger>
+            <SelectContent>
+              {pData?.piscinas
+                .filter((p: any) => !used.has(p.id))
+                .map((p: any) => (
+                  <SelectItem key={p.id} value={p.id}>
+                    {p.alias} — {p.clientes?.nombre}
+                  </SelectItem>
+                ))}
+              {!pData?.piscinas.filter((p: any) => !used.has(p.id)).length && (
+                <div className="px-2 py-1.5 text-sm text-muted-foreground">
+                  No quedan piscinas por añadir.
+                </div>
+              )}
+            </SelectContent>
+          </Select>
         </div>
 
-        {picker && (
-          <div className="max-h-64 overflow-auto border-b border-border">
-            {pData?.piscinas.filter((p: any) => !used.has(p.id)).map((p: any) => (
-              <button key={p.id} onClick={() => add(p.id)} className="w-full text-left px-4 py-2 text-sm hover:bg-muted">
-                <span className="font-medium">{p.alias}</span>{" "}
-                <span className="text-muted-foreground">— {p.clientes?.nombre}</span>
-              </button>
-            ))}
-            {!pData?.piscinas.filter((p: any) => !used.has(p.id)).length && (
-              <p className="p-4 text-sm text-muted-foreground">No quedan piscinas por añadir.</p>
-            )}
-          </div>
-        )}
 
         {!data.paradas.length ? (
           <p className="p-4 text-sm text-muted-foreground">Sin paradas. Añade piscinas a la ruta.</p>
