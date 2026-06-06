@@ -134,7 +134,9 @@ function RutaDetail() {
                   <Button size="sm" variant="outline" disabled={!available.length}>
                     <Plus className="size-4 mr-1" />
                     {available.length ? "Añadir piscina" : "Sin piscinas"}
+                    <ChevronDown className="size-4 ml-1 opacity-60" />
                   </Button>
+
                 </PopoverTrigger>
                 <PopoverContent align="end" className="p-0 w-[280px]">
                   <Command>
