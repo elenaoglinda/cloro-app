@@ -7,7 +7,8 @@ import { toast } from "sonner";
 import { getRuta, addParada, toggleParada, removeParada, deleteRuta, optimizeRuta } from "@/lib/rutas.functions";
 import { listPiscinas } from "@/lib/piscinas.functions";
 import { Button } from "@/components/ui/button";
-import { RutaMap } from "@/components/app/RutaMap";
+import { RutaMap, type RutaMapStop } from "@/components/app/RutaMap";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export const Route = createFileRoute("/_authenticated/app/rutas/$id")({
   component: RutaDetail,
