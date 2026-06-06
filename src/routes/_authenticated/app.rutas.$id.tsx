@@ -72,14 +72,18 @@ function RutaDetail() {
 
   if (!data) return <p className="text-sm text-muted-foreground">Cargando...</p>;
   const used = new Set(data.paradas.map((p: any) => p.piscina_id));
-  const stopsWithCoords = data.paradas
-    .filter((p: any) => p.piscinas?.lat != null && p.piscinas?.lng != null)
-    .map((p: any, i: number) => ({
-      id: p.id,
-      lat: Number(p.piscinas.lat),
-      lng: Number(p.piscinas.lng),
-      label: `${i + 1}. ${p.piscinas?.alias ?? ""}`,
-    }));
+  const mapStops: RutaMapStop[] = data.paradas.map((p: any) => ({
+    paradaId: p.id,
+    piscinaId: p.piscina_id,
+    alias: p.piscinas?.alias ?? "",
+    cliente: p.piscinas?.clientes?.nombre ?? "",
+    direccion: p.piscinas?.direccion ?? null,
+    lat: p.piscinas?.lat != null ? Number(p.piscinas.lat) : null,
+    lng: p.piscinas?.lng != null ? Number(p.piscinas.lng) : null,
+  }));
+  const geolocCount = mapStops.filter(
+    (s) => (s.lat != null && s.lng != null) || (s.direccion && s.direccion.trim().length > 0),
+  ).length;
 
   const gmapsHref = (p: any) =>
     p.piscinas?.lat != null
