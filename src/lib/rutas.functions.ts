@@ -114,7 +114,7 @@ export const deleteRuta = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-const GMAPS_GATEWAY = "https://connector-gateway.lovable.dev/google_maps";
+const GMAPS_BASE = "https://routes.googleapis.com";
 
 export const optimizeRuta = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
@@ -145,9 +145,8 @@ export const optimizeRuta = createServerFn({ method: "POST" })
     const destination = valid[valid.length - 1];
     const intermediates = valid.slice(1, -1);
 
-    const lovableKey = process.env.LOVABLE_API_KEY;
     const gmapsKey = process.env.GOOGLE_MAPS_API_KEY;
-    if (!lovableKey || !gmapsKey) throw new Error("Google Maps no está configurado.");
+    if (!gmapsKey) throw new Error("Google Maps no está configurado.");
 
     const body = {
       origin: { location: { latLng: { latitude: Number(origin.pisc.lat), longitude: Number(origin.pisc.lng) } } },
@@ -159,11 +158,10 @@ export const optimizeRuta = createServerFn({ method: "POST" })
       optimizeWaypointOrder: true,
     };
 
-    const res = await fetch(`${GMAPS_GATEWAY}/routes/directions/v2:computeRoutes`, {
+    const res = await fetch(`${GMAPS_BASE}/directions/v2:computeRoutes`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${lovableKey}`,
-        "X-Connection-Api-Key": gmapsKey,
+        "X-Goog-Api-Key": gmapsKey,
         "Content-Type": "application/json",
         "X-Goog-FieldMask": "routes.optimizedIntermediateWaypointIndex,routes.polyline.encodedPolyline,routes.duration,routes.distanceMeters",
       },

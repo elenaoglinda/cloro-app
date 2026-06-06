@@ -25,20 +25,12 @@ function loadGmaps(): Promise<void> {
   if (window.google?.maps) return Promise.resolve();
   if (loaderPromise) return loaderPromise;
   loaderPromise = new Promise((resolve, reject) => {
-    // Own API key (referrer-restricted to cloro.app + *.lovable.app domains).
-    // Safe to expose in client bundle: HTTP referrer restrictions in Google Cloud
-    // prevent use from other origins.
-    const key =
-      import.meta.env.VITE_GOOGLE_MAPS_API_KEY ||
-      "AIzaSyCZeOylI9EuakATmwExXB8c8YV9hmKweio";
-    const channel = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID;
-    if (!key) {
-      reject(new Error("Falta API key de Google Maps"));
-      return;
-    }
+    // Own browser API key, referrer-restricted in Google Cloud to cloro.app + *.lovable.app.
+    // Safe to expose in the client bundle.
+    const key = "AIzaSyCZeOylI9EuakATmwExXB8c8YV9hmKweio";
     window.__initRutaMap = () => resolve();
     const s = document.createElement("script");
-    s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&loading=async&callback=__initRutaMap${channel ? `&channel=${channel}` : ""}`;
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&loading=async&callback=__initRutaMap`;
     s.async = true;
     s.onerror = () => reject(new Error("No se pudo cargar Google Maps"));
     document.head.appendChild(s);
