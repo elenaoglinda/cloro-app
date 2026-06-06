@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Plus, Trash2, Check, Navigation, ExternalLink, Sparkles } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Check, Navigation, ExternalLink, Sparkles, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { getRuta, addParada, toggleParada, removeParada, deleteRuta, optimizeRuta } from "@/lib/rutas.functions";
@@ -134,7 +134,9 @@ function RutaDetail() {
                   <Button size="sm" variant="outline" disabled={!available.length}>
                     <Plus className="size-4 mr-1" />
                     {available.length ? "Añadir piscina" : "Sin piscinas"}
+                    <ChevronDown className="size-4 ml-1 opacity-60" />
                   </Button>
+
                 </PopoverTrigger>
                 <PopoverContent align="end" className="p-0 w-[280px]">
                   <Command>
