@@ -207,7 +207,7 @@ export function RutaMap({ stops, polyline }: Props) {
     <div className="w-full rounded-lg border border-border overflow-hidden" style={{ height: 400 }}>
       <APIProvider apiKey={API_KEY}>
         <GMap
-          mapId="cloro-ruta-map"
+          mapId="DEMO_MAP_ID"
           defaultCenter={{ lat: 40.4168, lng: -3.7038 }}
           defaultZoom={6}
           disableDefaultUI
