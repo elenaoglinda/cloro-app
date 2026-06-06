@@ -114,6 +114,24 @@ export const deleteRuta = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+export const setPiscinaCoords = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) =>
+    z.object({
+      id: z.string().uuid(),
+      lat: z.number().min(-90).max(90),
+      lng: z.number().min(-180).max(180),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { error } = await context.supabase
+      .from("piscinas")
+      .update({ lat: data.lat, lng: data.lng })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
 const GMAPS_BASE = "https://routes.googleapis.com";
 
 export const optimizeRuta = createServerFn({ method: "POST" })
