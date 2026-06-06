@@ -8,6 +8,7 @@ import { getRuta, addParada, toggleParada, removeParada, deleteRuta, optimizeRut
 import { listPiscinas } from "@/lib/piscinas.functions";
 import { Button } from "@/components/ui/button";
 import { RutaMap, type RutaMapStop } from "@/components/app/RutaMap";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 
 export const Route = createFileRoute("/_authenticated/app/rutas/$id")({
@@ -127,30 +128,21 @@ function RutaDetail() {
           {(() => {
             const available = pData?.piscinas.filter((p: any) => !used.has(p.id)) ?? [];
             return (
-              <div className="relative inline-flex items-center">
-                <Plus className="size-4 absolute left-2 pointer-events-none text-muted-foreground" />
-                <select
-                  value=""
-                  onChange={(e) => {
-                    const v = e.target.value;
-                    if (v) {
-                      add(v);
-                      e.target.value = "";
-                    }
-                  }}
-                  disabled={!available.length}
-                  className="h-9 pl-8 pr-3 rounded-md border border-input bg-background text-sm min-w-[180px] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                >
-                  <option value="">
-                    {available.length ? "Añadir piscina" : "Sin piscinas disponibles"}
-                  </option>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button size="sm" variant="outline" disabled={!available.length}>
+                    <Plus className="size-4 mr-1" />
+                    {available.length ? "Añadir piscina" : "Sin piscinas"}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="max-h-[60vh] overflow-y-auto">
                   {available.map((p: any) => (
-                    <option key={p.id} value={p.id}>
+                    <DropdownMenuItem key={p.id} onClick={() => add(p.id)}>
                       {p.alias} — {p.clientes?.nombre}
-                    </option>
+                    </DropdownMenuItem>
                   ))}
-                </select>
-              </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
             );
           })()}
         </div>
