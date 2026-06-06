@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   APIProvider,
-  Map,
+  Map as GMap,
   AdvancedMarker,
   InfoWindow,
   useMap,
