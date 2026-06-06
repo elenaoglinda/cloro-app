@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Plus, Trash2, Check, Navigation, ExternalLink, Sparkles } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Check, Navigation, ExternalLink, Sparkles, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { getRuta, addParada, toggleParada, removeParada, deleteRuta, optimizeRuta } from "@/lib/rutas.functions";
