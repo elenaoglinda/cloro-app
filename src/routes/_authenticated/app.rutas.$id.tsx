@@ -8,7 +8,8 @@ import { getRuta, addParada, toggleParada, removeParada, deleteRuta, optimizeRut
 import { listPiscinas } from "@/lib/piscinas.functions";
 import { Button } from "@/components/ui/button";
 import { RutaMap, type RutaMapStop } from "@/components/app/RutaMap";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 
 
 export const Route = createFileRoute("/_authenticated/app/rutas/$id")({
@@ -128,24 +129,37 @@ function RutaDetail() {
           {(() => {
             const available = pData?.piscinas.filter((p: any) => !used.has(p.id)) ?? [];
             return (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+              <Popover>
+                <PopoverTrigger asChild>
                   <Button size="sm" variant="outline" disabled={!available.length}>
                     <Plus className="size-4 mr-1" />
                     {available.length ? "Añadir piscina" : "Sin piscinas"}
                   </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="max-h-[60vh] overflow-y-auto">
-                  {available.map((p: any) => (
-                    <DropdownMenuItem key={p.id} onClick={() => add(p.id)}>
-                      {p.alias} — {p.clientes?.nombre}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                </PopoverTrigger>
+                <PopoverContent align="end" className="p-0 w-[280px]">
+                  <Command>
+                    <CommandInput placeholder="Buscar piscina..." />
+                    <CommandList className="max-h-[60vh]">
+                      <CommandEmpty>Sin resultados.</CommandEmpty>
+                      <CommandGroup>
+                        {available.map((p: any) => (
+                          <CommandItem
+                            key={p.id}
+                            value={`${p.alias} ${p.clientes?.nombre ?? ""}`}
+                            onSelect={() => add(p.id)}
+                          >
+                            {p.alias} — {p.clientes?.nombre}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             );
           })()}
         </div>
+
 
 
         {!data.paradas.length ? (
