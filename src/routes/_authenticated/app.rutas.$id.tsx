@@ -27,14 +27,13 @@ function RutaDetail() {
 
   const { data } = useQuery({ queryKey: ["ruta", id], queryFn: () => getFn({ data: { id } }) });
   const { data: pData } = useQuery({ queryKey: ["piscinas-all"], queryFn: () => piscinasFn() });
-  const [picker, setPicker] = useState(false);
+  
   const [polyline, setPolyline] = useState<string | null>(null);
   const [optimizing, setOptimizing] = useState(false);
 
   async function add(piscina_id: string) {
     try {
       await addFn({ data: { ruta_id: id, piscina_id } });
-      setPicker(false);
       await qc.invalidateQueries({ queryKey: ["ruta", id] });
       toast.success("Parada añadida");
     } catch (err: any) {
