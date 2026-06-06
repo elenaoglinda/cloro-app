@@ -216,7 +216,7 @@ export function RutaMap({ stops, polyline }: Props) {
         >
           <Geocoder stops={stops} onResolved={setResolved} />
           {resolved.length > 0 && <MapContent resolved={resolved} polyline={polyline} />}
-        </Map>
+        </GMap>
       </APIProvider>
     </div>
   );
