@@ -38,7 +38,7 @@ function RutaDetail() {
       await qc.invalidateQueries({ queryKey: ["ruta", id] });
       toast.success("Piscina añadida a la ruta");
     } catch (err: any) {
-      toast.error(err?.message || "No se pudo añadir la parada");
+      toast.error("Error al añadir la piscina", { description: err?.message });
     }
   }
   async function toggle(pid: string, completada: boolean) {
