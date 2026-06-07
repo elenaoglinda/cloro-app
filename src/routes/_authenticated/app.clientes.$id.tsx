@@ -23,7 +23,7 @@ function ClienteDetail() {
   const create = useServerFn(upsertPiscina);
   const qc = useQueryClient();
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ alias: "", tipo: "", volumen_m3: "" });
+  const [form, setForm] = useState({ alias: "", tipo: "", volumen_m3: "", direccion: "" });
   const { data, isLoading } = useQuery({ queryKey: ["cliente", id], queryFn: () => fn({ data: { id } }) });
 
   async function submit(e: React.FormEvent) {
@@ -36,12 +36,13 @@ function ClienteDetail() {
             alias: form.alias,
             tipo: form.tipo || null,
             volumen_m3: form.volumen_m3 ? Number(form.volumen_m3) : null,
+            direccion: form.direccion.trim() || null,
           } as any,
         },
       });
       toast.success("Piscina añadida");
       setOpen(false);
-      setForm({ alias: "", tipo: "", volumen_m3: "" });
+      setForm({ alias: "", tipo: "", volumen_m3: "", direccion: "" });
       qc.invalidateQueries({ queryKey: ["cliente", id] });
     } catch (err: any) {
       toast.error(err?.message ?? "Error");
