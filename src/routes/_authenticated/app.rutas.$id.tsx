@@ -181,14 +181,20 @@ function RutaDetail() {
                   {p.piscinas?.direccion && (
                     <div className="text-xs text-muted-foreground truncate">{p.piscinas.direccion}</div>
                   )}
-                  <div className="flex gap-3 mt-1">
-                    <a href={gmapsHref(p)} target="_blank" rel="noreferrer" className="text-xs text-primary inline-flex items-center gap-1 hover:underline">
-                      <ExternalLink className="size-3" /> Google Maps
-                    </a>
-                    <a href={wazeHref(p)} target="_blank" rel="noreferrer" className="text-xs text-primary inline-flex items-center gap-1 hover:underline">
-                      <Navigation className="size-3" /> Waze
-                    </a>
-                  </div>
+                  {p.piscinas?.lat != null || (p.piscinas?.direccion && p.piscinas.direccion.trim()) ? (
+                    <div className="flex gap-3 mt-1">
+                      <a href={gmapsHref(p)} target="_blank" rel="noreferrer" className="text-xs text-primary inline-flex items-center gap-1 hover:underline">
+                        <ExternalLink className="size-3" /> Google Maps
+                      </a>
+                      <a href={wazeHref(p)} target="_blank" rel="noreferrer" className="text-xs text-primary inline-flex items-center gap-1 hover:underline">
+                        <Navigation className="size-3" /> Waze
+                      </a>
+                    </div>
+                  ) : (
+                    <div className="text-xs text-muted-foreground mt-1 italic">
+                      Sin dirección — añádela en la ficha de la piscina para navegar.
+                    </div>
+                  )}
                 </div>
                 <Button variant="ghost" size="sm" onClick={() => remove(p.id)}>
                   <Trash2 className="size-4" />
