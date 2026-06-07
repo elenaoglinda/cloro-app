@@ -23,7 +23,7 @@ function ClienteDetail() {
   const create = useServerFn(upsertPiscina);
   const qc = useQueryClient();
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ alias: "", tipo: "", volumen_m3: "" });
+  const [form, setForm] = useState({ alias: "", tipo: "", volumen_m3: "", direccion: "" });
   const { data, isLoading } = useQuery({ queryKey: ["cliente", id], queryFn: () => fn({ data: { id } }) });
 
   async function submit(e: React.FormEvent) {
@@ -36,12 +36,13 @@ function ClienteDetail() {
             alias: form.alias,
             tipo: form.tipo || null,
             volumen_m3: form.volumen_m3 ? Number(form.volumen_m3) : null,
+            direccion: form.direccion.trim() || null,
           } as any,
         },
       });
       toast.success("Piscina añadida");
       setOpen(false);
-      setForm({ alias: "", tipo: "", volumen_m3: "" });
+      setForm({ alias: "", tipo: "", volumen_m3: "", direccion: "" });
       qc.invalidateQueries({ queryKey: ["cliente", id] });
     } catch (err: any) {
       toast.error(err?.message ?? "Error");
@@ -76,6 +77,7 @@ function ClienteDetail() {
                 <div><Label>Alias *</Label><Input required value={form.alias} onChange={(e) => setForm({ ...form, alias: e.target.value })} /></div>
                 <div><Label>Tipo</Label><Input placeholder="Privada / Comunidad / Hotel" value={form.tipo} onChange={(e) => setForm({ ...form, tipo: e.target.value })} /></div>
                 <div><Label>Volumen (m³)</Label><Input type="number" step="0.1" value={form.volumen_m3} onChange={(e) => setForm({ ...form, volumen_m3: e.target.value })} /></div>
+                <div><Label>Dirección</Label><Input placeholder="Calle, número, ciudad" value={form.direccion} onChange={(e) => setForm({ ...form, direccion: e.target.value })} /></div>
                 <DialogFooter><Button type="submit">Crear</Button></DialogFooter>
               </form>
             </DialogContent>
