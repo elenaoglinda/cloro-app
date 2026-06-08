@@ -39,11 +39,13 @@ export const parteSchema = z.object({
   fecha: z.string().optional().nullable(),
   hora_medicion: z
     .string()
-    .regex(/^\d{2}:\d{2}(:\d{2})?$/)
     .optional()
     .nullable()
-    .or(z.literal(""))
-    .transform((v) => (v && v !== "" ? (v.length === 5 ? `${v}:00` : v) : null)),
+    .transform((v) => {
+      if (!v) return null;
+      if (!/^\d{2}:\d{2}(:\d{2})?$/.test(v)) return null;
+      return v.length === 5 ? `${v}:00` : v;
+    }),
   ph: num(),
   cloro_libre: num(),
   cloro_total: num(),
