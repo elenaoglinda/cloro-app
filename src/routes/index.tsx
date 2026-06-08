@@ -1,8 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Waves, MapPin, Beaker, FileCheck2, MessageCircle, CreditCard,
-  Wifi, ShieldCheck, Calendar, BellRing, Building2, Check, X,
-  Sparkles, ArrowRight, Clock, Euro, Smartphone, FileSpreadsheet,
+  Waves,
+  MapPin,
+  Beaker,
+  FileCheck2,
+  MessageCircle,
+  CreditCard,
+  Wifi,
+  ShieldCheck,
+  Calendar,
+  BellRing,
+  Building2,
+  Check,
+  X,
+  Sparkles,
+  ArrowRight,
+  Clock,
+  Euro,
+  Smartphone,
+  FileSpreadsheet,
 } from "lucide-react";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -148,11 +164,12 @@ function Hero() {
             <Sparkles className="size-3.5" /> Diseñado para el mercado español
           </span>
           <h1 className="mt-6 text-5xl lg:text-7xl font-display leading-[1.02] text-balance">
-            El sistema operativo de tu empresa de <em className="text-primary not-italic">mantenimiento de piscinas</em>.
+            El sistema operativo de tu empresa de <em className="text-primary not-italic">mantenimiento de piscinas</em>
+            .
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl text-balance">
-            Gestiona rutas, parámetros químicos, facturación VeriFactu e informes SILOÉ desde un único
-            lugar. Con un agente de WhatsApp que capta y agenda nuevos clientes mientras atiendes los actuales.
+            Gestiona rutas, parámetros químicos, facturación VeriFactu e informes SILOÉ desde un único lugar. Con un
+            agente de WhatsApp que capta y agenda nuevos clientes mientras atiendes los actuales.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
@@ -166,13 +183,19 @@ function Hero() {
               href="#whatsapp"
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-card border border-border font-medium hover:bg-muted transition"
             >
-              <MessageCircle className="size-4" /> Ver el agente WhatsApp
+              <MessageCircle className="size-4" /> Contacto
             </a>
           </div>
           <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5"><Check className="size-4 text-primary" /> Sin tarjeta</span>
-            <span className="inline-flex items-center gap-1.5"><Check className="size-4 text-primary" /> En castellano</span>
-            <span className="inline-flex items-center gap-1.5"><Check className="size-4 text-primary" /> Datos en la UE</span>
+            <span className="inline-flex items-center gap-1.5">
+              <Check className="size-4 text-primary" /> Sin tarjeta
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <Check className="size-4 text-primary" /> En castellano
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <Check className="size-4 text-primary" /> Datos en la UE
+            </span>
           </div>
         </div>
 
@@ -208,11 +231,24 @@ function Hero() {
 }
 
 function FloatingMetric({
-  className, icon, label, value, sub,
-}: { className?: string; icon: React.ReactNode; label: string; value: string; sub: string }) {
+  className,
+  icon,
+  label,
+  value,
+  sub,
+}: {
+  className?: string;
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  sub: string;
+}) {
   return (
     <div className={`bg-card rounded-2xl shadow-card border border-border p-4 w-56 ${className ?? ""}`}>
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">{icon}{label}</div>
+      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        {icon}
+        {label}
+      </div>
       <div className="mt-1 text-2xl font-display">{value}</div>
       <div className="text-xs text-muted-foreground">{sub}</div>
     </div>
@@ -244,18 +280,29 @@ function LogosStrip() {
 /* ---------------- PROBLEM ---------------- */
 function Problem() {
   const items = [
-    { t: "Lecturas en libreta", d: "El cloro y el pH se anotan a mano en una libreta en la furgoneta — y se reconstruye el SILOÉ a final de año." },
-    { t: "Rutas a ojo los lunes", d: "Mapa de Google, una pizarra y mucho café. Más kilómetros, más combustible, técnicos quemados." },
-    { t: "Cobros perseguidos por WhatsApp", d: "Notas de voz pidiendo recibos. Bizum suelto. El Excel de impagados crece cada mes." },
+    {
+      t: "Lecturas en libreta",
+      d: "El cloro y el pH se anotan a mano en una libreta en la furgoneta — y se reconstruye el SILOÉ a final de año.",
+    },
+    {
+      t: "Rutas a ojo los lunes",
+      d: "Mapa de Google, una pizarra y mucho café. Más kilómetros, más combustible, técnicos quemados.",
+    },
+    {
+      t: "Cobros perseguidos por WhatsApp",
+      d: "Notas de voz pidiendo recibos. Bizum suelto. El Excel de impagados crece cada mes.",
+    },
   ];
   return (
     <section className="max-w-7xl mx-auto px-6 py-24">
       <div className="max-w-2xl">
         <p className="text-sm font-medium text-accent">El sector hoy</p>
-        <h2 className="mt-2 text-4xl lg:text-5xl">El 90 % del sector opera como hace 20 años. El otro 10 % ya usa Cloro.</h2>
+        <h2 className="mt-2 text-4xl lg:text-5xl">
+          El 90 % del sector opera como hace 20 años. El otro 10 % ya usa Cloro.
+        </h2>
         <p className="mt-4 text-muted-foreground">
-          Las empresas que crecen no lo hacen contratando más técnicos: lo hacen optimizando
-          sus procesos. Cloro centraliza rutas, química, cobros y cumplimiento en una sola plataforma.
+          Las empresas que crecen no lo hacen contratando más técnicos: lo hacen optimizando sus procesos. Cloro
+          centraliza rutas, química, cobros y cumplimiento en una sola plataforma.
         </p>
       </div>
       <div className="mt-12 grid md:grid-cols-3 gap-6">
@@ -276,24 +323,51 @@ function Problem() {
 /* ---------------- FEATURES ---------------- */
 function Features() {
   const features = [
-    { icon: MapPin, t: "Rutas optimizadas en un toque", d: "Arrastra piscinas al calendario semanal y deja que Google Routes minimice tu ruta. Menos kilómetros, más visitas." },
-    { icon: Beaker, t: "Parte químico digital", d: "Cloro, pH, ORP, turbidez, isocianurato y temperatura. Alertas si las lecturas se salen del rango RD 742/2013." },
-    { icon: FileCheck2, t: "Informes SILOÉ automáticos", d: "Genera el Anexo IV completo (XML + Excel por vaso) listo para subir al portal del Ministerio." },
-    { icon: MessageCircle, t: "WhatsApp Business nativo", d: "Notificaciones, informes de servicio y recordatorios por el canal que el cliente sí abre." },
-    { icon: CreditCard, t: "Cobros y VeriFactu", d: "Bizum, SEPA y Stripe en autopiloto, con recordatorios automáticos y facturación VeriFactu integrada." },
-    { icon: Building2, t: "Comunidades de propietarios", d: "Factura al NIF de la comunidad con varios contactos (administrador, presidente, conserje) y acceso para vecinos." },
+    {
+      icon: MapPin,
+      t: "Rutas optimizadas en un toque",
+      d: "Arrastra piscinas al calendario semanal y deja que Google Routes minimice tu ruta. Menos kilómetros, más visitas.",
+    },
+    {
+      icon: Beaker,
+      t: "Parte químico digital",
+      d: "Cloro, pH, ORP, turbidez, isocianurato y temperatura. Alertas si las lecturas se salen del rango RD 742/2013.",
+    },
+    {
+      icon: FileCheck2,
+      t: "Informes SILOÉ automáticos",
+      d: "Genera el Anexo IV completo (XML + Excel por vaso) listo para subir al portal del Ministerio.",
+    },
+    {
+      icon: MessageCircle,
+      t: "WhatsApp Business nativo",
+      d: "Notificaciones, informes de servicio y recordatorios por el canal que el cliente sí abre.",
+    },
+    {
+      icon: CreditCard,
+      t: "Cobros y VeriFactu",
+      d: "Bizum, SEPA y Stripe en autopiloto, con recordatorios automáticos y facturación VeriFactu integrada.",
+    },
+    {
+      icon: Building2,
+      t: "Comunidades de propietarios",
+      d: "Factura al NIF de la comunidad con varios contactos (administrador, presidente, conserje) y acceso para vecinos.",
+    },
   ];
 
   return (
     <section id="caracteristicas" className="bg-surface py-24">
       <div className="max-w-7xl mx-auto px-6">
-      <div className="max-w-2xl">
+        <div className="max-w-2xl">
           <p className="text-sm font-medium text-accent">La plataforma</p>
           <h2 className="mt-2 text-4xl lg:text-5xl">Una sola plataforma para operar, cumplir y crecer.</h2>
         </div>
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((f) => (
-            <div key={f.t} className="rounded-2xl bg-card border border-border p-6 shadow-soft hover:shadow-card transition">
+            <div
+              key={f.t}
+              className="rounded-2xl bg-card border border-border p-6 shadow-soft hover:shadow-card transition"
+            >
               <div className="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                 <f.icon className="size-5" />
               </div>
@@ -308,8 +382,8 @@ function Features() {
             <p className="text-sm font-medium text-accent">App de campo</p>
             <h3 className="mt-2 text-3xl lg:text-4xl">Diseñada para una furgoneta con el sol de cara.</h3>
             <p className="mt-4 text-muted-foreground">
-              Botones grandes, fuente legible, modo offline real. El técnico no puede cerrar una visita
-              sin las lecturas obligatorias — adiós a las inspecciones reconstruidas la noche antes.
+              Botones grandes, fuente legible, modo offline real. El técnico no puede cerrar una visita sin las lecturas
+              obligatorias — adiós a las inspecciones reconstruidas la noche antes.
             </p>
             <ul className="mt-6 space-y-3 text-sm">
               {[
@@ -318,7 +392,9 @@ function Features() {
                 "Firma del cliente en pantalla o por enlace WhatsApp",
                 "Sincronización en menos de 10 segundos al recuperar señal",
               ].map((x) => (
-                <li key={x} className="flex gap-2"><Check className="size-4 text-primary mt-0.5" /> {x}</li>
+                <li key={x} className="flex gap-2">
+                  <Check className="size-4 text-primary mt-0.5" /> {x}
+                </li>
               ))}
             </ul>
           </div>
@@ -349,16 +425,32 @@ function WhatsAppAgent() {
           </span>
           <h2 className="mt-4 text-4xl lg:text-5xl">El cliente escribe a WhatsApp. Cloro reserva la visita.</h2>
           <p className="mt-4 text-muted-foreground">
-            En España todo se hace por WhatsApp. Nuestro agente conversacional atiende a tus clientes
-            24/7, entiende lo que necesitan, propone huecos reales en tu calendario y reserva la visita
-            con un brief completo para el técnico.
+            En España todo se hace por WhatsApp. Nuestro agente conversacional atiende a tus clientes 24/7, entiende lo
+            que necesitan, propone huecos reales en tu calendario y reserva la visita con un brief completo para el
+            técnico.
           </p>
           <ul className="mt-6 space-y-4">
             {[
-              { icon: Calendar, t: "Conectado a tu calendario", d: "Sincroniza con Google Calendar y la planificación de Cloro. Solo propone huecos compatibles con la ruta del día." },
-              { icon: Clock, t: "Atención 24/7 en castellano", d: "Resuelve dudas frecuentes (precios orientativos, qué incluye una visita, urgencias) sin que tú tengas que cogerlo a las 22:00." },
-              { icon: FileSpreadsheet, t: "Brief completo al técnico", d: "Tipo de piscina, volumen, último análisis, fotos enviadas por el cliente y dirección con coordenadas." },
-              { icon: BellRing, t: "Recordatorios y confirmaciones", d: "Recordatorio 24h antes, confirmación de llegada y envío del informe al terminar." },
+              {
+                icon: Calendar,
+                t: "Conectado a tu calendario",
+                d: "Sincroniza con Google Calendar y la planificación de Cloro. Solo propone huecos compatibles con la ruta del día.",
+              },
+              {
+                icon: Clock,
+                t: "Atención 24/7 en castellano",
+                d: "Resuelve dudas frecuentes (precios orientativos, qué incluye una visita, urgencias) sin que tú tengas que cogerlo a las 22:00.",
+              },
+              {
+                icon: FileSpreadsheet,
+                t: "Brief completo al técnico",
+                d: "Tipo de piscina, volumen, último análisis, fotos enviadas por el cliente y dirección con coordenadas.",
+              },
+              {
+                icon: BellRing,
+                t: "Recordatorios y confirmaciones",
+                d: "Recordatorio 24h antes, confirmación de llegada y envío del informe al terminar.",
+              },
             ].map((i) => (
               <li key={i.t} className="flex gap-4">
                 <div className="size-10 shrink-0 rounded-lg bg-[color:var(--whatsapp)]/15 text-[color:var(--whatsapp)] flex items-center justify-center">
@@ -388,15 +480,24 @@ function WhatsAppAgent() {
               </div>
               <div className="bg-[#0b141a] p-4 space-y-2 min-h-[420px]">
                 <Bubble from="client">Hola, mi piscina tiene el agua verde 😅 ¿Podéis pasar mañana?</Bubble>
-                <Bubble from="bot">¡Hola Marta! Lamentamos lo del agua verde 🌿 Para enviarte a un técnico necesito un par de datos rápidos.</Bubble>
+                <Bubble from="bot">
+                  ¡Hola Marta! Lamentamos lo del agua verde 🌿 Para enviarte a un técnico necesito un par de datos
+                  rápidos.
+                </Bubble>
                 <Bubble from="bot">¿Es la piscina de la Calle Mayor 14, Sitges, ~40 m³, vaso descubierto?</Bubble>
                 <Bubble from="client">Sí, esa misma</Bubble>
-                <Bubble from="bot">Perfecto ✅ Tengo estos huecos en la ruta de mañana:<br />
-                  • <b>09:30 – 10:15</b><br />
-                  • <b>12:00 – 12:45</b><br />
-                  ¿Cuál te va mejor?</Bubble>
+                <Bubble from="bot">
+                  Perfecto ✅ Tengo estos huecos en la ruta de mañana:
+                  <br />• <b>09:30 – 10:15</b>
+                  <br />• <b>12:00 – 12:45</b>
+                  <br />
+                  ¿Cuál te va mejor?
+                </Bubble>
                 <Bubble from="client">12:00 perfecto</Bubble>
-                <Bubble from="bot">Reservado 📅 Visita el martes 12:00 con Javier. Te enviaré recordatorio 24h antes y el informe en cuanto termine. ¡Gracias, Marta!</Bubble>
+                <Bubble from="bot">
+                  Reservado 📅 Visita el martes 12:00 con Javier. Te enviaré recordatorio 24h antes y el informe en
+                  cuanto termine. ¡Gracias, Marta!
+                </Bubble>
               </div>
             </div>
           </div>
@@ -412,9 +513,7 @@ function Bubble({ from, children }: { from: "client" | "bot"; children: React.Re
     <div className={`flex ${isBot ? "justify-end" : "justify-start"}`}>
       <div
         className={`max-w-[80%] text-[13px] leading-snug px-3 py-2 rounded-lg ${
-          isBot
-            ? "bg-[#005c4b] text-white rounded-br-sm"
-            : "bg-[#202c33] text-white/95 rounded-bl-sm"
+          isBot ? "bg-[#005c4b] text-white rounded-br-sm" : "bg-[#202c33] text-white/95 rounded-bl-sm"
         }`}
       >
         {children}
@@ -432,11 +531,12 @@ function Compliance() {
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-white text-xs font-medium">
             <ShieldCheck className="size-3.5" /> RD 742/2013 · Anexo IV · SILOÉ
           </span>
-          <h2 className="mt-4 text-4xl lg:text-5xl text-white">El informe SILOÉ deja de ser un fin de semana de marzo.</h2>
+          <h2 className="mt-4 text-4xl lg:text-5xl text-white">
+            El informe SILOÉ deja de ser un fin de semana de marzo.
+          </h2>
           <p className="mt-4 text-white/80 max-w-xl">
-            Cada lectura del técnico alimenta directamente el motor de cumplimiento. El 1 de abril
-            haces clic y Cloro te entrega el XML listo para subir al portal del Ministerio
-            y el Excel por vaso para tu archivo.
+            Cada lectura del técnico alimenta directamente el motor de cumplimiento. El 1 de abril haces clic y Cloro te
+            entrega el XML listo para subir al portal del Ministerio y el Excel por vaso para tu archivo.
           </p>
           <ul className="mt-8 space-y-3">
             {[
@@ -458,7 +558,9 @@ function Compliance() {
               <div className="text-xs text-muted-foreground">Informe SILOÉ — Temporada 2026</div>
               <div className="font-display text-3xl mt-1">Piscina Hotel Mar Blau</div>
             </div>
-            <span className="px-2.5 py-1 rounded-md text-xs bg-primary/10 text-primary font-medium">Listo para enviar</span>
+            <span className="px-2.5 py-1 rounded-md text-xs bg-primary/10 text-primary font-medium">
+              Listo para enviar
+            </span>
           </div>
           <div className="mt-6 grid grid-cols-3 gap-4 text-center">
             {[
@@ -479,7 +581,10 @@ function Compliance() {
               { l: "Turbidez (< 5 UNF)", v: "96%", ok: true },
               { l: "Isocianurato (< 75 mg/L)", v: "100%", ok: true },
             ].map((r) => (
-              <div key={r.l} className="flex items-center justify-between text-sm py-2 border-b border-border last:border-0">
+              <div
+                key={r.l}
+                className="flex items-center justify-between text-sm py-2 border-b border-border last:border-0"
+              >
                 <span className="text-muted-foreground">{r.l}</span>
                 <span className="font-medium text-primary">{r.v}</span>
               </div>
@@ -496,7 +601,13 @@ function Compliance() {
 
 /* ---------------- COMPARISON ---------------- */
 function Comparison() {
-  const rows: Array<{ feature: string; cloro: boolean | string; autocontrol: boolean | string; evisane: boolean | string; eisi: boolean | string }> = [
+  const rows: Array<{
+    feature: string;
+    cloro: boolean | string;
+    autocontrol: boolean | string;
+    evisane: boolean | string;
+    eisi: boolean | string;
+  }> = [
     { feature: "Informe SILOÉ (XML + Excel)", cloro: true, autocontrol: true, evisane: true, eisi: true },
     { feature: "Optimización de rutas con IA", cloro: true, autocontrol: false, evisane: false, eisi: false },
     { feature: "App offline para técnicos", cloro: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial" },
@@ -509,7 +620,11 @@ function Comparison() {
 
   const Cell = ({ v }: { v: boolean | string }) =>
     typeof v === "boolean" ? (
-      v ? <Check className="size-5 text-primary mx-auto" /> : <X className="size-5 text-muted-foreground/40 mx-auto" />
+      v ? (
+        <Check className="size-5 text-primary mx-auto" />
+      ) : (
+        <X className="size-5 text-muted-foreground/40 mx-auto" />
+      )
     ) : (
       <span className="text-xs text-muted-foreground">{v}</span>
     );
@@ -521,8 +636,8 @@ function Comparison() {
           <p className="text-sm font-medium text-accent">Comparativa</p>
           <h2 className="mt-2 text-4xl lg:text-5xl">El único que cubre el día completo del piscinero.</h2>
           <p className="mt-4 text-muted-foreground">
-            Otras herramientas resuelven solo el informe SILOÉ. Cloro gestiona también la ruta, el
-            cobro y la comunicación con el cliente.
+            Otras herramientas resuelven solo el informe SILOÉ. Cloro gestiona también la ruta, el cobro y la
+            comunicación con el cliente.
           </p>
         </div>
 
@@ -541,10 +656,18 @@ function Comparison() {
               {rows.map((r) => (
                 <tr key={r.feature} className="border-b border-border last:border-0">
                   <td className="p-4">{r.feature}</td>
-                  <td className="p-4 text-center bg-primary/5"><Cell v={r.cloro} /></td>
-                  <td className="p-4 text-center"><Cell v={r.autocontrol} /></td>
-                  <td className="p-4 text-center"><Cell v={r.evisane} /></td>
-                  <td className="p-4 text-center"><Cell v={r.eisi} /></td>
+                  <td className="p-4 text-center bg-primary/5">
+                    <Cell v={r.cloro} />
+                  </td>
+                  <td className="p-4 text-center">
+                    <Cell v={r.autocontrol} />
+                  </td>
+                  <td className="p-4 text-center">
+                    <Cell v={r.evisane} />
+                  </td>
+                  <td className="p-4 text-center">
+                    <Cell v={r.eisi} />
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -563,7 +686,13 @@ function Pricing() {
       price: "19",
       perPool: "0,99",
       desc: "Para el piscinero autónomo: 20–60 piscinas, sin equipo, sin tiempo para papeleo.",
-      features: ["Rutas y parte químico digital", "Informe SILOÉ en un clic", "WhatsApp con tus clientes", "Bizum + transferencia", "App de campo offline"],
+      features: [
+        "Rutas y parte químico digital",
+        "Informe SILOÉ en un clic",
+        "WhatsApp con tus clientes",
+        "Bizum + transferencia",
+        "App de campo offline",
+      ],
       featured: false,
     },
     {
@@ -571,7 +700,13 @@ function Pricing() {
       price: "49",
       perPool: "0,79",
       desc: "Empresas familiares de 2–5 técnicos con comunidades y residencial recurrente (20–200 piscinas).",
-      features: ["Todo lo del plan Solo", "Agente WhatsApp con IA 24/7", "VeriFactu + SEPA + Stripe", "Portal cliente y comunidades", "Optimización de rutas con Google Routes"],
+      features: [
+        "Todo lo del plan Solo",
+        "Agente WhatsApp con IA 24/7",
+        "VeriFactu + SEPA + Stripe",
+        "Portal cliente y comunidades",
+        "Optimización de rutas con Google Routes",
+      ],
       featured: true,
     },
     {
@@ -579,7 +714,13 @@ function Pricing() {
       price: "129",
       perPool: "0,59",
       desc: "Operadores con +500 vasos, hoteles y contratos multi-provincia.",
-      features: ["Todo lo del plan Equipo", "Multi-sede y multi-NIF", "API y exportaciones a ERP", "SLA y auditorías hoteleras", "Gestor de cuenta dedicado"],
+      features: [
+        "Todo lo del plan Equipo",
+        "Multi-sede y multi-NIF",
+        "API y exportaciones a ERP",
+        "SLA y auditorías hoteleras",
+        "Gestor de cuenta dedicado",
+      ],
       featured: false,
     },
   ];
@@ -589,9 +730,7 @@ function Pricing() {
         <div className="max-w-2xl">
           <p className="text-sm font-medium text-accent">Precios</p>
           <h2 className="mt-2 text-4xl lg:text-5xl">Pagas por piscina. Sin permanencia.</h2>
-          <p className="mt-4 text-muted-foreground">
-            7 días de prueba gratis. Sin tarjeta. Cancela cuando quieras.
-          </p>
+          <p className="mt-4 text-muted-foreground">7 días de prueba gratis. Sin tarjeta. Cancela cuando quieras.</p>
         </div>
         <div className="mt-12 grid md:grid-cols-3 gap-6">
           {tiers.map((t) => (
@@ -601,12 +740,16 @@ function Pricing() {
             >
               <div className="flex items-center justify-between">
                 <h3 className={`text-xl font-medium ${t.featured ? "text-background" : ""}`}>{t.name}</h3>
-                {t.featured && <span className="text-xs px-2 py-0.5 rounded bg-accent text-accent-foreground">Más popular</span>}
+                {t.featured && (
+                  <span className="text-xs px-2 py-0.5 rounded bg-accent text-accent-foreground">Más popular</span>
+                )}
               </div>
               <p className={`mt-1 text-sm ${t.featured ? "text-background/70" : "text-muted-foreground"}`}>{t.desc}</p>
               <div className="mt-6 flex items-baseline gap-1">
                 <span className="font-display text-5xl">{t.price}€</span>
-                <span className={`text-sm ${t.featured ? "text-background/70" : "text-muted-foreground"}`}>/mes base</span>
+                <span className={`text-sm ${t.featured ? "text-background/70" : "text-muted-foreground"}`}>
+                  /mes base
+                </span>
               </div>
               <div className={`text-sm mt-1 ${t.featured ? "text-background/70" : "text-muted-foreground"}`}>
                 + {t.perPool}€ por piscina / mes
@@ -615,7 +758,9 @@ function Pricing() {
                 to="/auth"
                 search={{ mode: "registro" }}
                 className={`mt-6 inline-flex w-full items-center justify-center h-11 rounded-lg font-medium transition ${
-                  t.featured ? "bg-background text-foreground hover:opacity-90" : "bg-foreground text-background hover:opacity-90"
+                  t.featured
+                    ? "bg-background text-foreground hover:opacity-90"
+                    : "bg-foreground text-background hover:opacity-90"
                 }`}
               >
                 Empezar gratis
@@ -678,8 +823,8 @@ function CTA() {
               Opera como una empresa de 20 técnicos. Aunque seas tres.
             </h2>
             <p className="mt-4 text-white/85 max-w-xl">
-              Prueba Cloro gratis durante 7 días. Sin tarjeta, sin permanencia y con migración
-              de tu cartera incluida. En menos de una semana estarás operativo.
+              Prueba Cloro gratis durante 7 días. Sin tarjeta, sin permanencia y con migración de tu cartera incluida.
+              En menos de una semana estarás operativo.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -704,7 +849,9 @@ function CTA() {
               "Cumplimiento SILOÉ desde el primer día",
               "Integración con tu WhatsApp Business",
             ].map((x) => (
-              <li key={x} className="flex gap-2"><Check className="size-5 shrink-0" /> {x}</li>
+              <li key={x} className="flex gap-2">
+                <Check className="size-5 shrink-0" /> {x}
+              </li>
             ))}
           </ul>
         </div>
