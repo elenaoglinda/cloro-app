@@ -30,17 +30,36 @@ export const piscinaSchema = z.object({
 export type PiscinaInput = z.infer<typeof piscinaSchema>;
 
 const num = () => z.coerce.number().min(0).max(10000).optional().nullable();
+const optBool = () => z.boolean().optional().nullable();
 
 export const parteSchema = z.object({
   piscina_id: z.string().uuid(),
   estado: z.enum(["borrador", "completado", "firmado"]).default("completado"),
+  tipo_control: z.enum(["rutina", "periodico", "inicial"]).default("rutina"),
+  fecha: z.string().optional().nullable(),
+  hora_medicion: z
+    .string()
+    .regex(/^\d{2}:\d{2}(:\d{2})?$/)
+    .optional()
+    .nullable()
+    .or(z.literal(""))
+    .transform((v) => (v && v !== "" ? (v.length === 5 ? `${v}:00` : v) : null)),
   ph: num(),
   cloro_libre: num(),
   cloro_total: num(),
+  turbidez: num(),
+  transparencia_fondo: optBool(),
   alcalinidad: num(),
   cya: num(),
   sal: num(),
   temp_c: num(),
+  redox: num(),
+  tiempo_recirculacion: num(),
+  bromo_total: num(),
+  ecoli: optBool(),
+  pseudomonas: optBool(),
+  adjunto_laboratorio_url: optionalText(1000),
   observaciones: optionalText(4000),
+  productos_usados_texto: optionalText(4000),
 });
 export type ParteInput = z.infer<typeof parteSchema>;
