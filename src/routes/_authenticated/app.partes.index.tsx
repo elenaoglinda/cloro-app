@@ -4,10 +4,24 @@ import { useQuery } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
 import { listPartes } from "@/lib/partes.functions";
 import { Button } from "@/components/ui/button";
+import { semaforoParte, dotClass, type Estado } from "@/lib/parte-ranges";
 
 export const Route = createFileRoute("/_authenticated/app/partes/")({
   component: PartesList,
 });
+
+const tipoLabel: Record<string, string> = {
+  rutina: "Rutina",
+  periodico: "Periódico",
+  inicial: "Inicial",
+};
+
+const estadoTitulo: Record<Estado, string> = {
+  ok: "Todos los parámetros dentro de rango",
+  alerta: "Algún parámetro en zona de alerta",
+  critico: "Algún parámetro en zona de cierre obligatorio",
+  neutro: "Sin parámetros registrados",
+};
 
 function PartesList() {
   const fn = useServerFn(listPartes);
@@ -21,15 +35,25 @@ function PartesList() {
       </div>
       <div className="bg-card border border-border rounded-lg divide-y divide-border">
         {isLoading && <div className="p-8 text-center text-sm text-muted-foreground">Cargando...</div>}
-        {data?.partes.map((p: any) => (
-          <Link key={p.id} to="/app/partes/$id" params={{ id: p.id }} className="flex items-center justify-between p-4 hover:bg-muted/40">
-            <div>
-              <p className="font-medium">{p.piscinas?.alias ?? "—"} · {p.piscinas?.clientes?.nombre ?? ""}</p>
-              <p className="text-xs text-muted-foreground">{new Date(p.fecha).toLocaleString("es-ES")} · {p.estado}</p>
-            </div>
-            <div className="text-sm text-muted-foreground">pH {p.ph ?? "—"} · Cl {p.cloro_libre ?? "—"}</div>
-          </Link>
-        ))}
+        {data?.partes.map((p: any) => {
+          const estado = semaforoParte(p);
+          return (
+            <Link key={p.id} to="/app/partes/$id" params={{ id: p.id }} className="flex items-center gap-3 p-4 hover:bg-muted/40">
+              <span
+                className={`size-3 rounded-full shrink-0 ${dotClass[estado]}`}
+                title={estadoTitulo[estado]}
+                aria-label={estadoTitulo[estado]}
+              />
+              <div className="flex-1 min-w-0">
+                <p className="font-medium truncate">{p.piscinas?.alias ?? "—"} · {p.piscinas?.clientes?.nombre ?? ""}</p>
+                <p className="text-xs text-muted-foreground">
+                  {new Date(p.fecha).toLocaleString("es-ES")} · {tipoLabel[p.tipo_control] ?? p.tipo_control}
+                </p>
+              </div>
+              <div className="text-sm text-muted-foreground shrink-0">pH {p.ph ?? "—"} · Cl {p.cloro_libre ?? "—"}</div>
+            </Link>
+          );
+        })}
         {!isLoading && (data?.partes.length ?? 0) === 0 && (
           <div className="p-8 text-center text-sm text-muted-foreground">
             Aún no hay partes. <Link to="/app/partes/nuevo" className="text-primary">Crea el primero</Link>.
