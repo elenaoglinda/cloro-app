@@ -463,6 +463,15 @@ function WhatsAppAgent() {
               </li>
             ))}
           </ul>
+          <div className="mt-8">
+            <a
+              href="/auth?mode=registro"
+              className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-foreground text-background font-medium shadow-soft hover:opacity-90 transition"
+            >
+              Solicitar acceso anticipado
+              <ArrowRight className="size-4" />
+            </a>
+          </div>
         </div>
 
         <div className="relative">
