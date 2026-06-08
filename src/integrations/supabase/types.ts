@@ -224,63 +224,93 @@ export type Database = {
       }
       partes: {
         Row: {
+          adjunto_laboratorio_url: string | null
           alcalinidad: number | null
+          bromo_total: number | null
           cloro_libre: number | null
           cloro_total: number | null
           created_at: string
           cya: number | null
+          ecoli: boolean | null
           estado: Database["public"]["Enums"]["parte_estado"]
           fecha: string
           firma_cliente_url: string | null
+          hora_medicion: string | null
           id: string
           observaciones: string | null
           org_id: string
           ph: number | null
           piscina_id: string
           productos_usados: Json
+          pseudomonas: boolean | null
+          redox: number | null
           sal: number | null
           tecnico_id: string | null
           temp_c: number | null
+          tiempo_recirculacion: number | null
+          tipo_control: string
+          transparencia_fondo: boolean | null
+          turbidez: number | null
           updated_at: string
         }
         Insert: {
+          adjunto_laboratorio_url?: string | null
           alcalinidad?: number | null
+          bromo_total?: number | null
           cloro_libre?: number | null
           cloro_total?: number | null
           created_at?: string
           cya?: number | null
+          ecoli?: boolean | null
           estado?: Database["public"]["Enums"]["parte_estado"]
           fecha?: string
           firma_cliente_url?: string | null
+          hora_medicion?: string | null
           id?: string
           observaciones?: string | null
           org_id: string
           ph?: number | null
           piscina_id: string
           productos_usados?: Json
+          pseudomonas?: boolean | null
+          redox?: number | null
           sal?: number | null
           tecnico_id?: string | null
           temp_c?: number | null
+          tiempo_recirculacion?: number | null
+          tipo_control?: string
+          transparencia_fondo?: boolean | null
+          turbidez?: number | null
           updated_at?: string
         }
         Update: {
+          adjunto_laboratorio_url?: string | null
           alcalinidad?: number | null
+          bromo_total?: number | null
           cloro_libre?: number | null
           cloro_total?: number | null
           created_at?: string
           cya?: number | null
+          ecoli?: boolean | null
           estado?: Database["public"]["Enums"]["parte_estado"]
           fecha?: string
           firma_cliente_url?: string | null
+          hora_medicion?: string | null
           id?: string
           observaciones?: string | null
           org_id?: string
           ph?: number | null
           piscina_id?: string
           productos_usados?: Json
+          pseudomonas?: boolean | null
+          redox?: number | null
           sal?: number | null
           tecnico_id?: string | null
           temp_c?: number | null
+          tiempo_recirculacion?: number | null
+          tipo_control?: string
+          transparencia_fondo?: boolean | null
+          turbidez?: number | null
           updated_at?: string
         }
         Relationships: [
