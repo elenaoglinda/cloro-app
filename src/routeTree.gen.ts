@@ -27,6 +27,7 @@ import { Route as AuthenticatedAppAjustesRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAppRutasIndexRouteImport } from './routes/_authenticated/app.rutas.index'
 import { Route as AuthenticatedAppPartesIndexRouteImport } from './routes/_authenticated/app.partes.index'
 import { Route as AuthenticatedAppClientesIndexRouteImport } from './routes/_authenticated/app.clientes.index'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as AuthenticatedAppRutasIdRouteImport } from './routes/_authenticated/app.rutas.$id'
 import { Route as AuthenticatedAppPartesNuevoRouteImport } from './routes/_authenticated/app.partes.nuevo'
 import { Route as AuthenticatedAppPartesIdRouteImport } from './routes/_authenticated/app.partes.$id'
@@ -126,6 +127,12 @@ const AuthenticatedAppClientesIndexRoute =
     path: '/clientes/',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AuthenticatedAppRutasIdRoute = AuthenticatedAppRutasIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -169,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
   '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
   '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes/': typeof AuthenticatedAppPartesIndexRoute
   '/app/rutas/': typeof AuthenticatedAppRutasIndexRoute
@@ -190,6 +198,7 @@ export interface FileRoutesByTo {
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
   '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
   '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/app/clientes': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes': typeof AuthenticatedAppPartesIndexRoute
   '/app/rutas': typeof AuthenticatedAppRutasIndexRoute
@@ -215,6 +224,7 @@ export interface FileRoutesById {
   '/_authenticated/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
   '/_authenticated/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
   '/_authenticated/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/_authenticated/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/_authenticated/app/partes/': typeof AuthenticatedAppPartesIndexRoute
   '/_authenticated/app/rutas/': typeof AuthenticatedAppRutasIndexRoute
@@ -240,6 +250,7 @@ export interface FileRouteTypes {
     | '/app/partes/$id'
     | '/app/partes/nuevo'
     | '/app/rutas/$id'
+    | '/lovable/email/queue/process'
     | '/app/clientes/'
     | '/app/partes/'
     | '/app/rutas/'
@@ -261,6 +272,7 @@ export interface FileRouteTypes {
     | '/app/partes/$id'
     | '/app/partes/nuevo'
     | '/app/rutas/$id'
+    | '/lovable/email/queue/process'
     | '/app/clientes'
     | '/app/partes'
     | '/app/rutas'
@@ -285,6 +297,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/partes/$id'
     | '/_authenticated/app/partes/nuevo'
     | '/_authenticated/app/rutas/$id'
+    | '/lovable/email/queue/process'
     | '/_authenticated/app/clientes/'
     | '/_authenticated/app/partes/'
     | '/_authenticated/app/rutas/'
@@ -301,6 +314,7 @@ export interface RootRouteChildren {
   ComparativaEisiHotelRoute: typeof ComparativaEisiHotelRoute
   ComparativaEvisaneRoute: typeof ComparativaEvisaneRoute
   InvitacionTokenRoute: typeof InvitacionTokenRoute
+  LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -431,6 +445,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppClientesIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/app/rutas/$id': {
       id: '/_authenticated/app/rutas/$id'
       path: '/$id'
@@ -526,7 +547,18 @@ const rootRouteChildren: RootRouteChildren = {
   ComparativaEisiHotelRoute: ComparativaEisiHotelRoute,
   ComparativaEvisaneRoute: ComparativaEvisaneRoute,
   InvitacionTokenRoute: InvitacionTokenRoute,
+  LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
