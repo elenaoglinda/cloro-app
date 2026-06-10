@@ -20,7 +20,9 @@ import { Route as ComparativaEisiHotelRouteImport } from './routes/comparativa.e
 import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/comparativa.autocontrolpiscinas'
 import { Route as AdminMensajesRouteImport } from './routes/admin.mensajes'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAppRutasRouteImport } from './routes/_authenticated/app.rutas'
 import { Route as AuthenticatedAppPiscinasRouteImport } from './routes/_authenticated/app.piscinas'
 import { Route as AuthenticatedAppAjustesRouteImport } from './routes/_authenticated/app.ajustes'
@@ -88,10 +90,20 @@ const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
   path: '/app',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedAppRoute,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
 const AuthenticatedAppRutasRoute = AuthenticatedAppRutasRouteImport.update({
   id: '/rutas',
@@ -162,6 +174,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/app': typeof AuthenticatedAppRouteWithChildren
   '/admin/mensajes': typeof AdminMensajesRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
@@ -171,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
   '/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
+  '/admin/': typeof AuthenticatedAdminIndexRoute
   '/app/': typeof AuthenticatedAppIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
@@ -193,6 +207,7 @@ export interface FileRoutesByTo {
   '/invitacion/$token': typeof InvitacionTokenRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
   '/app': typeof AuthenticatedAppIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
@@ -210,6 +225,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
   '/admin/mensajes': typeof AdminMensajesRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
@@ -219,6 +235,7 @@ export interface FileRoutesById {
   '/_authenticated/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/_authenticated/app/piscinas': typeof AuthenticatedAppPiscinasRoute
   '/_authenticated/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
   '/_authenticated/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/_authenticated/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
@@ -236,6 +253,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contacto'
     | '/sitemap.xml'
+    | '/admin'
     | '/app'
     | '/admin/mensajes'
     | '/comparativa/autocontrolpiscinas'
@@ -245,6 +263,7 @@ export interface FileRouteTypes {
     | '/app/ajustes'
     | '/app/piscinas'
     | '/app/rutas'
+    | '/admin/'
     | '/app/'
     | '/app/clientes/$id'
     | '/app/partes/$id'
@@ -267,6 +286,7 @@ export interface FileRouteTypes {
     | '/invitacion/$token'
     | '/app/ajustes'
     | '/app/piscinas'
+    | '/admin'
     | '/app'
     | '/app/clientes/$id'
     | '/app/partes/$id'
@@ -283,6 +303,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contacto'
     | '/sitemap.xml'
+    | '/_authenticated/admin'
     | '/_authenticated/app'
     | '/admin/mensajes'
     | '/comparativa/autocontrolpiscinas'
@@ -292,6 +313,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/ajustes'
     | '/_authenticated/app/piscinas'
     | '/_authenticated/app/rutas'
+    | '/_authenticated/admin/'
     | '/_authenticated/app/'
     | '/_authenticated/app/clientes/$id'
     | '/_authenticated/app/partes/$id'
@@ -396,12 +418,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/app/': {
       id: '/_authenticated/app/'
       path: '/'
       fullPath: '/app/'
       preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/app/rutas': {
       id: '/_authenticated/app/rutas'
@@ -483,6 +519,17 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
 interface AuthenticatedAppRutasRouteChildren {
   AuthenticatedAppRutasIdRoute: typeof AuthenticatedAppRutasIdRoute
   AuthenticatedAppRutasIndexRoute: typeof AuthenticatedAppRutasIndexRoute
@@ -526,10 +573,12 @@ const AuthenticatedAppRouteWithChildren =
   AuthenticatedAppRoute._addFileChildren(AuthenticatedAppRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
   AuthenticatedAppRoute: typeof AuthenticatedAppRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
   AuthenticatedAppRoute: AuthenticatedAppRouteWithChildren,
 }
 
@@ -552,3 +601,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
