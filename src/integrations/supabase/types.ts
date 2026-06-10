@@ -250,6 +250,7 @@ export type Database = {
           name: string
           plan: string
           slug: string
+          suspended: boolean
           updated_at: string
         }
         Insert: {
@@ -258,6 +259,7 @@ export type Database = {
           name: string
           plan?: string
           slug: string
+          suspended?: boolean
           updated_at?: string
         }
         Update: {
@@ -266,6 +268,7 @@ export type Database = {
           name?: string
           plan?: string
           slug?: string
+          suspended?: boolean
           updated_at?: string
         }
         Relationships: []
@@ -483,6 +486,27 @@ export type Database = {
           },
         ]
       }
+      platform_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["platform_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["platform_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["platform_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -637,6 +661,13 @@ export type Database = {
         }
         Returns: boolean
       }
+      has_platform_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["platform_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       is_org_member: { Args: { _org_id: string }; Returns: boolean }
       move_to_dlq: {
         Args: {
@@ -659,6 +690,7 @@ export type Database = {
     Enums: {
       org_role: "owner" | "admin" | "tecnico"
       parte_estado: "borrador" | "completado" | "firmado"
+      platform_role: "super_admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -788,6 +820,7 @@ export const Constants = {
     Enums: {
       org_role: ["owner", "admin", "tecnico"],
       parte_estado: ["borrador", "completado", "firmado"],
+      platform_role: ["super_admin"],
     },
   },
 } as const
