@@ -35,6 +35,7 @@ import { Route as AuthenticatedAppRutasIdRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAppPartesNuevoRouteImport } from './routes/_authenticated/app.partes.nuevo'
 import { Route as AuthenticatedAppPartesIdRouteImport } from './routes/_authenticated/app.partes.$id'
 import { Route as AuthenticatedAppClientesIdRouteImport } from './routes/_authenticated/app.clientes.$id'
+import { Route as AuthenticatedAdminOrgsIdRouteImport } from './routes/_authenticated/admin.orgs.$id'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -175,6 +176,12 @@ const AuthenticatedAppClientesIdRoute =
     path: '/clientes/$id',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
+const AuthenticatedAdminOrgsIdRoute =
+  AuthenticatedAdminOrgsIdRouteImport.update({
+    id: '/orgs/$id',
+    path: '/orgs/$id',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -193,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/app/': typeof AuthenticatedAppIndexRoute
+  '/admin/orgs/$id': typeof AuthenticatedAdminOrgsIdRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
   '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
@@ -217,6 +225,7 @@ export interface FileRoutesByTo {
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/app': typeof AuthenticatedAppIndexRoute
+  '/admin/orgs/$id': typeof AuthenticatedAdminOrgsIdRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
   '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
@@ -246,6 +255,7 @@ export interface FileRoutesById {
   '/_authenticated/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
+  '/_authenticated/admin/orgs/$id': typeof AuthenticatedAdminOrgsIdRoute
   '/_authenticated/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/_authenticated/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
   '/_authenticated/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
@@ -275,6 +285,7 @@ export interface FileRouteTypes {
     | '/app/rutas'
     | '/admin/'
     | '/app/'
+    | '/admin/orgs/$id'
     | '/app/clientes/$id'
     | '/app/partes/$id'
     | '/app/partes/nuevo'
@@ -299,6 +310,7 @@ export interface FileRouteTypes {
     | '/app/piscinas'
     | '/admin'
     | '/app'
+    | '/admin/orgs/$id'
     | '/app/clientes/$id'
     | '/app/partes/$id'
     | '/app/partes/nuevo'
@@ -327,6 +339,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/rutas'
     | '/_authenticated/admin/'
     | '/_authenticated/app/'
+    | '/_authenticated/admin/orgs/$id'
     | '/_authenticated/app/clientes/$id'
     | '/_authenticated/app/partes/$id'
     | '/_authenticated/app/partes/nuevo'
@@ -536,16 +549,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppClientesIdRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/_authenticated/admin/orgs/$id': {
+      id: '/_authenticated/admin/orgs/$id'
+      path: '/orgs/$id'
+      fullPath: '/admin/orgs/$id'
+      preLoaderRoute: typeof AuthenticatedAdminOrgsIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminOrgsIdRoute: typeof AuthenticatedAdminOrgsIdRoute
   AuthenticatedAdminOrgsIndexRoute: typeof AuthenticatedAdminOrgsIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminOrgsIdRoute: AuthenticatedAdminOrgsIdRoute,
   AuthenticatedAdminOrgsIndexRoute: AuthenticatedAdminOrgsIndexRoute,
 }
 
