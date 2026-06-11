@@ -816,6 +816,11 @@ function FAQ() {
           </details>
         ))}
       </div>
+      <div className="mt-8 text-center">
+        <Link to="/preguntas-frecuentes" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
+          Ver todas las preguntas frecuentes <ArrowRight className="size-4" />
+        </Link>
+      </div>
     </section>
   );
 }
