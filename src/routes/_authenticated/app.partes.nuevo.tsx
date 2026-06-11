@@ -348,7 +348,7 @@ export function ParteForm({
         {/* SECCIÓN F */}
         <section className="bg-card border border-border rounded-lg p-4">
           <h2 className="text-sm font-semibold mb-1">F · Firma del cliente</h2>
-          <p className="text-xs text-muted-foreground">La firma se puede añadir desde la vista de detalle tras guardar.</p>
+          <p className="text-xs text-muted-foreground">La firma se añade desde la vista de detalle del parte tras guardar.</p>
         </section>
 
         <Button type="submit" className="w-full" size="lg" disabled={submitting}>
