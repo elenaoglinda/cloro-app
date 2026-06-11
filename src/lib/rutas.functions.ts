@@ -223,7 +223,6 @@ export const optimizeRuta = createServerFn({ method: "POST" })
     const intermediates = valid.slice(1, -1);
 
     const gmapsKey = process.env.GOOGLE_MAPS_API_KEY;
-    const lovableKey = process.env.LOVABLE_API_KEY;
     if (!gmapsKey || !lovableKey) throw new Error("Google Maps no está configurado.");
 
     const body = {
