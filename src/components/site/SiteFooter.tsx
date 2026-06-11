@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Waves } from "lucide-react";
 
 export function SiteFooter() {
@@ -23,6 +24,7 @@ export function SiteFooter() {
             <li><a href="/#whatsapp" className="hover:text-foreground">Agente WhatsApp</a></li>
             <li><a href="/#cumplimiento" className="hover:text-foreground">Cumplimiento SILOÉ</a></li>
             <li><a href="/#precios" className="hover:text-foreground">Precios</a></li>
+            <li><Link to="/preguntas-frecuentes" className="hover:text-foreground">FAQ</Link></li>
           </ul>
         </div>
         <div>
