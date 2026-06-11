@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Waves } from "lucide-react";
 
 export function SiteFooter() {
