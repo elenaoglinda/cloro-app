@@ -58,9 +58,11 @@ function ParteDetail() {
   const listFotosFn = useServerFn(listFotos);
   const registerFotoFn = useServerFn(registerFoto);
   const deleteFotoFn = useServerFn(deleteFoto);
+  const updateFirmaFn = useServerFn(updateParteFirma);
   const ctxFn = useServerFn(getMyContext);
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
+  const [savingFirma, setSavingFirma] = useState(false);
 
   const { data, isLoading } = useQuery({ queryKey: ["parte", id], queryFn: () => getParteFn({ data: { id } }) });
   const { data: fotosData } = useQuery({ queryKey: ["parte-fotos", id], queryFn: () => listFotosFn({ data: { parte_id: id } }) });
