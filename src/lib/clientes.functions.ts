@@ -46,7 +46,7 @@ export const getCliente = createServerFn({ method: "GET" })
     if (!cliente) throw new Error("Cliente no encontrado");
     const { data: piscinas } = await supabase
       .from("piscinas")
-      .select("id, alias, tipo, volumen_m3, sistema_desinfeccion, archived")
+      .select("id, alias, tipo, volumen_m3, sistema_desinfeccion, direccion, archived")
       .eq("cliente_id", data.id)
       .eq("archived", false)
       .order("alias");
