@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Plus, ArrowLeft, Droplets, Pencil } from "lucide-react";
 import { getCliente, upsertCliente } from "@/lib/clientes.functions";
 import { upsertPiscina } from "@/lib/piscinas.functions";
+import { AddressAutocomplete } from "@/components/app/AddressAutocomplete";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
