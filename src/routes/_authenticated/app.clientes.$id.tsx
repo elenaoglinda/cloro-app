@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Plus, ArrowLeft, Droplets, Pencil } from "lucide-react";
 import { getCliente, upsertCliente } from "@/lib/clientes.functions";
 import { upsertPiscina } from "@/lib/piscinas.functions";
+import { AddressAutocomplete } from "@/components/app/AddressAutocomplete";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -124,7 +125,7 @@ function ClienteDetail() {
                 <div><Label>Volumen (m³)</Label><Input type="number" step="0.1" value={form.volumen_m3} onChange={(e) => setForm({ ...form, volumen_m3: e.target.value })} /></div>
                 <div>
                   <Label>Dirección *</Label>
-                  <Input required placeholder="Calle, número, ciudad" value={form.direccion} onChange={(e) => setForm({ ...form, direccion: e.target.value })} />
+                  <AddressAutocomplete required placeholder="Calle, número, ciudad" value={form.direccion} onChange={(v) => setForm({ ...form, direccion: v })} />
                   <p className="text-[11px] text-muted-foreground mt-1">Necesaria para planificar rutas en mapa.</p>
                 </div>
                 <DialogFooter><Button type="submit">{form.id ? "Guardar" : "Crear"}</Button></DialogFooter>
