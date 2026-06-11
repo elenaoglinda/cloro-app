@@ -234,12 +234,19 @@ function ParteDetail() {
       )}
 
       {/* Firma */}
-      {p.firma_cliente_url && (
-        <div className="bg-card border border-border rounded-lg p-5">
-          <h2 className="text-sm font-semibold mb-3">Firma del cliente</h2>
-          <img src={p.firma_cliente_url} alt="Firma cliente" className="max-h-40 bg-white rounded border border-border" />
-        </div>
-      )}
+      <div className="bg-card border border-border rounded-lg p-5">
+        <h2 className="text-sm font-semibold mb-3">Firma del cliente</h2>
+        {data.firma_url ? (
+          <img src={data.firma_url} alt="Firma cliente" className="max-h-40 bg-white rounded border border-border" />
+        ) : (
+          <>
+            <p className="text-xs text-muted-foreground mb-3">
+              Pídele al cliente que firme abajo. Al guardar, el parte quedará marcado como firmado.
+            </p>
+            <SignaturePad onSave={saveFirma} saving={savingFirma} />
+          </>
+        )}
+      </div>
 
       {/* Fotos */}
       <div className="bg-card border border-border rounded-lg p-5">
