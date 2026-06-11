@@ -38,7 +38,19 @@ export const getParte = createServerFn({ method: "GET" })
         .createSignedUrl(path, 60 * 60);
       adjunto_url = s?.signedUrl ?? null;
     }
-    return { parte, adjunto_url };
+    let firma_url: string | null = null;
+    if ((parte as any).firma_cliente_url) {
+      const path = (parte as any).firma_cliente_url as string;
+      if (path.startsWith("http")) {
+        firma_url = path;
+      } else {
+        const { data: s } = await context.supabase.storage
+          .from("parte-fotos")
+          .createSignedUrl(path, 60 * 60);
+        firma_url = s?.signedUrl ?? null;
+      }
+    }
+    return { parte, adjunto_url, firma_url };
   });
 
 export const createParte = createServerFn({ method: "POST" })
@@ -89,6 +101,58 @@ export const updateParteAdjunto = createServerFn({ method: "POST" })
     const { error } = await context.supabase
       .from("partes")
       .update({ adjunto_laboratorio_url: data.adjunto_laboratorio_url })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const updateParte = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) =>
+    z.object({ id: z.string().uuid(), values: parteSchema }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const { supabase } = context;
+    const { data: existing, error: exErr } = await supabase
+      .from("partes")
+      .select("estado")
+      .eq("id", data.id)
+      .maybeSingle();
+    if (exErr) throw new Error(exErr.message);
+    if (!existing) throw new Error("Parte no encontrado");
+    if (existing.estado === "firmado") throw new Error("El parte está firmado y no puede editarse");
+
+    const { productos_usados_texto, fecha, ...rest } = data.values as any;
+    const productos_usados = productos_usados_texto
+      ? [{ texto: productos_usados_texto }]
+      : [];
+    const updateRow: any = {
+      ...rest,
+      productos_usados,
+      fecha: fecha ? new Date(fecha).toISOString() : undefined,
+    };
+    const { error } = await supabase
+      .from("partes")
+      .update(updateRow)
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { id: data.id };
+  });
+
+export const updateParteFirma = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) =>
+    z.object({
+      id: z.string().uuid(),
+      firma_cliente_url: z.string().min(1).max(1000).nullable(),
+    }).parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    const update: any = { firma_cliente_url: data.firma_cliente_url };
+    if (data.firma_cliente_url) update.estado = "firmado";
+    const { error } = await context.supabase
+      .from("partes")
+      .update(update)
       .eq("id", data.id);
     if (error) throw new Error(error.message);
     return { ok: true };

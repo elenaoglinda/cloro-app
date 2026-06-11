@@ -1,14 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Upload, Trash2, FileText } from "lucide-react";
+import { ArrowLeft, Upload, Trash2, FileText, Pencil } from "lucide-react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
-import { getParte } from "@/lib/partes.functions";
+import { getParte, updateParteFirma } from "@/lib/partes.functions";
 import { listFotos, registerFoto, deleteFoto } from "@/lib/fotos.functions";
 import { getMyContext } from "@/lib/orgs.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { SignaturePad } from "@/components/app/SignaturePad";
 import {
   cloroCombinado, dotClass, evalCloroCombinado, evalCloroLibre, evalPh,
   evalTemperatura, evalTransparencia, evalTurbidez, semaforoParte, textClass, type Estado,
@@ -57,9 +58,11 @@ function ParteDetail() {
   const listFotosFn = useServerFn(listFotos);
   const registerFotoFn = useServerFn(registerFoto);
   const deleteFotoFn = useServerFn(deleteFoto);
+  const updateFirmaFn = useServerFn(updateParteFirma);
   const ctxFn = useServerFn(getMyContext);
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
+  const [savingFirma, setSavingFirma] = useState(false);
 
   const { data, isLoading } = useQuery({ queryKey: ["parte", id], queryFn: () => getParteFn({ data: { id } }) });
   const { data: fotosData } = useQuery({ queryKey: ["parte-fotos", id], queryFn: () => listFotosFn({ data: { parte_id: id } }) });
@@ -105,6 +108,25 @@ function ParteDetail() {
     qc.invalidateQueries({ queryKey: ["parte-fotos", id] });
   }
 
+  async function saveFirma(blob: Blob) {
+    if (!ctx?.currentOrg?.id) return;
+    setSavingFirma(true);
+    try {
+      const path = `${ctx.currentOrg.id}/${id}/firma-${crypto.randomUUID()}.png`;
+      const { error } = await supabase.storage
+        .from("parte-fotos")
+        .upload(path, blob, { cacheControl: "3600", upsert: false, contentType: "image/png" });
+      if (error) throw error;
+      await updateFirmaFn({ data: { id, firma_cliente_url: path } });
+      toast.success("Firma guardada. El parte queda firmado.");
+      qc.invalidateQueries({ queryKey: ["parte", id] });
+    } catch (err: any) {
+      toast.error(err.message || "Error al guardar firma");
+    } finally {
+      setSavingFirma(false);
+    }
+  }
+
   const productosTexto =
     Array.isArray(p.productos_usados) && p.productos_usados.length > 0
       ? p.productos_usados.map((x: any) => x.texto ?? JSON.stringify(x)).join("\n")
@@ -129,6 +151,11 @@ function ParteDetail() {
             </p>
             <p className={`text-xs font-medium mt-1 ${textClass[semaforo]}`}>{estadoLabel[semaforo]}</p>
           </div>
+          {p.estado !== "firmado" && (
+            <Link to="/app/partes/$id/editar" params={{ id }}>
+              <Button size="sm" variant="outline"><Pencil className="size-4 mr-1" /> Editar</Button>
+            </Link>
+          )}
         </div>
       </div>
 
@@ -207,12 +234,19 @@ function ParteDetail() {
       )}
 
       {/* Firma */}
-      {p.firma_cliente_url && (
-        <div className="bg-card border border-border rounded-lg p-5">
-          <h2 className="text-sm font-semibold mb-3">Firma del cliente</h2>
-          <img src={p.firma_cliente_url} alt="Firma cliente" className="max-h-40 bg-white rounded border border-border" />
-        </div>
-      )}
+      <div className="bg-card border border-border rounded-lg p-5">
+        <h2 className="text-sm font-semibold mb-3">Firma del cliente</h2>
+        {data.firma_url ? (
+          <img src={data.firma_url} alt="Firma cliente" className="max-h-40 bg-white rounded border border-border" />
+        ) : (
+          <>
+            <p className="text-xs text-muted-foreground mb-3">
+              Pídele al cliente que firme abajo. Al guardar, el parte quedará marcado como firmado.
+            </p>
+            <SignaturePad onSave={saveFirma} saving={savingFirma} />
+          </>
+        )}
+      </div>
 
       {/* Fotos */}
       <div className="bg-card border border-border rounded-lg p-5">

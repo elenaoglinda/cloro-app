@@ -36,6 +36,7 @@ import { Route as AuthenticatedAppPartesNuevoRouteImport } from './routes/_authe
 import { Route as AuthenticatedAppPartesIdRouteImport } from './routes/_authenticated/app.partes.$id'
 import { Route as AuthenticatedAppClientesIdRouteImport } from './routes/_authenticated/app.clientes.$id'
 import { Route as AuthenticatedAdminOrgsIdRouteImport } from './routes/_authenticated/admin.orgs.$id'
+import { Route as AuthenticatedAppPartesIdEditarRouteImport } from './routes/_authenticated/app.partes.$id.editar'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -183,6 +184,12 @@ const AuthenticatedAdminOrgsIdRoute =
     path: '/orgs/$id',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAppPartesIdEditarRoute =
+  AuthenticatedAppPartesIdEditarRouteImport.update({
+    id: '/editar',
+    path: '/editar',
+    getParentRoute: () => AuthenticatedAppPartesIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -203,7 +210,7 @@ export interface FileRoutesByFullPath {
   '/app/': typeof AuthenticatedAppIndexRoute
   '/admin/orgs/$id': typeof AuthenticatedAdminOrgsIdRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
-  '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
+  '/app/partes/$id': typeof AuthenticatedAppPartesIdRouteWithChildren
   '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
   '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -211,6 +218,7 @@ export interface FileRoutesByFullPath {
   '/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes/': typeof AuthenticatedAppPartesIndexRoute
   '/app/rutas/': typeof AuthenticatedAppRutasIndexRoute
+  '/app/partes/$id/editar': typeof AuthenticatedAppPartesIdEditarRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -228,7 +236,7 @@ export interface FileRoutesByTo {
   '/app': typeof AuthenticatedAppIndexRoute
   '/admin/orgs/$id': typeof AuthenticatedAdminOrgsIdRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
-  '/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
+  '/app/partes/$id': typeof AuthenticatedAppPartesIdRouteWithChildren
   '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
   '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -236,6 +244,7 @@ export interface FileRoutesByTo {
   '/app/clientes': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes': typeof AuthenticatedAppPartesIndexRoute
   '/app/rutas': typeof AuthenticatedAppRutasIndexRoute
+  '/app/partes/$id/editar': typeof AuthenticatedAppPartesIdEditarRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -258,7 +267,7 @@ export interface FileRoutesById {
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
   '/_authenticated/admin/orgs/$id': typeof AuthenticatedAdminOrgsIdRoute
   '/_authenticated/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
-  '/_authenticated/app/partes/$id': typeof AuthenticatedAppPartesIdRoute
+  '/_authenticated/app/partes/$id': typeof AuthenticatedAppPartesIdRouteWithChildren
   '/_authenticated/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
   '/_authenticated/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -266,6 +275,7 @@ export interface FileRoutesById {
   '/_authenticated/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/_authenticated/app/partes/': typeof AuthenticatedAppPartesIndexRoute
   '/_authenticated/app/rutas/': typeof AuthenticatedAppRutasIndexRoute
+  '/_authenticated/app/partes/$id/editar': typeof AuthenticatedAppPartesIdEditarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -296,6 +306,7 @@ export interface FileRouteTypes {
     | '/app/clientes/'
     | '/app/partes/'
     | '/app/rutas/'
+    | '/app/partes/$id/editar'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -321,6 +332,7 @@ export interface FileRouteTypes {
     | '/app/clientes'
     | '/app/partes'
     | '/app/rutas'
+    | '/app/partes/$id/editar'
   id:
     | '__root__'
     | '/'
@@ -350,6 +362,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/clientes/'
     | '/_authenticated/app/partes/'
     | '/_authenticated/app/rutas/'
+    | '/_authenticated/app/partes/$id/editar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -556,6 +569,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminOrgsIdRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/app/partes/$id/editar': {
+      id: '/_authenticated/app/partes/$id/editar'
+      path: '/editar'
+      fullPath: '/app/partes/$id/editar'
+      preLoaderRoute: typeof AuthenticatedAppPartesIdEditarRouteImport
+      parentRoute: typeof AuthenticatedAppPartesIdRoute
+    }
   }
 }
 
@@ -591,13 +611,27 @@ const AuthenticatedAppRutasRouteWithChildren =
     AuthenticatedAppRutasRouteChildren,
   )
 
+interface AuthenticatedAppPartesIdRouteChildren {
+  AuthenticatedAppPartesIdEditarRoute: typeof AuthenticatedAppPartesIdEditarRoute
+}
+
+const AuthenticatedAppPartesIdRouteChildren: AuthenticatedAppPartesIdRouteChildren =
+  {
+    AuthenticatedAppPartesIdEditarRoute: AuthenticatedAppPartesIdEditarRoute,
+  }
+
+const AuthenticatedAppPartesIdRouteWithChildren =
+  AuthenticatedAppPartesIdRoute._addFileChildren(
+    AuthenticatedAppPartesIdRouteChildren,
+  )
+
 interface AuthenticatedAppRouteChildren {
   AuthenticatedAppAjustesRoute: typeof AuthenticatedAppAjustesRoute
   AuthenticatedAppPiscinasRoute: typeof AuthenticatedAppPiscinasRoute
   AuthenticatedAppRutasRoute: typeof AuthenticatedAppRutasRouteWithChildren
   AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
   AuthenticatedAppClientesIdRoute: typeof AuthenticatedAppClientesIdRoute
-  AuthenticatedAppPartesIdRoute: typeof AuthenticatedAppPartesIdRoute
+  AuthenticatedAppPartesIdRoute: typeof AuthenticatedAppPartesIdRouteWithChildren
   AuthenticatedAppPartesNuevoRoute: typeof AuthenticatedAppPartesNuevoRoute
   AuthenticatedAppClientesIndexRoute: typeof AuthenticatedAppClientesIndexRoute
   AuthenticatedAppPartesIndexRoute: typeof AuthenticatedAppPartesIndexRoute
@@ -609,7 +643,7 @@ const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
   AuthenticatedAppRutasRoute: AuthenticatedAppRutasRouteWithChildren,
   AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
   AuthenticatedAppClientesIdRoute: AuthenticatedAppClientesIdRoute,
-  AuthenticatedAppPartesIdRoute: AuthenticatedAppPartesIdRoute,
+  AuthenticatedAppPartesIdRoute: AuthenticatedAppPartesIdRouteWithChildren,
   AuthenticatedAppPartesNuevoRoute: AuthenticatedAppPartesNuevoRoute,
   AuthenticatedAppClientesIndexRoute: AuthenticatedAppClientesIndexRoute,
   AuthenticatedAppPartesIndexRoute: AuthenticatedAppPartesIndexRoute,
@@ -646,13 +680,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

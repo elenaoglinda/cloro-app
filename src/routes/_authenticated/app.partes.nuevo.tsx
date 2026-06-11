@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { ArrowLeft, ChevronDown, Upload } from "lucide-react";
 import { listPiscinas } from "@/lib/piscinas.functions";
-import { createParte, updateParteAdjunto } from "@/lib/partes.functions";
+import { createParte, updateParte, updateParteAdjunto } from "@/lib/partes.functions";
 import { getMyContext } from "@/lib/orgs.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
@@ -65,10 +65,39 @@ function NumField({
   );
 }
 
+export type ParteFormInitial = Partial<{
+  piscina_id: string;
+  tipo_control: TipoControl;
+  fecha: string;
+  hora_medicion: string;
+  ph: string; cloro_libre: string; cloro_total: string; turbidez: string;
+  transparencia_fondo: "" | "si" | "no";
+  temp_c: string; redox: string; tiempo_recirculacion: string;
+  cya: string; alcalinidad: string; sal: string;
+  ecoli: "" | "ok" | "ko";
+  pseudomonas: "" | "ok" | "ko";
+  bromo_total: string;
+  observaciones: string;
+  productos_usados_texto: string;
+}>;
+
 function NuevoParte() {
+  return <ParteForm mode="create" />;
+}
+
+export function ParteForm({
+  mode,
+  parteId,
+  initial,
+}: {
+  mode: "create" | "edit";
+  parteId?: string;
+  initial?: ParteFormInitial;
+}) {
   const navigate = useNavigate();
   const piscinasFn = useServerFn(listPiscinas);
   const createFn = useServerFn(createParte);
+  const updateFn = useServerFn(updateParte);
   const updateAdjFn = useServerFn(updateParteAdjunto);
   const ctxFn = useServerFn(getMyContext);
   const { data: piscinas } = useQuery({ queryKey: ["piscinas"], queryFn: () => piscinasFn() });
@@ -78,19 +107,21 @@ function NuevoParte() {
   const [labFile, setLabFile] = useState<File | null>(null);
 
   const [form, setForm] = useState({
-    piscina_id: "",
-    tipo_control: "rutina" as TipoControl,
-    fecha: todayISO(),
-    hora_medicion: nowHHMM(),
-    ph: "", cloro_libre: "", cloro_total: "", turbidez: "",
-    transparencia_fondo: "" as "" | "si" | "no",
-    temp_c: "", redox: "", tiempo_recirculacion: "",
-    cya: "", alcalinidad: "", sal: "",
-    ecoli: "" as "" | "ok" | "ko",
-    pseudomonas: "" as "" | "ok" | "ko",
-    bromo_total: "",
-    observaciones: "",
-    productos_usados_texto: "",
+    piscina_id: initial?.piscina_id ?? "",
+    tipo_control: (initial?.tipo_control ?? "rutina") as TipoControl,
+    fecha: initial?.fecha ?? todayISO(),
+    hora_medicion: initial?.hora_medicion ?? nowHHMM(),
+    ph: initial?.ph ?? "", cloro_libre: initial?.cloro_libre ?? "",
+    cloro_total: initial?.cloro_total ?? "", turbidez: initial?.turbidez ?? "",
+    transparencia_fondo: (initial?.transparencia_fondo ?? "") as "" | "si" | "no",
+    temp_c: initial?.temp_c ?? "", redox: initial?.redox ?? "",
+    tiempo_recirculacion: initial?.tiempo_recirculacion ?? "",
+    cya: initial?.cya ?? "", alcalinidad: initial?.alcalinidad ?? "", sal: initial?.sal ?? "",
+    ecoli: (initial?.ecoli ?? "") as "" | "ok" | "ko",
+    pseudomonas: (initial?.pseudomonas ?? "") as "" | "ok" | "ko",
+    bromo_total: initial?.bromo_total ?? "",
+    observaciones: initial?.observaciones ?? "",
+    productos_usados_texto: initial?.productos_usados_texto ?? "",
   });
 
   const isLab = form.tipo_control !== "rutina";
@@ -133,24 +164,26 @@ function NuevoParte() {
         payload[k] = v === "" ? null : Number(v);
       }
 
-      const res = await createFn({ data: payload });
+      const targetId = mode === "edit" && parteId
+        ? (await updateFn({ data: { id: parteId, values: payload } })).id
+        : (await createFn({ data: payload })).id;
 
       if (isLab && labFile && ctx?.currentOrg?.id) {
         try {
           const ext = labFile.name.split(".").pop() || "pdf";
-          const path = `${ctx.currentOrg.id}/${res.id}/laboratorio-${crypto.randomUUID()}.${ext}`;
+          const path = `${ctx.currentOrg.id}/${targetId}/laboratorio-${crypto.randomUUID()}.${ext}`;
           const { error: upErr } = await supabase.storage
             .from("parte-fotos")
             .upload(path, labFile, { cacheControl: "3600", upsert: false, contentType: labFile.type });
           if (upErr) throw upErr;
-          await updateAdjFn({ data: { id: res.id, adjunto_laboratorio_url: path } });
+          await updateAdjFn({ data: { id: targetId, adjunto_laboratorio_url: path } });
         } catch (err: any) {
-          toast.error(`Parte creado, pero el adjunto falló: ${err.message ?? err}`);
+          toast.error(`Parte guardado, pero el adjunto falló: ${err.message ?? err}`);
         }
       }
 
-      toast.success("Parte creado");
-      navigate({ to: "/app/partes/$id", params: { id: res.id } });
+      toast.success(mode === "edit" ? "Parte actualizado" : "Parte creado");
+      navigate({ to: "/app/partes/$id", params: { id: targetId } });
     } catch (err: any) {
       toast.error(err?.message ?? "Error");
       setSubmitting(false);
@@ -164,7 +197,7 @@ function NuevoParte() {
       <Link to="/app/partes" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="size-4 mr-1" /> Partes
       </Link>
-      <h1 className="text-2xl font-semibold">Nuevo parte</h1>
+      <h1 className="text-2xl font-semibold">{mode === "edit" ? "Editar parte" : "Nuevo parte"}</h1>
 
       <form onSubmit={submit} className="space-y-5">
         {/* SECCIÓN A */}
@@ -315,7 +348,7 @@ function NuevoParte() {
         {/* SECCIÓN F */}
         <section className="bg-card border border-border rounded-lg p-4">
           <h2 className="text-sm font-semibold mb-1">F · Firma del cliente</h2>
-          <p className="text-xs text-muted-foreground">La firma se puede añadir desde la vista de detalle tras guardar.</p>
+          <p className="text-xs text-muted-foreground">La firma se añade desde la vista de detalle del parte tras guardar.</p>
         </section>
 
         <Button type="submit" className="w-full" size="lg" disabled={submitting}>

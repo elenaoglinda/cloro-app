@@ -23,6 +23,17 @@ function Dashboard() {
   const partes = useQuery({ queryKey: ["partes"], queryFn: () => partesFn() });
   const piscinas = useQuery({ queryKey: ["piscinas-all"], queryFn: () => piscinasFn() });
 
+  const clientesCount = clientes.data?.clientes.length ?? 0;
+  const piscinasCount = piscinas.data?.piscinas.length ?? 0;
+  const ready = !clientes.isLoading && !piscinas.isLoading;
+  const primaryCta = !ready
+    ? { to: "/app/partes/nuevo" as const, label: "Cargando..." }
+    : clientesCount === 0
+      ? { to: "/app/clientes" as const, label: "Añadir cliente" }
+      : piscinasCount === 0
+        ? { to: "/app/clientes" as const, label: "Añadir piscina" }
+        : { to: "/app/partes/nuevo" as const, label: "Nuevo parte" };
+
   return (
     <div className="max-w-5xl mx-auto space-y-8">
       <div className="flex items-end justify-between flex-wrap gap-3">
@@ -33,9 +44,17 @@ function Dashboard() {
           <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
             Hola{ctx.data?.profile?.full_name ? `, ${ctx.data.profile.full_name.split(" ")[0]}` : ""} 👋
           </h1>
+          {ready && clientesCount === 0 && (
+            <p className="text-sm text-muted-foreground mt-2">Empieza añadiendo tu primer cliente.</p>
+          )}
+          {ready && clientesCount > 0 && piscinasCount === 0 && (
+            <p className="text-sm text-muted-foreground mt-2">
+              Añade una piscina a un cliente para empezar a registrar partes.
+            </p>
+          )}
         </div>
-        <Link to="/app/partes/nuevo">
-          <Button><Plus className="size-4 mr-2" /> Nuevo parte</Button>
+        <Link to={primaryCta.to}>
+          <Button><Plus className="size-4 mr-2" /> {primaryCta.label}</Button>
         </Link>
       </div>
 
