@@ -151,6 +151,11 @@ function ParteDetail() {
             </p>
             <p className={`text-xs font-medium mt-1 ${textClass[semaforo]}`}>{estadoLabel[semaforo]}</p>
           </div>
+          {p.estado !== "firmado" && (
+            <Link to="/app/partes/$id/editar" params={{ id }}>
+              <Button size="sm" variant="outline"><Pencil className="size-4 mr-1" /> Editar</Button>
+            </Link>
+          )}
         </div>
       </div>
 
