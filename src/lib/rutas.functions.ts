@@ -199,7 +199,8 @@ export const optimizeRuta = createServerFn({ method: "POST" })
     const intermediates = valid.slice(1, -1);
 
     const gmapsKey = process.env.GOOGLE_MAPS_API_KEY;
-    if (!gmapsKey) throw new Error("Google Maps no está configurado.");
+    const lovableKey = process.env.LOVABLE_API_KEY;
+    if (!gmapsKey || !lovableKey) throw new Error("Google Maps no está configurado.");
 
     const body = {
       origin: { location: { latLng: { latitude: Number(origin.pisc.lat), longitude: Number(origin.pisc.lng) } } },
@@ -211,10 +212,11 @@ export const optimizeRuta = createServerFn({ method: "POST" })
       optimizeWaypointOrder: true,
     };
 
-    const res = await fetch(`${GMAPS_BASE}/directions/v2:computeRoutes`, {
+    const res = await fetch(`${GMAPS_GATEWAY}/routes/directions/v2:computeRoutes`, {
       method: "POST",
       headers: {
-        "X-Goog-Api-Key": gmapsKey,
+        "Authorization": `Bearer ${lovableKey}`,
+        "X-Connection-Api-Key": gmapsKey,
         "Content-Type": "application/json",
         "X-Goog-FieldMask": "routes.optimizedIntermediateWaypointIndex,routes.polyline.encodedPolyline,routes.duration,routes.distanceMeters",
       },
