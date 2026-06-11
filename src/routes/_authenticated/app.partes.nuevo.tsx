@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { ArrowLeft, ChevronDown, Upload } from "lucide-react";
 import { listPiscinas } from "@/lib/piscinas.functions";
-import { createParte, updateParteAdjunto } from "@/lib/partes.functions";
+import { createParte, updateParte, updateParteAdjunto } from "@/lib/partes.functions";
 import { getMyContext } from "@/lib/orgs.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
