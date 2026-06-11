@@ -167,7 +167,7 @@ export const setPiscinaCoords = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-const GMAPS_BASE = "https://routes.googleapis.com";
+const GMAPS_GATEWAY = "https://connector-gateway.lovable.dev/google_maps";
 
 export const optimizeRuta = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
