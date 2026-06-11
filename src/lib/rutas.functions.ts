@@ -196,7 +196,7 @@ export const optimizeRuta = createServerFn({ method: "POST" })
       for (const p of needsGeo) {
         try {
           const r = await fetch(
-            `https://connector-gateway.lovable.dev/google_maps/maps/api/geocode/json?address=${encodeURIComponent(p.direccion)}`,
+            `https://connector-gateway.lovable.dev/google_maps/maps/api/geocode/json?address=${encodeURIComponent(String(p.direccion))}`,
             { headers: { Authorization: `Bearer ${lovableKey}`, "X-Connection-Api-Key": gmapsKeyForGeo } },
           );
           const j: any = await r.json();
