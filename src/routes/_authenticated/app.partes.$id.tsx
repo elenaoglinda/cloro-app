@@ -1,14 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Upload, Trash2, FileText } from "lucide-react";
+import { ArrowLeft, Upload, Trash2, FileText, Pencil } from "lucide-react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
-import { getParte } from "@/lib/partes.functions";
+import { getParte, updateParteFirma } from "@/lib/partes.functions";
 import { listFotos, registerFoto, deleteFoto } from "@/lib/fotos.functions";
 import { getMyContext } from "@/lib/orgs.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { SignaturePad } from "@/components/app/SignaturePad";
 import {
   cloroCombinado, dotClass, evalCloroCombinado, evalCloroLibre, evalPh,
   evalTemperatura, evalTransparencia, evalTurbidez, semaforoParte, textClass, type Estado,
