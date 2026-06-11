@@ -164,24 +164,26 @@ export function ParteForm({
         payload[k] = v === "" ? null : Number(v);
       }
 
-      const res = await createFn({ data: payload });
+      const targetId = mode === "edit" && parteId
+        ? (await updateFn({ data: { id: parteId, values: payload } })).id
+        : (await createFn({ data: payload })).id;
 
       if (isLab && labFile && ctx?.currentOrg?.id) {
         try {
           const ext = labFile.name.split(".").pop() || "pdf";
-          const path = `${ctx.currentOrg.id}/${res.id}/laboratorio-${crypto.randomUUID()}.${ext}`;
+          const path = `${ctx.currentOrg.id}/${targetId}/laboratorio-${crypto.randomUUID()}.${ext}`;
           const { error: upErr } = await supabase.storage
             .from("parte-fotos")
             .upload(path, labFile, { cacheControl: "3600", upsert: false, contentType: labFile.type });
           if (upErr) throw upErr;
-          await updateAdjFn({ data: { id: res.id, adjunto_laboratorio_url: path } });
+          await updateAdjFn({ data: { id: targetId, adjunto_laboratorio_url: path } });
         } catch (err: any) {
-          toast.error(`Parte creado, pero el adjunto falló: ${err.message ?? err}`);
+          toast.error(`Parte guardado, pero el adjunto falló: ${err.message ?? err}`);
         }
       }
 
-      toast.success("Parte creado");
-      navigate({ to: "/app/partes/$id", params: { id: res.id } });
+      toast.success(mode === "edit" ? "Parte actualizado" : "Parte creado");
+      navigate({ to: "/app/partes/$id", params: { id: targetId } });
     } catch (err: any) {
       toast.error(err?.message ?? "Error");
       setSubmitting(false);
@@ -195,7 +197,7 @@ export function ParteForm({
       <Link to="/app/partes" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="size-4 mr-1" /> Partes
       </Link>
-      <h1 className="text-2xl font-semibold">Nuevo parte</h1>
+      <h1 className="text-2xl font-semibold">{mode === "edit" ? "Editar parte" : "Nuevo parte"}</h1>
 
       <form onSubmit={submit} className="space-y-5">
         {/* SECCIÓN A */}
