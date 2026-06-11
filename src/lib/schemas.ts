@@ -24,7 +24,7 @@ export const piscinaSchema = z.object({
   tipo: optionalText(50),
   volumen_m3: z.coerce.number().min(0).max(100000).optional().nullable(),
   sistema_desinfeccion: optionalText(120),
-  direccion: optionalText(500),
+  direccion: z.string().trim().min(3, "La dirección es obligatoria").max(500),
   notas: optionalText(2000),
 });
 export type PiscinaInput = z.infer<typeof piscinaSchema>;
