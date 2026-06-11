@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PreguntasFrecuentesRouteImport } from './routes/preguntas-frecuentes'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
@@ -41,6 +42,11 @@ import { Route as AuthenticatedAppPartesIdEditarRouteImport } from './routes/_au
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreguntasFrecuentesRoute = PreguntasFrecuentesRouteImport.update({
+  id: '/preguntas-frecuentes',
+  path: '/preguntas-frecuentes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactoRoute = ContactoRouteImport.update({
@@ -195,6 +201,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
+  '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/app': typeof AuthenticatedAppRouteWithChildren
@@ -224,6 +231,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
+  '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
@@ -252,6 +260,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
+  '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
@@ -283,6 +292,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/contacto'
+    | '/preguntas-frecuentes'
     | '/sitemap.xml'
     | '/admin'
     | '/app'
@@ -312,6 +322,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/contacto'
+    | '/preguntas-frecuentes'
     | '/sitemap.xml'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
@@ -339,6 +350,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/contacto'
+    | '/preguntas-frecuentes'
     | '/sitemap.xml'
     | '/_authenticated/admin'
     | '/_authenticated/app'
@@ -370,6 +382,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ContactoRoute: typeof ContactoRoute
+  PreguntasFrecuentesRoute: typeof PreguntasFrecuentesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ComparativaAutocontrolpiscinasRoute: typeof ComparativaAutocontrolpiscinasRoute
   ComparativaEisiHotelRoute: typeof ComparativaEisiHotelRoute
@@ -385,6 +398,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preguntas-frecuentes': {
+      id: '/preguntas-frecuentes'
+      path: '/preguntas-frecuentes'
+      fullPath: '/preguntas-frecuentes'
+      preLoaderRoute: typeof PreguntasFrecuentesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contacto': {
@@ -670,6 +690,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ContactoRoute: ContactoRoute,
+  PreguntasFrecuentesRoute: PreguntasFrecuentesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ComparativaAutocontrolpiscinasRoute: ComparativaAutocontrolpiscinasRoute,
   ComparativaEisiHotelRoute: ComparativaEisiHotelRoute,
@@ -680,3 +701,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
