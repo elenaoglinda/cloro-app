@@ -108,6 +108,25 @@ function ParteDetail() {
     qc.invalidateQueries({ queryKey: ["parte-fotos", id] });
   }
 
+  async function saveFirma(blob: Blob) {
+    if (!ctx?.currentOrg?.id) return;
+    setSavingFirma(true);
+    try {
+      const path = `${ctx.currentOrg.id}/${id}/firma-${crypto.randomUUID()}.png`;
+      const { error } = await supabase.storage
+        .from("parte-fotos")
+        .upload(path, blob, { cacheControl: "3600", upsert: false, contentType: "image/png" });
+      if (error) throw error;
+      await updateFirmaFn({ data: { id, firma_cliente_url: path } });
+      toast.success("Firma guardada. El parte queda firmado.");
+      qc.invalidateQueries({ queryKey: ["parte", id] });
+    } catch (err: any) {
+      toast.error(err.message || "Error al guardar firma");
+    } finally {
+      setSavingFirma(false);
+    }
+  }
+
   const productosTexto =
     Array.isArray(p.productos_usados) && p.productos_usados.length > 0
       ? p.productos_usados.map((x: any) => x.texto ?? JSON.stringify(x)).join("\n")
