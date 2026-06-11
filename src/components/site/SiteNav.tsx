@@ -17,6 +17,7 @@ export function SiteNav() {
           <a href="/#cumplimiento" className="hover:text-foreground transition">SILOÉ</a>
           <a href="/#comparativa" className="hover:text-foreground transition">Comparativa</a>
           <a href="/#precios" className="hover:text-foreground transition">Precios</a>
+          <Link to="/preguntas-frecuentes" className="hover:text-foreground transition">FAQ</Link>
         </div>
         <div className="flex items-center gap-3">
           <Link to="/auth" className="hidden sm:inline text-sm text-muted-foreground hover:text-foreground transition">Iniciar sesión</Link>
