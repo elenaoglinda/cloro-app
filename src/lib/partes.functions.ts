@@ -38,7 +38,19 @@ export const getParte = createServerFn({ method: "GET" })
         .createSignedUrl(path, 60 * 60);
       adjunto_url = s?.signedUrl ?? null;
     }
-    return { parte, adjunto_url };
+    let firma_url: string | null = null;
+    if ((parte as any).firma_cliente_url) {
+      const path = (parte as any).firma_cliente_url as string;
+      if (path.startsWith("http")) {
+        firma_url = path;
+      } else {
+        const { data: s } = await context.supabase.storage
+          .from("parte-fotos")
+          .createSignedUrl(path, 60 * 60);
+        firma_url = s?.signedUrl ?? null;
+      }
+    }
+    return { parte, adjunto_url, firma_url };
   });
 
 export const createParte = createServerFn({ method: "POST" })
