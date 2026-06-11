@@ -184,14 +184,38 @@ export const optimizeRuta = createServerFn({ method: "POST" })
     if (!ids.length) throw new Error("Sin paradas.");
     const { data: pisc } = await supabase
       .from("piscinas")
-      .select("id, lat, lng")
+      .select("id, lat, lng, direccion")
       .in("id", ids);
     const piscMap = new Map((pisc ?? []).map((p: any) => [p.id, p]));
+
+    // Server-side geocode for piscinas with direccion but no coords
+    const lovableKey = process.env.LOVABLE_API_KEY;
+    const gmapsKeyForGeo = process.env.GOOGLE_MAPS_API_KEY;
+    const needsGeo = (pisc ?? []).filter((p: any) => (p.lat == null || p.lng == null) && p.direccion);
+    if (needsGeo.length && lovableKey && gmapsKeyForGeo) {
+      for (const p of needsGeo) {
+        try {
+          const r = await fetch(
+            `https://connector-gateway.lovable.dev/google_maps/maps/api/geocode/json?address=${encodeURIComponent(p.direccion)}`,
+            { headers: { Authorization: `Bearer ${lovableKey}`, "X-Connection-Api-Key": gmapsKeyForGeo } },
+          );
+          const j: any = await r.json();
+          const loc = j?.results?.[0]?.geometry?.location;
+          if (loc) {
+            await supabase.from("piscinas").update({ lat: loc.lat, lng: loc.lng }).eq("id", p.id);
+            piscMap.set(p.id, { ...p, lat: loc.lat, lng: loc.lng });
+          }
+        } catch (e) {
+          console.error("geocode fail", p.id, e);
+        }
+      }
+    }
+
     const valid = (paradas ?? [])
       .map((p: any) => ({ ...p, pisc: piscMap.get(p.piscina_id) }))
       .filter((p: any) => p.pisc?.lat != null && p.pisc?.lng != null);
     if (valid.length < 3) {
-      throw new Error("Necesitas al menos 3 paradas con coordenadas para optimizar.");
+      throw new Error(`Necesitas al menos 3 paradas con dirección para optimizar (tienes ${valid.length}).`);
     }
 
     const origin = valid[0];
