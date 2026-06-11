@@ -65,10 +65,39 @@ function NumField({
   );
 }
 
+export type ParteFormInitial = Partial<{
+  piscina_id: string;
+  tipo_control: TipoControl;
+  fecha: string;
+  hora_medicion: string;
+  ph: string; cloro_libre: string; cloro_total: string; turbidez: string;
+  transparencia_fondo: "" | "si" | "no";
+  temp_c: string; redox: string; tiempo_recirculacion: string;
+  cya: string; alcalinidad: string; sal: string;
+  ecoli: "" | "ok" | "ko";
+  pseudomonas: "" | "ok" | "ko";
+  bromo_total: string;
+  observaciones: string;
+  productos_usados_texto: string;
+}>;
+
 function NuevoParte() {
+  return <ParteForm mode="create" />;
+}
+
+export function ParteForm({
+  mode,
+  parteId,
+  initial,
+}: {
+  mode: "create" | "edit";
+  parteId?: string;
+  initial?: ParteFormInitial;
+}) {
   const navigate = useNavigate();
   const piscinasFn = useServerFn(listPiscinas);
   const createFn = useServerFn(createParte);
+  const updateFn = useServerFn(updateParte);
   const updateAdjFn = useServerFn(updateParteAdjunto);
   const ctxFn = useServerFn(getMyContext);
   const { data: piscinas } = useQuery({ queryKey: ["piscinas"], queryFn: () => piscinasFn() });
@@ -78,19 +107,21 @@ function NuevoParte() {
   const [labFile, setLabFile] = useState<File | null>(null);
 
   const [form, setForm] = useState({
-    piscina_id: "",
-    tipo_control: "rutina" as TipoControl,
-    fecha: todayISO(),
-    hora_medicion: nowHHMM(),
-    ph: "", cloro_libre: "", cloro_total: "", turbidez: "",
-    transparencia_fondo: "" as "" | "si" | "no",
-    temp_c: "", redox: "", tiempo_recirculacion: "",
-    cya: "", alcalinidad: "", sal: "",
-    ecoli: "" as "" | "ok" | "ko",
-    pseudomonas: "" as "" | "ok" | "ko",
-    bromo_total: "",
-    observaciones: "",
-    productos_usados_texto: "",
+    piscina_id: initial?.piscina_id ?? "",
+    tipo_control: (initial?.tipo_control ?? "rutina") as TipoControl,
+    fecha: initial?.fecha ?? todayISO(),
+    hora_medicion: initial?.hora_medicion ?? nowHHMM(),
+    ph: initial?.ph ?? "", cloro_libre: initial?.cloro_libre ?? "",
+    cloro_total: initial?.cloro_total ?? "", turbidez: initial?.turbidez ?? "",
+    transparencia_fondo: (initial?.transparencia_fondo ?? "") as "" | "si" | "no",
+    temp_c: initial?.temp_c ?? "", redox: initial?.redox ?? "",
+    tiempo_recirculacion: initial?.tiempo_recirculacion ?? "",
+    cya: initial?.cya ?? "", alcalinidad: initial?.alcalinidad ?? "", sal: initial?.sal ?? "",
+    ecoli: (initial?.ecoli ?? "") as "" | "ok" | "ko",
+    pseudomonas: (initial?.pseudomonas ?? "") as "" | "ok" | "ko",
+    bromo_total: initial?.bromo_total ?? "",
+    observaciones: initial?.observaciones ?? "",
+    productos_usados_texto: initial?.productos_usados_texto ?? "",
   });
 
   const isLab = form.tipo_control !== "rutina";
