@@ -1,5 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { BLOG_POSTS, getPostBySlug, type BlogPost } from "@/lib/blog-posts";
@@ -13,18 +15,19 @@ export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) => {
     const post = loaderData?.post;
     if (!post) {
-      return {
-        meta: [{ title: "Artículo no encontrado | Cloro" }],
-      };
+      return { meta: [{ title: "Artículo no encontrado | Cloro" }] };
     }
     const url = `https://cloro.app/blog/${post.slug}`;
+    const image = `https://cloro.app${post.cover}`;
     const ld = {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       headline: post.title,
       description: post.description,
+      keywords: post.keywords.join(", "),
       datePublished: post.date,
       dateModified: post.date,
+      image,
       author: { "@type": "Organization", name: post.author },
       publisher: {
         "@type": "Organization",
@@ -37,12 +40,16 @@ export const Route = createFileRoute("/blog/$slug")({
       meta: [
         { title: `${post.title} | Cloro` },
         { name: "description", content: post.description },
+        { name: "keywords", content: post.keywords.join(", ") },
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.description },
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
+        { property: "og:image", content: image },
         { property: "article:published_time", content: post.date },
+        { property: "article:author", content: post.author },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: image },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: [{ type: "application/ld+json", children: JSON.stringify(ld) }],
@@ -64,40 +71,15 @@ export const Route = createFileRoute("/blog/$slug")({
   component: BlogPostPage,
 });
 
-function renderContent(content: string) {
-  const blocks = content.trim().split(/\n\n+/);
-  return blocks.map((block, i) => {
-    if (block.startsWith("## ")) {
-      return (
-        <h2 key={i} className="mt-10 text-2xl">
-          {block.replace(/^##\s+/, "")}
-        </h2>
-      );
-    }
-    if (block.startsWith("# ")) {
-      return (
-        <h1 key={i} className="mt-10 text-3xl">
-          {block.replace(/^#\s+/, "")}
-        </h1>
-      );
-    }
-    return (
-      <p key={i} className="mt-4 text-muted-foreground leading-relaxed">
-        {block}
-      </p>
-    );
-  });
-}
-
 function BlogPostPage() {
   const { post } = Route.useLoaderData() as { post: BlogPost };
-  const related = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 2);
+  const related = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background">
       <SiteNav />
-      <main className="max-w-3xl mx-auto px-6 py-16">
-        <div className="mb-10">
+      <main className="max-w-3xl mx-auto px-6 py-12 lg:py-16">
+        <div className="mb-8">
           <Link
             to="/blog"
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition"
@@ -105,8 +87,18 @@ function BlogPostPage() {
             <ArrowLeft className="size-4" /> Volver al blog
           </Link>
         </div>
-        <article>
-          <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+
+        <img
+          src={post.cover}
+          alt={post.coverAlt}
+          width={1280}
+          height={720}
+          className="w-full aspect-[16/9] object-cover border border-border"
+        />
+
+        <header className="mt-8">
+          <h1 className="text-3xl lg:text-5xl leading-tight">{post.title}</h1>
+          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
             <time dateTime={post.date}>
               {new Date(post.date).toLocaleDateString("es-ES", {
                 day: "numeric",
@@ -115,39 +107,82 @@ function BlogPostPage() {
               })}
             </time>
             <span>·</span>
-            <span>{post.readingMinutes} min lectura</span>
+            <span>{post.author}</span>
+            <span>·</span>
+            <span>{post.readingMinutes} min de lectura</span>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-1.5">
             {post.tags.map((t) => (
               <span
                 key={t}
-                className="ml-1 rounded-full border border-border px-2 py-0.5 text-[11px]"
+                className="rounded-full border border-border px-2.5 py-0.5 text-[11px] text-muted-foreground"
               >
                 {t}
               </span>
             ))}
           </div>
-          <h1 className="mt-3 text-4xl lg:text-5xl">{post.title}</h1>
-          <p className="mt-4 text-lg text-muted-foreground">{post.description}</p>
-          <div className="mt-8">{renderContent(post.content)}</div>
+        </header>
+
+        <section className="mt-10 border-l-2 border-accent bg-accent/5 px-5 py-4">
+          <p className="text-xs uppercase tracking-wider text-accent font-medium">
+            TL;DR
+          </p>
+          <p className="mt-2 text-foreground/90 leading-relaxed">{post.tldr}</p>
+        </section>
+
+        <article
+          className="prose prose-neutral dark:prose-invert mt-10 max-w-none
+            prose-headings:scroll-mt-24
+            prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+            prose-h3:text-xl prose-h3:mt-8
+            prose-p:text-foreground/85 prose-p:leading-relaxed
+            prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-foreground
+            prose-li:text-foreground/85
+            prose-table:text-sm prose-th:bg-muted prose-th:text-left
+            prose-th:px-3 prose-th:py-2 prose-td:px-3 prose-td:py-2
+            prose-th:border prose-th:border-border
+            prose-td:border prose-td:border-border"
+        >
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
         </article>
 
+        <aside className="mt-14 border border-border p-6">
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">
+            Sobre el autor
+          </p>
+          <p className="mt-3 font-medium">{post.author}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{post.authorBio}</p>
+        </aside>
+
         {related.length > 0 && (
-          <aside className="mt-16 border-t border-border pt-10">
+          <section className="mt-14 border-t border-border pt-10">
             <h2 className="text-xl">Sigue leyendo</h2>
-            <ul className="mt-4 space-y-4">
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-5">
               {related.map((r) => (
-                <li key={r.slug}>
-                  <Link
-                    to="/blog/$slug"
-                    params={{ slug: r.slug }}
-                    className="font-medium hover:underline"
-                  >
-                    {r.title}
-                  </Link>
-                  <p className="text-sm text-muted-foreground">{r.description}</p>
-                </li>
+                <Link
+                  key={r.slug}
+                  to="/blog/$slug"
+                  params={{ slug: r.slug }}
+                  className="group border border-border hover:border-foreground/30 transition-colors block"
+                >
+                  <img
+                    src={r.cover}
+                    alt={r.coverAlt}
+                    loading="lazy"
+                    width={1280}
+                    height={720}
+                    className="w-full aspect-[16/9] object-cover"
+                  />
+                  <div className="p-4">
+                    <p className="text-sm leading-snug group-hover:underline underline-offset-4">
+                      {r.title}
+                    </p>
+                  </div>
+                </Link>
               ))}
-            </ul>
-          </aside>
+            </div>
+          </section>
         )}
       </main>
       <SiteFooter />
