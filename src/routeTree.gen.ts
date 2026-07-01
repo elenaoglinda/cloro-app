@@ -15,10 +15,12 @@ import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as InvitacionTokenRouteImport } from './routes/invitacion.$token'
 import { Route as ComparativaEvisaneRouteImport } from './routes/comparativa.evisane'
 import { Route as ComparativaEisiHotelRouteImport } from './routes/comparativa.eisi-hotel'
 import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/comparativa.autocontrolpiscinas'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
@@ -68,6 +70,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InvitacionTokenRoute = InvitacionTokenRouteImport.update({
   id: '/invitacion/$token',
   path: '/invitacion/$token',
@@ -89,6 +96,11 @@ const ComparativaAutocontrolpiscinasRoute =
     path: '/comparativa/autocontrolpiscinas',
     getParentRoute: () => rootRouteImport,
   } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
   id: '/app',
   path: '/app',
@@ -205,10 +217,12 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/app': typeof AuthenticatedAppRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
   '/invitacion/$token': typeof InvitacionTokenRoute
+  '/blog/': typeof BlogIndexRoute
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
@@ -233,10 +247,12 @@ export interface FileRoutesByTo {
   '/contacto': typeof ContactoRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
   '/invitacion/$token': typeof InvitacionTokenRoute
+  '/blog': typeof BlogIndexRoute
   '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
@@ -264,10 +280,12 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
   '/invitacion/$token': typeof InvitacionTokenRoute
+  '/blog/': typeof BlogIndexRoute
   '/_authenticated/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/_authenticated/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/_authenticated/app/piscinas': typeof AuthenticatedAppPiscinasRoute
@@ -296,10 +314,12 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admin'
     | '/app'
+    | '/blog/$slug'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
     | '/invitacion/$token'
+    | '/blog/'
     | '/admin/mensajes'
     | '/app/ajustes'
     | '/app/piscinas'
@@ -324,10 +344,12 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/preguntas-frecuentes'
     | '/sitemap.xml'
+    | '/blog/$slug'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
     | '/invitacion/$token'
+    | '/blog'
     | '/admin/mensajes'
     | '/app/ajustes'
     | '/app/piscinas'
@@ -354,10 +376,12 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/_authenticated/admin'
     | '/_authenticated/app'
+    | '/blog/$slug'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
     | '/invitacion/$token'
+    | '/blog/'
     | '/_authenticated/admin/mensajes'
     | '/_authenticated/app/ajustes'
     | '/_authenticated/app/piscinas'
@@ -384,10 +408,12 @@ export interface RootRouteChildren {
   ContactoRoute: typeof ContactoRoute
   PreguntasFrecuentesRoute: typeof PreguntasFrecuentesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   ComparativaAutocontrolpiscinasRoute: typeof ComparativaAutocontrolpiscinasRoute
   ComparativaEisiHotelRoute: typeof ComparativaEisiHotelRoute
   ComparativaEvisaneRoute: typeof ComparativaEvisaneRoute
   InvitacionTokenRoute: typeof InvitacionTokenRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
@@ -435,6 +461,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/invitacion/$token': {
       id: '/invitacion/$token'
       path: '/invitacion/$token'
@@ -461,6 +494,13 @@ declare module '@tanstack/react-router' {
       path: '/comparativa/autocontrolpiscinas'
       fullPath: '/comparativa/autocontrolpiscinas'
       preLoaderRoute: typeof ComparativaAutocontrolpiscinasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/app': {
@@ -692,22 +732,14 @@ const rootRouteChildren: RootRouteChildren = {
   ContactoRoute: ContactoRoute,
   PreguntasFrecuentesRoute: PreguntasFrecuentesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  BlogSlugRoute: BlogSlugRoute,
   ComparativaAutocontrolpiscinasRoute: ComparativaAutocontrolpiscinasRoute,
   ComparativaEisiHotelRoute: ComparativaEisiHotelRoute,
   ComparativaEvisaneRoute: ComparativaEvisaneRoute,
   InvitacionTokenRoute: InvitacionTokenRoute,
+  BlogIndexRoute: BlogIndexRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
