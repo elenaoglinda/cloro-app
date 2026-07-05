@@ -21,10 +21,10 @@ export function SiteNav() {
           <Link to="/blog" className="hover:text-foreground transition">Blog</Link>
         </div>
         <div className="flex items-center gap-3">
-          <Link to="/auth" className="hidden sm:inline text-sm text-muted-foreground hover:text-foreground transition">Iniciar sesión</Link>
-          <Link to="/auth" search={{ mode: "registro" }} className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition shadow-soft">
+          <a href="https://panel.cloro.app/" className="hidden sm:inline text-sm text-muted-foreground hover:text-foreground transition">Iniciar sesión</a>
+          <a href="https://panel.cloro.app/?mode=registro" className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition shadow-soft">
             Prueba gratis
-          </Link>
+          </a>
         </div>
       </nav>
     </header>

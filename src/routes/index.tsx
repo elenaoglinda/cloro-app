@@ -172,13 +172,12 @@ function Hero() {
             agente de WhatsApp que capta y agenda nuevos clientes mientras atiendes los actuales.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              to="/auth"
-              search={{ mode: "registro" }}
+            <a
+              href="https://panel.cloro.app/?mode=registro"
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-foreground text-background font-medium shadow-soft hover:opacity-90 transition"
             >
               Empezar gratis 7 días <ArrowRight className="size-4" />
-            </Link>
+            </a>
             <Link
               to="/contacto"
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-card border border-border font-medium hover:bg-muted transition"
@@ -465,7 +464,7 @@ function WhatsAppAgent() {
           </ul>
           <div className="mt-8">
             <a
-              href="/auth?mode=registro"
+              href="https://panel.cloro.app/?mode=registro"
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-foreground text-background font-medium shadow-soft hover:opacity-90 transition"
             >
               Solicitar acceso anticipado
@@ -763,9 +762,8 @@ function Pricing() {
               <div className={`text-sm mt-1 ${t.featured ? "text-background/70" : "text-muted-foreground"}`}>
                 + {t.perPool}€ por piscina / mes
               </div>
-              <Link
-                to="/auth"
-                search={{ mode: "registro" }}
+              <a
+                href="https://panel.cloro.app/?mode=registro"
                 className={`mt-6 inline-flex w-full items-center justify-center h-11 rounded-lg font-medium transition ${
                   t.featured
                     ? "bg-background text-foreground hover:opacity-90"
@@ -773,7 +771,7 @@ function Pricing() {
                 }`}
               >
                 Empezar gratis
-              </Link>
+              </a>
               <ul className="mt-6 space-y-2 text-sm">
                 {t.features.map((f) => (
                   <li key={f} className="flex gap-2">
@@ -841,13 +839,12 @@ function CTA() {
               En menos de una semana estarás operativo.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/auth"
-                search={{ mode: "registro" }}
+              <a
+                href="https://panel.cloro.app/?mode=registro"
                 className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-background text-foreground font-medium hover:opacity-90 transition"
               >
                 Empezar gratis <ArrowRight className="size-4" />
-              </Link>
+              </a>
               <a
                 href="#"
                 className="inline-flex items-center gap-2 h-12 px-6 rounded-lg border border-white/30 text-white hover:bg-white/10 transition"
