@@ -24,7 +24,6 @@ import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import heroPool from "@/assets/hero-pool.jpg";
 import technicianApp from "@/assets/technician-app.jpg";
-import paperToSiloe from "@/assets/paper-to-siloe.jpg";
 
 const FAQS = [
   {
