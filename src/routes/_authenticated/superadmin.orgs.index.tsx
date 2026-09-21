@@ -65,6 +65,7 @@ function AdminOrgsList() {
   const [search, setSearch] = useState("");
   const [planFilter, setPlanFilter] = useState<(typeof PLANS)[number]>("all");
   const [statusFilter, setStatusFilter] = useState<(typeof STATUSES)[number]>("all");
+  const [selectedOrg, setSelectedOrg] = useState<OrgRow | null>(null);
 
   const allOrgs = (data?.orgs ?? []) as OrgRow[];
 
