@@ -195,7 +195,11 @@ function AdminOrgDetail() {
 
       {/* Suscripción */}
       <Section title="Suscripción">
-        <SubscriptionCard orgId={id} subscription={data.subscription} orgPlan={org.plan} />
+        <SubscriptionEditor
+          orgId={id}
+          subscription={data.subscription}
+          orgPlan={org.plan}
+        />
       </Section>
 
 
