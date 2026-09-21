@@ -330,7 +330,7 @@ function SummaryCard({
         <Icon className="size-5" />
       </div>
       <div>
-        <p className="text-2xl font-display font-semibold tabular-nums ${styles.valueCls}">
+        <p className={`text-2xl font-display font-semibold tabular-nums ${styles.valueCls}`}>
           {value}
         </p>
         <p className="text-xs text-muted-foreground">{label}</p>
