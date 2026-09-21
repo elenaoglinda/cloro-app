@@ -212,13 +212,21 @@ export const getOrgDetail = createServerFn({ method: "GET" })
       }
     }
 
+    const { data: subscription } = await supabaseAdmin
+      .from("subscriptions")
+      .select("id, plan, status, trial_ends_at, current_period_end, notes, updated_at")
+      .eq("org_id", data.id)
+      .maybeSingle();
+
     return {
       org,
+      subscription: subscription ?? null,
       members: (members ?? []).map((m) => ({ ...m, email: emails[m.user_id] ?? m.user_id })),
       clientes: clientes ?? [],
       partes: partes ?? [],
       rutas: rutas ?? [],
     };
+
   });
 
 export const updateOrgPlan = createServerFn({ method: "POST" })
