@@ -10,7 +10,6 @@ import {
   ShieldCheck,
   Calendar,
   BellRing,
-  Building2,
   Check,
   X,
   Sparkles,
@@ -356,11 +355,6 @@ function Features() {
       icon: CreditCard,
       t: "Cobros y VeriFactu",
       d: "Bizum, SEPA y Stripe en autopiloto, con recordatorios automáticos y facturación VeriFactu integrada.",
-    },
-    {
-      icon: Building2,
-      t: "Comunidades de propietarios",
-      d: "Factura al NIF de la comunidad con varios contactos (administrador, presidente, conserje) y acceso para vecinos.",
     },
   ];
 
