@@ -238,6 +238,7 @@ export const getOrgDetail = createServerFn({ method: "GET" })
       subscription: subscription ?? null,
       members: (members ?? []).map((m) => ({ ...m, email: emails[m.user_id] ?? m.user_id })),
       clientes: clientes ?? [],
+      piscinasCount: (piscinas ?? []).length,
       partes: partes ?? [],
       rutas: rutas ?? [],
     };
