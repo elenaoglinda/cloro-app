@@ -64,7 +64,7 @@ export const listAllOrgs = createServerFn({ method: "GET" })
     const ids = (orgs ?? []).map((o) => o.id);
     if (ids.length === 0) return { orgs: [] };
 
-    const [members, clientes, partes, owners] = await Promise.all([
+    const [members, clientes, partes, owners, subs] = await Promise.all([
       supabaseAdmin.from("org_members").select("org_id").in("org_id", ids),
       supabaseAdmin.from("clientes").select("org_id").in("org_id", ids).eq("archived", false),
       supabaseAdmin.from("partes").select("org_id, created_at").in("org_id", ids),
@@ -74,7 +74,15 @@ export const listAllOrgs = createServerFn({ method: "GET" })
         .in("org_id", ids)
         .eq("role", "owner")
         .order("created_at", { ascending: true }),
+      supabaseAdmin
+        .from("subscriptions")
+        .select("org_id, plan, status, trial_ends_at, current_period_end, notes")
+        .in("org_id", ids),
     ]);
+
+    const subByOrg: Record<string, any> = {};
+    (subs.data ?? []).forEach((s: any) => (subByOrg[s.org_id] = s));
+
 
     const count = (rows: { org_id: string }[] | null) => {
       const map: Record<string, number> = {};
@@ -121,8 +129,14 @@ export const listAllOrgs = createServerFn({ method: "GET" })
     return {
       orgs: (orgs ?? []).map((o) => {
         const uid = ownerByOrg[o.id];
+        const sub = subByOrg[o.id];
         return {
           ...o,
+          plan: sub?.plan ?? o.plan,
+          subscription_status: sub?.status ?? o.subscription_status,
+          trial_ends_at: sub?.trial_ends_at ?? o.trial_ends_at,
+          current_period_end: sub?.current_period_end ?? null,
+          notes: sub?.notes ?? o.notes,
           members: memberCounts[o.id] ?? 0,
           clientes: clienteCounts[o.id] ?? 0,
           partes: parteCounts[o.id] ?? 0,
@@ -132,6 +146,7 @@ export const listAllOrgs = createServerFn({ method: "GET" })
         };
       }),
     };
+
   });
 
 
@@ -197,13 +212,21 @@ export const getOrgDetail = createServerFn({ method: "GET" })
       }
     }
 
+    const { data: subscription } = await supabaseAdmin
+      .from("subscriptions")
+      .select("id, plan, status, trial_ends_at, current_period_end, notes, updated_at")
+      .eq("org_id", data.id)
+      .maybeSingle();
+
     return {
       org,
+      subscription: subscription ?? null,
       members: (members ?? []).map((m) => ({ ...m, email: emails[m.user_id] ?? m.user_id })),
       clientes: clientes ?? [],
       partes: partes ?? [],
       rutas: rutas ?? [],
     };
+
   });
 
 export const updateOrgPlan = createServerFn({ method: "POST" })
@@ -322,4 +345,50 @@ export const listAllContactMessages = createServerFn({ method: "GET" })
       .limit(500);
     if (error) throw new Error(error.message);
     return { messages: data ?? [] };
+  });
+
+export const upsertSubscription = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) =>
+    z
+      .object({
+        orgId: z.string().uuid(),
+        plan: z.enum(["free", "starter", "pro", "enterprise"]),
+        status: z.enum(["active", "trialing", "past_due", "cancelled"]),
+        trial_ends_at: z.string().nullable().optional(),
+        current_period_end: z.string().nullable().optional(),
+        notes: z.string().max(2000).nullable().optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    await assertSuperAdmin(context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const payload = {
+      org_id: data.orgId,
+      plan: data.plan,
+      status: data.status,
+      trial_ends_at: data.trial_ends_at ? new Date(data.trial_ends_at).toISOString() : null,
+      current_period_end: data.current_period_end
+        ? new Date(data.current_period_end).toISOString()
+        : null,
+      notes: data.notes?.trim() ? data.notes.trim() : null,
+      updated_at: new Date().toISOString(),
+    };
+    const { error } = await supabaseAdmin
+      .from("subscriptions")
+      .upsert(payload, { onConflict: "org_id" });
+    if (error) throw new Error(error.message);
+
+    // Keep the org row in sync so member-facing screens stay correct
+    const { error: orgErr } = await supabaseAdmin
+      .from("organizations")
+      .update({
+        plan: data.plan,
+        subscription_status: data.status,
+        trial_ends_at: payload.trial_ends_at,
+      })
+      .eq("id", data.orgId);
+    if (orgErr) throw new Error(orgErr.message);
+    return { ok: true };
   });
