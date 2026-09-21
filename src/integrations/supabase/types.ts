@@ -248,27 +248,36 @@ export type Database = {
           created_at: string
           id: string
           name: string
+          notes: string | null
           plan: string
           slug: string
+          subscription_status: Database["public"]["Enums"]["subscription_status"]
           suspended: boolean
+          trial_ends_at: string | null
           updated_at: string
         }
         Insert: {
           created_at?: string
           id?: string
           name: string
+          notes?: string | null
           plan?: string
           slug: string
+          subscription_status?: Database["public"]["Enums"]["subscription_status"]
           suspended?: boolean
+          trial_ends_at?: string | null
           updated_at?: string
         }
         Update: {
           created_at?: string
           id?: string
           name?: string
+          notes?: string | null
           plan?: string
           slug?: string
+          subscription_status?: Database["public"]["Enums"]["subscription_status"]
           suspended?: boolean
+          trial_ends_at?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -692,6 +701,7 @@ export type Database = {
       org_role: "owner" | "admin" | "tecnico"
       parte_estado: "borrador" | "completado" | "firmado"
       platform_role: "super_admin"
+      subscription_status: "active" | "trialing" | "past_due" | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -822,6 +832,7 @@ export const Constants = {
       org_role: ["owner", "admin", "tecnico"],
       parte_estado: ["borrador", "completado", "firmado"],
       platform_role: ["super_admin"],
+      subscription_status: ["active", "trialing", "past_due", "cancelled"],
     },
   },
 } as const
