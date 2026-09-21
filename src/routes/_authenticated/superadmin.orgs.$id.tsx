@@ -206,27 +206,18 @@ function AdminOrgDetail() {
         </div>
       </header>
 
-      {/* Plan + stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-        <div className="rounded-xl border border-border/60 bg-surface p-4">
-          <p className="text-xs uppercase text-muted-foreground mb-2">Plan</p>
-          <Select value={org.plan ?? "free"} onValueChange={handlePlanChange}>
-            <SelectTrigger className="h-9">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {PLANS.map((p) => (
-                <SelectItem key={p} value={p} className="capitalize">
-                  {p}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+      {/* Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <Stat icon={Users} label="Miembros" value={members.length} />
         <Stat icon={ClipboardList} label="Partes" value={partes.length} />
         <Stat icon={Building2} label="Clientes" value={clientes.length} />
       </div>
+
+      {/* Suscripción */}
+      <Section title="Suscripción">
+        <SubscriptionCard orgId={id} subscription={data.subscription} orgPlan={org.plan} />
+      </Section>
+
 
       {/* Members */}
       <Section title="Miembros">
