@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
-import { Mail, MessageSquare, CheckCircle2 } from "lucide-react";
+import { Phone, MessageSquare, CheckCircle2 } from "lucide-react";
 
 const URL_PATH = "/contacto";
 
@@ -135,9 +135,14 @@ function ContactPage() {
           >
             {status === "loading" ? "Enviando..." : "Enviar mensaje"}
           </button>
-          <p className="text-xs text-muted-foreground flex items-center gap-1.5">
-            <Mail className="size-3.5" /> También puedes escribirnos a hola@cloro.app
-          </p>
+          <a
+            href="https://wa.me/34678785020?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20Cloro"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center h-11 px-6 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition shadow-soft w-full sm:w-auto"
+          >
+            <Phone className="size-4 mr-2" /> Escríbenos por WhatsApp
+          </a>
         </form>
       )}
     </main>

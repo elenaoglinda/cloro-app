@@ -40,7 +40,7 @@ export function SiteFooter() {
           <h4 className="text-sm font-medium mb-3">Empresa</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><a href="/contacto" className="hover:text-foreground">Contacto</a></li>
-            <li><a href="mailto:hola@cloro.app" className="hover:text-foreground">hola@cloro.app</a></li>
+            <li><a href="https://wa.me/34678785020" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">WhatsApp</a></li>
           </ul>
         </div>
       </div>
