@@ -23,6 +23,7 @@ import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/com
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedSuperadminRouteImport } from './routes/_authenticated/superadmin'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedSuperadminIndexRouteImport } from './routes/_authenticated/superadmin.index'
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
 import { Route as AuthenticatedSuperadminMensajesRouteImport } from './routes/_authenticated/superadmin.mensajes'
@@ -109,6 +110,11 @@ const AuthenticatedSuperadminRoute = AuthenticatedSuperadminRouteImport.update({
 const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSuperadminIndexRoute =
@@ -216,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/contacto': typeof ContactoRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/app': typeof AuthenticatedAppRouteWithChildren
   '/superadmin': typeof AuthenticatedSuperadminRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -248,6 +255,7 @@ export interface FileRoutesByTo {
   '/contacto': typeof ContactoRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
@@ -279,6 +287,7 @@ export interface FileRoutesById {
   '/contacto': typeof ContactoRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
   '/_authenticated/superadmin': typeof AuthenticatedSuperadminRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
@@ -313,6 +322,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/preguntas-frecuentes'
     | '/sitemap.xml'
+    | '/admin'
     | '/app'
     | '/superadmin'
     | '/blog/$slug'
@@ -345,6 +355,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/preguntas-frecuentes'
     | '/sitemap.xml'
+    | '/admin'
     | '/blog/$slug'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
@@ -375,6 +386,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/preguntas-frecuentes'
     | '/sitemap.xml'
+    | '/_authenticated/admin'
     | '/_authenticated/app'
     | '/_authenticated/superadmin'
     | '/blog/$slug'
@@ -516,6 +528,13 @@ declare module '@tanstack/react-router' {
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AuthenticatedAppRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/superadmin/': {
@@ -718,11 +737,13 @@ const AuthenticatedSuperadminRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedAppRoute: typeof AuthenticatedAppRouteWithChildren
   AuthenticatedSuperadminRoute: typeof AuthenticatedSuperadminRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedAppRoute: AuthenticatedAppRouteWithChildren,
   AuthenticatedSuperadminRoute: AuthenticatedSuperadminRouteWithChildren,
 }
