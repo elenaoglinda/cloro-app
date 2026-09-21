@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS subscriptions_org_id_unique ON public.subscriptions (org_id);
