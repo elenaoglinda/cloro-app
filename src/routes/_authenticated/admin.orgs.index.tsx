@@ -140,7 +140,7 @@ function AdminOrgsList() {
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {orgs.map((o) => (
+            {filteredOrgs.map((o) => (
               <tr key={o.id} className="hover:bg-muted/30 transition">
                 <td className="px-4 py-3">
                   <Link
@@ -186,14 +186,17 @@ function AdminOrgsList() {
                 </td>
               </tr>
             ))}
-            {orgs.length === 0 && (
+            {filteredOrgs.length === 0 && (
               <tr>
                 <td colSpan={7} className="px-4 py-12 text-center text-muted-foreground">
-                  No hay organizaciones todavía.
+                  {activeFilters
+                    ? "Ninguna organización coincide con los filtros."
+                    : "No hay organizaciones todavía."}
                 </td>
               </tr>
             )}
           </tbody>
+
         </table>
       </div>
     </div>
