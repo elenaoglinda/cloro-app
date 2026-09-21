@@ -285,6 +285,10 @@ function Problem() {
       d: "El cloro y el pH se anotan a mano en una libreta en la furgoneta — y se reconstruye el SILOÉ a final de año.",
     },
     {
+      t: "Partes en papel que no llegan a SILOÉ",
+      d: "A final de mes hay que pasar las libretas a Excel para Sanidad, con riesgo de lecturas perdidas o firmas olvidadas. Con Cloro el técnico fotografía el parte y genera el informe SILOÉ validado.",
+    },
+    {
       t: "Rutas a ojo los lunes",
       d: "Mapa de Google, una pizarra y mucho café. Más kilómetros, más combustible, técnicos quemados.",
     },
@@ -305,7 +309,7 @@ function Problem() {
           centraliza rutas, química, cobros y cumplimiento en una sola plataforma.
         </p>
       </div>
-      <div className="mt-12 grid md:grid-cols-3 gap-6">
+      <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {items.map((i) => (
           <div key={i.t} className="rounded-2xl border border-border bg-card p-6 shadow-soft">
             <div className="size-9 rounded-lg bg-destructive/10 text-destructive flex items-center justify-center">
@@ -448,10 +452,8 @@ function PaperToSiloe() {
     <section id="paper-to-siloe" className="py-24 bg-surface">
       <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-medium">
-            <Sparkles className="size-3.5" /> Nuevo
-          </span>
-          <h2 className="mt-4 text-4xl lg:text-5xl">De la libreta al Excel de Sanidad en un clic</h2>
+          <p className="text-sm font-medium text-accent">De papel a Excel</p>
+          <h2 className="mt-2 text-4xl lg:text-5xl">De la libreta al Excel de Sanidad en un clic</h2>
           <p className="mt-4 text-muted-foreground">
             Si aún tienes técnicos apuntando lecturas en papel, no tires ni una temporada de registros.
             Sube una foto del parte, Cloro extrae los datos y genera el informe SILOÉ en Excel listo
