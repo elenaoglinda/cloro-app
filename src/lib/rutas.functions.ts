@@ -35,9 +35,10 @@ export const getRuta = createServerFn({ method: "POST" })
     if (!ruta) throw new Error("Ruta no encontrada");
     const { data: paradasRaw, error: pErr } = await context.supabase
       .from("ruta_paradas")
-      .select("id, orden, completada, piscina_id, parte_id")
+      .select("id, orden, completada, piscina_id, parte_id, created_at")
       .eq("ruta_id", data.id)
-      .order("orden");
+      .order("orden", { ascending: true })
+      .order("created_at", { ascending: true });
     if (pErr) throw new Error(pErr.message);
     const paradas = paradasRaw ?? [];
     const piscinaIds = Array.from(new Set(paradas.map((p: any) => p.piscina_id).filter(Boolean)));
