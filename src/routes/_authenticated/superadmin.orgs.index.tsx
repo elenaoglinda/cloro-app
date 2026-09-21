@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
 import { listAllOrgs } from "@/lib/superadmin.functions";
-import { Building2, Users, ClipboardList, AlertTriangle, Search, X } from "lucide-react";
+import { Building2, Users, ClipboardList, AlertTriangle, Search, X, CircleCheck, Clock, Ban } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -77,6 +77,20 @@ function AdminOrgsList() {
     });
   }, [allOrgs, search, planFilter, statusFilter]);
 
+  const summary = useMemo(() => {
+    return {
+      total: allOrgs.length,
+      active: allOrgs.filter(
+        (o) => !o.suspended && o.subscription_status === "active",
+      ).length,
+      trialing: allOrgs.filter(
+        (o) => !o.suspended && o.subscription_status === "trialing",
+      ).length,
+      cancelled: allOrgs.filter((o) => o.subscription_status === "cancelled")
+        .length,
+    };
+  }, [allOrgs]);
+
   const activeFilters =
     search !== "" || planFilter !== "all" || statusFilter !== "all";
 
@@ -94,6 +108,33 @@ function AdminOrgsList() {
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <h2 className="font-display text-xl">Organizaciones ({filteredOrgs.length})</h2>
+      </div>
+
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <SummaryCard
+          label="Total organizaciones"
+          value={summary.total}
+          icon={Building2}
+          tone="neutral"
+        />
+        <SummaryCard
+          label="Activas"
+          value={summary.active}
+          icon={CircleCheck}
+          tone="success"
+        />
+        <SummaryCard
+          label="En prueba"
+          value={summary.trialing}
+          icon={Clock}
+          tone="warning"
+        />
+        <SummaryCard
+          label="Canceladas"
+          value={summary.cancelled}
+          icon={Ban}
+          tone="danger"
+        />
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3">
@@ -240,6 +281,59 @@ function AdminOrgsList() {
           </tbody>
 
         </table>
+      </div>
+    </div>
+  );
+}
+
+const SUMMARY_STYLES: Record<
+  SummaryTone,
+  { iconCls: string; valueCls: string }
+> = {
+  neutral: {
+    iconCls: "bg-muted text-foreground",
+    valueCls: "text-foreground",
+  },
+  success: {
+    iconCls: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+    valueCls: "text-emerald-600 dark:text-emerald-400",
+  },
+  warning: {
+    iconCls: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+    valueCls: "text-amber-600 dark:text-amber-400",
+  },
+  danger: {
+    iconCls: "bg-destructive/10 text-destructive",
+    valueCls: "text-destructive",
+  },
+};
+
+type SummaryTone = "neutral" | "success" | "warning" | "danger";
+
+function SummaryCard({
+  label,
+  value,
+  icon: Icon,
+  tone,
+}: {
+  label: string;
+  value: number;
+  icon: React.ComponentType<{ className?: string }>;
+  tone: SummaryTone;
+}) {
+  const styles = SUMMARY_STYLES[tone];
+  return (
+    <div className="bg-card border border-border rounded-lg p-4 flex items-center gap-4">
+      <div
+        className={`inline-flex items-center justify-center size-10 rounded-full ${styles.iconCls}`}
+      >
+        <Icon className="size-5" />
+      </div>
+      <div>
+        <p className={`text-2xl font-display font-semibold tabular-nums ${styles.valueCls}`}>
+          {value}
+        </p>
+        <p className="text-xs text-muted-foreground">{label}</p>
       </div>
     </div>
   );
