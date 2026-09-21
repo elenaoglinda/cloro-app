@@ -20,7 +20,9 @@ export const listRutas = createServerFn({ method: "GET" })
     return { rutas: data ?? [] };
   });
 
-export const getRuta = createServerFn({ method: "GET" })
+// POST so the response is never served from an HTTP cache (GET server fns can be
+// cached by the browser, which made newly added paradas appear missing).
+export const getRuta = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
   .handler(async ({ context, data }) => {
