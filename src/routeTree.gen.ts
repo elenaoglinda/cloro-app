@@ -21,24 +21,24 @@ import { Route as ComparativaEvisaneRouteImport } from './routes/comparativa.evi
 import { Route as ComparativaEisiHotelRouteImport } from './routes/comparativa.eisi-hotel'
 import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/comparativa.autocontrolpiscinas'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AuthenticatedSuperadminRouteImport } from './routes/_authenticated/superadmin'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
-import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedSuperadminIndexRouteImport } from './routes/_authenticated/superadmin.index'
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
-import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedSuperadminMensajesRouteImport } from './routes/_authenticated/superadmin.mensajes'
 import { Route as AuthenticatedAppRutasRouteImport } from './routes/_authenticated/app.rutas'
 import { Route as AuthenticatedAppPiscinasRouteImport } from './routes/_authenticated/app.piscinas'
 import { Route as AuthenticatedAppAjustesRouteImport } from './routes/_authenticated/app.ajustes'
-import { Route as AuthenticatedAdminMensajesRouteImport } from './routes/_authenticated/admin.mensajes'
+import { Route as AuthenticatedSuperadminOrgsIndexRouteImport } from './routes/_authenticated/superadmin.orgs.index'
 import { Route as AuthenticatedAppRutasIndexRouteImport } from './routes/_authenticated/app.rutas.index'
 import { Route as AuthenticatedAppPartesIndexRouteImport } from './routes/_authenticated/app.partes.index'
 import { Route as AuthenticatedAppClientesIndexRouteImport } from './routes/_authenticated/app.clientes.index'
-import { Route as AuthenticatedAdminOrgsIndexRouteImport } from './routes/_authenticated/admin.orgs.index'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
+import { Route as AuthenticatedSuperadminOrgsIdRouteImport } from './routes/_authenticated/superadmin.orgs.$id'
 import { Route as AuthenticatedAppRutasIdRouteImport } from './routes/_authenticated/app.rutas.$id'
 import { Route as AuthenticatedAppPartesNuevoRouteImport } from './routes/_authenticated/app.partes.nuevo'
 import { Route as AuthenticatedAppPartesIdRouteImport } from './routes/_authenticated/app.partes.$id'
 import { Route as AuthenticatedAppClientesIdRouteImport } from './routes/_authenticated/app.clientes.$id'
-import { Route as AuthenticatedAdminOrgsIdRouteImport } from './routes/_authenticated/admin.orgs.$id'
 import { Route as AuthenticatedAppPartesIdEditarRouteImport } from './routes/_authenticated/app.partes.$id.editar'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -101,26 +101,33 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSuperadminRoute = AuthenticatedSuperadminRouteImport.update({
+  id: '/superadmin',
+  path: '/superadmin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
   id: '/app',
   path: '/app',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
+const AuthenticatedSuperadminIndexRoute =
+  AuthenticatedSuperadminIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedSuperadminRoute,
+  } as any)
 const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
-const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AuthenticatedAdminRoute,
-} as any)
+const AuthenticatedSuperadminMensajesRoute =
+  AuthenticatedSuperadminMensajesRouteImport.update({
+    id: '/mensajes',
+    path: '/mensajes',
+    getParentRoute: () => AuthenticatedSuperadminRoute,
+  } as any)
 const AuthenticatedAppRutasRoute = AuthenticatedAppRutasRouteImport.update({
   id: '/rutas',
   path: '/rutas',
@@ -137,11 +144,11 @@ const AuthenticatedAppAjustesRoute = AuthenticatedAppAjustesRouteImport.update({
   path: '/ajustes',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
-const AuthenticatedAdminMensajesRoute =
-  AuthenticatedAdminMensajesRouteImport.update({
-    id: '/mensajes',
-    path: '/mensajes',
-    getParentRoute: () => AuthenticatedAdminRoute,
+const AuthenticatedSuperadminOrgsIndexRoute =
+  AuthenticatedSuperadminOrgsIndexRouteImport.update({
+    id: '/orgs/',
+    path: '/orgs/',
+    getParentRoute: () => AuthenticatedSuperadminRoute,
   } as any)
 const AuthenticatedAppRutasIndexRoute =
   AuthenticatedAppRutasIndexRouteImport.update({
@@ -161,17 +168,17 @@ const AuthenticatedAppClientesIndexRoute =
     path: '/clientes/',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
-const AuthenticatedAdminOrgsIndexRoute =
-  AuthenticatedAdminOrgsIndexRouteImport.update({
-    id: '/orgs/',
-    path: '/orgs/',
-    getParentRoute: () => AuthenticatedAdminRoute,
-  } as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
     path: '/lovable/email/queue/process',
     getParentRoute: () => rootRouteImport,
+  } as any)
+const AuthenticatedSuperadminOrgsIdRoute =
+  AuthenticatedSuperadminOrgsIdRouteImport.update({
+    id: '/orgs/$id',
+    path: '/orgs/$id',
+    getParentRoute: () => AuthenticatedSuperadminRoute,
   } as any)
 const AuthenticatedAppRutasIdRoute = AuthenticatedAppRutasIdRouteImport.update({
   id: '/$id',
@@ -196,12 +203,6 @@ const AuthenticatedAppClientesIdRoute =
     path: '/clientes/$id',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
-const AuthenticatedAdminOrgsIdRoute =
-  AuthenticatedAdminOrgsIdRouteImport.update({
-    id: '/orgs/$id',
-    path: '/orgs/$id',
-    getParentRoute: () => AuthenticatedAdminRoute,
-  } as any)
 const AuthenticatedAppPartesIdEditarRoute =
   AuthenticatedAppPartesIdEditarRouteImport.update({
     id: '/editar',
@@ -215,30 +216,30 @@ export interface FileRoutesByFullPath {
   '/contacto': typeof ContactoRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/app': typeof AuthenticatedAppRouteWithChildren
+  '/superadmin': typeof AuthenticatedSuperadminRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
   '/invitacion/$token': typeof InvitacionTokenRoute
   '/blog/': typeof BlogIndexRoute
-  '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
   '/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
-  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/superadmin/mensajes': typeof AuthenticatedSuperadminMensajesRoute
   '/app/': typeof AuthenticatedAppIndexRoute
-  '/admin/orgs/$id': typeof AuthenticatedAdminOrgsIdRoute
+  '/superadmin/': typeof AuthenticatedSuperadminIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRouteWithChildren
   '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
   '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
+  '/superadmin/orgs/$id': typeof AuthenticatedSuperadminOrgsIdRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
-  '/admin/orgs/': typeof AuthenticatedAdminOrgsIndexRoute
   '/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes/': typeof AuthenticatedAppPartesIndexRoute
   '/app/rutas/': typeof AuthenticatedAppRutasIndexRoute
+  '/superadmin/orgs/': typeof AuthenticatedSuperadminOrgsIndexRoute
   '/app/partes/$id/editar': typeof AuthenticatedAppPartesIdEditarRoute
 }
 export interface FileRoutesByTo {
@@ -253,21 +254,21 @@ export interface FileRoutesByTo {
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
   '/invitacion/$token': typeof InvitacionTokenRoute
   '/blog': typeof BlogIndexRoute
-  '/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
-  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/superadmin/mensajes': typeof AuthenticatedSuperadminMensajesRoute
   '/app': typeof AuthenticatedAppIndexRoute
-  '/admin/orgs/$id': typeof AuthenticatedAdminOrgsIdRoute
+  '/superadmin': typeof AuthenticatedSuperadminIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/app/partes/$id': typeof AuthenticatedAppPartesIdRouteWithChildren
   '/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
   '/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
+  '/superadmin/orgs/$id': typeof AuthenticatedSuperadminOrgsIdRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
-  '/admin/orgs': typeof AuthenticatedAdminOrgsIndexRoute
   '/app/clientes': typeof AuthenticatedAppClientesIndexRoute
   '/app/partes': typeof AuthenticatedAppPartesIndexRoute
   '/app/rutas': typeof AuthenticatedAppRutasIndexRoute
+  '/superadmin/orgs': typeof AuthenticatedSuperadminOrgsIndexRoute
   '/app/partes/$id/editar': typeof AuthenticatedAppPartesIdEditarRoute
 }
 export interface FileRoutesById {
@@ -278,30 +279,30 @@ export interface FileRoutesById {
   '/contacto': typeof ContactoRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
+  '/_authenticated/superadmin': typeof AuthenticatedSuperadminRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
   '/invitacion/$token': typeof InvitacionTokenRoute
   '/blog/': typeof BlogIndexRoute
-  '/_authenticated/admin/mensajes': typeof AuthenticatedAdminMensajesRoute
   '/_authenticated/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/_authenticated/app/piscinas': typeof AuthenticatedAppPiscinasRoute
   '/_authenticated/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
-  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/superadmin/mensajes': typeof AuthenticatedSuperadminMensajesRoute
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
-  '/_authenticated/admin/orgs/$id': typeof AuthenticatedAdminOrgsIdRoute
+  '/_authenticated/superadmin/': typeof AuthenticatedSuperadminIndexRoute
   '/_authenticated/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
   '/_authenticated/app/partes/$id': typeof AuthenticatedAppPartesIdRouteWithChildren
   '/_authenticated/app/partes/nuevo': typeof AuthenticatedAppPartesNuevoRoute
   '/_authenticated/app/rutas/$id': typeof AuthenticatedAppRutasIdRoute
+  '/_authenticated/superadmin/orgs/$id': typeof AuthenticatedSuperadminOrgsIdRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
-  '/_authenticated/admin/orgs/': typeof AuthenticatedAdminOrgsIndexRoute
   '/_authenticated/app/clientes/': typeof AuthenticatedAppClientesIndexRoute
   '/_authenticated/app/partes/': typeof AuthenticatedAppPartesIndexRoute
   '/_authenticated/app/rutas/': typeof AuthenticatedAppRutasIndexRoute
+  '/_authenticated/superadmin/orgs/': typeof AuthenticatedSuperadminOrgsIndexRoute
   '/_authenticated/app/partes/$id/editar': typeof AuthenticatedAppPartesIdEditarRoute
 }
 export interface FileRouteTypes {
@@ -312,30 +313,30 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/preguntas-frecuentes'
     | '/sitemap.xml'
-    | '/admin'
     | '/app'
+    | '/superadmin'
     | '/blog/$slug'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
     | '/invitacion/$token'
     | '/blog/'
-    | '/admin/mensajes'
     | '/app/ajustes'
     | '/app/piscinas'
     | '/app/rutas'
-    | '/admin/'
+    | '/superadmin/mensajes'
     | '/app/'
-    | '/admin/orgs/$id'
+    | '/superadmin/'
     | '/app/clientes/$id'
     | '/app/partes/$id'
     | '/app/partes/nuevo'
     | '/app/rutas/$id'
+    | '/superadmin/orgs/$id'
     | '/lovable/email/queue/process'
-    | '/admin/orgs/'
     | '/app/clientes/'
     | '/app/partes/'
     | '/app/rutas/'
+    | '/superadmin/orgs/'
     | '/app/partes/$id/editar'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -350,21 +351,21 @@ export interface FileRouteTypes {
     | '/comparativa/evisane'
     | '/invitacion/$token'
     | '/blog'
-    | '/admin/mensajes'
     | '/app/ajustes'
     | '/app/piscinas'
-    | '/admin'
+    | '/superadmin/mensajes'
     | '/app'
-    | '/admin/orgs/$id'
+    | '/superadmin'
     | '/app/clientes/$id'
     | '/app/partes/$id'
     | '/app/partes/nuevo'
     | '/app/rutas/$id'
+    | '/superadmin/orgs/$id'
     | '/lovable/email/queue/process'
-    | '/admin/orgs'
     | '/app/clientes'
     | '/app/partes'
     | '/app/rutas'
+    | '/superadmin/orgs'
     | '/app/partes/$id/editar'
   id:
     | '__root__'
@@ -374,30 +375,30 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/preguntas-frecuentes'
     | '/sitemap.xml'
-    | '/_authenticated/admin'
     | '/_authenticated/app'
+    | '/_authenticated/superadmin'
     | '/blog/$slug'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
     | '/invitacion/$token'
     | '/blog/'
-    | '/_authenticated/admin/mensajes'
     | '/_authenticated/app/ajustes'
     | '/_authenticated/app/piscinas'
     | '/_authenticated/app/rutas'
-    | '/_authenticated/admin/'
+    | '/_authenticated/superadmin/mensajes'
     | '/_authenticated/app/'
-    | '/_authenticated/admin/orgs/$id'
+    | '/_authenticated/superadmin/'
     | '/_authenticated/app/clientes/$id'
     | '/_authenticated/app/partes/$id'
     | '/_authenticated/app/partes/nuevo'
     | '/_authenticated/app/rutas/$id'
+    | '/_authenticated/superadmin/orgs/$id'
     | '/lovable/email/queue/process'
-    | '/_authenticated/admin/orgs/'
     | '/_authenticated/app/clientes/'
     | '/_authenticated/app/partes/'
     | '/_authenticated/app/rutas/'
+    | '/_authenticated/superadmin/orgs/'
     | '/_authenticated/app/partes/$id/editar'
   fileRoutesById: FileRoutesById
 }
@@ -503,6 +504,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/superadmin': {
+      id: '/_authenticated/superadmin'
+      path: '/superadmin'
+      fullPath: '/superadmin'
+      preLoaderRoute: typeof AuthenticatedSuperadminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/app': {
       id: '/_authenticated/app'
       path: '/app'
@@ -510,12 +518,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin': {
-      id: '/_authenticated/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/_authenticated/superadmin/': {
+      id: '/_authenticated/superadmin/'
+      path: '/'
+      fullPath: '/superadmin/'
+      preLoaderRoute: typeof AuthenticatedSuperadminIndexRouteImport
+      parentRoute: typeof AuthenticatedSuperadminRoute
     }
     '/_authenticated/app/': {
       id: '/_authenticated/app/'
@@ -524,12 +532,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
-    '/_authenticated/admin/': {
-      id: '/_authenticated/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
+    '/_authenticated/superadmin/mensajes': {
+      id: '/_authenticated/superadmin/mensajes'
+      path: '/mensajes'
+      fullPath: '/superadmin/mensajes'
+      preLoaderRoute: typeof AuthenticatedSuperadminMensajesRouteImport
+      parentRoute: typeof AuthenticatedSuperadminRoute
     }
     '/_authenticated/app/rutas': {
       id: '/_authenticated/app/rutas'
@@ -552,12 +560,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppAjustesRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
-    '/_authenticated/admin/mensajes': {
-      id: '/_authenticated/admin/mensajes'
-      path: '/mensajes'
-      fullPath: '/admin/mensajes'
-      preLoaderRoute: typeof AuthenticatedAdminMensajesRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
+    '/_authenticated/superadmin/orgs/': {
+      id: '/_authenticated/superadmin/orgs/'
+      path: '/orgs'
+      fullPath: '/superadmin/orgs/'
+      preLoaderRoute: typeof AuthenticatedSuperadminOrgsIndexRouteImport
+      parentRoute: typeof AuthenticatedSuperadminRoute
     }
     '/_authenticated/app/rutas/': {
       id: '/_authenticated/app/rutas/'
@@ -580,19 +588,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppClientesIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
-    '/_authenticated/admin/orgs/': {
-      id: '/_authenticated/admin/orgs/'
-      path: '/orgs'
-      fullPath: '/admin/orgs/'
-      preLoaderRoute: typeof AuthenticatedAdminOrgsIndexRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
-    }
     '/lovable/email/queue/process': {
       id: '/lovable/email/queue/process'
       path: '/lovable/email/queue/process'
       fullPath: '/lovable/email/queue/process'
       preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/superadmin/orgs/$id': {
+      id: '/_authenticated/superadmin/orgs/$id'
+      path: '/orgs/$id'
+      fullPath: '/superadmin/orgs/$id'
+      preLoaderRoute: typeof AuthenticatedSuperadminOrgsIdRouteImport
+      parentRoute: typeof AuthenticatedSuperadminRoute
     }
     '/_authenticated/app/rutas/$id': {
       id: '/_authenticated/app/rutas/$id'
@@ -622,13 +630,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppClientesIdRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
-    '/_authenticated/admin/orgs/$id': {
-      id: '/_authenticated/admin/orgs/$id'
-      path: '/orgs/$id'
-      fullPath: '/admin/orgs/$id'
-      preLoaderRoute: typeof AuthenticatedAdminOrgsIdRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
-    }
     '/_authenticated/app/partes/$id/editar': {
       id: '/_authenticated/app/partes/$id/editar'
       path: '/editar'
@@ -638,23 +639,6 @@ declare module '@tanstack/react-router' {
     }
   }
 }
-
-interface AuthenticatedAdminRouteChildren {
-  AuthenticatedAdminMensajesRoute: typeof AuthenticatedAdminMensajesRoute
-  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
-  AuthenticatedAdminOrgsIdRoute: typeof AuthenticatedAdminOrgsIdRoute
-  AuthenticatedAdminOrgsIndexRoute: typeof AuthenticatedAdminOrgsIndexRoute
-}
-
-const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
-  AuthenticatedAdminMensajesRoute: AuthenticatedAdminMensajesRoute,
-  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
-  AuthenticatedAdminOrgsIdRoute: AuthenticatedAdminOrgsIdRoute,
-  AuthenticatedAdminOrgsIndexRoute: AuthenticatedAdminOrgsIndexRoute,
-}
-
-const AuthenticatedAdminRouteWithChildren =
-  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
 
 interface AuthenticatedAppRutasRouteChildren {
   AuthenticatedAppRutasIdRoute: typeof AuthenticatedAppRutasIdRoute
@@ -712,14 +696,35 @@ const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
 const AuthenticatedAppRouteWithChildren =
   AuthenticatedAppRoute._addFileChildren(AuthenticatedAppRouteChildren)
 
+interface AuthenticatedSuperadminRouteChildren {
+  AuthenticatedSuperadminMensajesRoute: typeof AuthenticatedSuperadminMensajesRoute
+  AuthenticatedSuperadminIndexRoute: typeof AuthenticatedSuperadminIndexRoute
+  AuthenticatedSuperadminOrgsIdRoute: typeof AuthenticatedSuperadminOrgsIdRoute
+  AuthenticatedSuperadminOrgsIndexRoute: typeof AuthenticatedSuperadminOrgsIndexRoute
+}
+
+const AuthenticatedSuperadminRouteChildren: AuthenticatedSuperadminRouteChildren =
+  {
+    AuthenticatedSuperadminMensajesRoute: AuthenticatedSuperadminMensajesRoute,
+    AuthenticatedSuperadminIndexRoute: AuthenticatedSuperadminIndexRoute,
+    AuthenticatedSuperadminOrgsIdRoute: AuthenticatedSuperadminOrgsIdRoute,
+    AuthenticatedSuperadminOrgsIndexRoute:
+      AuthenticatedSuperadminOrgsIndexRoute,
+  }
+
+const AuthenticatedSuperadminRouteWithChildren =
+  AuthenticatedSuperadminRoute._addFileChildren(
+    AuthenticatedSuperadminRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
   AuthenticatedAppRoute: typeof AuthenticatedAppRouteWithChildren
+  AuthenticatedSuperadminRoute: typeof AuthenticatedSuperadminRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
   AuthenticatedAppRoute: AuthenticatedAppRouteWithChildren,
+  AuthenticatedSuperadminRoute: AuthenticatedSuperadminRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =

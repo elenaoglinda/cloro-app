@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 
 
-export const Route = createFileRoute("/_authenticated/admin/orgs/")({
+export const Route = createFileRoute("/_authenticated/superadmin/orgs/")({
   component: AdminOrgsList,
 });
 
@@ -154,7 +154,7 @@ function AdminOrgsList() {
               <tr key={o.id} className="hover:bg-muted/30 transition align-top">
                 <td className="px-4 py-3">
                   <Link
-                    to="/admin/orgs/$id"
+                    to="/superadmin/orgs/$id"
                     params={{ id: o.id }}
                     className="flex items-center gap-2 font-medium hover:text-primary"
                   >

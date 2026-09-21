@@ -6,7 +6,7 @@ import { Shield, Building2, MessageSquare, KeyRound } from "lucide-react";
 import { checkSuperAdmin, bootstrapSuperAdmin } from "@/lib/superadmin.functions";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/_authenticated/admin")({
+export const Route = createFileRoute("/_authenticated/superadmin")({
   head: () => ({
     meta: [
       { title: "Super Admin — Cloro" },
@@ -86,8 +86,8 @@ function AdminLayout() {
   }
 
   const tabs = [
-    { to: "/admin/orgs", label: "Organizaciones", icon: Building2 },
-    { to: "/admin/mensajes", label: "Mensajes", icon: MessageSquare },
+    { to: "/superadmin/orgs", label: "Organizaciones", icon: Building2 },
+    { to: "/superadmin/mensajes", label: "Mensajes", icon: MessageSquare },
   ];
 
   return (
