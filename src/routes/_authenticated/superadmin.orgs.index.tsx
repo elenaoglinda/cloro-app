@@ -212,13 +212,13 @@ function AdminOrgsList() {
           </thead>
           <tbody className="divide-y divide-border">
             {filteredOrgs.map((o) => (
-              <tr key={o.id} className="hover:bg-muted/30 transition align-top">
+              <tr
+                key={o.id}
+                className="hover:bg-muted/30 transition align-top cursor-pointer"
+                onClick={() => setSelectedOrg(o)}
+              >
                 <td className="px-4 py-3">
-                  <Link
-                    to="/superadmin/orgs/$id"
-                    params={{ id: o.id }}
-                    className="flex items-center gap-2 font-medium hover:text-primary"
-                  >
+                  <div className="flex items-center gap-2 font-medium">
                     <Building2 className="size-4 text-muted-foreground" />
                     <span>{o.name}</span>
                     {o.suspended && (
@@ -226,7 +226,7 @@ function AdminOrgsList() {
                         <AlertTriangle className="size-3" /> Suspendida
                       </span>
                     )}
-                  </Link>
+                  </div>
                   <p className="text-xs text-muted-foreground mt-0.5">{o.slug}</p>
                 </td>
                 <td className="px-4 py-3">
