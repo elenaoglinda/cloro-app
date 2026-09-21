@@ -110,6 +110,33 @@ function AdminOrgsList() {
         <h2 className="font-display text-xl">Organizaciones ({filteredOrgs.length})</h2>
       </div>
 
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <SummaryCard
+          label="Total organizaciones"
+          value={summary.total}
+          icon={Building2}
+          tone="neutral"
+        />
+        <SummaryCard
+          label="Activas"
+          value={summary.active}
+          icon={CircleCheck}
+          tone="success"
+        />
+        <SummaryCard
+          label="En prueba"
+          value={summary.trialing}
+          icon={Clock}
+          tone="warning"
+        />
+        <SummaryCard
+          label="Canceladas"
+          value={summary.cancelled}
+          icon={Ban}
+          tone="danger"
+        />
+      </div>
+
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
