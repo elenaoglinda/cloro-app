@@ -129,8 +129,14 @@ export const listAllOrgs = createServerFn({ method: "GET" })
     return {
       orgs: (orgs ?? []).map((o) => {
         const uid = ownerByOrg[o.id];
+        const sub = subByOrg[o.id];
         return {
           ...o,
+          plan: sub?.plan ?? o.plan,
+          subscription_status: sub?.status ?? o.subscription_status,
+          trial_ends_at: sub?.trial_ends_at ?? o.trial_ends_at,
+          current_period_end: sub?.current_period_end ?? null,
+          notes: sub?.notes ?? o.notes,
           members: memberCounts[o.id] ?? 0,
           clientes: clienteCounts[o.id] ?? 0,
           partes: parteCounts[o.id] ?? 0,
@@ -140,6 +146,7 @@ export const listAllOrgs = createServerFn({ method: "GET" })
         };
       }),
     };
+
   });
 
 
