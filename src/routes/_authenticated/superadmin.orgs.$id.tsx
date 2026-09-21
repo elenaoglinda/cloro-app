@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import {
   getOrgDetail,
-  updateOrgPlan,
+  upsertSubscription,
   setOrgSuspended,
   inviteOrgOwner,
   impersonateOrg,
@@ -51,7 +51,6 @@ function AdminOrgDetail() {
   const navigate = useNavigate();
   const qc = useQueryClient();
   const getDetail = useServerFn(getOrgDetail);
-  const setPlan = useServerFn(updateOrgPlan);
   const setSuspended = useServerFn(setOrgSuspended);
   const invite = useServerFn(inviteOrgOwner);
   const impersonate = useServerFn(impersonateOrg);
@@ -71,16 +70,6 @@ function AdminOrgDetail() {
 
   const { org, members, clientes, partes, rutas } = data;
 
-  async function handlePlanChange(plan: string) {
-    try {
-      await setPlan({ data: { id, plan: plan as any } });
-      toast.success("Plan actualizado");
-      qc.invalidateQueries({ queryKey: ["admin-org", id] });
-      qc.invalidateQueries({ queryKey: ["admin-orgs"] });
-    } catch (e: any) {
-      toast.error(e?.message ?? "Error");
-    }
-  }
 
   async function handleSuspend() {
     const next = !org.suspended;
