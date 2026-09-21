@@ -70,8 +70,9 @@ function AdminOrgsList() {
       const matchesPlan = planFilter === "all" || o.plan === planFilter;
       const matchesStatus =
         statusFilter === "all" ||
-        (statusFilter === "active" && !o.suspended) ||
-        (statusFilter === "suspended" && o.suspended);
+        (statusFilter === "suspended"
+          ? o.suspended
+          : !o.suspended && (o.subscription_status ?? "trialing") === statusFilter);
       return matchesSearch && matchesPlan && matchesStatus;
     });
   }, [allOrgs, search, planFilter, statusFilter]);
@@ -124,6 +125,9 @@ function AdminOrgsList() {
           <SelectContent>
             <SelectItem value="all">Todos los estados</SelectItem>
             <SelectItem value="active">Activas</SelectItem>
+            <SelectItem value="trialing">En prueba</SelectItem>
+            <SelectItem value="past_due">Pago pendiente</SelectItem>
+            <SelectItem value="cancelled">Canceladas</SelectItem>
             <SelectItem value="suspended">Suspendidas</SelectItem>
           </SelectContent>
         </Select>
