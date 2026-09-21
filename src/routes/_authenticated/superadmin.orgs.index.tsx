@@ -158,13 +158,13 @@ function AdminOrgsList() {
             className="pl-9"
           />
         </div>
-        <Select value={planFilter} onValueChange={(v) => setPlanFilter(v as any)}>
+        <Select value={planFilter} onValueChange={(v) => setPlanFilter(v as typeof PLANS[number])}>
           <SelectTrigger className="w-full sm:w-40">
             <SelectValue placeholder="Plan" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todos los planes</SelectItem>
-            <SelectItem value="free">Free</SelectItem>
+            <SelectItem value="trial">Trial</SelectItem>
             <SelectItem value="starter">Starter</SelectItem>
             <SelectItem value="pro">Pro</SelectItem>
             <SelectItem value="enterprise">Enterprise</SelectItem>
