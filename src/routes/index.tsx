@@ -452,10 +452,8 @@ function PaperToSiloe() {
     <section id="paper-to-siloe" className="py-24 bg-surface">
       <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-medium">
-            <Sparkles className="size-3.5" /> Nuevo
-          </span>
-          <h2 className="mt-4 text-4xl lg:text-5xl">De la libreta al Excel de Sanidad en un clic</h2>
+          <p className="text-sm font-medium text-accent">De papel a Excel</p>
+          <h2 className="mt-2 text-4xl lg:text-5xl">De la libreta al Excel de Sanidad en un clic</h2>
           <p className="mt-4 text-muted-foreground">
             Si aún tienes técnicos apuntando lecturas en papel, no tires ni una temporada de registros.
             Sube una foto del parte, Cloro extrae los datos y genera el informe SILOÉ en Excel listo
