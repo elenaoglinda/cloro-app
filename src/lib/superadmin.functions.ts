@@ -346,3 +346,49 @@ export const listAllContactMessages = createServerFn({ method: "GET" })
     if (error) throw new Error(error.message);
     return { messages: data ?? [] };
   });
+
+export const upsertSubscription = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) =>
+    z
+      .object({
+        orgId: z.string().uuid(),
+        plan: z.enum(["free", "starter", "pro", "enterprise"]),
+        status: z.enum(["active", "trialing", "past_due", "cancelled"]),
+        trial_ends_at: z.string().nullable().optional(),
+        current_period_end: z.string().nullable().optional(),
+        notes: z.string().max(2000).nullable().optional(),
+      })
+      .parse(d),
+  )
+  .handler(async ({ context, data }) => {
+    await assertSuperAdmin(context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const payload = {
+      org_id: data.orgId,
+      plan: data.plan,
+      status: data.status,
+      trial_ends_at: data.trial_ends_at ? new Date(data.trial_ends_at).toISOString() : null,
+      current_period_end: data.current_period_end
+        ? new Date(data.current_period_end).toISOString()
+        : null,
+      notes: data.notes?.trim() ? data.notes.trim() : null,
+      updated_at: new Date().toISOString(),
+    };
+    const { error } = await supabaseAdmin
+      .from("subscriptions")
+      .upsert(payload, { onConflict: "org_id" });
+    if (error) throw new Error(error.message);
+
+    // Keep the org row in sync so member-facing screens stay correct
+    const { error: orgErr } = await supabaseAdmin
+      .from("organizations")
+      .update({
+        plan: data.plan,
+        subscription_status: data.status,
+        trial_ends_at: payload.trial_ends_at,
+      })
+      .eq("id", data.orgId);
+    if (orgErr) throw new Error(orgErr.message);
+    return { ok: true };
+  });
