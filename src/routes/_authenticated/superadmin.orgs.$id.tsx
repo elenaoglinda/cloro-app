@@ -4,22 +4,14 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import {
   getOrgDetail,
-  upsertSubscription,
   setOrgSuspended,
   inviteOrgOwner,
   impersonateOrg,
 } from "@/lib/superadmin.functions";
+import { SubscriptionEditor } from "@/components/superadmin/SubscriptionEditor";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -44,8 +36,6 @@ import {
 export const Route = createFileRoute("/_authenticated/superadmin/orgs/$id")({
   component: AdminOrgDetail,
 });
-
-const PLANS = ["free", "starter", "pro", "enterprise"] as const;
 
 function AdminOrgDetail() {
   const { id } = Route.useParams();
