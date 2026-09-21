@@ -55,17 +55,25 @@ export const listAllOrgs = createServerFn({ method: "GET" })
 
     const { data: orgs, error } = await supabaseAdmin
       .from("organizations")
-      .select("id, name, slug, plan, suspended, created_at")
+      .select(
+        "id, name, slug, plan, suspended, created_at, subscription_status, trial_ends_at, notes",
+      )
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
 
     const ids = (orgs ?? []).map((o) => o.id);
     if (ids.length === 0) return { orgs: [] };
 
-    const [members, clientes, partes] = await Promise.all([
+    const [members, clientes, partes, owners] = await Promise.all([
       supabaseAdmin.from("org_members").select("org_id").in("org_id", ids),
       supabaseAdmin.from("clientes").select("org_id").in("org_id", ids).eq("archived", false),
       supabaseAdmin.from("partes").select("org_id, created_at").in("org_id", ids),
+      supabaseAdmin
+        .from("org_members")
+        .select("org_id, user_id, created_at")
+        .in("org_id", ids)
+        .eq("role", "owner")
+        .order("created_at", { ascending: true }),
     ]);
 
     const count = (rows: { org_id: string }[] | null) => {
@@ -84,16 +92,48 @@ export const listAllOrgs = createServerFn({ method: "GET" })
     const clienteCounts = count(clientes.data as any);
     const parteCounts = count(partes.data as any);
 
+    // First owner per org
+    const ownerByOrg: Record<string, string> = {};
+    (owners.data ?? []).forEach((m: any) => {
+      if (!ownerByOrg[m.org_id]) ownerByOrg[m.org_id] = m.user_id;
+    });
+    const ownerIds = [...new Set(Object.values(ownerByOrg))];
+    const ownerName: Record<string, string | null> = {};
+    const ownerEmail: Record<string, string | null> = {};
+    if (ownerIds.length) {
+      const { data: profiles } = await supabaseAdmin
+        .from("profiles")
+        .select("id, full_name")
+        .in("id", ownerIds);
+      (profiles ?? []).forEach((p) => (ownerName[p.id] = p.full_name));
+      await Promise.all(
+        ownerIds.map(async (uid) => {
+          try {
+            const { data: u } = await supabaseAdmin.auth.admin.getUserById(uid);
+            ownerEmail[uid] = u?.user?.email ?? null;
+          } catch {
+            ownerEmail[uid] = null;
+          }
+        }),
+      );
+    }
+
     return {
-      orgs: (orgs ?? []).map((o) => ({
-        ...o,
-        members: memberCounts[o.id] ?? 0,
-        clientes: clienteCounts[o.id] ?? 0,
-        partes: parteCounts[o.id] ?? 0,
-        last_activity: lastActivity[o.id] ?? null,
-      })),
+      orgs: (orgs ?? []).map((o) => {
+        const uid = ownerByOrg[o.id];
+        return {
+          ...o,
+          members: memberCounts[o.id] ?? 0,
+          clientes: clienteCounts[o.id] ?? 0,
+          partes: parteCounts[o.id] ?? 0,
+          last_activity: lastActivity[o.id] ?? null,
+          owner_name: uid ? (ownerName[uid] ?? null) : null,
+          owner_email: uid ? (ownerEmail[uid] ?? null) : null,
+        };
+      }),
     };
   });
+
 
 export const getOrgDetail = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
