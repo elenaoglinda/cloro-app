@@ -168,31 +168,41 @@ export const getOrgDetail = createServerFn({ method: "GET" })
     if (error) throw new Error(error.message);
     if (!org) throw new Error("Organización no encontrada");
 
-    const [{ data: members }, { data: clientes }, { data: partes }, { data: rutas }] =
-      await Promise.all([
-        supabaseAdmin
-          .from("org_members")
-          .select("user_id, role, created_at")
-          .eq("org_id", data.id),
-        supabaseAdmin
-          .from("clientes")
-          .select("id, nombre, email, telefono, archived, created_at")
-          .eq("org_id", data.id)
-          .order("created_at", { ascending: false })
-          .limit(100),
-        supabaseAdmin
-          .from("partes")
-          .select("id, created_at")
-          .eq("org_id", data.id)
-          .order("created_at", { ascending: false })
-          .limit(100),
-        supabaseAdmin
-          .from("rutas")
-          .select("id, nombre, created_at")
-          .eq("org_id", data.id)
-          .order("created_at", { ascending: false })
-          .limit(50),
-      ]);
+    const [
+      { data: members },
+      { data: clientes },
+      { data: piscinas },
+      { data: partes },
+      { data: rutas },
+    ] = await Promise.all([
+      supabaseAdmin
+        .from("org_members")
+        .select("user_id, role, created_at")
+        .eq("org_id", data.id),
+      supabaseAdmin
+        .from("clientes")
+        .select("id, nombre, email, telefono, archived, created_at")
+        .eq("org_id", data.id)
+        .order("created_at", { ascending: false })
+        .limit(100),
+      supabaseAdmin
+        .from("piscinas")
+        .select("id")
+        .eq("org_id", data.id)
+        .eq("archived", false),
+      supabaseAdmin
+        .from("partes")
+        .select("id, created_at")
+        .eq("org_id", data.id)
+        .order("created_at", { ascending: false })
+        .limit(100),
+      supabaseAdmin
+        .from("rutas")
+        .select("id, nombre, created_at")
+        .eq("org_id", data.id)
+        .order("created_at", { ascending: false })
+        .limit(50),
+    ]);
 
     // Resolve member emails
     const userIds = (members ?? []).map((m) => m.user_id);
@@ -228,6 +238,7 @@ export const getOrgDetail = createServerFn({ method: "GET" })
       subscription: subscription ?? null,
       members: (members ?? []).map((m) => ({ ...m, email: emails[m.user_id] ?? m.user_id })),
       clientes: clientes ?? [],
+      piscinasCount: (piscinas ?? []).length,
       partes: partes ?? [],
       rutas: rutas ?? [],
     };

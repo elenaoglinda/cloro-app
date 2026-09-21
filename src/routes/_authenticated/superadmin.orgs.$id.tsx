@@ -66,7 +66,7 @@ function AdminOrgDetail() {
     return <p className="text-sm text-muted-foreground">Cargando…</p>;
   }
 
-  const { org, members, clientes, partes, rutas } = data;
+  const { org, members, clientes, piscinasCount, partes, rutas } = data;
 
 
   async function handleSuspend() {
@@ -196,8 +196,8 @@ function AdminOrgDetail() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <Stat icon={Users} label="Miembros" value={members.length} />
-        <Stat icon={ClipboardList} label="Partes" value={partes.length} />
         <Stat icon={Building2} label="Clientes" value={clientes.length} />
+        <Stat icon={MapPin} label="Piscinas activas" value={piscinasCount} />
       </div>
 
       {/* Suscripción */}
