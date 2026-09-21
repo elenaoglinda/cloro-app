@@ -36,9 +36,6 @@ function RutaDetail() {
   const [polyline, setPolyline] = useState<string | null>(null);
   const [optimizing, setOptimizing] = useState(false);
 
-  async function reloadRuta() {
-    await qc.invalidateQueryies_placeholder;
-  }
 
   async function add(piscina_id: string) {
     try {
