@@ -415,6 +415,85 @@ function Features() {
   );
 }
 
+/* ---------------- PAPER REPORTS TO SILOÉ EXCEL ---------------- */
+function PaperToSiloe() {
+  return (
+    <section id="paper-to-siloe" className="py-24 bg-surface">
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
+        <div className="order-2 lg:order-1 relative">
+          <div className="absolute -inset-8 bg-primary/10 blur-3xl rounded-3xl" />
+          <div className="relative rounded-3xl overflow-hidden shadow-card ring-1 ring-border bg-card">
+            <img
+              src={paperToSiloe}
+              alt="Escanea un parte en papel con el móvil y conviértelo en informe SILOÉ Excel"
+              width={1280}
+              height={720}
+              loading="lazy"
+              className="w-full h-auto object-cover aspect-[16/9]"
+            />
+          </div>
+        </div>
+
+        <div className="order-1 lg:order-2">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 text-accent text-xs font-medium">
+            <Sparkles className="size-3.5" /> Nuevo
+          </span>
+          <h2 className="mt-4 text-4xl lg:text-5xl">
+            De la libreta al Excel de Sanidad en un clic
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            Si aún tienes técnicos apuntando lecturas en papel, no tires ni una temporada de
+            registros. Sube una foto del parte, Cloro extrae los datos y genera el informe SILOÉ
+            en Excel listo para la consejería.
+          </p>
+          <ul className="mt-6 space-y-4">
+            {[
+              {
+                icon: Smartphone,
+                t: "Foto del parte en papel",
+                d: "El técnico fotografía la libreta o el parte impreso desde su móvil.",
+              },
+              {
+                icon: FileSpreadsheet,
+                t: "Extracción automática de datos",
+                d: "Lecturas de cloro, pH, temperatura, turbidez, piscina, fecha y firma se pasan a campos estructurados.",
+              },
+              {
+                icon: FileCheck2,
+                t: "Excel SILOÉ por vaso",
+                d: "Genera el Anexo IV en formato Excel, validado contra los rangos del RD 742/2013, para enviar a Sanidad.",
+              },
+              {
+                icon: ShieldCheck,
+                t: "Revisión humana antes de enviar",
+                d: "Comprueba y corrige cualquier campo antes de cerrar el informe y archivarlo.",
+              },
+            ].map((i) => (
+              <li key={i.t} className="flex gap-4">
+                <div className="size-10 shrink-0 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                  <i.icon className="size-5" />
+                </div>
+                <div>
+                  <div className="font-medium">{i.t}</div>
+                  <div className="text-sm text-muted-foreground">{i.d}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8">
+            <a
+              href="https://panel.cloro.app/?mode=registro"
+              className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-foreground text-background font-medium shadow-soft hover:opacity-90 transition"
+            >
+              Probar la importación de partes <ArrowRight className="size-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------------- WHATSAPP AGENT ---------------- */
 function WhatsAppAgent() {
   return (
