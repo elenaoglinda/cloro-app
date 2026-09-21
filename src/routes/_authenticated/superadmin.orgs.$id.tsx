@@ -40,7 +40,7 @@ import {
   MapPin,
 } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/admin/orgs/$id")({
+export const Route = createFileRoute("/_authenticated/superadmin/orgs/$id")({
   component: AdminOrgDetail,
 });
 
@@ -129,7 +129,7 @@ function AdminOrgDetail() {
     <div className="space-y-6">
       <div>
         <Link
-          to="/admin/orgs"
+          to="/superadmin/orgs"
           className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="size-4" /> Todas las organizaciones

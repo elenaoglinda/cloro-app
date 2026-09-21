@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { listAllContactMessages } from "@/lib/superadmin.functions";
 import { Mail, Building2, Phone } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/admin/mensajes")({
+export const Route = createFileRoute("/_authenticated/superadmin/mensajes")({
   component: AdminMessages,
 });
 
