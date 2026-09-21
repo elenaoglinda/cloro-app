@@ -15,7 +15,7 @@ import {
 import { toast } from "sonner";
 import { upsertSubscription } from "@/lib/superadmin.functions";
 
-const PLANS = ["free", "starter", "pro", "enterprise"] as const;
+const PLANS = ["trial", "starter", "pro", "enterprise"] as const;
 
 const STATUSES = [
   { value: "active", label: "Activa" },
@@ -34,6 +34,7 @@ export type SubscriptionData = {
   plan: string;
   status: string;
   trial_ends_at: string | null;
+  current_period_start: string | null;
   current_period_end: string | null;
   notes: string | null;
 };
@@ -51,9 +52,13 @@ export function SubscriptionEditor({
 }) {
   const qc = useQueryClient();
   const save = useServerFn(upsertSubscription);
-  const [plan, setPlan] = useState(subscription?.plan ?? orgPlan ?? "free");
+  const initialPlan = subscription?.plan ?? (orgPlan === "free" ? "trial" : orgPlan) ?? "trial";
+  const [plan, setPlan] = useState(initialPlan);
   const [status, setStatus] = useState(subscription?.status ?? "trialing");
   const [trial, setTrial] = useState(toDateInput(subscription?.trial_ends_at));
+  const [periodStart, setPeriodStart] = useState(
+    toDateInput(subscription?.current_period_start),
+  );
   const [periodEnd, setPeriodEnd] = useState(
     toDateInput(subscription?.current_period_end),
   );
@@ -70,6 +75,7 @@ export function SubscriptionEditor({
           plan: plan as any,
           status: status as any,
           trial_ends_at: trial || null,
+          current_period_start: periodStart || null,
           current_period_end: periodEnd || null,
           notes: notes || null,
         },
@@ -133,6 +139,14 @@ export function SubscriptionEditor({
             type="date"
             value={trial}
             onChange={(e) => setTrial(e.target.value)}
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label>Inicio del periodo</Label>
+          <Input
+            type="date"
+            value={periodStart}
+            onChange={(e) => setPeriodStart(e.target.value)}
           />
         </div>
         <div className="space-y-1.5">

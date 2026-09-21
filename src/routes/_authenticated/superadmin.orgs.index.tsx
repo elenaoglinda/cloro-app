@@ -26,7 +26,7 @@ export const Route = createFileRoute("/_authenticated/superadmin/orgs/")({
   component: AdminOrgsList,
 });
 
-const PLANS = ["all", "free", "starter", "pro", "enterprise"] as const;
+const PLANS = ["all", "trial", "starter", "pro", "enterprise"] as const;
 const STATUSES = [
   "all",
   "active",
@@ -49,6 +49,7 @@ type OrgRow = {
   last_activity: string | null;
   subscription_status: string | null;
   trial_ends_at: string | null;
+  current_period_start: string | null;
   current_period_end: string | null;
   notes: string | null;
   owner_name: string | null;
@@ -330,6 +331,7 @@ function AdminOrgsList() {
                         plan: selectedOrg.plan,
                         status: selectedOrg.subscription_status,
                         trial_ends_at: selectedOrg.trial_ends_at,
+                        current_period_start: selectedOrg.current_period_start,
                         current_period_end: selectedOrg.current_period_end,
                         notes: selectedOrg.notes,
                       }
