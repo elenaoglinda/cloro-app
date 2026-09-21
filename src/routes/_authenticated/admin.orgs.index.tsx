@@ -1,12 +1,38 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
+import { useState, useMemo } from "react";
 import { listAllOrgs } from "@/lib/superadmin.functions";
-import { Building2, Users, ClipboardList, AlertTriangle } from "lucide-react";
+import { Building2, Users, ClipboardList, AlertTriangle, Search, X } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 
 export const Route = createFileRoute("/_authenticated/admin/orgs/")({
   component: AdminOrgsList,
 });
+
+const PLANS = ["all", "free", "starter", "pro", "enterprise"] as const;
+const STATUSES = ["all", "active", "suspended"] as const;
+
+type OrgRow = {
+  id: string;
+  name: string;
+  slug: string;
+  plan: string;
+  suspended: boolean;
+  created_at: string;
+  members: number;
+  clientes: number;
+  partes: number;
+  last_activity: string | null;
+};
 
 function AdminOrgsList() {
   const fn = useServerFn(listAllOrgs);
@@ -15,17 +41,90 @@ function AdminOrgsList() {
     queryFn: () => fn(),
   });
 
+  const [search, setSearch] = useState("");
+  const [planFilter, setPlanFilter] = useState<(typeof PLANS)[number]>("all");
+  const [statusFilter, setStatusFilter] = useState<(typeof STATUSES)[number]>("all");
+
+  const allOrgs = (data?.orgs ?? []) as OrgRow[];
+
+  const filteredOrgs = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return allOrgs.filter((o) => {
+      const matchesSearch =
+        !q ||
+        o.name.toLowerCase().includes(q) ||
+        o.slug.toLowerCase().includes(q);
+      const matchesPlan = planFilter === "all" || o.plan === planFilter;
+      const matchesStatus =
+        statusFilter === "all" ||
+        (statusFilter === "active" && !o.suspended) ||
+        (statusFilter === "suspended" && o.suspended);
+      return matchesSearch && matchesPlan && matchesStatus;
+    });
+  }, [allOrgs, search, planFilter, statusFilter]);
+
+  const activeFilters =
+    search !== "" || planFilter !== "all" || statusFilter !== "all";
+
+  function clearFilters() {
+    setSearch("");
+    setPlanFilter("all");
+    setStatusFilter("all");
+  }
+
   if (isLoading) {
     return <p className="text-sm text-muted-foreground">Cargando…</p>;
   }
 
-  const orgs = data?.orgs ?? [];
-
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="font-display text-xl">Organizaciones ({orgs.length})</h2>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <h2 className="font-display text-xl">Organizaciones ({filteredOrgs.length})</h2>
       </div>
+
+      <div className="flex flex-col sm:flex-row gap-3">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+          <Input
+            placeholder="Buscar por nombre o slug…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9"
+          />
+        </div>
+        <Select value={planFilter} onValueChange={(v) => setPlanFilter(v as any)}>
+          <SelectTrigger className="w-full sm:w-40">
+            <SelectValue placeholder="Plan" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todos los planes</SelectItem>
+            <SelectItem value="free">Free</SelectItem>
+            <SelectItem value="starter">Starter</SelectItem>
+            <SelectItem value="pro">Pro</SelectItem>
+            <SelectItem value="enterprise">Enterprise</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v as any)}>
+          <SelectTrigger className="w-full sm:w-40">
+            <SelectValue placeholder="Estado" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todos los estados</SelectItem>
+            <SelectItem value="active">Activas</SelectItem>
+            <SelectItem value="suspended">Suspendidas</SelectItem>
+          </SelectContent>
+        </Select>
+        {activeFilters && (
+          <button
+            onClick={clearFilters}
+            className="inline-flex items-center justify-center gap-1.5 text-sm text-muted-foreground hover:text-foreground px-2 py-2 rounded-md hover:bg-muted transition"
+            type="button"
+          >
+            <X className="size-4" /> Limpiar
+          </button>
+        )}
+      </div>
+
 
       <div className="bg-card border border-border rounded-lg overflow-hidden">
         <table className="w-full text-sm">
@@ -41,7 +140,7 @@ function AdminOrgsList() {
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {orgs.map((o) => (
+            {filteredOrgs.map((o) => (
               <tr key={o.id} className="hover:bg-muted/30 transition">
                 <td className="px-4 py-3">
                   <Link
@@ -87,14 +186,17 @@ function AdminOrgsList() {
                 </td>
               </tr>
             ))}
-            {orgs.length === 0 && (
+            {filteredOrgs.length === 0 && (
               <tr>
                 <td colSpan={7} className="px-4 py-12 text-center text-muted-foreground">
-                  No hay organizaciones todavía.
+                  {activeFilters
+                    ? "Ninguna organización coincide con los filtros."
+                    : "No hay organizaciones todavía."}
                 </td>
               </tr>
             )}
           </tbody>
+
         </table>
       </div>
     </div>
