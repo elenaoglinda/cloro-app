@@ -237,7 +237,7 @@ function AdminOrgsList() {
                 </td>
                 <td className="px-4 py-3">
                   <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-muted text-xs font-medium capitalize">
-                    {o.plan ?? "free"}
+                    {o.plan ?? "—"}
                   </span>
                 </td>
                 <td className="px-4 py-3">
