@@ -32,7 +32,13 @@ type OrgRow = {
   clientes: number;
   partes: number;
   last_activity: string | null;
+  subscription_status: string | null;
+  trial_ends_at: string | null;
+  notes: string | null;
+  owner_name: string | null;
+  owner_email: string | null;
 };
+
 
 function AdminOrgsList() {
   const fn = useServerFn(listAllOrgs);
