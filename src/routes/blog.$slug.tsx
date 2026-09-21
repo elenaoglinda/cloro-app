@@ -124,7 +124,7 @@ function BlogPostPage() {
           </div>
         </header>
 
-        <section className="mt-10 border-l-2 border-accent bg-accent/5 px-5 py-4">
+        <section className="mt-10 mb-8 border-l-2 border-accent bg-accent/5 px-5 py-4">
           <p className="text-xs uppercase tracking-wider text-accent font-medium">
             TL;DR
           </p>
