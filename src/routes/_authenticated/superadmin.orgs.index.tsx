@@ -286,6 +286,59 @@ function AdminOrgsList() {
   );
 }
 
+const SUMMARY_STYLES: Record<
+  SummaryTone,
+  { iconCls: string; valueCls: string }
+> = {
+  neutral: {
+    iconCls: "bg-muted text-foreground",
+    valueCls: "text-foreground",
+  },
+  success: {
+    iconCls: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+    valueCls: "text-emerald-600 dark:text-emerald-400",
+  },
+  warning: {
+    iconCls: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+    valueCls: "text-amber-600 dark:text-amber-400",
+  },
+  danger: {
+    iconCls: "bg-destructive/10 text-destructive",
+    valueCls: "text-destructive",
+  },
+};
+
+type SummaryTone = "neutral" | "success" | "warning" | "danger";
+
+function SummaryCard({
+  label,
+  value,
+  icon: Icon,
+  tone,
+}: {
+  label: string;
+  value: number;
+  icon: React.ComponentType<{ className?: string }>;
+  tone: SummaryTone;
+}) {
+  const styles = SUMMARY_STYLES[tone];
+  return (
+    <div className="bg-card border border-border rounded-lg p-4 flex items-center gap-4">
+      <div
+        className={`inline-flex items-center justify-center size-10 rounded-full ${styles.iconCls}`}
+      >
+        <Icon className="size-5" />
+      </div>
+      <div>
+        <p className="text-2xl font-display font-semibold tabular-nums ${styles.valueCls}">
+          {value}
+        </p>
+        <p className="text-xs text-muted-foreground">{label}</p>
+      </div>
+    </div>
+  );
+}
+
 const STATUS_STYLES: Record<string, { label: string; cls: string }> = {
   active: {
     label: "Activa",
