@@ -629,10 +629,11 @@ export type Database = {
         Row: {
           created_at: string
           current_period_end: string | null
+          current_period_start: string | null
           id: string
           notes: string | null
-          org_id: string
-          plan: string
+          organization_id: string
+          plan: Database["public"]["Enums"]["subscription_plan"]
           status: Database["public"]["Enums"]["subscription_status"]
           trial_ends_at: string | null
           updated_at: string
@@ -640,10 +641,11 @@ export type Database = {
         Insert: {
           created_at?: string
           current_period_end?: string | null
+          current_period_start?: string | null
           id?: string
           notes?: string | null
-          org_id: string
-          plan?: string
+          organization_id: string
+          plan?: Database["public"]["Enums"]["subscription_plan"]
           status?: Database["public"]["Enums"]["subscription_status"]
           trial_ends_at?: string | null
           updated_at?: string
@@ -651,18 +653,19 @@ export type Database = {
         Update: {
           created_at?: string
           current_period_end?: string | null
+          current_period_start?: string | null
           id?: string
           notes?: string | null
-          org_id?: string
-          plan?: string
+          organization_id?: string
+          plan?: Database["public"]["Enums"]["subscription_plan"]
           status?: Database["public"]["Enums"]["subscription_status"]
           trial_ends_at?: string | null
           updated_at?: string
         }
         Relationships: [
           {
-            foreignKeyName: "subscriptions_org_id_fkey"
-            columns: ["org_id"]
+            foreignKeyName: "subscriptions_organization_id_fkey"
+            columns: ["organization_id"]
             isOneToOne: true
             referencedRelation: "organizations"
             referencedColumns: ["id"]
@@ -745,6 +748,7 @@ export type Database = {
       org_role: "owner" | "admin" | "tecnico"
       parte_estado: "borrador" | "completado" | "firmado"
       platform_role: "super_admin"
+      subscription_plan: "trial" | "starter" | "pro" | "enterprise"
       subscription_status: "active" | "trialing" | "past_due" | "cancelled"
     }
     CompositeTypes: {
@@ -876,6 +880,7 @@ export const Constants = {
       org_role: ["owner", "admin", "tecnico"],
       parte_estado: ["borrador", "completado", "firmado"],
       platform_role: ["super_admin"],
+      subscription_plan: ["trial", "starter", "pro", "enterprise"],
       subscription_status: ["active", "trialing", "past_due", "cancelled"],
     },
   },
