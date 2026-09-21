@@ -86,8 +86,8 @@ function AdminLayout() {
   }
 
   const tabs = [
-    { to: "/admin/orgs", label: "Organizaciones", icon: Building2 },
-    { to: "/admin/mensajes", label: "Mensajes", icon: MessageSquare },
+    { to: "/superadmin/orgs", label: "Organizaciones", icon: Building2 },
+    { to: "/superadmin/mensajes", label: "Mensajes", icon: MessageSquare },
   ];
 
   return (
