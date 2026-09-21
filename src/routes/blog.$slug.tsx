@@ -131,31 +131,10 @@ function BlogPostPage() {
           <p className="mt-2 text-foreground/90 leading-relaxed">{post.tldr}</p>
         </section>
 
-        <article className="mt-10 text-[17px] leading-[1.75] text-foreground/85">
+        <article className="blog-content mt-10">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
-              h2: ({ node, ...props }) => (
-                <h2
-                  className="scroll-mt-24 mt-14 mb-5 text-2xl lg:text-3xl text-foreground"
-                  {...props}
-                />
-              ),
-              h3: ({ node, ...props }) => (
-                <h3
-                  className="scroll-mt-24 mt-10 mb-4 text-xl lg:text-2xl text-foreground"
-                  {...props}
-                />
-              ),
-              h4: ({ node, ...props }) => (
-                <h4
-                  className="scroll-mt-24 mt-8 mb-3 text-lg text-foreground font-medium"
-                  {...props}
-                />
-              ),
-              p: ({ node, ...props }) => (
-                <p className="my-5 text-foreground/85" {...props} />
-              ),
               a: ({ node, ...props }) => (
                 <a
                   className="text-primary underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition"
@@ -168,22 +147,6 @@ function BlogPostPage() {
               em: ({ node, ...props }) => (
                 <em className="italic text-foreground/90" {...props} />
               ),
-              ul: ({ node, ...props }) => (
-                <ul className="my-5 pl-6 list-disc marker:text-accent space-y-2" {...props} />
-              ),
-              ol: ({ node, ...props }) => (
-                <ol className="my-5 pl-6 list-decimal marker:text-muted-foreground space-y-2" {...props} />
-              ),
-              li: ({ node, ...props }) => (
-                <li className="pl-1 text-foreground/85 leading-[1.7]" {...props} />
-              ),
-              blockquote: ({ node, ...props }) => (
-                <blockquote
-                  className="my-6 border-l-2 border-accent bg-accent/5 px-5 py-3 italic text-foreground/85"
-                  {...props}
-                />
-              ),
-              hr: () => <hr className="my-12 border-t border-border" />,
               code: ({ node, className, children, ...props }) => {
                 const isBlock = /language-/.test(className || "");
                 if (isBlock) {
@@ -208,25 +171,10 @@ function BlogPostPage() {
               pre: ({ node, ...props }) => (
                 <pre className="my-6 overflow-x-auto bg-muted border border-border" {...props} />
               ),
-              table: ({ node, ...props }) => (
-                <div className="my-8 overflow-x-auto border border-border">
-                  <table className="w-full text-sm border-collapse" {...props} />
+              table: ({ children }) => (
+                <div className="overflow-x-auto">
+                  <table>{children}</table>
                 </div>
-              ),
-              thead: ({ node, ...props }) => (
-                <thead className="bg-muted" {...props} />
-              ),
-              th: ({ node, ...props }) => (
-                <th
-                  className="border border-border px-3 py-2 text-left font-medium text-foreground"
-                  {...props}
-                />
-              ),
-              td: ({ node, ...props }) => (
-                <td
-                  className="border border-border px-3 py-2 align-top text-foreground/85"
-                  {...props}
-                />
               ),
               img: ({ node, ...props }) => (
                 <img
