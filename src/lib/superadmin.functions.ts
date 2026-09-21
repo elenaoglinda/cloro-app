@@ -76,12 +76,14 @@ export const listAllOrgs = createServerFn({ method: "GET" })
         .order("created_at", { ascending: true }),
       supabaseAdmin
         .from("subscriptions")
-        .select("org_id, plan, status, trial_ends_at, current_period_end, notes")
-        .in("org_id", ids),
+        .select(
+          "organization_id, plan, status, trial_ends_at, current_period_start, current_period_end, notes",
+        )
+        .in("organization_id", ids),
     ]);
 
     const subByOrg: Record<string, any> = {};
-    (subs.data ?? []).forEach((s: any) => (subByOrg[s.org_id] = s));
+    (subs.data ?? []).forEach((s: any) => (subByOrg[s.organization_id] = s));
 
 
     const count = (rows: { org_id: string }[] | null) => {
@@ -214,8 +216,10 @@ export const getOrgDetail = createServerFn({ method: "GET" })
 
     const { data: subscription } = await supabaseAdmin
       .from("subscriptions")
-      .select("id, plan, status, trial_ends_at, current_period_end, notes, updated_at")
-      .eq("org_id", data.id)
+      .select(
+        "id, plan, status, trial_ends_at, current_period_start, current_period_end, notes, updated_at",
+      )
+      .eq("organization_id", data.id)
       .maybeSingle();
 
     return {
@@ -353,9 +357,10 @@ export const upsertSubscription = createServerFn({ method: "POST" })
     z
       .object({
         orgId: z.string().uuid(),
-        plan: z.enum(["free", "starter", "pro", "enterprise"]),
+        plan: z.enum(["trial", "starter", "pro", "enterprise"]),
         status: z.enum(["active", "trialing", "past_due", "cancelled"]),
         trial_ends_at: z.string().nullable().optional(),
+        current_period_start: z.string().nullable().optional(),
         current_period_end: z.string().nullable().optional(),
         notes: z.string().max(2000).nullable().optional(),
       })
@@ -365,10 +370,13 @@ export const upsertSubscription = createServerFn({ method: "POST" })
     await assertSuperAdmin(context.userId);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const payload = {
-      org_id: data.orgId,
+      organization_id: data.orgId,
       plan: data.plan,
       status: data.status,
       trial_ends_at: data.trial_ends_at ? new Date(data.trial_ends_at).toISOString() : null,
+      current_period_start: data.current_period_start
+        ? new Date(data.current_period_start).toISOString()
+        : null,
       current_period_end: data.current_period_end
         ? new Date(data.current_period_end).toISOString()
         : null,
@@ -377,7 +385,7 @@ export const upsertSubscription = createServerFn({ method: "POST" })
     };
     const { error } = await supabaseAdmin
       .from("subscriptions")
-      .upsert(payload, { onConflict: "org_id" });
+      .upsert(payload, { onConflict: "organization_id" });
     if (error) throw new Error(error.message);
 
     // Keep the org row in sync so member-facing screens stay correct

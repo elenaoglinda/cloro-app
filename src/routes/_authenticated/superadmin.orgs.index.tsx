@@ -26,7 +26,7 @@ export const Route = createFileRoute("/_authenticated/superadmin/orgs/")({
   component: AdminOrgsList,
 });
 
-const PLANS = ["all", "free", "starter", "pro", "enterprise"] as const;
+const PLANS = ["all", "trial", "starter", "pro", "enterprise"] as const;
 const STATUSES = [
   "all",
   "active",
