@@ -6,7 +6,7 @@ import {
   useRouterState,
   isRedirect,
 } from "@tanstack/react-router";
-import { Shield, Building2, MessageSquare } from "lucide-react";
+import { Shield, LayoutDashboard, MessageSquare } from "lucide-react";
 import { checkSuperAdmin } from "@/lib/superadmin.functions";
 
 export const Route = createFileRoute("/_authenticated/superadmin")({
@@ -16,13 +16,16 @@ export const Route = createFileRoute("/_authenticated/superadmin")({
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
-  beforeLoad: async () => {
+  beforeLoad: async ({ location }) => {
     try {
       const { isSuperAdmin } = await checkSuperAdmin();
       if (!isSuperAdmin) throw redirect({ to: "/app" });
     } catch (e) {
       if (isRedirect(e)) throw e;
       throw redirect({ to: "/app" });
+    }
+    if (location.pathname === "/superadmin") {
+      throw redirect({ to: "/superadmin/orgs" });
     }
   },
   component: AdminLayout,
@@ -32,7 +35,7 @@ function AdminLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const tabs = [
-    { to: "/superadmin/orgs", label: "Organizaciones", icon: Building2 },
+    { to: "/superadmin/orgs", label: "Resumen", icon: LayoutDashboard },
     { to: "/superadmin/mensajes", label: "Mensajes", icon: MessageSquare },
   ];
 
