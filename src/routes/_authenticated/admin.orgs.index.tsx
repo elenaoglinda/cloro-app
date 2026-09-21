@@ -32,7 +32,13 @@ type OrgRow = {
   clientes: number;
   partes: number;
   last_activity: string | null;
+  subscription_status: string | null;
+  trial_ends_at: string | null;
+  notes: string | null;
+  owner_name: string | null;
+  owner_email: string | null;
 };
+
 
 function AdminOrgsList() {
   const fn = useServerFn(listAllOrgs);
@@ -126,22 +132,26 @@ function AdminOrgsList() {
       </div>
 
 
-      <div className="bg-card border border-border rounded-lg overflow-hidden">
-        <table className="w-full text-sm">
+      <div className="bg-card border border-border rounded-lg overflow-x-auto">
+        <table className="w-full min-w-[1100px] text-sm">
           <thead className="bg-muted/40 text-xs uppercase text-muted-foreground">
             <tr>
               <th className="text-left px-4 py-3">Organización</th>
+              <th className="text-left px-4 py-3">Propietario</th>
               <th className="text-left px-4 py-3">Plan</th>
+              <th className="text-left px-4 py-3">Estado</th>
+              <th className="text-left px-4 py-3">Fin de prueba</th>
               <th className="text-right px-4 py-3">Miembros</th>
               <th className="text-right px-4 py-3">Clientes</th>
               <th className="text-right px-4 py-3">Partes</th>
               <th className="text-left px-4 py-3">Última actividad</th>
               <th className="text-left px-4 py-3">Creada</th>
+              <th className="text-left px-4 py-3">Notas</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
             {filteredOrgs.map((o) => (
-              <tr key={o.id} className="hover:bg-muted/30 transition">
+              <tr key={o.id} className="hover:bg-muted/30 transition align-top">
                 <td className="px-4 py-3">
                   <Link
                     to="/admin/orgs/$id"
@@ -159,9 +169,21 @@ function AdminOrgsList() {
                   <p className="text-xs text-muted-foreground mt-0.5">{o.slug}</p>
                 </td>
                 <td className="px-4 py-3">
+                  <p className="font-medium">{o.owner_name ?? "—"}</p>
+                  <p className="text-xs text-muted-foreground">{o.owner_email ?? "—"}</p>
+                </td>
+                <td className="px-4 py-3">
                   <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-muted text-xs font-medium capitalize">
                     {o.plan ?? "free"}
                   </span>
+                </td>
+                <td className="px-4 py-3">
+                  <StatusBadge status={o.subscription_status} />
+                </td>
+                <td className="px-4 py-3 text-xs text-muted-foreground">
+                  {o.trial_ends_at
+                    ? new Date(o.trial_ends_at).toLocaleDateString("es-ES")
+                    : "—"}
                 </td>
                 <td className="px-4 py-3 text-right tabular-nums">
                   <span className="inline-flex items-center gap-1 text-muted-foreground">
@@ -184,11 +206,20 @@ function AdminOrgsList() {
                 <td className="px-4 py-3 text-xs text-muted-foreground">
                   {new Date(o.created_at).toLocaleDateString("es-ES")}
                 </td>
+                <td className="px-4 py-3 text-xs text-muted-foreground max-w-[220px]">
+                  {o.notes ? (
+                    <span className="line-clamp-2" title={o.notes}>
+                      {o.notes}
+                    </span>
+                  ) : (
+                    "—"
+                  )}
+                </td>
               </tr>
             ))}
             {filteredOrgs.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-4 py-12 text-center text-muted-foreground">
+                <td colSpan={11} className="px-4 py-12 text-center text-muted-foreground">
                   {activeFilters
                     ? "Ninguna organización coincide con los filtros."
                     : "No hay organizaciones todavía."}
@@ -202,3 +233,38 @@ function AdminOrgsList() {
     </div>
   );
 }
+
+const STATUS_STYLES: Record<string, { label: string; cls: string }> = {
+  active: {
+    label: "Activa",
+    cls: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
+  },
+  trialing: {
+    label: "En prueba",
+    cls: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30",
+  },
+  past_due: {
+    label: "Pago pendiente",
+    cls: "bg-destructive/10 text-destructive border-destructive/30",
+  },
+  cancelled: {
+    label: "Cancelada",
+    cls: "bg-destructive/10 text-destructive border-destructive/30",
+  },
+};
+
+function StatusBadge({ status }: { status: string | null }) {
+  const s = STATUS_STYLES[status ?? ""] ?? {
+    label: status ?? "—",
+    cls: "bg-muted text-muted-foreground border-border",
+  };
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-xs font-medium ${s.cls}`}
+    >
+      <span className="size-1.5 rounded-full bg-current" />
+      {s.label}
+    </span>
+  );
+}
+
