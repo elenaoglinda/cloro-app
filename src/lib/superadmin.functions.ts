@@ -64,7 +64,7 @@ export const listAllOrgs = createServerFn({ method: "GET" })
     const ids = (orgs ?? []).map((o) => o.id);
     if (ids.length === 0) return { orgs: [] };
 
-    const [members, clientes, partes, owners] = await Promise.all([
+    const [members, clientes, partes, owners, subs] = await Promise.all([
       supabaseAdmin.from("org_members").select("org_id").in("org_id", ids),
       supabaseAdmin.from("clientes").select("org_id").in("org_id", ids).eq("archived", false),
       supabaseAdmin.from("partes").select("org_id, created_at").in("org_id", ids),
@@ -74,7 +74,15 @@ export const listAllOrgs = createServerFn({ method: "GET" })
         .in("org_id", ids)
         .eq("role", "owner")
         .order("created_at", { ascending: true }),
+      supabaseAdmin
+        .from("subscriptions")
+        .select("org_id, plan, status, trial_ends_at, current_period_end, notes")
+        .in("org_id", ids),
     ]);
+
+    const subByOrg: Record<string, any> = {};
+    (subs.data ?? []).forEach((s: any) => (subByOrg[s.org_id] = s));
+
 
     const count = (rows: { org_id: string }[] | null) => {
       const map: Record<string, number> = {};
