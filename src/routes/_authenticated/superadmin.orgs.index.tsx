@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
 import { listAllOrgs } from "@/lib/superadmin.functions";
+import { SubscriptionEditor } from "@/components/superadmin/SubscriptionEditor";
 import { Building2, Users, ClipboardList, AlertTriangle, Search, X, CircleCheck, Clock, Ban } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
@@ -12,6 +13,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 
 
 export const Route = createFileRoute("/_authenticated/superadmin/orgs/")({
@@ -41,6 +49,7 @@ type OrgRow = {
   last_activity: string | null;
   subscription_status: string | null;
   trial_ends_at: string | null;
+  current_period_end: string | null;
   notes: string | null;
   owner_name: string | null;
   owner_email: string | null;
@@ -57,6 +66,7 @@ function AdminOrgsList() {
   const [search, setSearch] = useState("");
   const [planFilter, setPlanFilter] = useState<(typeof PLANS)[number]>("all");
   const [statusFilter, setStatusFilter] = useState<(typeof STATUSES)[number]>("all");
+  const [selectedOrg, setSelectedOrg] = useState<OrgRow | null>(null);
 
   const allOrgs = (data?.orgs ?? []) as OrgRow[];
 
@@ -203,13 +213,13 @@ function AdminOrgsList() {
           </thead>
           <tbody className="divide-y divide-border">
             {filteredOrgs.map((o) => (
-              <tr key={o.id} className="hover:bg-muted/30 transition align-top">
+              <tr
+                key={o.id}
+                className="hover:bg-muted/30 transition align-top cursor-pointer"
+                onClick={() => setSelectedOrg(o)}
+              >
                 <td className="px-4 py-3">
-                  <Link
-                    to="/superadmin/orgs/$id"
-                    params={{ id: o.id }}
-                    className="flex items-center gap-2 font-medium hover:text-primary"
-                  >
+                  <div className="flex items-center gap-2 font-medium">
                     <Building2 className="size-4 text-muted-foreground" />
                     <span>{o.name}</span>
                     {o.suspended && (
@@ -217,7 +227,7 @@ function AdminOrgsList() {
                         <AlertTriangle className="size-3" /> Suspendida
                       </span>
                     )}
-                  </Link>
+                  </div>
                   <p className="text-xs text-muted-foreground mt-0.5">{o.slug}</p>
                 </td>
                 <td className="px-4 py-3">
@@ -282,6 +292,56 @@ function AdminOrgsList() {
 
         </table>
       </div>
+
+      <Sheet open={!!selectedOrg} onOpenChange={(open) => !open && setSelectedOrg(null)}>
+        <SheetContent className="w-full sm:max-w-md overflow-y-auto">
+          <SheetHeader className="text-left">
+            <SheetTitle className="flex items-center gap-2">
+              <Building2 className="size-5 text-muted-foreground" />
+              {selectedOrg?.name}
+            </SheetTitle>
+            <SheetDescription>
+              {selectedOrg?.slug} · propietario{" "}
+              {selectedOrg?.owner_email ?? "—"}
+            </SheetDescription>
+          </SheetHeader>
+          <div className="mt-6 space-y-6">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">
+                Creada el{" "}
+                {selectedOrg?.created_at
+                  ? new Date(selectedOrg.created_at).toLocaleDateString("es-ES")
+                  : "—"}
+              </span>
+              <Link
+                to="/superadmin/orgs/$id"
+                params={{ id: selectedOrg?.id ?? "" }}
+                className="text-sm text-primary hover:underline"
+              >
+                Ver ficha completa →
+              </Link>
+            </div>
+            {selectedOrg && (
+              <SubscriptionEditor
+                orgId={selectedOrg.id}
+                subscription={
+                  selectedOrg.subscription_status
+                    ? {
+                        plan: selectedOrg.plan,
+                        status: selectedOrg.subscription_status,
+                        trial_ends_at: selectedOrg.trial_ends_at,
+                        current_period_end: selectedOrg.current_period_end,
+                        notes: selectedOrg.notes,
+                      }
+                    : null
+                }
+                orgPlan={selectedOrg.plan}
+                onSaved={() => setSelectedOrg(null)}
+              />
+            )}
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
