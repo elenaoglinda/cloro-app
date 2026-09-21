@@ -170,7 +170,7 @@ function AdminOrgsList() {
             <SelectItem value="enterprise">Enterprise</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v as any)}>
+        <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v as typeof STATUSES[number])}>
           <SelectTrigger className="w-full sm:w-40">
             <SelectValue placeholder="Estado" />
           </SelectTrigger>
