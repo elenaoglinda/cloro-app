@@ -26,16 +26,22 @@ function RutaDetail() {
   const deleteFn = useServerFn(deleteRuta);
   const optimizeFn = useServerFn(optimizeRuta);
 
-  const { data } = useQuery({ queryKey: ["ruta", id], queryFn: () => getFn({ data: { id } }) });
+  const { data, refetch } = useQuery({
+    queryKey: ["ruta", id],
+    queryFn: () => getFn({ data: { id } }),
+    staleTime: 0,
+  });
   const { data: pData } = useQuery({ queryKey: ["piscinas-all"], queryFn: () => piscinasFn() });
   
   const [polyline, setPolyline] = useState<string | null>(null);
   const [optimizing, setOptimizing] = useState(false);
 
+
   async function add(piscina_id: string) {
     try {
       await addFn({ data: { ruta_id: id, piscina_id } });
       await qc.invalidateQueries({ queryKey: ["ruta", id] });
+      await refetch();
       toast.success("Piscina añadida a la ruta");
     } catch (err: any) {
       toast.error("Error al añadir la piscina", { description: err?.message });
@@ -43,11 +49,13 @@ function RutaDetail() {
   }
   async function toggle(pid: string, completada: boolean) {
     await toggleFn({ data: { id: pid, completada } });
-    qc.invalidateQueries({ queryKey: ["ruta", id] });
+    await qc.invalidateQueries({ queryKey: ["ruta", id] });
+    await refetch();
   }
   async function remove(pid: string) {
     await removeFn({ data: { id: pid } });
-    qc.invalidateQueries({ queryKey: ["ruta", id] });
+    await qc.invalidateQueries({ queryKey: ["ruta", id] });
+    await refetch();
   }
   async function killRuta() {
     if (!confirm("¿Eliminar la ruta?")) return;
@@ -61,6 +69,8 @@ function RutaDetail() {
       const res = await optimizeFn({ data: { id } });
       setPolyline(res.polyline ?? null);
       await qc.invalidateQueries({ queryKey: ["ruta", id] });
+      await refetch();
+
       const km = res.distanceMeters ? (res.distanceMeters / 1000).toFixed(1) : null;
       toast.success(km ? `Ruta optimizada · ${km} km` : "Ruta optimizada");
     } catch (err: any) {
