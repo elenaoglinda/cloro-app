@@ -77,6 +77,20 @@ function AdminOrgsList() {
     });
   }, [allOrgs, search, planFilter, statusFilter]);
 
+  const summary = useMemo(() => {
+    return {
+      total: allOrgs.length,
+      active: allOrgs.filter(
+        (o) => !o.suspended && o.subscription_status === "active",
+      ).length,
+      trialing: allOrgs.filter(
+        (o) => !o.suspended && o.subscription_status === "trialing",
+      ).length,
+      cancelled: allOrgs.filter((o) => o.subscription_status === "cancelled")
+        .length,
+    };
+  }, [allOrgs]);
+
   const activeFilters =
     search !== "" || planFilter !== "all" || statusFilter !== "all";
 
