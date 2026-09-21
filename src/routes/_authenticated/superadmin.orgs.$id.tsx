@@ -66,7 +66,7 @@ function AdminOrgDetail() {
     return <p className="text-sm text-muted-foreground">Cargando…</p>;
   }
 
-  const { org, members, clientes, partes, rutas } = data;
+  const { org, members, clientes, piscinasCount, partes, rutas } = data;
 
 
   async function handleSuspend() {
