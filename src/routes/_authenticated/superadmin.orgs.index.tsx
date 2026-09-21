@@ -49,6 +49,7 @@ type OrgRow = {
   last_activity: string | null;
   subscription_status: string | null;
   trial_ends_at: string | null;
+  current_period_end: string | null;
   notes: string | null;
   owner_name: string | null;
   owner_email: string | null;
