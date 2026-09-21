@@ -137,6 +137,7 @@ export const listAllOrgs = createServerFn({ method: "GET" })
           plan: sub?.plan ?? o.plan,
           subscription_status: sub?.status ?? o.subscription_status,
           trial_ends_at: sub?.trial_ends_at ?? o.trial_ends_at,
+          current_period_start: sub?.current_period_start ?? null,
           current_period_end: sub?.current_period_end ?? null,
           notes: sub?.notes ?? o.notes,
           members: memberCounts[o.id] ?? 0,
