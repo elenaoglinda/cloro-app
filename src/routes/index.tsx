@@ -325,6 +325,11 @@ function Problem() {
 function Features() {
   const features = [
     {
+      icon: FileSpreadsheet,
+      t: "Partes en papel → Excel SILOÉ",
+      d: "Fotografía los partes manuales con el móvil y genera el informe SILOÉ en Excel listo para la consejería.",
+    },
+    {
       icon: MapPin,
       t: "Rutas optimizadas en un toque",
       d: "Arrastra piscinas al calendario semanal y deja que Google Routes minimice tu ruta. Menos kilómetros, más visitas.",
