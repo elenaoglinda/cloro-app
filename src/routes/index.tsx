@@ -143,6 +143,7 @@ function Landing() {
         <LogosStrip />
         <Problem />
         <Features />
+        <PaperToSiloe />
         <WhatsAppAgent />
         <Compliance />
         <Comparison />
