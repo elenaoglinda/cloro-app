@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { BLOG_POSTS, getPostBySlug, type BlogPost } from "@/lib/blog-posts";
+import "@/styles/blog-prose.css";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
