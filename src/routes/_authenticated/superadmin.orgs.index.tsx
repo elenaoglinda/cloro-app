@@ -158,19 +158,19 @@ function AdminOrgsList() {
             className="pl-9"
           />
         </div>
-        <Select value={planFilter} onValueChange={(v) => setPlanFilter(v as any)}>
+        <Select value={planFilter} onValueChange={(v) => setPlanFilter(v as typeof PLANS[number])}>
           <SelectTrigger className="w-full sm:w-40">
             <SelectValue placeholder="Plan" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todos los planes</SelectItem>
-            <SelectItem value="free">Free</SelectItem>
+            <SelectItem value="trial">Trial</SelectItem>
             <SelectItem value="starter">Starter</SelectItem>
             <SelectItem value="pro">Pro</SelectItem>
             <SelectItem value="enterprise">Enterprise</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v as any)}>
+        <Select value={statusFilter} onValueChange={(v) => setStatusFilter(v as typeof STATUSES[number])}>
           <SelectTrigger className="w-full sm:w-40">
             <SelectValue placeholder="Estado" />
           </SelectTrigger>
@@ -237,7 +237,7 @@ function AdminOrgsList() {
                 </td>
                 <td className="px-4 py-3">
                   <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-muted text-xs font-medium capitalize">
-                    {o.plan ?? "free"}
+                    {o.plan ?? "—"}
                   </span>
                 </td>
                 <td className="px-4 py-3">
