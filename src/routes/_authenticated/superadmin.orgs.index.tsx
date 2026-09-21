@@ -19,7 +19,14 @@ export const Route = createFileRoute("/_authenticated/superadmin/orgs/")({
 });
 
 const PLANS = ["all", "free", "starter", "pro", "enterprise"] as const;
-const STATUSES = ["all", "active", "suspended"] as const;
+const STATUSES = [
+  "all",
+  "active",
+  "trialing",
+  "past_due",
+  "cancelled",
+  "suspended",
+] as const;
 
 type OrgRow = {
   id: string;
