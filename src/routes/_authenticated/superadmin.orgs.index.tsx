@@ -291,6 +291,56 @@ function AdminOrgsList() {
 
         </table>
       </div>
+
+      <Sheet open={!!selectedOrg} onOpenChange={(open) => !open && setSelectedOrg(null)}>
+        <SheetContent className="w-full sm:max-w-md overflow-y-auto">
+          <SheetHeader className="text-left">
+            <SheetTitle className="flex items-center gap-2">
+              <Building2 className="size-5 text-muted-foreground" />
+              {selectedOrg?.name}
+            </SheetTitle>
+            <SheetDescription>
+              {selectedOrg?.slug} · propietario{" "}
+              {selectedOrg?.owner_email ?? "—"}
+            </SheetDescription>
+          </SheetHeader>
+          <div className="mt-6 space-y-6">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">
+                Creada el{" "}
+                {selectedOrg?.created_at
+                  ? new Date(selectedOrg.created_at).toLocaleDateString("es-ES")
+                  : "—"}
+              </span>
+              <Link
+                to="/superadmin/orgs/$id"
+                params={{ id: selectedOrg?.id ?? "" }}
+                className="text-sm text-primary hover:underline"
+              >
+                Ver ficha completa →
+              </Link>
+            </div>
+            {selectedOrg && (
+              <SubscriptionEditor
+                orgId={selectedOrg.id}
+                subscription={
+                  selectedOrg.subscription_status
+                    ? {
+                        plan: selectedOrg.plan,
+                        status: selectedOrg.subscription_status,
+                        trial_ends_at: selectedOrg.trial_ends_at,
+                        current_period_end: selectedOrg.current_period_end,
+                        notes: selectedOrg.notes,
+                      }
+                    : null
+                }
+                orgPlan={selectedOrg.plan}
+                onSaved={() => setSelectedOrg(null)}
+              />
+            )}
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
