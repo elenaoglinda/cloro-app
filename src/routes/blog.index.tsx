@@ -9,7 +9,7 @@ const blogLd = {
   name: "Blog de Cloro",
   url: "https://cloro.app/blog",
   description:
-    "Insights, novedades de producto y guías prácticas sobre mantenimiento de piscinas, cumplimiento SILOÉ, rutas optimizadas y facturación VeriFactu en España.",
+    "Insights, novedades de producto y guías prácticas sobre mantenimiento de piscinas, cumplimiento SILOÉ y rutas optimizadas en España.",
   blogPost: BLOG_POSTS.map((p) => ({
     "@type": "BlogPosting",
     headline: p.title,
@@ -28,9 +28,9 @@ export const Route = createFileRoute("/blog/")({
       {
         name: "description",
         content:
-          "Insights, novedades de producto y guías prácticas para empresas de mantenimiento de piscinas en España: RD 742/2013, SILOÉ, rutas optimizadas, WhatsApp y facturación VeriFactu.",
+          "Insights, novedades de producto y guías prácticas para empresas de mantenimiento de piscinas en España: RD 742/2013, SILOÉ, rutas optimizadas y WhatsApp.",
       },
-      { name: "keywords", content: "blog mantenimiento piscinas, RD 742/2013, SILOÉ, VeriFactu, rutas piscinas, WhatsApp piscinas" },
+      { name: "keywords", content: "blog mantenimiento piscinas, RD 742/2013, SILOÉ, rutas piscinas, WhatsApp piscinas" },
       { property: "og:title", content: "Blog de Cloro" },
       {
         property: "og:description",

@@ -27,7 +27,7 @@ import technicianApp from "@/assets/technician-app.jpg";
 const FAQS = [
   {
     q: "¿Cuál es el mejor software para empresas de mantenimiento de piscinas en España?",
-    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ, factura con VeriFactu y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria ni la facturación electrónica española.",
+    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria ni la facturación electrónica española.",
   },
   {
     q: "¿Cloro genera el informe SILOÉ exactamente como lo pide Sanidad?",
@@ -39,11 +39,11 @@ const FAQS = [
   },
   {
     q: "¿En qué se diferencia Cloro de Skimmer, Pool Office o ServiceTitan?",
-    a: "Skimmer y Pool Office son excelentes apps de campo pensadas para el mercado norteamericano: no cubren SILOÉ, RD 742/2013, VeriFactu, comunidades de propietarios ni facturación en euros con IVA. ServiceTitan es un ERP para grandes empresas multi-oficio con un coste muy superior. Cloro es vertical para piscinas y para España, con un precio pensado para autónomos y empresas familiares.",
+    a: "Skimmer y Pool Office son excelentes apps de campo pensadas para el mercado norteamericano: no cubren SILOÉ, RD 742/2013 ni las necesidades específicas de empresas de piscinas en España. ServiceTitan es un ERP para grandes empresas multi-oficio con un coste muy superior. Cloro es vertical para piscinas y para España, con un precio pensado para autónomos y empresas familiares.",
   },
   {
     q: "¿Sirve también para una sola persona con 30-60 piscinas?",
-    a: "Sí, es nuestro perfil Solo (autónomo). Por 19 €/mes + 0,99 € por piscina tienes rutas optimizadas con Google Routes, parte diario con foto y firma, facturación VeriFactu y portal de cliente. La mayoría de autónomos recupera 4-6 horas a la semana sólo eliminando el Excel y los WhatsApp sueltos.",
+    a: "Sí, es nuestro perfil Solo (autónomo). Por 19 €/mes + 0,99 € por piscina tienes rutas optimizadas con Google Routes, parte diario con foto y firma y portal de cliente. La mayoría de autónomos recupera 4-6 horas a la semana sólo eliminando el Excel y los WhatsApp sueltos.",
   },
   {
     q: "¿Cómo optimiza Cloro las rutas de mantenimiento?",
@@ -58,12 +58,12 @@ const FAQS = [
     a: "Sí. La app móvil tiene modo offline real: lecturas, fotos, firmas, productos aplicados y partes se guardan en el dispositivo y se sincronizan en menos de 10 segundos cuando vuelve la señal. Es la queja número uno que vemos en Reddit sobre apps americanas y europeas: Cloro se diseñó offline-first.",
   },
   {
-    q: "¿Puedo facturar a una comunidad de propietarios con VeriFactu?",
-    a: "Sí. Soporta NIF de la comunidad, varios contactos (administrador, presidente, conserje), facturación recurrente y emisión VeriFactu firmada y enviada a la AEAT en tiempo real. El administrador y los vecinos pueden acceder al portal para ver informes, analíticas y facturas de su piscina.",
+    q: "¿Puedo gestionar comunidades de propietarios con Cloro?",
+    a: "Sí. Puedes guardar el NIF de la comunidad y varios contactos, como el administrador, el presidente o el conserje. El administrador y los vecinos pueden acceder al portal para consultar informes y analíticas de su piscina.",
   },
   {
     q: "¿Cuánto cuesta un software de gestión de piscinas?",
-    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Cloro arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ, VeriFactu y portal de cliente sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
+    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Cloro arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ y portal de cliente sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
   },
   {
     q: "¿Cómo se gestiona la dosificación de cloro y pH desde la app?",
@@ -90,13 +90,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, SILOÉ, VeriFactu y agenda clientes por WhatsApp.",
+          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, partes digitales, SILOÉ y clientes por WhatsApp.",
       },
       { property: "og:title", content: "Cloro — Gestión de mantenimiento de piscinas" },
       {
         property: "og:description",
         content:
-          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, SILOÉ, VeriFactu y agenda clientes por WhatsApp.",
+          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, partes digitales, SILOÉ y clientes por WhatsApp.",
       },
       { property: "og:url", content: "https://cloro.app/" },
       { property: "og:type", content: "website" },
@@ -168,7 +168,7 @@ function Hero() {
             .
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl text-balance">
-            Gestiona rutas, parámetros químicos, facturación VeriFactu e informes SILOÉ desde un único lugar. Con un
+            Gestiona rutas, parámetros químicos, partes digitales e informes SILOÉ desde un único lugar. Con un
             agente de WhatsApp que capta y agenda nuevos clientes mientras atiendes los actuales.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -353,8 +353,8 @@ function Features() {
     },
     {
       icon: CreditCard,
-      t: "Cobros y VeriFactu",
-      d: "Bizum, SEPA y Stripe en autopiloto, con recordatorios automáticos y facturación VeriFactu integrada.",
+      t: "Cobros automatizados",
+      d: "Bizum, SEPA y Stripe en un solo lugar, con recordatorios automáticos para reducir impagos.",
     },
   ];
 
@@ -690,7 +690,7 @@ function Comparison() {
     { feature: "Optimización de rutas con IA", cloro: true, autocontrol: false, evisane: false, eisi: false },
     { feature: "App offline para técnicos", cloro: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial" },
     { feature: "Agente WhatsApp con calendario", cloro: true, autocontrol: false, evisane: false, eisi: false },
-    { feature: "Bizum + SEPA + VeriFactu", cloro: true, autocontrol: false, evisane: false, eisi: false },
+    { feature: "Bizum + SEPA + Stripe", cloro: true, autocontrol: false, evisane: false, eisi: false },
     { feature: "Portal cliente y comunidades", cloro: true, autocontrol: false, evisane: false, eisi: "Hoteles" },
     { feature: "Cobros recurrentes automáticos", cloro: true, autocontrol: false, evisane: false, eisi: false },
     { feature: "En castellano nativo + soporte ES", cloro: true, autocontrol: true, evisane: true, eisi: true },
@@ -781,7 +781,7 @@ function Pricing() {
       features: [
         "Todo lo del plan Solo",
         "Agente WhatsApp con IA 24/7",
-        "VeriFactu + SEPA + Stripe",
+        "Cobros con SEPA + Stripe",
         "Portal cliente y comunidades",
         "Optimización de rutas con Google Routes",
       ],

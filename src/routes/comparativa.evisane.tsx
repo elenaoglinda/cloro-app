@@ -11,7 +11,7 @@ export const Route = createFileRoute("/comparativa/evisane")({
       {
         name: "description",
         content:
-          "Comparamos Cloro y EviSane: gestión sanitaria de piscinas, SILOÉ, rutas, facturación VeriFactu y atención por WhatsApp para empresas en España.",
+          "Comparamos Cloro y EviSane: gestión sanitaria de piscinas, SILOÉ, rutas, partes digitales y atención por WhatsApp para empresas en España.",
       },
       { property: "og:title", content: `Cloro vs ${COMPETITOR}` },
       {
@@ -64,8 +64,7 @@ function Page() {
         {
           title: "Cliente y facturación",
           rows: [
-            { feature: "Facturación electrónica VeriFactu", cloro: true, competitor: "partial" },
-            { feature: "Cobros con Bizum, tarjeta y SEPA", cloro: true, competitor: false },
+                        { feature: "Cobros con Bizum, tarjeta y SEPA", cloro: true, competitor: false },
             { feature: "Portal del cliente y comunidad de propietarios", cloro: true, competitor: "partial" },
             { feature: "Agente WhatsApp 24/7", cloro: true, competitor: false },
             { feature: "Plantillas de presupuestos y contratos", cloro: true, competitor: "partial" },

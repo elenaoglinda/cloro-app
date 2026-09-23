@@ -30,13 +30,12 @@ export const BLOG_POSTS: BlogPost[] = [
     title:
       "Software para mantenimiento de piscinas: guía completa para empresas en España",
     description:
-      "Qué debe hacer un software de mantenimiento de piscinas en 2026: partes digitales, rutas, cumplimiento del RD 742/2013, informe SILOÉ y facturación VeriFactu. Comparativa frente a WhatsApp y Excel.",
+      "Qué debe hacer un software de mantenimiento de piscinas en 2026: partes digitales, rutas, cumplimiento del RD 742/2013 e informe SILOÉ. Comparativa frente a WhatsApp y Excel.",
     keywords: [
       "software mantenimiento piscinas",
       "app piscinas España",
       "gestión empresa mantenimiento piscinas",
       "SILOÉ",
-      "VeriFactu piscinas",
       "digitalización mantenimiento piscinas",
     ],
     date: "2026-06-30",
@@ -47,7 +46,7 @@ export const BLOG_POSTS: BlogPost[] = [
     cover: softwareCover,
     coverAlt: "Ilustración de una app de mantenimiento de piscinas en el móvil",
     tldr:
-      "La mayoría de empresas de mantenimiento de piscinas en España sigue trabajando con WhatsApp, Excel y papel, y eso provoca partes perdidos, incumplimientos del RD 742/2013 y facturación tarde. Cloro es el software específico para el sector: partes digitales desde el móvil, rutas optimizadas, informe SILOÉ automático, agente WhatsApp para clientes y facturación VeriFactu — todo conectado.",
+      "La mayoría de empresas de mantenimiento de piscinas en España sigue trabajando con WhatsApp, Excel y papel, y eso provoca partes perdidos, incumplimientos del RD 742/2013 y facturación tarde. Cloro es el software específico para el sector: partes digitales desde el móvil, rutas optimizadas, informe SILOÉ automático y agente WhatsApp para clientes — todo conectado.",
     content: `## El problema real: WhatsApp, Excel y libretas
 
 Si diriges una empresa de mantenimiento de piscinas en España, seguramente tu operativa se parece a esto: los técnicos apuntan lecturas en una libreta, mandan una foto por WhatsApp al terminar la visita, y alguien en oficina las pasa a Excel al día siguiente. La factura se hace a fin de mes, revisando conversaciones y hojas sueltas. Cuando llega Sanidad, se rezan las cuentas mientras se buscan los papeles.
@@ -59,7 +58,7 @@ Los problemas típicos que arrastra este flujo son siempre los mismos:
 - **Datos perdidos.** Fotos de WhatsApp que se borran a los pocos meses, libretas que se mojan, empleados que se van con su móvil.
 - **Registros no válidos ante Sanidad.** El RD 742/2013 exige un registro diario con parámetros concretos (cloro libre, cloro combinado, pH, turbidez, temperatura y aforo). Un WhatsApp o una foto de una libreta no cumplen ese requisito.
 - **Técnicos llamando a oficina.** "¿Cuál era el cliente de las 11?", "¿Traigo el bidón de ácido?". Cada llamada es una piscina que espera.
-- **Doble entrada al facturar.** Alguien tiene que releer los partes del mes, cruzar con los contratos, generar las facturas una a una y cumplir además con VeriFactu.
+- **Trabajo administrativo duplicado.** Alguien tiene que releer los partes del mes, cruzarlos con los contratos y volver a introducir la misma información en otras herramientas.
 - **Disputas con comunidades.** "No pasasteis el martes." Sin firma ni geolocalización, la palabra del técnico contra la del presidente.
 
 Cada uno de estos problemas se paga en horas de oficina, en requerimientos sanitarios y en clientes que se van sin avisar.
@@ -75,7 +74,7 @@ Un ERP genérico o un CRM adaptado *casi* sirve, pero siempre falla en lo mismo:
 | Cumplimiento RD 742/2013 | Valida rangos, exige acción correctiva cuando algo se sale y guarda el historial completo. |
 | SILOÉ | Genera el informe mensual con el formato que espera Sanidad, sin recomponerlo a mano. |
 | Comunicación con el cliente | El presidente o administrador recibe el parte firmado al momento, sin llamar a oficina. |
-| Facturación | Los partes del mes se convierten en factura VeriFactu con un clic, sin volver a picar datos. |
+| Seguimiento administrativo | Los partes quedan ordenados por cliente y fecha, sin volver a buscar datos en papeles o conversaciones. |
 
 Sin esos seis bloques integrados, sigues teniendo silos: una cosa en la libreta, otra en el Excel, otra en el programa de facturación. Y los silos son exactamente el origen de los fallos que te cuestan dinero.
 
@@ -89,10 +88,9 @@ Cloro no es un CRM adaptado ni un ERP con módulo de piscinas. Está construido 
 - **Rutas optimizadas.** Cada mañana el técnico ve su ruta ordenada por eficiencia, no por el orden en que se dieron de alta las piscinas.
 - **Informe SILOÉ automático.** A fin de mes el informe está generado con los datos reales y en el formato válido. No hay que recomponerlo desde Excel.
 - **Agente WhatsApp para clientes.** Los presidentes y administradores reciben el parte firmado por WhatsApp automáticamente al terminar la visita, y pueden preguntar por el estado de su piscina sin llamarte.
-- **Facturación VeriFactu integrada.** Los partes del mes se convierten en factura conforme a VeriFactu sin volver a introducir datos. Cierras el ciclo visita → parte → factura sin salir de Cloro.
 - **Historial y trazabilidad.** Todo queda archivado el tiempo que exige la norma, con geolocalización, hora, técnico y firma. Ante un requerimiento de Sanidad se descarga en segundos.
 
-Además, si tu problema principal ahora es que las facturas se hacen tarde y con errores, conviene ver [cómo facturar el mantenimiento de piscinas cumpliendo VeriFactu](/blog/como-facturar-mantenimiento-piscinas-verifactu) antes de elegir un flujo.
+Si tu problema principal son los partes dispersos, revisa [cómo digitalizar los partes de trabajo de piscinas frente al papel](/blog/partes-trabajo-piscinas-digitales-vs-papel) antes de elegir un flujo.
 
 ## Cómo saber si tu empresa está lista para dar el paso
 
@@ -122,7 +120,7 @@ El parte se guarda en el móvil y se sincroniza automáticamente al recuperar se
 
 ---
 
-Cloro es el software específico para empresas de mantenimiento de piscinas en España: partes digitales, rutas optimizadas, informe SILOÉ automático, agente WhatsApp y facturación VeriFactu integrada. Todo en una sola aplicación, pensada para el técnico en el borde de la piscina y para la oficina que cierra el mes.
+Cloro es el software específico para empresas de mantenimiento de piscinas en España: partes digitales, rutas optimizadas, informe SILOÉ automático y agente WhatsApp. Todo en una sola aplicación, pensada para el técnico en el borde de la piscina y para la oficina que cierra el mes.
 `,
   },
 
@@ -466,114 +464,95 @@ Cloro está diseñado específicamente para cumplir el RD 742/2013: registra los
   },
 
   {
-    slug: "como-facturar-mantenimiento-piscinas-verifactu",
-    title:
-      "Cómo facturar el mantenimiento de piscinas cumpliendo VeriFactu",
+    slug: "como-organizar-partes-mantenimiento-piscinas",
+    title: "Cómo organizar los partes de mantenimiento de piscinas sin perder horas",
     description:
-      "VeriFactu obliga a emitir facturas verificables ante la Agencia Tributaria. Guía práctica para empresas de mantenimiento de piscinas: qué es, a quién afecta, plazos y cómo integrar los partes de trabajo con la factura.",
+      "Guía práctica para ordenar partes, visitas y documentación de piscinas sin depender de papel, WhatsApp y hojas de cálculo dispersas.",
     keywords: [
-      "VeriFactu",
-      "facturación mantenimiento piscinas",
-      "factura electrónica piscinas",
-      "software facturación piscinas",
-      "AEAT VeriFactu",
+      "organizar partes mantenimiento piscinas",
+      "gestión partes piscinas",
+      "digitalizar empresa piscinas",
+      "software partes piscinas",
+      "control visitas piscinas",
     ],
     date: "2026-06-26",
-    readingMinutes: 9,
+    readingMinutes: 8,
     author: AUTHOR,
     authorBio: AUTHOR_BIO,
-    tags: ["Facturación", "VeriFactu", "Administración"],
+    tags: ["Partes", "Operaciones", "Digitalización"],
     cover: facturacionCover,
-    coverAlt: "Portada del artículo sobre facturación VeriFactu en mantenimiento de piscinas",
+    coverAlt: "Portada del artículo sobre organización de partes de mantenimiento de piscinas",
     tldr:
-      "VeriFactu obliga a que las facturas cumplan requisitos técnicos de verificación ante la Agencia Tributaria. Si sigues facturando a mano desde partes en papel, pierdes horas cada mes y te arriesgas a incumplir. Cloro genera facturas VeriFactu-compatibles directamente desde los partes de trabajo, sin pasos manuales.",
-    content: `## El problema: cerrar el mes con papel
+      "Los partes en papel y los mensajes sueltos hacen perder información y horas de oficina. Cloro centraliza cada visita, lectura, foto y firma para que el historial de cada piscina esté siempre completo y listo para consultar.",
+    content: `## El problema: cerrar la semana buscando papeles
 
-En una empresa pequeña de mantenimiento de piscinas, cerrar el mes se parece a esto:
+En una empresa de mantenimiento de piscinas, la información suele quedar repartida entre libretas, fotos enviadas por WhatsApp y hojas de cálculo. Cuando un cliente pregunta por una visita o llega el momento de preparar el informe SILOÉ, alguien tiene que reconstruir lo ocurrido.
 
-1. Alguien recoge los partes de papel del mes (o los WhatsApp del técnico).
-2. Cuadra visitas por cliente contra el contrato mensual.
-3. Abre un programa de facturación separado (o una plantilla de Word).
-4. Genera factura a factura, arrastrando errores tipográficos.
-5. Envía por email o entrega en mano.
-6. Vuelve a cuadrar contra el cobro.
+Ese sistema puede funcionar con pocas piscinas. Cuando crecen la cartera y el equipo, aparecen los mismos problemas:
 
-Todo eso, para 60 clientes, son fácilmente **dos días de oficina al mes**. Y ese ciclo tiene tres problemas graves añadidos:
+- **Partes perdidos o ilegibles.** El papel se moja, se extravía o llega tarde a la oficina.
+- **Datos duplicados.** Una lectura se apunta primero a mano y después se vuelve a introducir en Excel.
+- **Falta de trazabilidad.** No siempre queda claro quién hizo la visita, a qué hora o qué producto aplicó.
+- **Respuestas lentas al cliente.** Encontrar el último parte exige revisar conversaciones y carpetas.
 
-- **Facturas con errores.** Confusiones de fechas, servicios no reflejados, extras olvidados.
-- **Cobro tarde.** Facturar el día 15 significa cobrar en el mejor de los casos a 45–60 días.
-- **Riesgo normativo.** Con VeriFactu en marcha, seguir emitiendo facturas fuera del estándar te deja expuesto.
+## Qué debe contener un parte bien organizado
 
-## Qué es VeriFactu y a quién afecta
+| Dato | Por qué importa |
+| --- | --- |
+| Fecha, hora y técnico | Permite demostrar cuándo se realizó la visita. |
+| Lecturas químicas | Mantiene el historial de cloro, pH, turbidez y temperatura. |
+| Productos aplicados | Deja constancia de dosis, cantidades y acciones correctivas. |
+| Fotos y firma | Aporta evidencia del estado de la piscina y del servicio. |
+| Observaciones | Facilita el seguimiento de incidencias en la siguiente visita. |
 
-**VeriFactu** es el sistema de emisión de facturas verificables regulado en España a raíz de la Ley Antifraude (Ley 11/2021) y el Reglamento que la desarrolla. En síntesis, obliga a que los sistemas de facturación:
+Toda esta información debe quedar unida a la piscina correcta. Guardar una parte en papel, otra en el móvil del técnico y otra en una hoja de cálculo crea huecos que después cuestan tiempo y credibilidad.
 
-- Generen facturas con un identificador único y encadenado con la anterior.
-- Incluyan un código QR verificable.
-- Puedan remitir el registro a la Agencia Tributaria (modo "envío") o mantenerlo íntegro y trazable a disposición de la AEAT (modo "no envío").
-- Impidan la modificación de facturas ya emitidas sin trazabilidad.
+## Cómo pasar del papel a un flujo digital
 
-Afecta a **empresarios y profesionales que emitan facturas en España** con muy pocas excepciones. Las empresas de mantenimiento de piscinas están claramente dentro del ámbito, tanto si facturan a comunidades como a hoteles o cámpings.
+El cambio no consiste solo en sustituir una libreta por una pantalla. El objetivo es que el dato se registre una vez y sirva para todo el proceso.
 
-Los plazos han ido moviéndose por sucesivos reales decretos: la referencia práctica es que en 2026 el sistema debe estar operativo para la práctica totalidad de empresas y autónomos que emitan facturas. Comprobar la fecha exacta que aplica a tu caso (por CNAE y facturación) es parte del checklist inicial.
+1. El técnico abre la piscina asignada desde su ruta diaria.
+2. Introduce las lecturas y los productos aplicados.
+3. Añade fotos, observaciones y la firma del cliente.
+4. El parte queda guardado en el historial de la instalación.
+5. La oficina puede consultar la visita sin pedir fotos ni transcribir datos.
+6. Los registros quedan preparados para generar el informe SILOÉ.
 
-Si tu empresa aún no ha ordenado el ciclo visita → parte → factura, revisa antes la [guía completa de software de mantenimiento de piscinas](/blog/software-mantenimiento-piscinas-guia-completa) para entender el sistema completo.
+Si todavía recibes fotografías de formularios manuales, también puedes digitalizarlas. Cloro extrae la información del parte fotografiado y la organiza antes de incorporarla al informe. Así puedes migrar de forma gradual sin perder el trabajo ya realizado.
 
-## El problema del sistema desconectado
+Para entender qué datos exige la normativa, consulta la [guía del RD 742/2013 para piscinas comunitarias](/blog/normativa-piscinas-comunitarias-espana-2025). Si quieres comparar el trabajo diario, revisa también [partes digitales frente a partes en papel](/blog/partes-trabajo-piscinas-digitales-vs-papel).
 
-La mayoría de empresas del sector tiene hoy tres piezas separadas:
+## Cómo ayuda Cloro
 
-| Pieza | Herramienta típica | Problema |
-| --- | --- | --- |
-| Partes de trabajo | Papel o WhatsApp | Datos no estructurados |
-| Facturación | Programa aparte o plantilla | Datos re-introducidos a mano |
-| Contabilidad | Excel o asesoría | Otra vez datos re-introducidos |
+Cloro reúne la operación diaria de la empresa en un único lugar:
 
-Cada salto entre piezas es un punto de error y de retraso. Y ninguno de ellos, por sí solo, cumple VeriFactu de extremo a extremo si al final el técnico entrega un papel y alguien pica la factura a mano.
+- Rutas optimizadas para cada técnico.
+- Partes digitales con lecturas, fotos y firma.
+- Importación de partes manuales mediante una fotografía.
+- Historial completo por cliente y piscina.
+- Alertas cuando una lectura está fuera de rango.
+- Generación del informe SILOÉ en Excel por vaso.
+- Comunicación con clientes desde WhatsApp.
 
-La única solución real es cerrar el bucle: que el parte que firma el cliente en el móvil sea el mismo que alimenta la factura VeriFactu y la información que va a contabilidad.
-
-## Cómo se cierra el ciclo con Cloro
-
-En Cloro el flujo funciona así:
-
-- Cada visita queda registrada como un parte firmado por el cliente.
-- Los servicios del contrato mensual se agrupan automáticamente por cliente.
-- Los servicios extras (una reparación, un cambio de arena, un tratamiento de choque) se marcan en el parte y se suman a la factura del mes.
-- A fin de mes generas todas las facturas de golpe, ya en formato VeriFactu-compatible: identificador único, QR y encadenamiento con la anterior.
-- Las facturas se envían al cliente automáticamente y se archivan.
-- El asesor recibe el paquete del mes listo para contabilizar.
-
-Resultado práctico: lo que antes eran dos días de oficina se convierte en una sesión de una hora, y todo lo que se emite queda dentro del estándar que exige la Agencia Tributaria.
-
-Y como los datos vienen del parte firmado en el móvil, no hay que preocuparse por incoherencias. Si además quieres asegurarte de que tu operativa cumple también con [la normativa sanitaria de piscinas comunitarias en España](/blog/normativa-piscinas-comunitarias-espana-2025), el mismo sistema te sirve para las dos frentes.
-
-## Checklist para pasar a facturación VeriFactu ordenada
-
-- Auditar contratos mensuales y cerrar tarifas claras por cliente.
-- Digitalizar los partes de trabajo antes de tocar la facturación (sin datos limpios no hay factura limpia).
-- Elegir una herramienta que cubra parte → factura sin exportar CSV entre programas.
-- Verificar que emite en formato VeriFactu (identificador único, QR, encadenamiento).
-- Coordinar con el asesor cómo recibirá los registros mensuales.
-- Comunicar al cliente el nuevo formato de factura (con QR).
+El resultado es sencillo: el técnico termina la visita y la oficina ya tiene la información. No hay que esperar al viernes, perseguir libretas ni volver a escribir los mismos datos.
 
 ## Preguntas frecuentes
 
-### ¿VeriFactu obliga a enviar cada factura a Hacienda al momento?
-No necesariamente. Hay modo "envío" (remisión inmediata) y modo "no envío" con conservación íntegra. Cloro cubre el flujo VeriFactu-compatible que exige el reglamento.
+### ¿Puedo empezar aunque todavía use partes en papel?
+Sí. Puedes fotografiar los partes existentes, revisar los datos extraídos y pasar gradualmente al registro digital desde el móvil.
 
-### ¿Puedo seguir facturando en Excel?
-Solo si tu Excel cumple los requisitos de encadenamiento, integridad y QR de VeriFactu, cosa que en la práctica no ocurre.
+### ¿Funciona si el técnico no tiene cobertura?
+Sí. El parte puede guardarse durante la visita y sincronizarse cuando vuelva la conexión.
 
-### ¿Qué pasa con los servicios extras fuera del contrato?
-Se marcan en el parte y se incorporan automáticamente a la factura mensual, sin volver a picar nada.
+### ¿Puedo encontrar todos los partes de una piscina?
+Sí. Cada piscina conserva su historial de visitas, lecturas, fotos, observaciones y firmas.
 
-### ¿Y con las facturas rectificativas?
-Se emiten desde el sistema como rectificativas trazables a la original, tal como exige la norma.
+### ¿Los datos sirven para preparar SILOÉ?
+Sí. Cloro organiza los registros por piscina y genera el Excel correspondiente para su revisión y entrega.
 
 ---
 
-Cloro genera facturas VeriFactu-compatibles directamente desde los partes de trabajo, sin pasos manuales. Cobras más rápido y cumples la normativa fiscal sin esfuerzo extra.
+Si quieres dejar de reconstruir visitas desde papeles y mensajes, prueba Cloro con una ruta real. Registra un parte o fotografía uno manual y comprueba cómo queda todo el historial preparado para SILOÉ.
 `,
   },
 ];
