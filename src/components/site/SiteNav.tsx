@@ -21,8 +21,8 @@ export function SiteNav() {
           <Link to="/blog" className="hover:text-foreground transition">Blog</Link>
         </div>
         <div className="flex items-center gap-3">
-          <a href="/auth" className="hidden sm:inline text-sm text-muted-foreground hover:text-foreground transition">Iniciar sesión</a>
-          <a href="/auth?mode=registro" className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition shadow-soft">
+          <a href="https://panel.cloro.app/login" className="hidden sm:inline text-sm text-muted-foreground hover:text-foreground transition">Iniciar sesión</a>
+          <a href="https://panel.cloro.app/signup" className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition shadow-soft">
             Prueba gratis
           </a>
         </div>
