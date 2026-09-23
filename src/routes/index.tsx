@@ -173,7 +173,7 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="/auth?mode=registro"
+              href="https://panel.cloro.app/signup"
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-foreground text-background font-medium shadow-soft hover:opacity-90 transition"
             >
               Empezar gratis 7 días <ArrowRight className="size-4" />
@@ -472,7 +472,7 @@ function PaperToSiloe() {
 
         <div className="mt-10">
           <a
-            href="/auth?mode=registro"
+            href="https://panel.cloro.app/signup"
             className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-foreground text-background font-medium shadow-soft hover:opacity-90 transition"
           >
             Probar la importación de partes <ArrowRight className="size-4" />
@@ -534,7 +534,7 @@ function WhatsAppAgent() {
           </ul>
           <div className="mt-8">
             <a
-              href="/auth?mode=registro"
+              href="https://panel.cloro.app/signup"
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-foreground text-background font-medium shadow-soft hover:opacity-90 transition"
             >
               Solicitar acceso anticipado
@@ -833,7 +833,7 @@ function Pricing() {
                 + {t.perPool}€ por piscina / mes
               </div>
               <a
-                href="/auth?mode=registro"
+                href="https://panel.cloro.app/signup"
                 className={`mt-6 inline-flex w-full items-center justify-center h-11 rounded-lg font-medium transition ${
                   t.featured
                     ? "bg-background text-foreground hover:opacity-90"
@@ -910,7 +910,7 @@ function CTA() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="/auth?mode=registro"
+                href="https://panel.cloro.app/signup"
                 className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-background text-foreground font-medium hover:opacity-90 transition"
               >
                 Empezar gratis <ArrowRight className="size-4" />
