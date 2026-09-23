@@ -160,7 +160,9 @@ export function blogContent(): Plugin {
     },
     load(id) {
       if (id === RESOLVED_POSTS_ID) {
-        this.addWatchFile(contentDir());
+        // In dev the directory is watched in configureServer; adding a directory as a
+        // watch file here makes Vite's import-analysis try to resolve it as an import.
+        if (!isDev) this.addWatchFile(contentDir());
         return postsModule();
       }
       if (id.startsWith(RESOLVED_BODY_PREFIX)) {
