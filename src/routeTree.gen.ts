@@ -9,52 +9,49 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as PreguntasFrecuentesRouteImport } from './routes/preguntas-frecuentes'
-import { Route as ContactoRouteImport } from './routes/contacto'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as BlogIndexRouteImport } from './routes/blog.index'
-import { Route as InvitacionTokenRouteImport } from './routes/invitacion.$token'
-import { Route as ComparativaEvisaneRouteImport } from './routes/comparativa.evisane'
-import { Route as ComparativaEisiHotelRouteImport } from './routes/comparativa.eisi-hotel'
-import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/comparativa.autocontrolpiscinas'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as AuthenticatedSuperadminRouteImport } from './routes/_authenticated/superadmin'
-import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
+import { Route as PreguntasFrecuentesRouteImport } from './routes/preguntas-frecuentes'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
-import { Route as AuthenticatedSuperadminIndexRouteImport } from './routes/_authenticated/superadmin.index'
+import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
+import { Route as AuthenticatedSuperadminRouteImport } from './routes/_authenticated/superadmin'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as BlogRssDotxmlRouteImport } from './routes/blog.rss[.]xml'
+import { Route as ComparativaAutocontrolpiscinasRouteImport } from './routes/comparativa.autocontrolpiscinas'
+import { Route as ComparativaEisiHotelRouteImport } from './routes/comparativa.eisi-hotel'
+import { Route as ComparativaEvisaneRouteImport } from './routes/comparativa.evisane'
+import { Route as InvitacionTokenRouteImport } from './routes/invitacion.$token'
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
-import { Route as AuthenticatedSuperadminMensajesRouteImport } from './routes/_authenticated/superadmin.mensajes'
-import { Route as AuthenticatedAppRutasRouteImport } from './routes/_authenticated/app.rutas'
-import { Route as AuthenticatedAppPiscinasRouteImport } from './routes/_authenticated/app.piscinas'
 import { Route as AuthenticatedAppAjustesRouteImport } from './routes/_authenticated/app.ajustes'
-import { Route as AuthenticatedSuperadminOrgsIndexRouteImport } from './routes/_authenticated/superadmin.orgs.index'
-import { Route as AuthenticatedAppRutasIndexRouteImport } from './routes/_authenticated/app.rutas.index'
-import { Route as AuthenticatedAppPartesIndexRouteImport } from './routes/_authenticated/app.partes.index'
+import { Route as AuthenticatedAppPiscinasRouteImport } from './routes/_authenticated/app.piscinas'
+import { Route as AuthenticatedAppRutasRouteImport } from './routes/_authenticated/app.rutas'
+import { Route as AuthenticatedSuperadminIndexRouteImport } from './routes/_authenticated/superadmin.index'
+import { Route as AuthenticatedSuperadminMensajesRouteImport } from './routes/_authenticated/superadmin.mensajes'
+import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as AuthenticatedAppClientesIndexRouteImport } from './routes/_authenticated/app.clientes.index'
-import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
-import { Route as AuthenticatedSuperadminOrgsIdRouteImport } from './routes/_authenticated/superadmin.orgs.$id'
-import { Route as AuthenticatedAppRutasIdRouteImport } from './routes/_authenticated/app.rutas.$id'
-import { Route as AuthenticatedAppPartesNuevoRouteImport } from './routes/_authenticated/app.partes.nuevo'
-import { Route as AuthenticatedAppPartesIdRouteImport } from './routes/_authenticated/app.partes.$id'
 import { Route as AuthenticatedAppClientesIdRouteImport } from './routes/_authenticated/app.clientes.$id'
+import { Route as AuthenticatedAppPartesIndexRouteImport } from './routes/_authenticated/app.partes.index'
+import { Route as AuthenticatedAppPartesIdRouteImport } from './routes/_authenticated/app.partes.$id'
+import { Route as AuthenticatedAppPartesNuevoRouteImport } from './routes/_authenticated/app.partes.nuevo'
+import { Route as AuthenticatedAppRutasIndexRouteImport } from './routes/_authenticated/app.rutas.index'
+import { Route as AuthenticatedAppRutasIdRouteImport } from './routes/_authenticated/app.rutas.$id'
+import { Route as AuthenticatedSuperadminOrgsIndexRouteImport } from './routes/_authenticated/superadmin.orgs.index'
+import { Route as AuthenticatedSuperadminOrgsIdRouteImport } from './routes/_authenticated/superadmin.orgs.$id'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as AuthenticatedAppPartesIdEditarRouteImport } from './routes/_authenticated/app.partes.$id.editar'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PreguntasFrecuentesRoute = PreguntasFrecuentesRouteImport.update({
-  id: '/preguntas-frecuentes',
-  path: '/preguntas-frecuentes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactoRoute = ContactoRouteImport.update({
-  id: '/contacto',
-  path: '/contacto',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -62,33 +59,54 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PreguntasFrecuentesRoute = PreguntasFrecuentesRouteImport.update({
+  id: '/preguntas-frecuentes',
+  path: '/preguntas-frecuentes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSuperadminRoute = AuthenticatedSuperadminRouteImport.update({
+  id: '/superadmin',
+  path: '/superadmin',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const InvitacionTokenRoute = InvitacionTokenRouteImport.update({
-  id: '/invitacion/$token',
-  path: '/invitacion/$token',
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComparativaEvisaneRoute = ComparativaEvisaneRouteImport.update({
-  id: '/comparativa/evisane',
-  path: '/comparativa/evisane',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComparativaEisiHotelRoute = ComparativaEisiHotelRouteImport.update({
-  id: '/comparativa/eisi-hotel',
-  path: '/comparativa/eisi-hotel',
+const BlogRssDotxmlRoute = BlogRssDotxmlRouteImport.update({
+  id: '/blog/rss.xml',
+  path: '/blog/rss.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComparativaAutocontrolpiscinasRoute =
@@ -97,46 +115,29 @@ const ComparativaAutocontrolpiscinasRoute =
     path: '/comparativa/autocontrolpiscinas',
     getParentRoute: () => rootRouteImport,
   } as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/blog/$slug',
-  path: '/blog/$slug',
+const ComparativaEisiHotelRoute = ComparativaEisiHotelRouteImport.update({
+  id: '/comparativa/eisi-hotel',
+  path: '/comparativa/eisi-hotel',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedSuperadminRoute = AuthenticatedSuperadminRouteImport.update({
-  id: '/superadmin',
-  path: '/superadmin',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const ComparativaEvisaneRoute = ComparativaEvisaneRouteImport.update({
+  id: '/comparativa/evisane',
+  path: '/comparativa/evisane',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAppRoute = AuthenticatedAppRouteImport.update({
-  id: '/app',
-  path: '/app',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const InvitacionTokenRoute = InvitacionTokenRouteImport.update({
+  id: '/invitacion/$token',
+  path: '/invitacion/$token',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedSuperadminIndexRoute =
-  AuthenticatedSuperadminIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => AuthenticatedSuperadminRoute,
-  } as any)
 const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
-const AuthenticatedSuperadminMensajesRoute =
-  AuthenticatedSuperadminMensajesRouteImport.update({
-    id: '/mensajes',
-    path: '/mensajes',
-    getParentRoute: () => AuthenticatedSuperadminRoute,
-  } as any)
-const AuthenticatedAppRutasRoute = AuthenticatedAppRutasRouteImport.update({
-  id: '/rutas',
-  path: '/rutas',
+const AuthenticatedAppAjustesRoute = AuthenticatedAppAjustesRouteImport.update({
+  id: '/ajustes',
+  path: '/ajustes',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
 const AuthenticatedAppPiscinasRoute =
@@ -145,56 +146,44 @@ const AuthenticatedAppPiscinasRoute =
     path: '/piscinas',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
-const AuthenticatedAppAjustesRoute = AuthenticatedAppAjustesRouteImport.update({
-  id: '/ajustes',
-  path: '/ajustes',
+const AuthenticatedAppRutasRoute = AuthenticatedAppRutasRouteImport.update({
+  id: '/rutas',
+  path: '/rutas',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
-const AuthenticatedSuperadminOrgsIndexRoute =
-  AuthenticatedSuperadminOrgsIndexRouteImport.update({
-    id: '/orgs/',
-    path: '/orgs/',
-    getParentRoute: () => AuthenticatedSuperadminRoute,
-  } as any)
-const AuthenticatedAppRutasIndexRoute =
-  AuthenticatedAppRutasIndexRouteImport.update({
+const AuthenticatedSuperadminIndexRoute =
+  AuthenticatedSuperadminIndexRouteImport.update({
     id: '/',
     path: '/',
-    getParentRoute: () => AuthenticatedAppRutasRoute,
+    getParentRoute: () => AuthenticatedSuperadminRoute,
   } as any)
-const AuthenticatedAppPartesIndexRoute =
-  AuthenticatedAppPartesIndexRouteImport.update({
-    id: '/partes/',
-    path: '/partes/',
-    getParentRoute: () => AuthenticatedAppRoute,
+const AuthenticatedSuperadminMensajesRoute =
+  AuthenticatedSuperadminMensajesRouteImport.update({
+    id: '/mensajes',
+    path: '/mensajes',
+    getParentRoute: () => AuthenticatedSuperadminRoute,
   } as any)
+const BlogTagTagRoute = BlogTagTagRouteImport.update({
+  id: '/blog/tag/$tag',
+  path: '/blog/tag/$tag',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAppClientesIndexRoute =
   AuthenticatedAppClientesIndexRouteImport.update({
     id: '/clientes/',
     path: '/clientes/',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
-const LovableEmailQueueProcessRoute =
-  LovableEmailQueueProcessRouteImport.update({
-    id: '/lovable/email/queue/process',
-    path: '/lovable/email/queue/process',
-    getParentRoute: () => rootRouteImport,
+const AuthenticatedAppClientesIdRoute =
+  AuthenticatedAppClientesIdRouteImport.update({
+    id: '/clientes/$id',
+    path: '/clientes/$id',
+    getParentRoute: () => AuthenticatedAppRoute,
   } as any)
-const AuthenticatedSuperadminOrgsIdRoute =
-  AuthenticatedSuperadminOrgsIdRouteImport.update({
-    id: '/orgs/$id',
-    path: '/orgs/$id',
-    getParentRoute: () => AuthenticatedSuperadminRoute,
-  } as any)
-const AuthenticatedAppRutasIdRoute = AuthenticatedAppRutasIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => AuthenticatedAppRutasRoute,
-} as any)
-const AuthenticatedAppPartesNuevoRoute =
-  AuthenticatedAppPartesNuevoRouteImport.update({
-    id: '/partes/nuevo',
-    path: '/partes/nuevo',
+const AuthenticatedAppPartesIndexRoute =
+  AuthenticatedAppPartesIndexRouteImport.update({
+    id: '/partes/',
+    path: '/partes/',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
 const AuthenticatedAppPartesIdRoute =
@@ -203,11 +192,40 @@ const AuthenticatedAppPartesIdRoute =
     path: '/partes/$id',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
-const AuthenticatedAppClientesIdRoute =
-  AuthenticatedAppClientesIdRouteImport.update({
-    id: '/clientes/$id',
-    path: '/clientes/$id',
+const AuthenticatedAppPartesNuevoRoute =
+  AuthenticatedAppPartesNuevoRouteImport.update({
+    id: '/partes/nuevo',
+    path: '/partes/nuevo',
     getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppRutasIndexRoute =
+  AuthenticatedAppRutasIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedAppRutasRoute,
+  } as any)
+const AuthenticatedAppRutasIdRoute = AuthenticatedAppRutasIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AuthenticatedAppRutasRoute,
+} as any)
+const AuthenticatedSuperadminOrgsIndexRoute =
+  AuthenticatedSuperadminOrgsIndexRouteImport.update({
+    id: '/orgs/',
+    path: '/orgs/',
+    getParentRoute: () => AuthenticatedSuperadminRoute,
+  } as any)
+const AuthenticatedSuperadminOrgsIdRoute =
+  AuthenticatedSuperadminOrgsIdRouteImport.update({
+    id: '/orgs/$id',
+    path: '/orgs/$id',
+    getParentRoute: () => AuthenticatedSuperadminRoute,
+  } as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const AuthenticatedAppPartesIdEditarRoute =
   AuthenticatedAppPartesIdEditarRouteImport.update({
@@ -220,12 +238,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/app': typeof AuthenticatedAppRouteWithChildren
   '/superadmin': typeof AuthenticatedSuperadminRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
@@ -235,6 +255,7 @@ export interface FileRoutesByFullPath {
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
   '/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/superadmin/mensajes': typeof AuthenticatedSuperadminMensajesRoute
+  '/blog/tag/$tag': typeof BlogTagTagRoute
   '/app/': typeof AuthenticatedAppIndexRoute
   '/superadmin/': typeof AuthenticatedSuperadminIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
@@ -253,10 +274,12 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
@@ -265,6 +288,7 @@ export interface FileRoutesByTo {
   '/app/ajustes': typeof AuthenticatedAppAjustesRoute
   '/app/piscinas': typeof AuthenticatedAppPiscinasRoute
   '/superadmin/mensajes': typeof AuthenticatedSuperadminMensajesRoute
+  '/blog/tag/$tag': typeof BlogTagTagRoute
   '/app': typeof AuthenticatedAppIndexRoute
   '/superadmin': typeof AuthenticatedSuperadminIndexRoute
   '/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
@@ -285,12 +309,14 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/contacto': typeof ContactoRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/preguntas-frecuentes': typeof PreguntasFrecuentesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
   '/_authenticated/superadmin': typeof AuthenticatedSuperadminRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/rss.xml': typeof BlogRssDotxmlRoute
   '/comparativa/autocontrolpiscinas': typeof ComparativaAutocontrolpiscinasRoute
   '/comparativa/eisi-hotel': typeof ComparativaEisiHotelRoute
   '/comparativa/evisane': typeof ComparativaEvisaneRoute
@@ -300,6 +326,7 @@ export interface FileRoutesById {
   '/_authenticated/app/piscinas': typeof AuthenticatedAppPiscinasRoute
   '/_authenticated/app/rutas': typeof AuthenticatedAppRutasRouteWithChildren
   '/_authenticated/superadmin/mensajes': typeof AuthenticatedSuperadminMensajesRoute
+  '/blog/tag/$tag': typeof BlogTagTagRoute
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
   '/_authenticated/superadmin/': typeof AuthenticatedSuperadminIndexRoute
   '/_authenticated/app/clientes/$id': typeof AuthenticatedAppClientesIdRoute
@@ -320,12 +347,14 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/contacto'
+    | '/llms.txt'
     | '/preguntas-frecuentes'
     | '/sitemap.xml'
     | '/admin'
     | '/app'
     | '/superadmin'
     | '/blog/$slug'
+    | '/blog/rss.xml'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
@@ -335,6 +364,7 @@ export interface FileRouteTypes {
     | '/app/piscinas'
     | '/app/rutas'
     | '/superadmin/mensajes'
+    | '/blog/tag/$tag'
     | '/app/'
     | '/superadmin/'
     | '/app/clientes/$id'
@@ -353,10 +383,12 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/contacto'
+    | '/llms.txt'
     | '/preguntas-frecuentes'
     | '/sitemap.xml'
     | '/admin'
     | '/blog/$slug'
+    | '/blog/rss.xml'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
@@ -365,6 +397,7 @@ export interface FileRouteTypes {
     | '/app/ajustes'
     | '/app/piscinas'
     | '/superadmin/mensajes'
+    | '/blog/tag/$tag'
     | '/app'
     | '/superadmin'
     | '/app/clientes/$id'
@@ -384,12 +417,14 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/contacto'
+    | '/llms.txt'
     | '/preguntas-frecuentes'
     | '/sitemap.xml'
     | '/_authenticated/admin'
     | '/_authenticated/app'
     | '/_authenticated/superadmin'
     | '/blog/$slug'
+    | '/blog/rss.xml'
     | '/comparativa/autocontrolpiscinas'
     | '/comparativa/eisi-hotel'
     | '/comparativa/evisane'
@@ -399,6 +434,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/piscinas'
     | '/_authenticated/app/rutas'
     | '/_authenticated/superadmin/mensajes'
+    | '/blog/tag/$tag'
     | '/_authenticated/app/'
     | '/_authenticated/superadmin/'
     | '/_authenticated/app/clientes/$id'
@@ -419,45 +455,27 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ContactoRoute: typeof ContactoRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   PreguntasFrecuentesRoute: typeof PreguntasFrecuentesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  BlogRssDotxmlRoute: typeof BlogRssDotxmlRoute
   ComparativaAutocontrolpiscinasRoute: typeof ComparativaAutocontrolpiscinasRoute
   ComparativaEisiHotelRoute: typeof ComparativaEisiHotelRoute
   ComparativaEvisaneRoute: typeof ComparativaEvisaneRoute
   InvitacionTokenRoute: typeof InvitacionTokenRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  BlogTagTagRoute: typeof BlogTagTagRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/preguntas-frecuentes': {
-      id: '/preguntas-frecuentes'
-      path: '/preguntas-frecuentes'
-      fullPath: '/preguntas-frecuentes'
-      preLoaderRoute: typeof PreguntasFrecuentesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contacto': {
-      id: '/contacto'
-      path: '/contacto'
-      fullPath: '/contacto'
-      preLoaderRoute: typeof ContactoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -467,60 +485,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog/': {
-      id: '/blog/'
-      path: '/blog'
-      fullPath: '/blog/'
-      preLoaderRoute: typeof BlogIndexRouteImport
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/invitacion/$token': {
-      id: '/invitacion/$token'
-      path: '/invitacion/$token'
-      fullPath: '/invitacion/$token'
-      preLoaderRoute: typeof InvitacionTokenRouteImport
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/comparativa/evisane': {
-      id: '/comparativa/evisane'
-      path: '/comparativa/evisane'
-      fullPath: '/comparativa/evisane'
-      preLoaderRoute: typeof ComparativaEvisaneRouteImport
+    '/preguntas-frecuentes': {
+      id: '/preguntas-frecuentes'
+      path: '/preguntas-frecuentes'
+      fullPath: '/preguntas-frecuentes'
+      preLoaderRoute: typeof PreguntasFrecuentesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/comparativa/eisi-hotel': {
-      id: '/comparativa/eisi-hotel'
-      path: '/comparativa/eisi-hotel'
-      fullPath: '/comparativa/eisi-hotel'
-      preLoaderRoute: typeof ComparativaEisiHotelRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/comparativa/autocontrolpiscinas': {
-      id: '/comparativa/autocontrolpiscinas'
-      path: '/comparativa/autocontrolpiscinas'
-      fullPath: '/comparativa/autocontrolpiscinas'
-      preLoaderRoute: typeof ComparativaAutocontrolpiscinasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/blog/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/superadmin': {
-      id: '/_authenticated/superadmin'
-      path: '/superadmin'
-      fullPath: '/superadmin'
-      preLoaderRoute: typeof AuthenticatedSuperadminRouteImport
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/app': {
@@ -530,46 +534,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin': {
-      id: '/_authenticated/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+    '/_authenticated/superadmin': {
+      id: '/_authenticated/superadmin'
+      path: '/superadmin'
+      fullPath: '/superadmin'
+      preLoaderRoute: typeof AuthenticatedSuperadminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/superadmin/': {
-      id: '/_authenticated/superadmin/'
-      path: '/'
-      fullPath: '/superadmin/'
-      preLoaderRoute: typeof AuthenticatedSuperadminIndexRouteImport
-      parentRoute: typeof AuthenticatedSuperadminRoute
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/rss.xml': {
+      id: '/blog/rss.xml'
+      path: '/blog/rss.xml'
+      fullPath: '/blog/rss.xml'
+      preLoaderRoute: typeof BlogRssDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comparativa/autocontrolpiscinas': {
+      id: '/comparativa/autocontrolpiscinas'
+      path: '/comparativa/autocontrolpiscinas'
+      fullPath: '/comparativa/autocontrolpiscinas'
+      preLoaderRoute: typeof ComparativaAutocontrolpiscinasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comparativa/eisi-hotel': {
+      id: '/comparativa/eisi-hotel'
+      path: '/comparativa/eisi-hotel'
+      fullPath: '/comparativa/eisi-hotel'
+      preLoaderRoute: typeof ComparativaEisiHotelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comparativa/evisane': {
+      id: '/comparativa/evisane'
+      path: '/comparativa/evisane'
+      fullPath: '/comparativa/evisane'
+      preLoaderRoute: typeof ComparativaEvisaneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invitacion/$token': {
+      id: '/invitacion/$token'
+      path: '/invitacion/$token'
+      fullPath: '/invitacion/$token'
+      preLoaderRoute: typeof InvitacionTokenRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/app/': {
       id: '/_authenticated/app/'
       path: '/'
       fullPath: '/app/'
       preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
-    }
-    '/_authenticated/superadmin/mensajes': {
-      id: '/_authenticated/superadmin/mensajes'
-      path: '/mensajes'
-      fullPath: '/superadmin/mensajes'
-      preLoaderRoute: typeof AuthenticatedSuperadminMensajesRouteImport
-      parentRoute: typeof AuthenticatedSuperadminRoute
-    }
-    '/_authenticated/app/rutas': {
-      id: '/_authenticated/app/rutas'
-      path: '/rutas'
-      fullPath: '/app/rutas'
-      preLoaderRoute: typeof AuthenticatedAppRutasRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
-    }
-    '/_authenticated/app/piscinas': {
-      id: '/_authenticated/app/piscinas'
-      path: '/piscinas'
-      fullPath: '/app/piscinas'
-      preLoaderRoute: typeof AuthenticatedAppPiscinasRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
     '/_authenticated/app/ajustes': {
@@ -579,26 +604,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppAjustesRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
-    '/_authenticated/superadmin/orgs/': {
-      id: '/_authenticated/superadmin/orgs/'
-      path: '/orgs'
-      fullPath: '/superadmin/orgs/'
-      preLoaderRoute: typeof AuthenticatedSuperadminOrgsIndexRouteImport
+    '/_authenticated/app/piscinas': {
+      id: '/_authenticated/app/piscinas'
+      path: '/piscinas'
+      fullPath: '/app/piscinas'
+      preLoaderRoute: typeof AuthenticatedAppPiscinasRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/rutas': {
+      id: '/_authenticated/app/rutas'
+      path: '/rutas'
+      fullPath: '/app/rutas'
+      preLoaderRoute: typeof AuthenticatedAppRutasRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/superadmin/': {
+      id: '/_authenticated/superadmin/'
+      path: '/'
+      fullPath: '/superadmin/'
+      preLoaderRoute: typeof AuthenticatedSuperadminIndexRouteImport
       parentRoute: typeof AuthenticatedSuperadminRoute
     }
-    '/_authenticated/app/rutas/': {
-      id: '/_authenticated/app/rutas/'
-      path: '/'
-      fullPath: '/app/rutas/'
-      preLoaderRoute: typeof AuthenticatedAppRutasIndexRouteImport
-      parentRoute: typeof AuthenticatedAppRutasRoute
+    '/_authenticated/superadmin/mensajes': {
+      id: '/_authenticated/superadmin/mensajes'
+      path: '/mensajes'
+      fullPath: '/superadmin/mensajes'
+      preLoaderRoute: typeof AuthenticatedSuperadminMensajesRouteImport
+      parentRoute: typeof AuthenticatedSuperadminRoute
     }
-    '/_authenticated/app/partes/': {
-      id: '/_authenticated/app/partes/'
-      path: '/partes'
-      fullPath: '/app/partes/'
-      preLoaderRoute: typeof AuthenticatedAppPartesIndexRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
+    '/blog/tag/$tag': {
+      id: '/blog/tag/$tag'
+      path: '/blog/tag/$tag'
+      fullPath: '/blog/tag/$tag'
+      preLoaderRoute: typeof BlogTagTagRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/app/clientes/': {
       id: '/_authenticated/app/clientes/'
@@ -607,32 +646,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppClientesIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
-    '/lovable/email/queue/process': {
-      id: '/lovable/email/queue/process'
-      path: '/lovable/email/queue/process'
-      fullPath: '/lovable/email/queue/process'
-      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_authenticated/app/clientes/$id': {
+      id: '/_authenticated/app/clientes/$id'
+      path: '/clientes/$id'
+      fullPath: '/app/clientes/$id'
+      preLoaderRoute: typeof AuthenticatedAppClientesIdRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
     }
-    '/_authenticated/superadmin/orgs/$id': {
-      id: '/_authenticated/superadmin/orgs/$id'
-      path: '/orgs/$id'
-      fullPath: '/superadmin/orgs/$id'
-      preLoaderRoute: typeof AuthenticatedSuperadminOrgsIdRouteImport
-      parentRoute: typeof AuthenticatedSuperadminRoute
-    }
-    '/_authenticated/app/rutas/$id': {
-      id: '/_authenticated/app/rutas/$id'
-      path: '/$id'
-      fullPath: '/app/rutas/$id'
-      preLoaderRoute: typeof AuthenticatedAppRutasIdRouteImport
-      parentRoute: typeof AuthenticatedAppRutasRoute
-    }
-    '/_authenticated/app/partes/nuevo': {
-      id: '/_authenticated/app/partes/nuevo'
-      path: '/partes/nuevo'
-      fullPath: '/app/partes/nuevo'
-      preLoaderRoute: typeof AuthenticatedAppPartesNuevoRouteImport
+    '/_authenticated/app/partes/': {
+      id: '/_authenticated/app/partes/'
+      path: '/partes'
+      fullPath: '/app/partes/'
+      preLoaderRoute: typeof AuthenticatedAppPartesIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
     '/_authenticated/app/partes/$id': {
@@ -642,12 +667,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppPartesIdRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
-    '/_authenticated/app/clientes/$id': {
-      id: '/_authenticated/app/clientes/$id'
-      path: '/clientes/$id'
-      fullPath: '/app/clientes/$id'
-      preLoaderRoute: typeof AuthenticatedAppClientesIdRouteImport
+    '/_authenticated/app/partes/nuevo': {
+      id: '/_authenticated/app/partes/nuevo'
+      path: '/partes/nuevo'
+      fullPath: '/app/partes/nuevo'
+      preLoaderRoute: typeof AuthenticatedAppPartesNuevoRouteImport
       parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/rutas/': {
+      id: '/_authenticated/app/rutas/'
+      path: '/'
+      fullPath: '/app/rutas/'
+      preLoaderRoute: typeof AuthenticatedAppRutasIndexRouteImport
+      parentRoute: typeof AuthenticatedAppRutasRoute
+    }
+    '/_authenticated/app/rutas/$id': {
+      id: '/_authenticated/app/rutas/$id'
+      path: '/$id'
+      fullPath: '/app/rutas/$id'
+      preLoaderRoute: typeof AuthenticatedAppRutasIdRouteImport
+      parentRoute: typeof AuthenticatedAppRutasRoute
+    }
+    '/_authenticated/superadmin/orgs/': {
+      id: '/_authenticated/superadmin/orgs/'
+      path: '/orgs'
+      fullPath: '/superadmin/orgs/'
+      preLoaderRoute: typeof AuthenticatedSuperadminOrgsIndexRouteImport
+      parentRoute: typeof AuthenticatedSuperadminRoute
+    }
+    '/_authenticated/superadmin/orgs/$id': {
+      id: '/_authenticated/superadmin/orgs/$id'
+      path: '/orgs/$id'
+      fullPath: '/superadmin/orgs/$id'
+      preLoaderRoute: typeof AuthenticatedSuperadminOrgsIdRouteImport
+      parentRoute: typeof AuthenticatedSuperadminRoute
+    }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/app/partes/$id/editar': {
       id: '/_authenticated/app/partes/$id/editar'
@@ -756,14 +816,17 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ContactoRoute: ContactoRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   PreguntasFrecuentesRoute: PreguntasFrecuentesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   BlogSlugRoute: BlogSlugRoute,
+  BlogRssDotxmlRoute: BlogRssDotxmlRoute,
   ComparativaAutocontrolpiscinasRoute: ComparativaAutocontrolpiscinasRoute,
   ComparativaEisiHotelRoute: ComparativaEisiHotelRoute,
   ComparativaEvisaneRoute: ComparativaEvisaneRoute,
   InvitacionTokenRoute: InvitacionTokenRoute,
   BlogIndexRoute: BlogIndexRoute,
+  BlogTagTagRoute: BlogTagTagRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport

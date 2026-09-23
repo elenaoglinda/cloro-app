@@ -1,60 +1,38 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { BLOG_POSTS, getPostBySlug, type BlogPost } from "@/lib/blog-posts";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Breadcrumbs } from "@/components/blog/Breadcrumbs";
+import { PostBody } from "@/components/blog/PostBody";
+import {
+  formatPostDate,
+  getPostBody,
+  getPostBySlug,
+  getRelatedPosts,
+  tagSlug,
+  type BlogPost,
+} from "@/lib/blog/posts";
+import { postHead } from "@/lib/blog/seo";
 import "@/styles/blog-prose.css";
 
 export const Route = createFileRoute("/blog/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const post = getPostBySlug(params.slug);
     if (!post) throw notFound();
-    return { post };
+    return { post, body: await getPostBody(post.slug) };
   },
   head: ({ loaderData }) => {
-    const post = loaderData?.post;
-    if (!post) {
-      return { meta: [{ title: "Artículo no encontrado | Cloro" }] };
+    if (!loaderData?.post) {
+      return {
+        meta: [{ title: "Artículo no encontrado | Cloro" }, { name: "robots", content: "noindex" }],
+      };
     }
-    const url = `https://cloro.app/blog/${post.slug}`;
-    const image = `https://cloro.app${post.cover}`;
-    const ld = {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.description,
-      keywords: post.keywords.join(", "),
-      datePublished: post.date,
-      dateModified: post.date,
-      image,
-      author: { "@type": "Organization", name: post.author },
-      publisher: {
-        "@type": "Organization",
-        name: "Cloro",
-        url: "https://cloro.app/",
-      },
-      mainEntityOfPage: url,
-    };
-    return {
-      meta: [
-        { title: `${post.title} | Cloro` },
-        { name: "description", content: post.description },
-        { name: "keywords", content: post.keywords.join(", ") },
-        { property: "og:title", content: post.title },
-        { property: "og:description", content: post.description },
-        { property: "og:type", content: "article" },
-        { property: "og:url", content: url },
-        { property: "og:image", content: image },
-        { property: "article:published_time", content: post.date },
-        { property: "article:author", content: post.author },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: image },
-      ],
-      links: [{ rel: "canonical", href: url }],
-      scripts: [{ type: "application/ld+json", children: JSON.stringify(ld) }],
-    };
+    return postHead(loaderData.post);
   },
   notFoundComponent: () => (
     <div className="min-h-screen bg-background">
@@ -73,129 +51,139 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function BlogPostPage() {
-  const { post } = Route.useLoaderData() as { post: BlogPost };
-  const related = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const { post, body } = Route.useLoaderData() as { post: BlogPost; body: string };
+  const related = getRelatedPosts(post);
+  const toc = post.headings.filter((h) => h.depth === 2);
+  const wasUpdated = post.updated !== post.date;
 
   return (
     <div className="min-h-screen bg-background">
       <SiteNav />
       <main className="max-w-3xl mx-auto px-6 py-12 lg:py-16">
-        <div className="mb-8">
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition"
-          >
-            <ArrowLeft className="size-4" /> Volver al blog
-          </Link>
-        </div>
-
-        <img
-          src={post.cover}
-          alt={post.coverAlt}
-          width={1280}
-          height={720}
-          className="w-full aspect-[16/9] object-cover border border-border"
+        <Breadcrumbs
+          items={[
+            { label: "Inicio", to: "/" },
+            { label: "Blog", to: "/blog" },
+            { label: post.title },
+          ]}
         />
 
-        <header className="mt-8">
-          <h1 className="text-3xl lg:text-5xl leading-tight">{post.title}</h1>
-          <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-            <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString("es-ES", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </time>
-            <span>·</span>
-            <span>{post.author}</span>
-            <span>·</span>
-            <span>{post.readingMinutes} min de lectura</span>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {post.tags.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-border px-2.5 py-0.5 text-[11px] text-muted-foreground"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </header>
+        <article className="mt-8">
+          <img
+            src={post.cover}
+            alt={post.coverAlt}
+            width={post.coverSize?.width ?? 1280}
+            height={post.coverSize?.height ?? 720}
+            fetchPriority="high"
+            className="w-full aspect-[16/9] object-cover border border-border"
+          />
 
-        <section className="mt-10 mb-8 border-l-2 border-accent bg-accent/5 px-5 py-4">
-          <p className="text-xs uppercase tracking-wider text-accent font-medium">
-            TL;DR
-          </p>
-          <p className="mt-2 text-foreground/90 leading-relaxed">{post.tldr}</p>
-        </section>
+          <header className="mt-8">
+            <h1 className="text-3xl lg:text-5xl leading-tight">{post.title}</h1>
+            <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+              <time dateTime={post.date}>{formatPostDate(post.date)}</time>
+              {wasUpdated && (
+                <>
+                  <span>·</span>
+                  <span>
+                    Actualizado el{" "}
+                    <time dateTime={post.updated}>{formatPostDate(post.updated)}</time>
+                  </span>
+                </>
+              )}
+              <span>·</span>
+              <span>{post.authorInfo.name}</span>
+              <span>·</span>
+              <span>{post.readingMinutes} min de lectura</span>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {post.tags.map((t) => (
+                <Link
+                  key={t}
+                  to="/blog/tag/$tag"
+                  params={{ tag: tagSlug(t) }}
+                  className="rounded-full border border-border px-2.5 py-0.5 text-[11px] text-muted-foreground hover:text-foreground hover:border-foreground/30 transition"
+                >
+                  {t}
+                </Link>
+              ))}
+            </div>
+          </header>
 
-        <article className="blog-content mt-10">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              a: ({ node, ...props }) => (
-                <a
-                  className="text-primary underline underline-offset-4 decoration-primary/30 hover:decoration-primary transition"
-                  {...props}
-                />
-              ),
-              strong: ({ node, ...props }) => (
-                <strong className="font-semibold text-foreground" {...props} />
-              ),
-              em: ({ node, ...props }) => (
-                <em className="italic text-foreground/90" {...props} />
-              ),
-              code: ({ node, className, children, ...props }) => {
-                const isBlock = /language-/.test(className || "");
-                if (isBlock) {
-                  return (
-                    <code
-                      className={`${className || ""} block p-4 bg-muted text-sm font-mono overflow-x-auto`}
-                      {...props}
-                    >
-                      {children}
-                    </code>
-                  );
-                }
-                return (
-                  <code
-                    className="px-1.5 py-0.5 bg-muted text-[0.9em] font-mono rounded"
-                    {...props}
-                  >
-                    {children}
-                  </code>
-                );
-              },
-              pre: ({ node, ...props }) => (
-                <pre className="my-6 overflow-x-auto bg-muted border border-border" {...props} />
-              ),
-              table: ({ children }) => (
-                <div className="overflow-x-auto">
-                  <table>{children}</table>
-                </div>
-              ),
-              img: ({ node, ...props }) => (
-                <img
-                  className="my-8 w-full border border-border"
-                  loading="lazy"
-                  {...props}
-                />
-              ),
-            }}
+          <section
+            aria-label="Resumen"
+            className="mt-10 mb-8 border-l-2 border-accent bg-accent/5 px-5 py-4"
           >
-            {post.content}
-          </ReactMarkdown>
-        </article>
+            <p className="text-xs uppercase tracking-wider text-accent font-medium">TL;DR</p>
+            <p className="mt-2 text-foreground/90 leading-relaxed">{post.tldr}</p>
+          </section>
 
-        <aside className="mt-14 border border-border p-6">
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">
-            Sobre el autor
-          </p>
-          <p className="mt-3 font-medium">{post.author}</p>
-          <p className="mt-1 text-sm text-muted-foreground">{post.authorBio}</p>
-        </aside>
+          {toc.length >= 3 && (
+            <nav aria-label="Índice del artículo" className="mb-10 border border-border p-5">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                En este artículo
+              </p>
+              <ol className="mt-3 space-y-1.5 text-sm list-decimal list-inside marker:text-muted-foreground">
+                {toc.map((h) => (
+                  <li key={h.id}>
+                    <a
+                      href={`#${h.id}`}
+                      className="hover:text-primary hover:underline underline-offset-4"
+                    >
+                      {h.text}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
+
+          <div className="blog-content">
+            <PostBody markdown={body} />
+          </div>
+
+          <section id="preguntas-frecuentes" className="mt-14" aria-labelledby="faq-title">
+            <h2 id="faq-title" className="text-2xl">
+              Preguntas frecuentes
+            </h2>
+            <Accordion type="multiple" className="mt-4 border-t border-border">
+              {post.faqs.map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="border-border">
+                  <AccordionTrigger className="text-left text-base">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="blog-content text-[15px]">
+                    <PostBody markdown={faq.answer} />
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </section>
+
+          <aside className="mt-14 border border-border p-6">
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">Sobre el autor</p>
+            <p className="mt-3 font-medium">
+              {post.authorInfo.url ? (
+                <a
+                  href={post.authorInfo.url}
+                  className="hover:underline underline-offset-4"
+                  rel="author"
+                >
+                  {post.authorInfo.name}
+                </a>
+              ) : (
+                post.authorInfo.name
+              )}
+              {post.authorInfo.jobTitle && (
+                <span className="text-muted-foreground font-normal">
+                  {" "}
+                  · {post.authorInfo.jobTitle}
+                </span>
+              )}
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">{post.authorInfo.bio}</p>
+          </aside>
+        </article>
 
         {related.length > 0 && (
           <section className="mt-14 border-t border-border pt-10">
@@ -212,8 +200,9 @@ function BlogPostPage() {
                     src={r.cover}
                     alt={r.coverAlt}
                     loading="lazy"
-                    width={1280}
-                    height={720}
+                    decoding="async"
+                    width={r.coverSize?.width ?? 1280}
+                    height={r.coverSize?.height ?? 720}
                     className="w-full aspect-[16/9] object-cover"
                   />
                   <div className="p-4">

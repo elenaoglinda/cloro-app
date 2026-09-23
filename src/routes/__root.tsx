@@ -107,8 +107,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
+          "@id": "https://cloro.app/#organization",
           name: "Cloro",
           url: "https://cloro.app/",
+          logo: "https://cloro.app/favicon.png",
           description:
             "Sistema operativo para empresas de mantenimiento de piscinas en España.",
         }),
@@ -118,8 +120,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
+          "@id": "https://cloro.app/#website",
           name: "Cloro",
           url: "https://cloro.app/",
+          inLanguage: "es-ES",
+          publisher: { "@id": "https://cloro.app/#organization" },
         }),
       },
     ],
