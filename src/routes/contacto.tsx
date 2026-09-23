@@ -13,7 +13,7 @@ export const Route = createFileRoute("/contacto")({
       {
         name: "description",
         content:
-          "Habla con el equipo de Cloro. Resolvemos dudas sobre rutas, SILOÉ, facturación VeriFactu y migración desde Excel u otros programas.",
+          "Habla con el equipo de Cloro. Resolvemos dudas sobre rutas, SILOÉ, partes digitales y migración desde Excel u otros programas.",
       },
       { property: "og:title", content: "Contacto — Cloro" },
       {

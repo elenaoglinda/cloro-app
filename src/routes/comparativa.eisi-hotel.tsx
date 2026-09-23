@@ -33,11 +33,11 @@ function Page() {
     <ComparisonPage
       competitorName={COMPETITOR}
       competitorTagline="Suite de gestión técnica para hoteles, con un módulo de control de piscinas y SPA."
-      intro="EISI Hotel está diseñado para los servicios técnicos internos de un hotel: mantenimiento general, PRL, legionela y piscinas. Cloro está pensado para empresas de mantenimiento de piscinas que prestan servicio externo — incluyendo hoteles, comunidades y chalets — con rutas multi-cliente, facturación VeriFactu y atención por WhatsApp."
+      intro="EISI Hotel está diseñado para los servicios técnicos internos de un hotel: mantenimiento general, PRL, legionela y piscinas. Cloro está pensado para empresas de mantenimiento de piscinas que prestan servicio externo — incluyendo hoteles, comunidades y chalets — con rutas multi-cliente, cobros y atención por WhatsApp."
       summary={[
         "Optimizado para empresas externas con múltiples clientes",
         "Rutas multi-cliente y partes facturables por visita",
-        "Facturación VeriFactu y cobros recurrentes incluidos",
+        "Cobros recurrentes incluidos",
         "Portal del cliente para hoteles y administradores",
       ]}
       sections={[
@@ -63,8 +63,7 @@ function Page() {
         {
           title: "Cliente y facturación",
           rows: [
-            { feature: "Facturación electrónica VeriFactu", cloro: true, competitor: false },
-            { feature: "Cobros recurrentes con Bizum, tarjeta y SEPA", cloro: true, competitor: false },
+                        { feature: "Cobros recurrentes con Bizum, tarjeta y SEPA", cloro: true, competitor: false },
             { feature: "Portal del cliente para hoteles y administradores", cloro: true, competitor: "partial" },
             { feature: "Agente WhatsApp 24/7 para atender clientes", cloro: true, competitor: false },
             { feature: "Presupuestos y contratos de mantenimiento", cloro: true, competitor: "partial" },
@@ -86,7 +85,7 @@ function Page() {
         competitor:
           "Eres el equipo técnico interno de un hotel y quieres una sola herramienta para gestionar mantenimiento general del edificio además de la piscina.",
       }}
-      verdict="EISI Hotel encaja para el departamento técnico interno de un hotel. Si tu empresa presta el servicio de mantenimiento de piscinas a varios clientes — hoteles incluidos — Cloro te da rutas multi-cliente, facturación VeriFactu y un portal por cliente que EISI no está diseñado para cubrir."
+      verdict="EISI Hotel encaja para el departamento técnico interno de un hotel. Si tu empresa presta el servicio de mantenimiento de piscinas a varios clientes — hoteles incluidos — Cloro te da rutas multi-cliente, cobros y un portal por cliente que EISI no está diseñado para cubrir."
     />
   );
 }

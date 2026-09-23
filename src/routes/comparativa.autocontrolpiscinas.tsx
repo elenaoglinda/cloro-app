@@ -11,7 +11,7 @@ export const Route = createFileRoute("/comparativa/autocontrolpiscinas")({
       {
         name: "description",
         content:
-          "Comparamos Cloro y AutocontrolPiscinas: SILOÉ, rutas, facturación VeriFactu, agente WhatsApp y precios para empresas de mantenimiento en España.",
+          "Comparamos Cloro y AutocontrolPiscinas: SILOÉ, rutas, partes digitales y agente WhatsApp y precios para empresas de mantenimiento en España.",
       },
       { property: "og:title", content: `Cloro vs ${COMPETITOR}` },
       {
@@ -33,11 +33,11 @@ function Page() {
     <ComparisonPage
       competitorName={COMPETITOR}
       competitorTagline="Software de autocontrol sanitario centrado en parámetros de agua y cumplimiento SILOÉ."
-      intro="AutocontrolPiscinas es una herramienta especializada en el autocontrol sanitario: registra parámetros, calcula dosificaciones y ayuda a cumplir el RD 742/2013. Cloro cubre eso, y además gestiona rutas, técnicos, facturación VeriFactu, cobros y la atención de clientes por WhatsApp."
+      intro="AutocontrolPiscinas es una herramienta especializada en el autocontrol sanitario: registra parámetros, calcula dosificaciones y ayuda a cumplir el RD 742/2013. Cloro cubre eso, y además gestiona rutas, técnicos, cobros y la atención de clientes por WhatsApp."
       summary={[
         "Mismo cumplimiento SILOÉ y XML del Anexo IV",
         "Cloro añade rutas, partes y firma digital del técnico",
-        "Facturación VeriFactu, Bizum y SEPA integrados",
+        "Cobros con Bizum y SEPA integrados",
         "Agente WhatsApp 24/7 para responder a clientes",
       ]}
       sections={[
@@ -64,8 +64,7 @@ function Page() {
         {
           title: "Cliente y facturación",
           rows: [
-            { feature: "Facturación electrónica VeriFactu", cloro: true, competitor: false },
-            { feature: "Cobros con Bizum, tarjeta y SEPA", cloro: true, competitor: false },
+                        { feature: "Cobros con Bizum, tarjeta y SEPA", cloro: true, competitor: false },
             { feature: "Portal del cliente y comunidad de propietarios", cloro: true, competitor: false },
             { feature: "Agente WhatsApp 24/7", cloro: true, competitor: false },
             { feature: "Recordatorios automáticos y avisos de visita", cloro: true, competitor: "partial" },
