@@ -33,11 +33,11 @@ function Page() {
     <ComparisonPage
       competitorName={COMPETITOR}
       competitorTagline="Software de autocontrol sanitario centrado en parámetros de agua y cumplimiento SILOÉ."
-      intro="AutocontrolPiscinas es una herramienta especializada en el autocontrol sanitario: registra parámetros, calcula dosificaciones y ayuda a cumplir el RD 742/2013. Cloro cubre eso, y además gestiona rutas, técnicos, cobros y la atención de clientes por WhatsApp."
+      intro="AutocontrolPiscinas es una herramienta especializada en el autocontrol sanitario: registra parámetros, calcula dosificaciones y ayuda a cumplir el RD 742/2013. Cloro cubre eso, y además gestiona rutas, técnicos, partes de trabajo y la atención de clientes por WhatsApp."
       summary={[
         "Mismo cumplimiento SILOÉ y XML del Anexo IV",
         "Cloro añade rutas, partes y firma digital del técnico",
-        "Cobros con Bizum y SEPA integrados",
+        "Portal del cliente para comunidades y administradores",
         "Agente WhatsApp 24/7 para responder a clientes",
       ]}
       sections={[
@@ -62,9 +62,8 @@ function Page() {
           ],
         },
         {
-          title: "Cliente y facturación",
+          title: "Cliente",
           rows: [
-                        { feature: "Cobros con Bizum, tarjeta y SEPA", cloro: true, competitor: false },
             { feature: "Portal del cliente y comunidad de propietarios", cloro: true, competitor: false },
             { feature: "Agente WhatsApp 24/7", cloro: true, competitor: false },
             { feature: "Recordatorios automáticos y avisos de visita", cloro: true, competitor: "partial" },
@@ -82,11 +81,11 @@ function Page() {
       ]}
       bestFor={{
         cloro:
-          "Tu empresa hace mantenimiento de piscinas y quieres unificar cumplimiento sanitario, rutas, facturación y atención al cliente en una sola herramienta.",
+          "Tu empresa hace mantenimiento de piscinas y quieres unificar cumplimiento sanitario, rutas, partes y atención al cliente en una sola herramienta.",
         competitor:
-          "Solo necesitas registrar parámetros de agua y generar el XML de SILOÉ, y el resto de la operativa (rutas, facturación, cobros) la llevas con otras herramientas.",
+          "Solo necesitas registrar parámetros de agua y generar el XML de SILOÉ, y el resto de la operativa (rutas, partes, comunicación con clientes) la llevas con otras herramientas.",
       }}
-      verdict="Si tu negocio es operar piscinas — con técnicos, rutas, clientes y facturas — Cloro te cubre de extremo a extremo. AutocontrolPiscinas es una buena pieza única para el autocontrol, pero te obliga a sumar otras herramientas para facturar, planificar y comunicarte con clientes."
+      verdict="Si tu negocio es operar piscinas — con técnicos, rutas y clientes — Cloro te cubre de extremo a extremo. AutocontrolPiscinas es una buena pieza única para el autocontrol, pero te obliga a sumar otras herramientas para planificar rutas, gestionar partes y comunicarte con clientes."
     />
   );
 }

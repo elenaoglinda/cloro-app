@@ -78,7 +78,7 @@ Señales típicas de que ya vas tarde:
 
 - Dedicas más de un día al mes a componer los SILOÉ de cada instalación.
 - Has recibido al menos un requerimiento por datos incompletos o incoherentes.
-- Facturar el mes te lleva más de dos días.
+- Cerrar el mes (partes, informes, incidencias) te lleva más de dos días.
 - Cuando un técnico se va, la información se va con él.
 - Los presidentes te escriben por WhatsApp pidiendo el parte de la última visita.
 

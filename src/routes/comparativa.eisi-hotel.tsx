@@ -33,11 +33,11 @@ function Page() {
     <ComparisonPage
       competitorName={COMPETITOR}
       competitorTagline="Suite de gestión técnica para hoteles, con un módulo de control de piscinas y SPA."
-      intro="EISI Hotel está diseñado para los servicios técnicos internos de un hotel: mantenimiento general, PRL, legionela y piscinas. Cloro está pensado para empresas de mantenimiento de piscinas que prestan servicio externo — incluyendo hoteles, comunidades y chalets — con rutas multi-cliente, cobros y atención por WhatsApp."
+      intro="EISI Hotel está diseñado para los servicios técnicos internos de un hotel: mantenimiento general, PRL, legionela y piscinas. Cloro está pensado para empresas de mantenimiento de piscinas que prestan servicio externo — incluyendo hoteles, comunidades y chalets — con rutas multi-cliente, portal del cliente y atención por WhatsApp."
       summary={[
         "Optimizado para empresas externas con múltiples clientes",
-        "Rutas multi-cliente y partes facturables por visita",
-        "Cobros recurrentes incluidos",
+        "Rutas multi-cliente y partes por visita y cliente",
+        "Agente WhatsApp 24/7 para atender clientes",
         "Portal del cliente para hoteles y administradores",
       ]}
       sections={[
@@ -55,18 +55,15 @@ function Page() {
           rows: [
             { feature: "Cartera de clientes con NIF y contactos múltiples", cloro: true, competitor: "partial", detail: "EISI Hotel está pensado para un solo establecimiento" },
             { feature: "Rutas semanales optimizadas por geografía", cloro: true, competitor: false },
-            { feature: "Partes de trabajo facturables por visita", cloro: true, competitor: false },
             { feature: "Asignación de técnicos y cuadrantes", cloro: true, competitor: true },
             { feature: "Inventario de almacén central y furgonetas", cloro: true, competitor: "partial" },
           ],
         },
         {
-          title: "Cliente y facturación",
+          title: "Cliente",
           rows: [
-                        { feature: "Cobros recurrentes con Bizum, tarjeta y SEPA", cloro: true, competitor: false },
             { feature: "Portal del cliente para hoteles y administradores", cloro: true, competitor: "partial" },
             { feature: "Agente WhatsApp 24/7 para atender clientes", cloro: true, competitor: false },
-            { feature: "Presupuestos y contratos de mantenimiento", cloro: true, competitor: "partial" },
           ],
         },
         {
@@ -81,11 +78,11 @@ function Page() {
       ]}
       bestFor={{
         cloro:
-          "Eres una empresa que mantiene piscinas de varios hoteles, comunidades o chalets y necesitas rutas, facturación y atención al cliente unificadas.",
+          "Eres una empresa que mantiene piscinas de varios hoteles, comunidades o chalets y necesitas rutas, partes y atención al cliente unificadas.",
         competitor:
           "Eres el equipo técnico interno de un hotel y quieres una sola herramienta para gestionar mantenimiento general del edificio además de la piscina.",
       }}
-      verdict="EISI Hotel encaja para el departamento técnico interno de un hotel. Si tu empresa presta el servicio de mantenimiento de piscinas a varios clientes — hoteles incluidos — Cloro te da rutas multi-cliente, cobros y un portal por cliente que EISI no está diseñado para cubrir."
+      verdict="EISI Hotel encaja para el departamento técnico interno de un hotel. Si tu empresa presta el servicio de mantenimiento de piscinas a varios clientes — hoteles incluidos — Cloro te da rutas multi-cliente, agente WhatsApp y un portal por cliente que EISI no está diseñado para cubrir."
     />
   );
 }

@@ -33,7 +33,7 @@ function Page() {
     <ComparisonPage
       competitorName={COMPETITOR}
       competitorTagline="Plataforma de gestión higiénico-sanitaria con módulos para piscinas, agua y legionela."
-      intro="EviSane es una suite de cumplimiento higiénico-sanitario amplia, usada por instalaciones que combinan piscinas con control de legionela o agua de consumo. Cloro está enfocado 100% en empresas de mantenimiento de piscinas: cubre el RD 742/2013 con la misma seriedad, y suma rutas, facturación y atención al cliente sin módulos extra."
+      intro="EviSane es una suite de cumplimiento higiénico-sanitario amplia, usada por instalaciones que combinan piscinas con control de legionela o agua de consumo. Cloro está enfocado 100% en empresas de mantenimiento de piscinas: cubre el RD 742/2013 con la misma seriedad, y suma rutas, partes digitales y atención al cliente sin módulos extra."
       summary={[
         "Foco total en piscinas, sin módulos que no usarás",
         "Implantación en menos de una semana",
@@ -62,12 +62,10 @@ function Page() {
           ],
         },
         {
-          title: "Cliente y facturación",
+          title: "Cliente",
           rows: [
-                        { feature: "Cobros con Bizum, tarjeta y SEPA", cloro: true, competitor: false },
             { feature: "Portal del cliente y comunidad de propietarios", cloro: true, competitor: "partial" },
             { feature: "Agente WhatsApp 24/7", cloro: true, competitor: false },
-            { feature: "Plantillas de presupuestos y contratos", cloro: true, competitor: "partial" },
           ],
         },
         {
@@ -82,11 +80,11 @@ function Page() {
       ]}
       bestFor={{
         cloro:
-          "Eres una empresa de mantenimiento de piscinas y quieres una herramienta lista para usar, con precio claro y todo lo necesario para operar y facturar incluido.",
+          "Eres una empresa de mantenimiento de piscinas y quieres una herramienta lista para usar, con precio claro y todo lo necesario para operar incluido.",
         competitor:
           "Gestionas múltiples riesgos higiénico-sanitarios (legionela, agua de consumo, piscinas) en un mismo grupo y necesitas una suite transversal con consultoría a medida.",
       }}
-      verdict="EviSane brilla cuando necesitas una plataforma sanitaria amplia para varios riesgos. Si tu negocio principal es el mantenimiento de piscinas, Cloro te da el mismo cumplimiento con menos complejidad y, sobre todo, integra la operativa diaria (rutas, facturas, cobros, WhatsApp) en el mismo lugar."
+      verdict="EviSane brilla cuando necesitas una plataforma sanitaria amplia para varios riesgos. Si tu negocio principal es el mantenimiento de piscinas, Cloro te da el mismo cumplimiento con menos complejidad y, sobre todo, integra la operativa diaria (rutas, partes, portal del cliente, WhatsApp) en el mismo lugar."
     />
   );
 }

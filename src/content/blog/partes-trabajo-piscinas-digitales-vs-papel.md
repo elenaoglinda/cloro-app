@@ -59,7 +59,7 @@ Un parte digital no es "escanear un PDF". Es un flujo completo:
 - Adjunta fotos si procede (filtro, vaso, incidencia).
 - El cliente firma en la pantalla, con hora y geolocalización automáticas.
 - El parte se envía automáticamente al cliente y se archiva en la nube.
-- Los datos alimentan directamente el SILOÉ y la factura del mes.
+- Los datos alimentan directamente el informe SILOÉ.
 
 El técnico no vuelve a base con papeles. La oficina no vuelve a transcribir nada.
 
@@ -77,7 +77,7 @@ El técnico no vuelve a base con papeles. La oficina no vuelve a transcribir nad
 
 ## Beneficios que se notan la primera semana
 
-- **Se factura antes.** Los partes están cerrados y firmados al terminar la visita. El día 1 del mes siguiente puedes facturar.
+- **Cierras el mes antes.** Los partes están cerrados y firmados al terminar la visita, así que el día 1 tienes todo lo que necesitas para facturar con tu herramienta habitual.
 - **Bajan las disputas.** Firma + hora + coordenadas + foto. La visita es incontestable.
 - **La ruta no se rompe.** El técnico no vuelve a base a entregar papeles.
 - **SILOÉ automático.** No hay que recomponer nada a fin de mes.

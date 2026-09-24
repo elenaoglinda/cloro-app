@@ -5,7 +5,7 @@ import {
   Beaker,
   FileCheck2,
   MessageCircle,
-  CreditCard,
+  Users,
   Wifi,
   ShieldCheck,
   Calendar,
@@ -27,7 +27,7 @@ import technicianApp from "@/assets/technician-app.jpg";
 const FAQS = [
   {
     q: "¿Cuál es el mejor software para empresas de mantenimiento de piscinas en España?",
-    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria ni la facturación electrónica española.",
+    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria española.",
   },
   {
     q: "¿Cloro genera el informe SILOÉ exactamente como lo pide Sanidad?",
@@ -292,8 +292,8 @@ function Problem() {
       d: "Mapa de Google, una pizarra y mucho café. Más kilómetros, más combustible, técnicos quemados.",
     },
     {
-      t: "Cobros perseguidos por WhatsApp",
-      d: "Notas de voz pidiendo recibos. Bizum suelto. El Excel de impagados crece cada mes.",
+      t: "Clientes preguntando por WhatsApp",
+      d: "¿Pasasteis hoy? ¿Cómo está el cloro? Llamadas y audios que interrumpen al técnico y a la oficina todo el día.",
     },
   ];
   return (
@@ -305,7 +305,7 @@ function Problem() {
         </h2>
         <p className="mt-4 text-muted-foreground">
           Las empresas que crecen no lo hacen contratando más técnicos: lo hacen optimizando sus procesos. Cloro
-          centraliza rutas, química, cobros y cumplimiento en una sola plataforma.
+          centraliza rutas, química, partes y cumplimiento en una sola plataforma.
         </p>
       </div>
       <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -352,9 +352,9 @@ function Features() {
       d: "Notificaciones, informes de servicio y recordatorios por el canal que el cliente sí abre.",
     },
     {
-      icon: CreditCard,
-      t: "Cobros automatizados",
-      d: "Bizum, SEPA y Stripe en un solo lugar, con recordatorios automáticos para reducir impagos.",
+      icon: Users,
+      t: "Portal del cliente",
+      d: "Comunidades, administradores y hoteles consultan sus partes firmados y el histórico de su piscina sin llamar a oficina.",
     },
   ];
 
@@ -690,9 +690,7 @@ function Comparison() {
     { feature: "Optimización de rutas con IA", cloro: true, autocontrol: false, evisane: false, eisi: false },
     { feature: "App offline para técnicos", cloro: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial" },
     { feature: "Agente WhatsApp con calendario", cloro: true, autocontrol: false, evisane: false, eisi: false },
-    { feature: "Bizum + SEPA + Stripe", cloro: true, autocontrol: false, evisane: false, eisi: false },
     { feature: "Portal cliente y comunidades", cloro: true, autocontrol: false, evisane: false, eisi: "Hoteles" },
-    { feature: "Cobros recurrentes automáticos", cloro: true, autocontrol: false, evisane: false, eisi: false },
     { feature: "En castellano nativo + soporte ES", cloro: true, autocontrol: true, evisane: true, eisi: true },
   ];
 
@@ -714,7 +712,7 @@ function Comparison() {
           <p className="text-sm font-medium text-accent">Comparativa</p>
           <h2 className="mt-2 text-4xl lg:text-5xl">El único que cubre el día completo del piscinero.</h2>
           <p className="mt-4 text-muted-foreground">
-            Otras herramientas resuelven solo el informe SILOÉ. Cloro gestiona también la ruta, el cobro y la
+            Otras herramientas resuelven solo el informe SILOÉ. Cloro gestiona también la ruta, los partes y la
             comunicación con el cliente.
           </p>
         </div>
@@ -768,7 +766,7 @@ function Pricing() {
         "Rutas y parte químico digital",
         "Informe SILOÉ en un clic",
         "WhatsApp con tus clientes",
-        "Bizum + transferencia",
+        "Partes con foto y firma del cliente",
         "App de campo offline",
       ],
       featured: false,
@@ -781,7 +779,7 @@ function Pricing() {
       features: [
         "Todo lo del plan Solo",
         "Agente WhatsApp con IA 24/7",
-        "Cobros con SEPA + Stripe",
+        "Control horario y kilometraje",
         "Portal cliente y comunidades",
         "Optimización de rutas con Google Routes",
       ],
