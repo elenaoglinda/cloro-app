@@ -3,6 +3,7 @@ title: "Partes de trabajo digitales vs papel en mantenimiento de piscinas"
 seoTitle: "Partes de trabajo digitales vs papel en piscinas"
 description: "Papel vs parte digital en mantenimiento de piscinas: comparativa real del día de un técnico, con firma, fotos y envío inmediato al cliente por WhatsApp."
 date: 2026-06-28
+updated: 2026-09-25
 author: equipo-cloro
 tags:
   - "Partes de trabajo"
@@ -59,7 +60,7 @@ Un parte digital no es "escanear un PDF". Es un flujo completo:
 - Adjunta fotos si procede (filtro, vaso, incidencia).
 - El cliente firma en la pantalla, con hora y geolocalización automáticas.
 - El parte se envía automáticamente al cliente y se archiva en la nube.
-- Los datos alimentan directamente el informe SILOÉ.
+- Los datos alimentan directamente el informe SILOÉ y la facturación del mes.
 
 El técnico no vuelve a base con papeles. La oficina no vuelve a transcribir nada.
 
@@ -77,7 +78,7 @@ El técnico no vuelve a base con papeles. La oficina no vuelve a transcribir nad
 
 ## Beneficios que se notan la primera semana
 
-- **Cierras el mes antes.** Los partes están cerrados y firmados al terminar la visita, así que el día 1 tienes todo lo que necesitas para facturar con tu herramienta habitual.
+- **Se factura antes.** Los partes están cerrados y firmados al terminar la visita, así que el día 1 del mes siguiente emites las facturas desde Cloro, con cada servicio trazado y enviadas a la AEAT conforme a VeriFactu.
 - **Bajan las disputas.** Firma + hora + coordenadas + foto. La visita es incontestable.
 - **La ruta no se rompe.** El técnico no vuelve a base a entregar papeles.
 - **SILOÉ automático.** No hay que recomponer nada a fin de mes.

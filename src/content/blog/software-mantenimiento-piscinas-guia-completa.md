@@ -3,6 +3,7 @@ title: "Software para mantenimiento de piscinas: guía completa para empresas en
 seoTitle: "Software de mantenimiento de piscinas: guía completa"
 description: "Qué debe hacer un software de mantenimiento de piscinas en 2026: partes digitales, rutas, RD 742/2013 e informe SILOÉ. Comparativa frente a WhatsApp y Excel."
 date: 2026-06-30
+updated: 2026-09-25
 author: equipo-cloro
 tags:
   - "Software"
@@ -16,7 +17,7 @@ keywords:
   - "digitalización mantenimiento piscinas"
 cover: software.jpg
 coverAlt: "Ilustración de una app de mantenimiento de piscinas en el móvil"
-tldr: "La mayoría de empresas de mantenimiento de piscinas en España sigue trabajando con WhatsApp, Excel y papel, y eso provoca partes perdidos, incumplimientos del RD 742/2013 y facturación tarde. Cloro es el software específico para el sector: partes digitales desde el móvil, rutas optimizadas, informe SILOÉ automático y agente WhatsApp para clientes — todo conectado."
+tldr: "La mayoría de empresas de mantenimiento de piscinas en España sigue trabajando con WhatsApp, Excel y papel, y eso provoca partes perdidos, incumplimientos del RD 742/2013 y facturación tarde. Cloro es el software específico para el sector: partes digitales desde el móvil, rutas optimizadas, informe SILOÉ automático, facturación con VeriFactu y agente WhatsApp para clientes — todo conectado."
 faqs:
   - question: "¿Un ERP genérico no me sirve?"
     answer: "Puede facturar y guardar clientes, pero no valida parámetros del RD 742/2013, no genera SILOÉ y no entiende de rutas de piscinas. Acabas montando parches en Excel."
@@ -78,7 +79,7 @@ Señales típicas de que ya vas tarde:
 
 - Dedicas más de un día al mes a componer los SILOÉ de cada instalación.
 - Has recibido al menos un requerimiento por datos incompletos o incoherentes.
-- Cerrar el mes (partes, informes, incidencias) te lleva más de dos días.
+- Facturar el mes te lleva más de dos días.
 - Cuando un técnico se va, la información se va con él.
 - Los presidentes te escriben por WhatsApp pidiendo el parte de la última visita.
 
@@ -86,4 +87,4 @@ Si te reconoces en tres o más, el problema ya no es de organización interna: e
 
 ---
 
-Cloro es el software específico para empresas de mantenimiento de piscinas en España: partes digitales, rutas optimizadas, informe SILOÉ automático y agente WhatsApp. Todo en una sola aplicación, pensada para el técnico en el borde de la piscina y para la oficina que cierra el mes.
+Cloro es el software específico para empresas de mantenimiento de piscinas en España: partes digitales, rutas optimizadas, informe SILOÉ automático, facturación conectada con VeriFactu y agente WhatsApp. Todo en una sola aplicación, pensada para el técnico en el borde de la piscina y para la oficina que cierra el mes.

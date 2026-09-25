@@ -14,7 +14,7 @@ export function SiteFooter() {
           </div>
           <p className="mt-4 text-sm text-muted-foreground max-w-sm">
             El sistema operativo para empresas de mantenimiento de piscinas en España.
-            Rutas, química, partes digitales, SILOÉ y WhatsApp en una sola plataforma.
+            Rutas, química, facturación VeriFactu, SILOÉ y WhatsApp en una sola plataforma.
           </p>
         </div>
         <div>
@@ -47,7 +47,7 @@ export function SiteFooter() {
       <div className="border-t border-border/60">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} Cloro. Hecho en España. Datos alojados en la UE.</p>
-          <p>RD 742/2013 · SILOÉ · WhatsApp</p>
+          <p>RD 742/2013 · SILOÉ · VeriFactu</p>
         </div>
       </div>
     </footer>

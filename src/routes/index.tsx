@@ -5,7 +5,7 @@ import {
   Beaker,
   FileCheck2,
   MessageCircle,
-  Users,
+  Receipt,
   Wifi,
   ShieldCheck,
   Calendar,
@@ -27,7 +27,7 @@ import technicianApp from "@/assets/technician-app.jpg";
 const FAQS = [
   {
     q: "¿Cuál es el mejor software para empresas de mantenimiento de piscinas en España?",
-    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria española.",
+    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria española ni la facturación VeriFactu.",
   },
   {
     q: "¿Cloro genera el informe SILOÉ exactamente como lo pide Sanidad?",
@@ -90,13 +90,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, partes digitales, SILOÉ y clientes por WhatsApp.",
+          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, partes digitales, facturación VeriFactu, SILOÉ y clientes por WhatsApp.",
       },
       { property: "og:title", content: "Cloro — Gestión de mantenimiento de piscinas" },
       {
         property: "og:description",
         content:
-          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, partes digitales, SILOÉ y clientes por WhatsApp.",
+          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, partes digitales, facturación VeriFactu, SILOÉ y clientes por WhatsApp.",
       },
       { property: "og:url", content: "https://cloro.app/" },
       { property: "og:type", content: "website" },
@@ -168,7 +168,7 @@ function Hero() {
             .
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl text-balance">
-            Gestiona rutas, parámetros químicos, partes digitales e informes SILOÉ desde un único lugar. Con un
+            Gestiona rutas, parámetros químicos, partes digitales, facturación VeriFactu e informes SILOÉ desde un único lugar. Con un
             agente de WhatsApp que capta y agenda nuevos clientes mientras atiendes los actuales.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -292,8 +292,8 @@ function Problem() {
       d: "Mapa de Google, una pizarra y mucho café. Más kilómetros, más combustible, técnicos quemados.",
     },
     {
-      t: "Clientes preguntando por WhatsApp",
-      d: "¿Pasasteis hoy? ¿Cómo está el cloro? Llamadas y audios que interrumpen al técnico y a la oficina todo el día.",
+      t: "Facturar a fin de mes, a mano",
+      d: "Repasar libretas y WhatsApps para saber qué cobrar a cada cliente. Servicios que se quedan sin facturar.",
     },
   ];
   return (
@@ -305,7 +305,7 @@ function Problem() {
         </h2>
         <p className="mt-4 text-muted-foreground">
           Las empresas que crecen no lo hacen contratando más técnicos: lo hacen optimizando sus procesos. Cloro
-          centraliza rutas, química, partes y cumplimiento en una sola plataforma.
+          centraliza rutas, química, facturación y cumplimiento en una sola plataforma.
         </p>
       </div>
       <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -352,9 +352,9 @@ function Features() {
       d: "Notificaciones, informes de servicio y recordatorios por el canal que el cliente sí abre.",
     },
     {
-      icon: Users,
-      t: "Portal del cliente",
-      d: "Comunidades, administradores y hoteles consultan sus partes firmados y el histórico de su piscina sin llamar a oficina.",
+      icon: Receipt,
+      t: "Facturación con VeriFactu",
+      d: "Factura mensual, puntual o anualmente a partir de los servicios realizados, con envío a la AEAT conforme a VeriFactu.",
     },
   ];
 
@@ -690,6 +690,7 @@ function Comparison() {
     { feature: "Optimización de rutas con IA", cloro: true, autocontrol: false, evisane: false, eisi: false },
     { feature: "App offline para técnicos", cloro: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial" },
     { feature: "Agente WhatsApp con calendario", cloro: true, autocontrol: false, evisane: false, eisi: false },
+    { feature: "Facturación VeriFactu (AEAT)", cloro: true, autocontrol: false, evisane: false, eisi: false },
     { feature: "Portal cliente y comunidades", cloro: true, autocontrol: false, evisane: false, eisi: "Hoteles" },
     { feature: "En castellano nativo + soporte ES", cloro: true, autocontrol: true, evisane: true, eisi: true },
   ];
@@ -712,7 +713,7 @@ function Comparison() {
           <p className="text-sm font-medium text-accent">Comparativa</p>
           <h2 className="mt-2 text-4xl lg:text-5xl">El único que cubre el día completo del piscinero.</h2>
           <p className="mt-4 text-muted-foreground">
-            Otras herramientas resuelven solo el informe SILOÉ. Cloro gestiona también la ruta, los partes y la
+            Otras herramientas resuelven solo el informe SILOÉ. Cloro gestiona también la ruta, la facturación y la
             comunicación con el cliente.
           </p>
         </div>

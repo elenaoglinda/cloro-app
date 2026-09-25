@@ -7,9 +7,9 @@ import { absoluteUrl, postPath } from "@/lib/blog/seo";
 // Blog posts are added automatically from src/content/blog.
 const INTRO = `# Cloro
 
-> Sistema operativo para empresas de mantenimiento de piscinas en España: rutas, parte químico digital, informes SILOÉ (RD 742/2013), portal del cliente y un agente de WhatsApp que capta y agenda clientes 24/7.
+> Sistema operativo para empresas de mantenimiento de piscinas en España: rutas, parte químico digital, informes SILOÉ (RD 742/2013), facturación conectada con VeriFactu (AEAT) y un agente de WhatsApp que capta y agenda clientes 24/7.
 
-Cloro digitaliza la operación diaria de empresas de mantenimiento de piscinas (comunidades, hoteles, chalets): planifica rutas, registra parámetros químicos con firma en obra, genera el XML SILOÉ listo para subir a Sanidad, comparte los partes firmados con cada cliente y atiende a los clientes por WhatsApp con un agente que reserva visitas en el calendario del equipo.
+Cloro digitaliza la operación diaria de empresas de mantenimiento de piscinas (comunidades, hoteles, chalets): planifica rutas, registra parámetros químicos con firma en obra, genera el XML SILOÉ listo para subir a Sanidad, factura los servicios realizados (mensual, puntual o anualmente) con envío a la AEAT conforme a VeriFactu y atiende a los clientes por WhatsApp con un agente que reserva visitas en el calendario del equipo.
 
 ## Pages
 

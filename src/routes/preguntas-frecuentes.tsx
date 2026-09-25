@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 const FAQS = [
   {
     q: "¿Cuál es el mejor software para empresas de mantenimiento de piscinas en España?",
-    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria española.",
+    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria española ni la facturación VeriFactu.",
   },
   {
     q: "¿Cloro genera el informe SILOÉ exactamente como lo pide Sanidad?",
