@@ -42,7 +42,7 @@ const FAQS = [
   },
   {
     q: "¿Cuánto cuesta un software de gestión de piscinas?",
-    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Cloro arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ y portal de cliente sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
+    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Cloro arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ, facturación con VeriFactu y portal de cliente sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
   },
   {
     q: "¿Cómo se gestiona la dosificación de cloro y pH desde la app?",
