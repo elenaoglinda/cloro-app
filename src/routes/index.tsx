@@ -690,7 +690,7 @@ function Comparison() {
     { feature: "Optimización de rutas con IA", cloro: true, autocontrol: false, evisane: false, eisi: false },
     { feature: "App offline para técnicos", cloro: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial" },
     { feature: "Agente WhatsApp con calendario", cloro: true, autocontrol: false, evisane: false, eisi: false },
-    { feature: "Facturación VeriFactu (AEAT)", cloro: true, autocontrol: false, evisane: false, eisi: false },
+    { feature: "Facturación VeriFactu (AEAT)", cloro: true, autocontrol: false, evisane: true, eisi: false },
     { feature: "Portal cliente y comunidades", cloro: true, autocontrol: false, evisane: false, eisi: "Hoteles" },
     { feature: "En castellano nativo + soporte ES", cloro: true, autocontrol: true, evisane: true, eisi: true },
   ];
