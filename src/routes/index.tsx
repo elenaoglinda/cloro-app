@@ -254,13 +254,14 @@ function FloatingMetric({
   );
 }
 
-/* ---------------- LOGOS / METRICS STRIP ---------------- */
+/* ---------------- OBLIGATIONS STRIP ---------------- */
+// Regulatory facts the customer has to deal with (not Cloro metrics).
 function LogosStrip() {
   const stats = [
-    { v: "1,34 M", l: "piscinas registradas en España" },
-    { v: "≈ 2.000", l: "empresas de mantenimiento activas" },
-    { v: "30 abr", l: "fecha tope informe SILOÉ anual" },
-    { v: "93 %", l: "uso de WhatsApp entre adultos" },
+    { v: "Cada día", l: "control obligatorio de cloro, pH y turbidez (RD 742/2013)" },
+    { v: "30 abr", l: "fecha tope para enviar el informe SILOÉ del año anterior" },
+    { v: "Hasta 60.000 €", l: "multa por infracción grave de salud pública (Ley 33/2011)" },
+    { v: "1 ene 2027", l: "VeriFactu obligatorio en la facturación de las sociedades" },
   ];
   return (
     <section className="border-y border-border bg-surface">
