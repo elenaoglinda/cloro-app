@@ -34,6 +34,7 @@ export function SiteFooter() {
             <li><a href="/comparativa/autocontrolpiscinas" className="hover:text-foreground">vs AutocontrolPiscinas</a></li>
             <li><a href="/comparativa/evisane" className="hover:text-foreground">vs EviSane</a></li>
             <li><a href="/comparativa/eisi-hotel" className="hover:text-foreground">vs EISI Hotel</a></li>
+            <li><a href="/comparativa/jobber" className="hover:text-foreground">vs Jobber</a></li>
           </ul>
         </div>
         <div>
