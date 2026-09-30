@@ -685,14 +685,15 @@ function Comparison() {
     autocontrol: boolean | string;
     evisane: boolean | string;
     eisi: boolean | string;
+    jobber: boolean | string;
   }> = [
-    { feature: "Informe SILOÉ (XML + Excel)", cloro: true, autocontrol: true, evisane: true, eisi: true },
-    { feature: "Optimización de rutas con IA", cloro: true, autocontrol: false, evisane: false, eisi: false },
-    { feature: "App offline para técnicos", cloro: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial" },
-    { feature: "Agente WhatsApp con calendario", cloro: true, autocontrol: false, evisane: false, eisi: false },
-    { feature: "Facturación VeriFactu (AEAT)", cloro: true, autocontrol: false, evisane: true, eisi: false },
-    { feature: "Portal cliente y comunidades", cloro: true, autocontrol: false, evisane: false, eisi: "Hoteles" },
-    { feature: "En castellano nativo + soporte ES", cloro: true, autocontrol: true, evisane: true, eisi: true },
+    { feature: "Informe SILOÉ (XML + Excel)", cloro: true, autocontrol: true, evisane: true, eisi: true, jobber: false },
+    { feature: "Optimización de rutas con IA", cloro: true, autocontrol: false, evisane: false, eisi: false, jobber: true },
+    { feature: "App offline para técnicos", cloro: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial", jobber: "Parcial" },
+    { feature: "Agente WhatsApp con calendario", cloro: true, autocontrol: false, evisane: false, eisi: false, jobber: "Solo SMS" },
+    { feature: "Facturación VeriFactu (AEAT)", cloro: true, autocontrol: false, evisane: true, eisi: false, jobber: false },
+    { feature: "Portal cliente y comunidades", cloro: true, autocontrol: false, evisane: false, eisi: "Hoteles", jobber: true },
+    { feature: "En castellano nativo + soporte ES", cloro: true, autocontrol: true, evisane: true, eisi: true, jobber: "Parcial" },
   ];
 
   const Cell = ({ v }: { v: boolean | string }) =>
@@ -713,7 +714,7 @@ function Comparison() {
           <p className="text-sm font-medium text-accent">Comparativa</p>
           <h2 className="mt-2 text-4xl lg:text-5xl">El único que cubre el día completo del piscinero.</h2>
           <p className="mt-4 text-muted-foreground">
-            Otras herramientas resuelven solo el informe SILOÉ. Cloro gestiona también la ruta, la facturación y la
+            Otras herramientas resuelven solo el informe SILOÉ o son generalistas sin normativa española. Cloro gestiona también la ruta, la facturación y la
             comunicación con el cliente.
           </p>
         </div>
@@ -727,6 +728,7 @@ function Comparison() {
                 <th className="p-4 font-medium text-muted-foreground">Autocontrol Piscinas</th>
                 <th className="p-4 font-medium text-muted-foreground">EviSane</th>
                 <th className="p-4 font-medium text-muted-foreground">EISI HOTEL</th>
+                <th className="p-4 font-medium text-muted-foreground">Jobber</th>
               </tr>
             </thead>
             <tbody>
@@ -744,6 +746,9 @@ function Comparison() {
                   </td>
                   <td className="p-4 text-center">
                     <Cell v={r.eisi} />
+                  </td>
+                  <td className="p-4 text-center">
+                    <Cell v={r.jobber} />
                   </td>
                 </tr>
               ))}
