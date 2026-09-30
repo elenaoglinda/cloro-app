@@ -922,7 +922,7 @@ function CTA() {
                 Empezar gratis <ArrowRight className="size-4" />
               </a>
               <a
-                href="#"
+                href="/contacto"
                 className="inline-flex items-center gap-2 h-12 px-6 rounded-lg border border-white/30 text-white hover:bg-white/10 transition"
               >
                 <Smartphone className="size-4" /> Pedir una demo
