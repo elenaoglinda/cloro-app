@@ -21,6 +21,8 @@ export const Route = createFileRoute("/contacto")({
         content: "Escríbenos y te respondemos en menos de 24 horas laborables.",
       },
       { property: "og:url", content: `https://cloro.app${URL_PATH}` },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: `https://cloro.app${URL_PATH}` }],
   }),

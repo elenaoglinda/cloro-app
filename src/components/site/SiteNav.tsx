@@ -1,7 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Waves } from "lucide-react";
+import { Menu, Waves, X } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export function SiteNav() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/75 border-b border-border/60">
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -22,12 +25,31 @@ export function SiteNav() {
           <Link to="/blog" className="hover:text-foreground transition">Blog</Link>
         </div>
         <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" className="xl:hidden" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} aria-controls="site-menu" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X /> : <Menu />}
+          </Button>
           <a href="https://panel.cloro.app/login" className="hidden sm:inline text-sm text-muted-foreground hover:text-foreground transition">Iniciar sesión</a>
           <a href="https://panel.cloro.app/signup" className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition shadow-soft">
             Prueba gratis
           </a>
         </div>
       </nav>
+      {menuOpen && (
+        <nav id="site-menu" aria-label="Menú principal" className="xl:hidden border-t border-border bg-background px-6 py-4 grid grid-cols-2 gap-4 text-sm">
+          {[
+            ["Características", "/#caracteristicas"],
+            ["Agente WhatsApp", "/#whatsapp"],
+            ["SILOÉ", "/#cumplimiento"],
+            ["VeriFactu", "/#verifactu"],
+            ["Comparativa", "/#comparativa"],
+            ["Precios", "/#precios"],
+            ["FAQ", "/preguntas-frecuentes"],
+            ["Blog", "/blog"],
+          ].map(([label, href]) => (
+            <a key={href} href={href} onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">{label}</a>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }
