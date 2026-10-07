@@ -5,6 +5,26 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 
 const FAQS = [
   {
+    q: "¿Qué es VeriFactu y para qué sirve?",
+    a: "VeriFactu es una modalidad de los sistemas informáticos de facturación regulados por la Ley Antifraude. Genera registros de facturación inalterables y los envía a la Agencia Tributaria. En Cloro, la facturación VeriFactu está integrada con la gestión de clientes y servicios de mantenimiento de piscinas.",
+  },
+  {
+    q: "¿Es obligatorio VeriFactu para las empresas de mantenimiento de piscinas?",
+    a: "Las empresas y autónomos que utilicen un sistema informático para facturar deben adaptarlo a los requisitos del reglamento, salvo los casos excluidos por la normativa, como quienes ya están acogidos al SII. La obligación depende de la situación fiscal de cada negocio, por lo que conviene confirmarla con la asesoría.",
+  },
+  {
+    q: "¿Cuándo entra en vigor VeriFactu para empresas y autónomos?",
+    a: "Según el calendario vigente, los contribuyentes del Impuesto sobre Sociedades deben tener sus sistemas adaptados antes del 1 de enero de 2027. Para autónomos y el resto de obligados tributarios, el plazo es antes del 1 de julio de 2027.",
+  },
+  {
+    q: "¿VeriFactu es obligatorio para todos los autónomos?",
+    a: "No en todos los casos. Afecta, con carácter general, a autónomos que desarrollan actividades económicas y utilizan un sistema informático de facturación, pero existen exclusiones y particularidades fiscales. Tu asesoría puede confirmar cómo se aplica a tu caso; Cloro te permite gestionar la facturación adaptada junto con tus partes y clientes.",
+  },
+  {
+    q: "¿Cómo funciona VeriFactu en Cloro?",
+    a: "Cloro permite crear facturas desde los servicios realizados, mantener juntos los datos del cliente, los partes y la facturación, y gestionar el envío de los registros de facturación a la AEAT conforme a VeriFactu. Así evitas volver a introducir los mismos datos en otro programa.",
+  },
+  {
     q: "¿Cuál es el mejor software para empresas de mantenimiento de piscinas en España?",
     a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria española ni la facturación VeriFactu.",
   },
@@ -79,13 +99,13 @@ export const Route = createFileRoute("/preguntas-frecuentes")({
       {
         name: "description",
         content:
-          "Respuestas a las preguntas más frecuentes sobre Cloro: SILOÉ, rutas optimizadas, cumplimiento del RD 742/2013, precios y comparativas con otros software de piscinas.",
+          "Respuestas sobre VeriFactu, SILOÉ, rutas optimizadas, cumplimiento del RD 742/2013, precios y software para empresas de piscinas.",
       },
       { property: "og:title", content: "Preguntas frecuentes — Software de mantenimiento de piscinas en España | Cloro" },
       {
         property: "og:description",
         content:
-          "Respuestas a las preguntas más frecuentes sobre Cloro: SILOÉ, rutas optimizadas, cumplimiento del RD 742/2013, precios y comparativas.",
+          "Respuestas sobre VeriFactu, SILOÉ, rutas optimizadas, cumplimiento del RD 742/2013, precios y software para empresas de piscinas.",
       },
       { property: "og:url", content: "https://cloro.app/preguntas-frecuentes" },
       { property: "og:type", content: "website" },
@@ -121,7 +141,7 @@ function FAQPage() {
             Todo lo que necesitas saber sobre Cloro
           </h1>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-            Respuestas claras sobre software de mantenimiento de piscinas, cumplimiento SILOÉ y cómo Cloro ayuda a empresas de piscinas en España.
+            Respuestas claras sobre VeriFactu, software de mantenimiento de piscinas, cumplimiento SILOÉ y cómo Cloro ayuda a empresas de piscinas en España.
           </p>
         </div>
         <div className="mt-10 divide-y divide-border border-y border-border">
