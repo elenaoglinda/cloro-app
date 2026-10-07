@@ -11,10 +11,11 @@ export function SiteNav() {
           </span>
           <span className="font-display text-2xl tracking-tight">Cloro</span>
         </Link>
-        <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+        <div className="hidden xl:flex items-center gap-5 text-sm text-muted-foreground">
           <a href="/#caracteristicas" className="hover:text-foreground transition">Características</a>
           <a href="/#whatsapp" className="hover:text-foreground transition">Agente WhatsApp</a>
           <a href="/#cumplimiento" className="hover:text-foreground transition">SILOÉ</a>
+          <a href="/#verifactu" className="hover:text-foreground transition">VeriFactu</a>
           <a href="/#comparativa" className="hover:text-foreground transition">Comparativa</a>
           <a href="/#precios" className="hover:text-foreground transition">Precios</a>
           <Link to="/preguntas-frecuentes" className="hover:text-foreground transition">FAQ</Link>

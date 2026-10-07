@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { Button } from "@/components/ui/button";
 import heroPool from "@/assets/hero-pool.jpg";
 import technicianApp from "@/assets/technician-app.jpg";
 
@@ -144,6 +145,7 @@ function Landing() {
         <PaperToSiloe />
         <WhatsAppAgent />
         <Compliance />
+        <Verifactu />
         <Comparison />
         <Pricing />
         <FAQ />
@@ -672,6 +674,62 @@ function Compliance() {
           <button className="mt-6 w-full h-11 rounded-lg bg-foreground text-background font-medium hover:opacity-90 transition inline-flex items-center justify-center gap-2">
             <FileSpreadsheet className="size-4" /> Descargar XML + Excel
           </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- VERIFACTU ---------------- */
+function Verifactu() {
+  const items = [
+    {
+      icon: Receipt,
+      title: "Facturas desde tus servicios",
+      description: "Factura el mantenimiento mensual o los trabajos puntuales a partir de los servicios realizados.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Envío a la AEAT",
+      description: "Gestiona la facturación con VeriFactu desde Cloro, con envío de los registros de facturación a la AEAT.",
+    },
+    {
+      icon: FileCheck2,
+      title: "Todo en la misma plataforma",
+      description: "Mantén clientes, partes de trabajo y facturación juntos, sin volver a pasar los datos a otro programa.",
+    },
+  ];
+
+  return (
+    <section id="verifactu" className="scroll-mt-20 bg-surface py-24" aria-labelledby="verifactu-title">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-2xl">
+          <p className="text-sm font-medium text-accent">Facturación · VeriFactu</p>
+          <h2 id="verifactu-title" className="mt-2 text-4xl lg:text-5xl">VeriFactu, integrado en Cloro.</h2>
+          <p className="mt-4 text-muted-foreground">
+            El trabajo termina en la piscina, no delante de una hoja de cálculo.
+            Con Cloro puedes facturar los servicios de mantenimiento y gestionar
+            el envío a la AEAT conforme a VeriFactu, sin salir de tu plataforma.
+          </p>
+        </div>
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item) => (
+            <div key={item.title} className="rounded-2xl bg-card border border-border p-6 shadow-soft">
+              <div className="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                <item.icon className="size-5" />
+              </div>
+              <h3 className="mt-4 text-lg font-medium">{item.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <Button asChild size="lg" className="h-12 rounded-lg bg-foreground text-background shadow-soft hover:bg-foreground/90">
+            <a href="https://panel.cloro.app/signup">Empezar gratis <ArrowRight className="size-4" /></a>
+          </Button>
+          <Button asChild variant="link">
+            <Link to="/contacto">Consultar sobre VeriFactu <ArrowRight className="size-4" /></Link>
+          </Button>
         </div>
       </div>
     </section>
