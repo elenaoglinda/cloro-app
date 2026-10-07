@@ -9,6 +9,16 @@ import { listPiscinas } from "@/lib/piscinas.functions";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/app/")({
+  head: () => ({
+    meta: [
+      { title: "Mi empresa — Cloro" },
+      { name: "description", content: "Consulta la actividad de tu empresa de piscinas en Cloro." },
+      { property: "og:title", content: "Mi empresa — Cloro" },
+      { property: "og:description", content: "Consulta la actividad de tu empresa de piscinas en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Dashboard,
 });
 

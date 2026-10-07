@@ -6,6 +6,16 @@ import { getParte } from "@/lib/partes.functions";
 import { ParteForm, type ParteFormInitial } from "./app.partes.nuevo";
 
 export const Route = createFileRoute("/_authenticated/app/partes/$id/editar")({
+  head: () => ({
+    meta: [
+      { title: "Editar parte — Cloro" },
+      { name: "description", content: "Edita las lecturas y los datos de un parte de mantenimiento en Cloro." },
+      { property: "og:title", content: "Editar parte — Cloro" },
+      { property: "og:description", content: "Edita las lecturas y los datos de un parte de mantenimiento en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: EditarParte,
 });
 

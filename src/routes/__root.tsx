@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -35,7 +36,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -84,8 +85,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Cloro — Gestión de piscinas para España" },
       { property: "og:description", content: "Software todo-en-uno para empresas de mantenimiento de piscinas: rutas, SILOÉ, partes digitales y agente WhatsApp." },
       { name: "twitter:description", content: "Software todo-en-uno para empresas de mantenimiento de piscinas: rutas, SILOÉ, partes digitales y agente WhatsApp." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/699d05c8-751e-4fea-aea2-6b01897cc2c9/id-preview-017a0033--e40d4daa-e17b-4a1a-a897-80702d0ac07a.lovable.app-1780345749904.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/699d05c8-751e-4fea-aea2-6b01897cc2c9/id-preview-017a0033--e40d4daa-e17b-4a1a-a897-80702d0ac07a.lovable.app-1780345749904.png" },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:type", content: "website" },
     ],

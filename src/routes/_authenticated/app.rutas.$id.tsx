@@ -12,6 +12,16 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 
 
 export const Route = createFileRoute("/_authenticated/app/rutas/$id")({
+  head: () => ({
+    meta: [
+      { title: "Detalle de ruta — Cloro" },
+      { name: "description", content: "Consulta las paradas y organiza una ruta de mantenimiento en Cloro." },
+      { property: "og:title", content: "Detalle de ruta — Cloro" },
+      { property: "og:description", content: "Consulta las paradas y organiza una ruta de mantenimiento en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: RutaDetail,
 });
 

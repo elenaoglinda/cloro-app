@@ -5,6 +5,16 @@ import { listAllContactMessages } from "@/lib/superadmin.functions";
 import { Mail, Building2, Phone } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/superadmin/mensajes")({
+  head: () => ({
+    meta: [
+      { title: "Mensajes de contacto — Cloro" },
+      { name: "description", content: "Consulta los mensajes recibidos por el equipo de Cloro." },
+      { property: "og:title", content: "Mensajes de contacto — Cloro" },
+      { property: "og:description", content: "Consulta los mensajes recibidos por el equipo de Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: AdminMessages,
 });
 

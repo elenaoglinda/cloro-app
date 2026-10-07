@@ -13,6 +13,16 @@ import {
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/app/clientes/")({
+  head: () => ({
+    meta: [
+      { title: "Clientes — Cloro" },
+      { name: "description", content: "Gestiona los clientes de tu empresa de mantenimiento de piscinas en Cloro." },
+      { property: "og:title", content: "Clientes — Cloro" },
+      { property: "og:description", content: "Gestiona los clientes de tu empresa de mantenimiento de piscinas en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: ClientesList,
 });
 

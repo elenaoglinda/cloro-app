@@ -10,6 +10,16 @@ import { Input } from "@/components/ui/input";
 import { Trash2 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/app/ajustes")({
+  head: () => ({
+    meta: [
+      { title: "Ajustes — Cloro" },
+      { name: "description", content: "Gestiona tu cuenta y las invitaciones de tu equipo en Cloro." },
+      { property: "og:title", content: "Ajustes — Cloro" },
+      { property: "og:description", content: "Gestiona tu cuenta y las invitaciones de tu equipo en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Ajustes,
 });
 

@@ -4,6 +4,16 @@ import { useEffect } from "react";
 const LOGIN_URL = "https://panel.cloro.app/login";
 
 export const Route = createFileRoute("/auth")({
+  head: () => ({
+    meta: [
+      { title: "Acceso a Cloro — Cloro" },
+      { name: "description", content: "Accede al panel de Cloro para gestionar tu empresa de piscinas." },
+      { property: "og:title", content: "Acceso a Cloro — Cloro" },
+      { property: "og:description", content: "Accede al panel de Cloro para gestionar tu empresa de piscinas." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   ssr: false,
   component: AuthRedirect,
 });
