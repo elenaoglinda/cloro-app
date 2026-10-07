@@ -6,6 +6,16 @@ import { acceptInvite } from "@/lib/invites.functions";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/invitacion/$token")({
+  head: () => ({
+    meta: [
+      { title: "Invitación al equipo — Cloro" },
+      { name: "description", content: "Acepta tu invitación para unirte a un equipo de mantenimiento en Cloro." },
+      { property: "og:title", content: "Invitación al equipo — Cloro" },
+      { property: "og:description", content: "Acepta tu invitación para unirte a un equipo de mantenimiento en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: AcceptInvite,
 });
 

@@ -7,6 +7,16 @@ import { Button } from "@/components/ui/button";
 import { semaforoParte, dotClass, type Estado } from "@/lib/parte-ranges";
 
 export const Route = createFileRoute("/_authenticated/app/partes/")({
+  head: () => ({
+    meta: [
+      { title: "Partes de trabajo — Cloro" },
+      { name: "description", content: "Consulta los partes de mantenimiento de piscinas de tu equipo en Cloro." },
+      { property: "og:title", content: "Partes de trabajo — Cloro" },
+      { property: "og:description", content: "Consulta los partes de mantenimiento de piscinas de tu equipo en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: PartesList,
 });
 

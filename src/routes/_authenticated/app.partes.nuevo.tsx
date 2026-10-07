@@ -23,6 +23,16 @@ import {
 } from "@/lib/parte-ranges";
 
 export const Route = createFileRoute("/_authenticated/app/partes/nuevo")({
+  head: () => ({
+    meta: [
+      { title: "Nuevo parte — Cloro" },
+      { name: "description", content: "Registra un nuevo parte de mantenimiento de piscinas en Cloro." },
+      { property: "og:title", content: "Nuevo parte — Cloro" },
+      { property: "og:description", content: "Registra un nuevo parte de mantenimiento de piscinas en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: NuevoParte,
 });
 

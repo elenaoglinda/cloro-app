@@ -41,6 +41,16 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/superadmin/orgs/$id")({
+  head: () => ({
+    meta: [
+      { title: "Detalle de organización — Cloro" },
+      { name: "description", content: "Administra la suscripción y consulta la actividad de una organización en Cloro." },
+      { property: "og:title", content: "Detalle de organización — Cloro" },
+      { property: "og:description", content: "Administra la suscripción y consulta la actividad de una organización en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: AdminOrgDetail,
 });
 

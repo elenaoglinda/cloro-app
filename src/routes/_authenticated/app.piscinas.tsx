@@ -5,6 +5,16 @@ import { Droplets } from "lucide-react";
 import { listPiscinas } from "@/lib/piscinas.functions";
 
 export const Route = createFileRoute("/_authenticated/app/piscinas")({
+  head: () => ({
+    meta: [
+      { title: "Piscinas — Cloro" },
+      { name: "description", content: "Consulta las piscinas gestionadas por tu empresa en Cloro." },
+      { property: "og:title", content: "Piscinas — Cloro" },
+      { property: "og:description", content: "Consulta las piscinas gestionadas por tu empresa en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: PiscinasList,
 });
 

@@ -23,6 +23,16 @@ import {
 
 
 export const Route = createFileRoute("/_authenticated/superadmin/orgs/")({
+  head: () => ({
+    meta: [
+      { title: "Organizaciones — Cloro" },
+      { name: "description", content: "Administra las organizaciones y sus suscripciones en Cloro." },
+      { property: "og:title", content: "Organizaciones — Cloro" },
+      { property: "og:description", content: "Administra las organizaciones y sus suscripciones en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: AdminOrgsList,
 });
 

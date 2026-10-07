@@ -9,6 +9,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export const Route = createFileRoute("/_authenticated/app/rutas/")({
+  head: () => ({
+    meta: [
+      { title: "Rutas — Cloro" },
+      { name: "description", content: "Organiza las rutas de mantenimiento de piscinas de tu equipo en Cloro." },
+      { property: "og:title", content: "Rutas — Cloro" },
+      { property: "og:description", content: "Organiza las rutas de mantenimiento de piscinas de tu equipo en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: RutasPage,
 });
 

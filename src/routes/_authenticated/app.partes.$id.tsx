@@ -16,6 +16,16 @@ import {
 } from "@/lib/parte-ranges";
 
 export const Route = createFileRoute("/_authenticated/app/partes/$id")({
+  head: () => ({
+    meta: [
+      { title: "Detalle del parte — Cloro" },
+      { name: "description", content: "Consulta las lecturas, fotos y firma de un parte de mantenimiento en Cloro." },
+      { property: "og:title", content: "Detalle del parte — Cloro" },
+      { property: "og:description", content: "Consulta las lecturas, fotos y firma de un parte de mantenimiento en Cloro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: ParteDetail,
 });
 
