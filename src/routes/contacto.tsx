@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { z } from "zod";
+import { useServerFn } from "@tanstack/react-start";
+import { contactSchema } from "@/lib/contact-schema";
+import { sendContactMessage } from "@/lib/contact.functions";
+import { Button } from "@/components/ui/button";
 import { Phone, MessageSquare, CheckCircle2 } from "lucide-react";
 
 const URL_PATH = "/contacto";
@@ -29,49 +32,60 @@ export const Route = createFileRoute("/contacto")({
   component: ContactPage,
 });
 
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Indica tu nombre").max(200),
-  email: z.string().trim().email("Email no válido").max(320),
-  company: z.string().trim().max(200).optional().or(z.literal("")),
-  phone: z.string().trim().max(50).optional().or(z.literal("")),
-  message: z.string().trim().min(5, "Cuéntanos un poco más").max(5000),
-});
-
 function ContactPage() {
+  const sendMessage = useServerFn(sendContactMessage);
+  const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (status === "loading") return;
+    const form = e.currentTarget;
     setStatus("loading");
     setErrorMsg("");
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
+    const id = submissionId ?? crypto.randomUUID();
+    setSubmissionId(id);
     const parsed = contactSchema.safeParse({
       name: formData.get("name"),
       email: formData.get("email"),
       company: formData.get("company") ?? "",
       phone: formData.get("phone") ?? "",
       message: formData.get("message"),
+      website: formData.get("website") ?? "",
+      submissionId: id,
     });
     if (!parsed.success) {
       setStatus("error");
       setErrorMsg(parsed.error.issues[0]?.message ?? "Datos no válidos");
       return;
     }
-    const { error } = await supabase.from("contact_messages").insert({
+    try {
+      const result = await sendMessage({ data: parsed.data });
+      if (!result.success) {
+        setStatus("error");
+        setErrorMsg(result.error);
+        return;
+      }
+      if (!parsed.data.website) {
+        const { error } = await supabase.from("contact_messages").insert({
       name: parsed.data.name,
       email: parsed.data.email,
       company: parsed.data.company || null,
       phone: parsed.data.phone || null,
       message: parsed.data.message,
-    });
-    if (error) {
+        });
+        if (error) console.error("No se ha podido guardar la copia del mensaje de contacto.");
+      }
+      setStatus("success");
+      setSubmissionId(null);
+      form.reset();
+    } catch {
       setStatus("error");
       setErrorMsg("No hemos podido enviar el mensaje. Inténtalo de nuevo.");
       return;
     }
-    setStatus("success");
-    (e.target as HTMLFormElement).reset();
   }
 
   return (
@@ -96,18 +110,22 @@ function ContactPage() {
           <p className="text-muted-foreground mt-2">
             Gracias por escribirnos. Te contestamos al email que nos has facilitado.
           </p>
-          <button
+          <Button variant="outline"
             onClick={() => setStatus("idle")}
             className="mt-6 inline-flex items-center justify-center h-10 px-5 rounded-md border border-border text-sm font-medium hover:bg-surface transition"
           >
             Enviar otro mensaje
-          </button>
+          </Button>
         </div>
       ) : (
         <form
           onSubmit={handleSubmit}
           className="rounded-2xl border border-border/60 bg-surface p-6 md:p-8 space-y-5"
         >
+          <div className="sr-only" aria-hidden="true">
+            <label htmlFor="contact-website">Sitio web</label>
+            <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" maxLength={1000} />
+          </div>
           <div className="grid md:grid-cols-2 gap-5">
             <Field label="Nombre *" name="name" type="text" required />
             <Field label="Email *" name="email" type="email" required />
@@ -117,12 +135,13 @@ function ContactPage() {
             <Field label="Teléfono" name="phone" type="tel" />
           </div>
           <div>
-            <label className="text-sm font-medium block mb-1.5">Mensaje *</label>
+            <label htmlFor="contact-message" className="text-sm font-medium block mb-1.5">Mensaje *</label>
             <textarea
               name="message"
+              id="contact-message"
               required
               rows={5}
-              maxLength={5000}
+              maxLength={500}
               placeholder="¿Cuántas piscinas mantienes? ¿Qué herramientas usas hoy?"
               className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
             />
@@ -130,13 +149,13 @@ function ContactPage() {
           {errorMsg && (
             <p className="text-sm text-destructive">{errorMsg}</p>
           )}
-          <button
+          <Button
             type="submit"
             disabled={status === "loading"}
             className="w-full sm:w-auto inline-flex items-center justify-center h-11 px-6 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition shadow-soft disabled:opacity-60"
           >
             {status === "loading" ? "Enviando..." : "Enviar mensaje"}
-          </button>
+          </Button>
           <a
             href="https://wa.me/34678785020?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20Cloro"
             target="_blank"
@@ -154,9 +173,11 @@ function ContactPage() {
 function Field({ label, name, type, required }: { label: string; name: string; type: string; required?: boolean }) {
   return (
     <div>
-      <label className="text-sm font-medium block mb-1.5">{label}</label>
+      <label htmlFor={`contact-${name}`} className="text-sm font-medium block mb-1.5">{label}</label>
       <input
         name={name}
+        id={`contact-${name}`}
+        maxLength={name === "email" ? 255 : name === "phone" ? 50 : 200}
         type={type}
         required={required}
         className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
