@@ -23,6 +23,7 @@ export function SiteNav() {
           <a href="/#precios" className="hover:text-foreground transition">Precios</a>
           <Link to="/preguntas-frecuentes" className="hover:text-foreground transition">FAQ</Link>
           <Link to="/blog" className="hover:text-foreground transition">Blog</Link>
+          <Link to="/contacto" className="hover:text-foreground transition">Contacto</Link>
         </div>
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" className="xl:hidden" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} aria-controls="site-menu" onClick={() => setMenuOpen(!menuOpen)}>
@@ -45,6 +46,7 @@ export function SiteNav() {
             ["Precios", "/#precios"],
             ["FAQ", "/preguntas-frecuentes"],
             ["Blog", "/blog"],
+            ["Contacto", "/contacto"],
           ].map(([label, href]) => (
             <a key={href} href={href} onClick={() => setMenuOpen(false)} className="text-muted-foreground hover:text-foreground">{label}</a>
           ))}

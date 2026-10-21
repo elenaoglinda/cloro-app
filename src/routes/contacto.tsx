@@ -5,6 +5,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { contactSchema } from "@/lib/contact-schema";
 import { sendContactMessage } from "@/lib/contact.functions";
 import { Button } from "@/components/ui/button";
+import { SiteNav } from "@/components/site/SiteNav";
+import { SiteFooter } from "@/components/site/SiteFooter";
 import { Phone, MessageSquare, CheckCircle2 } from "lucide-react";
 
 const URL_PATH = "/contacto";
@@ -89,7 +91,9 @@ function ContactPage() {
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-6 py-16">
+    <>
+      <SiteNav />
+      <main className="max-w-3xl mx-auto px-6 py-16">
       <div className="text-center mb-12">
         <span className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground bg-surface border border-border/60 px-3 py-1 rounded-full">
           <MessageSquare className="size-3.5" /> Contacto
@@ -166,7 +170,9 @@ function ContactPage() {
           </a>
         </form>
       )}
-    </main>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
 
