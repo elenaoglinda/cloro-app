@@ -1,4 +1,5 @@
-import { describe, expect, test } from "bun:test";
+import { describe, test } from "node:test";
+import { strict as assert } from "node:assert";
 import { contactSchema, contactPayload, transactionalPayload } from "./contact-schema";
 
 const input = {
@@ -8,27 +9,27 @@ const input = {
 
 describe("Contact delivery rules", () => {
   test("sends the chosen template to Elena", () => {
-    expect(transactionalPayload(contactSchema.parse(input))).toMatchObject({
-      email: "elena@tertie.co", transactionalId: "cmvgrblm2027j0j1wvksob5f5",
-    });
+    const payload = transactionalPayload(contactSchema.parse(input));
+    assert.equal(payload.email, "elena@tertie.co");
+    assert.equal(payload.transactionalId, "cmvgrblm2027j0j1wvksob5f5");
   });
   test("replies go to the sender", () => {
-    expect(transactionalPayload(contactSchema.parse(input)).replyTo).toBe(input.email);
+    assert.equal(transactionalPayload(contactSchema.parse(input)).replyTo, input.email);
   });
   test("passes the four requested template variables", () => {
-    expect(transactionalPayload(contactSchema.parse(input)).dataVariables).toEqual({
+    assert.deepEqual(transactionalPayload(contactSchema.parse(input)).dataVariables, {
       name: input.name, email: input.email, company: input.company, message: input.message,
     });
   });
   test("sets contact source without marketing opt-in", () => {
-    expect(contactPayload(contactSchema.parse(input))).toEqual({
+    assert.deepEqual(contactPayload(contactSchema.parse(input)), {
       email: input.email, firstName: input.name, source: "contact-form", subscribed: false,
     });
   });
   test("retains honeypot input for server rejection", () => {
-    expect(contactSchema.parse({ ...input, website: "spam.example" }).website).toBe("spam.example");
+    assert.equal(contactSchema.parse({ ...input, website: "spam.example" }).website, "spam.example");
   });
   test("rejects invalid sender addresses", () => {
-    expect(contactSchema.safeParse({ ...input, email: "not-an-email" }).success).toBe(false);
+    assert.equal(contactSchema.safeParse({ ...input, email: "not-an-email" }).success, false);
   });
 });
