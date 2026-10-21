@@ -22,7 +22,7 @@ describe("Contact delivery rules", () => {
   });
   test("sets contact source without marketing opt-in", () => {
     expect(contactPayload(contactSchema.parse(input))).toEqual({
-      email: input.email, firstName: input.name, source: "contact-form",
+      email: input.email, firstName: input.name, source: "contact-form", subscribed: false,
     });
   });
   test("retains honeypot input for server rejection", () => {

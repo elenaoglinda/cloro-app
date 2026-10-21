@@ -27,5 +27,5 @@ export function transactionalPayload(data: ContactInput) {
 }
 
 export function contactPayload(data: ContactInput) {
-  return { email: data.email, firstName: data.name, source: "contact-form" };
+  return { email: data.email, firstName: data.name, source: "contact-form", subscribed: false };
 }
