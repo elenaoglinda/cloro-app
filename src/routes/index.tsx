@@ -56,7 +56,7 @@ const FAQS = [
   },
   {
     q: "¿Es obligatorio llevar el registro de parámetros de piscinas en España?",
-    a: "Sí, el RD 742/2013 obliga al titular de cualquier piscina de uso público (hoteles, cámpings, comunidades de más de 30 viviendas, gimnasios, polideportivos) a registrar pH, cloro libre y combinado, temperatura, turbidez y aforo cada día de apertura, además de analíticas mensuales por laboratorio acreditado. Cloro automatiza tanto el parte diario del técnico como la subida a SILOÉ.",
+    a: "Sí, en las piscinas de uso público (piscinas municipales, parques acuáticos, spas, hoteles, alojamientos turísticos, cámpings, gimnasios…). El RD 742/2013 obliga al titular a hacer un control de rutina cada día, antes de abrir al público (pH, desinfectante residual, turbidez, transparencia, temperatura y tiempo de recirculación), y un control periódico al mes en laboratorio (artículo 11 y anexo III). Las piscinas de comunidades de propietarios son de uso privado (tipo 3A) y el real decreto solo les exige una parte de estas obligaciones, pero su comunidad autónoma puede pedirles el resto: consulta la normativa autonómica. Cloro registra el control del técnico y genera el XML para SILOÉ.",
   },
   {
     q: "¿En qué se diferencia Cloro de Skimmer, Pool Office o ServiceTitan?",
