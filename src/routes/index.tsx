@@ -48,11 +48,11 @@ const FAQS = [
   },
   {
     q: "¿Cuál es el mejor software para empresas de mantenimiento de piscinas en España?",
-    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria española ni la facturación VeriFactu.",
+    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013 y genera el XML de SILOÉ. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria española ni la facturación VeriFactu.",
   },
   {
     q: "¿Cloro genera el informe SILOÉ exactamente como lo pide Sanidad?",
-    a: "Sí. Generamos el XML conforme al Anexo IV del RD 742/2013 listo para subir al portal SILOÉ, más un Excel por vaso para tu archivo. Validamos en tiempo real lecturas fuera de rango, días sin parte y analíticas mensuales pendientes, para que no te llegue un requerimiento de la consejería.",
+    a: "Sí. Generamos el XML conforme al Anexo IV del RD 742/2013 listo para subir al portal SILOÉ. Validamos en tiempo real lecturas fuera de rango, días sin parte y analíticas mensuales pendientes, para que no te llegue un requerimiento de la consejería.",
   },
   {
     q: "¿Es obligatorio llevar el registro de parámetros de piscinas en España?",
@@ -64,27 +64,27 @@ const FAQS = [
   },
   {
     q: "¿Sirve también para una sola persona con 30-60 piscinas?",
-    a: "Sí, es nuestro perfil Solo (autónomo). Por 19 €/mes + 0,99 € por piscina tienes rutas optimizadas con Google Routes, parte diario con foto y firma y portal de cliente. La mayoría de autónomos recupera 4-6 horas a la semana sólo eliminando el Excel y los WhatsApp sueltos.",
+    a: "Sí, es nuestro perfil Solo (autónomo). Por 19 €/mes + 0,99 € por piscina tienes rutas optimizadas y parte diario con foto y firma. La mayoría de autónomos recupera 4-6 horas a la semana sólo eliminando el Excel y los WhatsApp sueltos.",
   },
   {
     q: "¿Cómo optimiza Cloro las rutas de mantenimiento?",
-    a: "Usamos Google Routes API con tráfico en tiempo real, ventanas horarias por cliente (comunidades que sólo abren mañanas, hoteles con check-in a partir de las 14h) y el tiempo medio real de cada piscina. Una ruta típica de 18 piscinas baja de ~7,5 h a ~5,5 h. El técnico ve la siguiente parada con navegación nativa (Google Maps o Waze).",
+    a: "Eliges las piscinas del día y Cloro calcula el orden de visita que acorta el recorrido, con la hora estimada de llegada a cada parada. El técnico abre la ruta en Google Maps y marca cada parada como hecha o saltada.",
   },
   {
     q: "¿El agente de WhatsApp habla con mis clientes en mi nombre?",
-    a: "Sí, usa el número de WhatsApp Business de tu empresa y responde 24/7 a preguntas frecuentes (precios orientativos, próxima visita, resultado de la última analítica), agenda visitas en huecos que tú defines y escala automáticamente urgencias o casos complejos a tu móvil. Tú validas el tono antes de activarlo.",
+    a: "Todavía no: el agente de WhatsApp está en desarrollo. Cuando llegue, usará el número de WhatsApp Business de tu empresa y responderá 24/7 a preguntas frecuentes (precios orientativos, próxima visita, resultado de la última analítica), agendará visitas en huecos que tú definas y te pasará las urgencias o los casos complejos. Tú validarás el tono antes de activarlo.",
   },
   {
     q: "¿Funciona si mi técnico está en un chalet sin cobertura?",
-    a: "Sí. La app móvil tiene modo offline real: lecturas, fotos, firmas, productos aplicados y partes se guardan en el dispositivo y se sincronizan en menos de 10 segundos cuando vuelve la señal. Es la queja número uno que vemos en Reddit sobre apps americanas y europeas: Cloro se diseñó offline-first.",
+    a: "Todavía no. Hoy Cloro funciona en el navegador del móvil y necesita conexión para guardar el parte. Estamos trabajando en el modo sin conexión: lecturas, fotos y firma guardadas en el móvil y enviadas al recuperar la señal.",
   },
   {
     q: "¿Puedo gestionar comunidades de propietarios con Cloro?",
-    a: "Sí. Puedes guardar el NIF de la comunidad y varios contactos, como el administrador, el presidente o el conserje. El administrador y los vecinos pueden acceder al portal para consultar informes y analíticas de su piscina.",
+    a: "Sí. Guardas la comunidad con su NIF y un contacto (por ejemplo, el administrador), y le envías el informe de cada visita y el resumen mensual en PDF por correo o WhatsApp.",
   },
   {
     q: "¿Cuánto cuesta un software de gestión de piscinas?",
-    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Cloro arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ, facturación con VeriFactu y portal de cliente sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
+    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Cloro arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ y facturación con VeriFactu sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
   },
   {
     q: "¿Cómo se gestiona la dosificación de cloro y pH desde la app?",
@@ -111,13 +111,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, partes digitales, facturación VeriFactu, SILOÉ y clientes por WhatsApp.",
+          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, partes digitales, facturación VeriFactu y SILOÉ.",
       },
       { property: "og:title", content: "Cloro — Gestión de mantenimiento de piscinas" },
       {
         property: "og:description",
         content:
-          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, partes digitales, facturación VeriFactu, SILOÉ y clientes por WhatsApp.",
+          "Sistema operativo para empresas de mantenimiento de piscinas. Gestiona rutas, partes digitales, facturación VeriFactu y SILOÉ.",
       },
       { property: "og:url", content: "https://cloro.app/" },
       { property: "og:type", content: "website" },
@@ -351,13 +351,13 @@ function Features() {
   const features = [
     {
       icon: FileSpreadsheet,
-      t: "Partes en papel → Excel SILOÉ",
-      d: "Fotografía los partes manuales con el móvil y genera el informe SILOÉ en Excel listo para la consejería.",
+      t: "Partes en papel → SILOÉ",
+      d: "Fotografía los partes manuales con el móvil y pasa las lecturas al registro de cada vaso, listas para el informe SILOÉ.",
     },
     {
       icon: MapPin,
       t: "Rutas optimizadas en un toque",
-      d: "Arrastra piscinas al calendario semanal y deja que Google Routes minimice tu ruta. Menos kilómetros, más visitas.",
+      d: "Elige las piscinas del día y Cloro calcula el orden que acorta el recorrido. Menos kilómetros, más visitas.",
     },
     {
       icon: Beaker,
@@ -367,7 +367,7 @@ function Features() {
     {
       icon: FileCheck2,
       t: "Informes SILOÉ automáticos",
-      d: "Genera el Anexo IV completo (XML + Excel por vaso) listo para subir al portal del Ministerio.",
+      d: "Genera el XML de resultados anuales (Anexo IV) listo para subir al portal del Ministerio.",
     },
     {
       icon: MessageCircle,
@@ -408,15 +408,15 @@ function Features() {
             <p className="text-sm font-medium text-accent">App de campo</p>
             <h3 className="mt-2 text-3xl lg:text-4xl">Diseñada para una furgoneta con el sol de cara.</h3>
             <p className="mt-4 text-muted-foreground">
-              Botones grandes, fuente legible, modo offline real. El técnico no puede cerrar una visita sin las lecturas
+              Botones grandes y fuente legible. El técnico no puede cerrar una visita sin las lecturas
               obligatorias — adiós a las inspecciones reconstruidas la noche antes.
             </p>
             <ul className="mt-6 space-y-3 text-sm">
               {[
                 "Foto antes/después con sello GPS y hora",
-                "Stock de químicos por furgoneta y aviso de reposición",
                 "Firma del cliente en pantalla o por enlace WhatsApp",
-                "Sincronización en menos de 10 segundos al recuperar señal",
+                "Semáforo de cada lectura según el RD 742/2013",
+                "Productos aplicados y tareas hechas en cada visita",
               ].map((x) => (
                 <li key={x} className="flex gap-2">
                   <Check className="size-4 text-primary mt-0.5" /> {x}
@@ -455,8 +455,8 @@ function PaperToSiloe() {
     },
     {
       icon: FileCheck2,
-      t: "Excel SILOÉ por vaso",
-      d: "Genera el Anexo IV en formato Excel, validado contra los rangos del RD 742/2013, para enviar a Sanidad.",
+      t: "Informe SILOÉ",
+      d: "Las lecturas pasan al registro del vaso, con semáforo según el RD 742/2013, y al XML de SILOÉ para Sanidad.",
     },
     {
       icon: ShieldCheck,
@@ -469,11 +469,11 @@ function PaperToSiloe() {
     <section id="paper-to-siloe" className="py-24 bg-surface">
       <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-2xl">
-          <p className="text-sm font-medium text-accent">De papel a Excel</p>
-          <h2 className="mt-2 text-4xl lg:text-5xl">De la libreta al Excel de Sanidad en un clic</h2>
+          <p className="text-sm font-medium text-accent">De papel a SILOÉ</p>
+          <h2 className="mt-2 text-4xl lg:text-5xl">De la libreta al informe de Sanidad</h2>
           <p className="mt-4 text-muted-foreground">
             Si aún tienes técnicos apuntando lecturas en papel, no tires ni una temporada de registros.
-            Sube una foto del parte, Cloro extrae los datos y genera el informe SILOÉ en Excel listo
+            Sube una foto del parte, Cloro extrae los datos y, tras tu revisión, pasan al informe SILOÉ
             para la consejería.
           </p>
         </div>
@@ -513,25 +513,25 @@ function WhatsAppAgent() {
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
         <div>
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[color:var(--whatsapp)]/15 text-[color:var(--whatsapp)] text-xs font-medium">
-            <MessageCircle className="size-3.5" /> Nuevo · Agente IA en WhatsApp
+            <MessageCircle className="size-3.5" /> Próximamente · Agente IA en WhatsApp
           </span>
-          <h2 className="mt-4 text-4xl lg:text-5xl">El cliente escribe a WhatsApp. Cloro reserva la visita.</h2>
+          <h2 className="mt-4 text-4xl lg:text-5xl">El cliente escribirá a WhatsApp. Cloro reservará la visita.</h2>
           <p className="mt-4 text-muted-foreground">
-            En España todo se hace por WhatsApp. Nuestro agente conversacional atiende a tus clientes 24/7, entiende lo
-            que necesitan, propone huecos reales en tu calendario y reserva la visita con un brief completo para el
-            técnico.
+            En España todo se hace por WhatsApp. Estamos preparando un agente conversacional que atenderá a tus clientes
+            24/7, entenderá lo que necesitan, propondrá huecos reales en tu calendario y reservará la visita con un
+            brief completo para el técnico.
           </p>
           <ul className="mt-6 space-y-4">
             {[
               {
                 icon: Calendar,
                 t: "Conectado a tu calendario",
-                d: "Sincroniza con Google Calendar y la planificación de Cloro. Solo propone huecos compatibles con la ruta del día.",
+                d: "Se sincronizará con Google Calendar y la planificación de Cloro. Solo propondrá huecos compatibles con la ruta del día.",
               },
               {
                 icon: Clock,
                 t: "Atención 24/7 en castellano",
-                d: "Resuelve dudas frecuentes (precios orientativos, qué incluye una visita, urgencias) sin que tú tengas que cogerlo a las 22:00.",
+                d: "Resolverá dudas frecuentes (precios orientativos, qué incluye una visita, urgencias) sin que tú tengas que cogerlo a las 22:00.",
               },
               {
                 icon: FileSpreadsheet,
@@ -637,12 +637,12 @@ function Compliance() {
           </h2>
           <p className="mt-4 text-white/80 max-w-xl">
             Cada lectura del técnico alimenta directamente el motor de cumplimiento. El 1 de abril haces clic y Cloro te
-            entrega el XML listo para subir al portal del Ministerio y el Excel por vaso para tu archivo.
+            entrega el XML listo para subir al portal del Ministerio.
           </p>
           <ul className="mt-8 space-y-3">
             {[
               "Validación automática: huecos de días sin parte, lecturas fuera de rango sin incidencia, analíticas mensuales pendientes",
-              "Exportación XML (formato SILOÉ) + Excel por vaso, listos para Sanidad",
+              "Exportación XML en formato SILOÉ, lista para Sanidad",
               "Histórico de 5 años inmutable y firmado, con sello temporal",
               "Panel de cumplimiento por piscina: % de lecturas completas en tiempo real",
             ].map((t) => (
@@ -692,7 +692,7 @@ function Compliance() {
             ))}
           </div>
           <button className="mt-6 w-full h-11 rounded-lg bg-foreground text-background font-medium hover:opacity-90 transition inline-flex items-center justify-center gap-2">
-            <FileSpreadsheet className="size-4" /> Descargar XML + Excel
+            <FileSpreadsheet className="size-4" /> Descargar XML
           </button>
         </div>
       </div>
@@ -766,12 +766,10 @@ function Comparison() {
     eisi: boolean | string;
     jobber: boolean | string;
   }> = [
-    { feature: "Informe SILOÉ (XML + Excel)", cloro: true, autocontrol: true, evisane: true, eisi: true, jobber: false },
-    { feature: "Optimización de rutas con IA", cloro: true, autocontrol: false, evisane: false, eisi: false, jobber: true },
-    { feature: "App offline para técnicos", cloro: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial", jobber: "Parcial" },
-    { feature: "Agente WhatsApp con calendario", cloro: true, autocontrol: false, evisane: false, eisi: false, jobber: "Solo SMS" },
+    { feature: "Informe SILOÉ (XML)", cloro: true, autocontrol: true, evisane: true, eisi: true, jobber: false },
+    { feature: "Optimización de rutas", cloro: true, autocontrol: false, evisane: false, eisi: false, jobber: true },
+    { feature: "Agente WhatsApp con calendario", cloro: "Próximamente", autocontrol: false, evisane: false, eisi: false, jobber: "Solo SMS" },
     { feature: "Facturación VeriFactu (AEAT)", cloro: true, autocontrol: false, evisane: true, eisi: false, jobber: false },
-    { feature: "Portal cliente y comunidades", cloro: true, autocontrol: false, evisane: false, eisi: "Hoteles", jobber: true },
     { feature: "En castellano nativo + soporte ES", cloro: true, autocontrol: true, evisane: true, eisi: true, jobber: "Parcial" },
   ];
 
@@ -853,7 +851,6 @@ function Pricing() {
         "Facturación con VeriFactu (AEAT)",
         "WhatsApp con tus clientes",
         "Partes con foto y firma del cliente",
-        "App de campo offline",
       ],
       featured: false,
     },
@@ -864,10 +861,8 @@ function Pricing() {
       desc: "Empresas familiares de 2–5 técnicos con comunidades y residencial recurrente (20–200 piscinas).",
       features: [
         "Todo lo del plan Solo",
-        "Agente WhatsApp con IA 24/7",
-        "Control horario y kilometraje",
-        "Portal cliente y comunidades",
-        "Optimización de rutas con Google Routes",
+        "Varios técnicos con roles y permisos",
+        "Rutas optimizadas para todo el equipo",
       ],
       featured: true,
     },
@@ -878,8 +873,6 @@ function Pricing() {
       desc: "Operadores con +500 vasos, hoteles y contratos multi-provincia.",
       features: [
         "Todo lo del plan Equipo",
-        "Multi-sede y multi-NIF",
-        "API y exportaciones a ERP",
         "SLA y auditorías hoteleras",
         "Gestor de cuenta dedicado",
       ],
@@ -936,6 +929,24 @@ function Pricing() {
               </ul>
             </div>
           ))}
+        </div>
+        <div id="proximamente" className="mt-8 rounded-2xl border border-dashed border-border bg-card p-6">
+          <p className="text-sm font-medium text-accent">Próximamente</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Estamos trabajando en estas funciones. Aún no están disponibles en ningún plan.
+          </p>
+          <ul className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
+            {[
+              "Agente WhatsApp con IA 24/7",
+              "Control horario y kilometraje",
+              "Multi-sede y multi-NIF",
+              "API y exportaciones a ERP",
+            ].map((x) => (
+              <li key={x} className="flex gap-2">
+                <Clock className="size-4 mt-0.5 shrink-0 text-muted-foreground" /> {x}
+              </li>
+            ))}
+          </ul>
         </div>
         <p className="mt-8 text-center text-xs text-muted-foreground">
           <Euro className="size-3.5 inline -mt-0.5 mr-1" />
@@ -1012,7 +1023,7 @@ function CTA() {
               "Migración guiada de tu Excel actual",
               "Soporte humano en castellano y catalán",
               "Cumplimiento SILOÉ desde el primer día",
-              "Integración con tu WhatsApp Business",
+              "Informes al cliente por correo o WhatsApp",
             ].map((x) => (
               <li key={x} className="flex gap-2">
                 <Check className="size-5 shrink-0" /> {x}

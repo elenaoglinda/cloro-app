@@ -26,11 +26,11 @@ const FAQS = [
   },
   {
     q: "¿Cuál es el mejor software para empresas de mantenimiento de piscinas en España?",
-    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013, genera SILOÉ y funciona offline en chalets sin cobertura. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria española ni la facturación VeriFactu.",
+    a: "Depende del tamaño y de si trabajas con piscinas de uso público (hoteles, comunidades, campings) o sólo residenciales. Cloro está diseñado específicamente para el mercado español: cumple RD 742/2013 y genera el XML de SILOÉ. Skimmer, Pool Office o ServiceTitan son potentes pero están pensados para EE. UU. y no cubren la normativa sanitaria española ni la facturación VeriFactu.",
   },
   {
     q: "¿Cloro genera el informe SILOÉ exactamente como lo pide Sanidad?",
-    a: "Sí. Generamos el XML conforme al Anexo IV del RD 742/2013 listo para subir al portal SILOÉ, más un Excel por vaso para tu archivo. Validamos en tiempo real lecturas fuera de rango, días sin parte y analíticas mensuales pendientes, para que no te llegue un requerimiento de la consejería.",
+    a: "Sí. Generamos el XML conforme al Anexo IV del RD 742/2013 listo para subir al portal SILOÉ. Validamos en tiempo real lecturas fuera de rango, días sin parte y analíticas mensuales pendientes, para que no te llegue un requerimiento de la consejería.",
   },
   {
     q: "¿Es obligatorio llevar el registro de parámetros de piscinas en España?",
@@ -42,27 +42,27 @@ const FAQS = [
   },
   {
     q: "¿Sirve también para una sola persona con 30-60 piscinas?",
-    a: "Sí, es nuestro perfil Solo (autónomo). Por 19 €/mes + 0,99 € por piscina tienes rutas optimizadas con Google Routes, parte diario con foto y firma y portal de cliente. La mayoría de autónomos recupera 4-6 horas a la semana sólo eliminando el Excel y los WhatsApp sueltos.",
+    a: "Sí, es nuestro perfil Solo (autónomo). Por 19 €/mes + 0,99 € por piscina tienes rutas optimizadas y parte diario con foto y firma. La mayoría de autónomos recupera 4-6 horas a la semana sólo eliminando el Excel y los WhatsApp sueltos.",
   },
   {
     q: "¿Cómo optimiza Cloro las rutas de mantenimiento?",
-    a: "Usamos Google Routes API con tráfico en tiempo real, ventanas horarias por cliente (comunidades que sólo abren mañanas, hoteles con check-in a partir de las 14h) y el tiempo medio real de cada piscina. Una ruta típica de 18 piscinas baja de ~7,5 h a ~5,5 h. El técnico ve la siguiente parada con navegación nativa (Google Maps o Waze).",
+    a: "Eliges las piscinas del día y Cloro calcula el orden de visita que acorta el recorrido, con la hora estimada de llegada a cada parada. El técnico abre la ruta en Google Maps y marca cada parada como hecha o saltada.",
   },
   {
     q: "¿El agente de WhatsApp habla con mis clientes en mi nombre?",
-    a: "Sí, usa el número de WhatsApp Business de tu empresa y responde 24/7 a preguntas frecuentes (precios orientativos, próxima visita, resultado de la última analítica), agenda visitas en huecos que tú defines y escala automáticamente urgencias o casos complejos a tu móvil. Tú validas el tono antes de activarlo.",
+    a: "Todavía no: el agente de WhatsApp está en desarrollo. Cuando llegue, usará el número de WhatsApp Business de tu empresa y responderá 24/7 a preguntas frecuentes (precios orientativos, próxima visita, resultado de la última analítica), agendará visitas en huecos que tú definas y te pasará las urgencias o los casos complejos. Tú validarás el tono antes de activarlo.",
   },
   {
     q: "¿Funciona si mi técnico está en un chalet sin cobertura?",
-    a: "Sí. La app móvil tiene modo offline real: lecturas, fotos, firmas, productos aplicados y partes se guardan en el dispositivo y se sincronizan en menos de 10 segundos cuando vuelve la señal. Es la queja número uno que vemos en Reddit sobre apps americanas y europeas: Cloro se diseñó offline-first.",
+    a: "Todavía no. Hoy Cloro funciona en el navegador del móvil y necesita conexión para guardar el parte. Estamos trabajando en el modo sin conexión: lecturas, fotos y firma guardadas en el móvil y enviadas al recuperar la señal.",
   },
   {
     q: "¿Puedo gestionar comunidades de propietarios con Cloro?",
-    a: "Sí. Puedes guardar el NIF de la comunidad y varios contactos, como el administrador, el presidente o el conserje. El administrador y los vecinos pueden acceder al portal para consultar informes y analíticas de su piscina.",
+    a: "Sí. Guardas la comunidad con su NIF y un contacto (por ejemplo, el administrador), y le envías el informe de cada visita y el resumen mensual en PDF por correo o WhatsApp.",
   },
   {
     q: "¿Cuánto cuesta un software de gestión de piscinas?",
-    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Cloro arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ, facturación con VeriFactu y portal de cliente sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
+    a: "El rango habitual en el mercado español va de 0 € (Excel + WhatsApp, con coste oculto en horas) a 300-600 €/mes en suites de cumplimiento sanitario como EviSane o AutocontrolPiscinas. Cloro arranca en 19 €/mes (Solo) e incluye rutas, parte, SILOÉ y facturación con VeriFactu sin módulos extra. Para una empresa con 150 piscinas, el coste real ronda los 168 €/mes.",
   },
   {
     q: "¿Cómo se gestiona la dosificación de cloro y pH desde la app?",
