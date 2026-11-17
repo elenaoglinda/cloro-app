@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Upload, Trash2, FileText, Pencil } from "lucide-react";
+import { ArrowLeft, Upload, Trash2, FileText, Pencil, Sparkles } from "lucide-react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { getParte, updateParteFirma } from "@/lib/partes.functions";
+import { analizarParte } from "@/lib/partes-ai.functions";
 import { listFotos, registerFoto, deleteFoto } from "@/lib/fotos.functions";
 import { getMyContext } from "@/lib/orgs.functions";
 import { supabase } from "@/integrations/supabase/client";
@@ -69,10 +70,25 @@ function ParteDetail() {
   const registerFotoFn = useServerFn(registerFoto);
   const deleteFotoFn = useServerFn(deleteFoto);
   const updateFirmaFn = useServerFn(updateParteFirma);
+  const analizarFn = useServerFn(analizarParte);
   const ctxFn = useServerFn(getMyContext);
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [savingFirma, setSavingFirma] = useState(false);
+  const [analisis, setAnalisis] = useState<string | null>(null);
+  const [analizando, setAnalizando] = useState(false);
+
+  async function handleAnalizar() {
+    setAnalizando(true);
+    try {
+      const res = await analizarFn({ data: { id } });
+      setAnalisis(res.analisis);
+    } catch (err: any) {
+      toast.error(err.message || "No se pudo generar el análisis");
+    } finally {
+      setAnalizando(false);
+    }
+  }
 
   const { data, isLoading } = useQuery({ queryKey: ["parte", id], queryFn: () => getParteFn({ data: { id } }) });
   const { data: fotosData } = useQuery({ queryKey: ["parte-fotos", id], queryFn: () => listFotosFn({ data: { parte_id: id } }) });
@@ -167,6 +183,25 @@ function ParteDetail() {
             </Link>
           )}
         </div>
+      </div>
+
+      {/* Análisis con IA */}
+      <div className="bg-card border border-border rounded-lg p-5">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-sm font-semibold flex items-center gap-2">
+            <Sparkles className="size-4 text-primary" /> Análisis con IA
+          </h2>
+          <Button size="sm" variant="outline" onClick={handleAnalizar} disabled={analizando}>
+            {analizando ? "Analizando..." : analisis ? "Volver a analizar" : "Analizar lecturas"}
+          </Button>
+        </div>
+        {analisis ? (
+          <p className="text-sm whitespace-pre-wrap leading-relaxed">{analisis}</p>
+        ) : (
+          <p className="text-xs text-muted-foreground">
+            La IA valora las lecturas según el RD 742/2013 y te propone acciones concretas. Es una ayuda, no sustituye tu criterio técnico.
+          </p>
+        )}
       </div>
 
       {/* Sección B */}

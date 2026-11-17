@@ -109,8 +109,11 @@ export function blogContent(): Plugin {
 
   function postsModule(): string {
     const posts = readPosts();
+    // Absolute filesystem paths: root-relative "/src/..." imports are not resolved
+    // from a virtual module by the dev bundler.
     const imports = posts.map(
-      (p, i) => `import cover${i} from ${JSON.stringify(`/src/assets/blog/${p.data.cover}`)};`,
+      (p, i) =>
+        `import cover${i} from ${JSON.stringify(path.join(coverDir(), p.data.cover).split(path.sep).join("/"))};`,
     );
     const entries = posts.map((p, i) => {
       const words = countWords(p.body);
