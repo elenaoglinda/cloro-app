@@ -21,7 +21,7 @@ export function SiteFooter() {
           <h4 className="text-sm font-medium mb-3">Producto</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><a href="/#caracteristicas" className="hover:text-foreground">Características</a></li>
-            <li><a href="/#whatsapp" className="hover:text-foreground">Agente WhatsApp</a></li>
+            <li><a href="/#whatsapp" className="hover:text-foreground">Agente WhatsApp (próximamente)</a></li>
             <li><a href="/#cumplimiento" className="hover:text-foreground">Cumplimiento SILOÉ</a></li>
             <li><a href="/#verifactu" className="hover:text-foreground">Facturación VeriFactu</a></li>
             <li><a href="/#precios" className="hover:text-foreground">Precios</a></li>

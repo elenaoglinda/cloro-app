@@ -38,7 +38,7 @@ function Page() {
         "SILOÉ y RD 742/2013 integrados, sin formularios a medida",
         "Facturación conectada con VeriFactu (AEAT)",
         "Toda la plataforma y el soporte en castellano",
-        "Agente WhatsApp 24/7, el canal que usan tus clientes en España",
+        "Agente WhatsApp 24/7 (próximamente), el canal que usan tus clientes en España",
       ]}
       sections={[
         {
@@ -101,7 +101,7 @@ function Page() {
             { feature: "Portal del cliente", cloro: true, competitor: true },
             {
               feature: "Agente WhatsApp 24/7",
-              cloro: true,
+              cloro: "Próximamente",
               competitor: "partial",
               detail:
                 "Jobber ofrece recepcionista IA por llamada y SMS; WhatsApp solo con integraciones de terceros",

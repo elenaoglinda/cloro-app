@@ -16,7 +16,7 @@ export function SiteNav() {
         </Link>
         <div className="hidden xl:flex items-center gap-5 text-sm text-muted-foreground">
           <a href="/#caracteristicas" className="hover:text-foreground transition">Características</a>
-          <a href="/#whatsapp" className="hover:text-foreground transition">Agente WhatsApp</a>
+          <a href="/#whatsapp" className="hover:text-foreground transition inline-flex items-center gap-1.5">Agente WhatsApp<span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-medium leading-none">Pronto</span></a>
           <a href="/#cumplimiento" className="hover:text-foreground transition">SILOÉ</a>
           <a href="/#verifactu" className="hover:text-foreground transition">VeriFactu</a>
           <a href="/#comparativa" className="hover:text-foreground transition">Comparativa</a>
@@ -39,7 +39,7 @@ export function SiteNav() {
         <nav id="site-menu" aria-label="Menú principal" className="xl:hidden border-t border-border bg-background px-6 py-4 grid grid-cols-2 gap-4 text-sm">
           {[
             ["Características", "/#caracteristicas"],
-            ["Agente WhatsApp", "/#whatsapp"],
+            ["Agente WhatsApp (próximamente)", "/#whatsapp"],
             ["SILOÉ", "/#cumplimiento"],
             ["VeriFactu", "/#verifactu"],
             ["Comparativa", "/#comparativa"],

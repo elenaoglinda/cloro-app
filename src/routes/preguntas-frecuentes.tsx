@@ -50,7 +50,7 @@ const FAQS = [
   },
   {
     q: "¿El agente de WhatsApp habla con mis clientes en mi nombre?",
-    a: "Sí, usa el número de WhatsApp Business de tu empresa y responde 24/7 a preguntas frecuentes (precios orientativos, próxima visita, resultado de la última analítica), agenda visitas en huecos que tú defines y escala automáticamente urgencias o casos complejos a tu móvil. Tú validas el tono antes de activarlo.",
+    a: "Lo hará muy pronto: el agente de WhatsApp está en desarrollo. Usará el número de WhatsApp Business de tu empresa para responder 24/7 a preguntas frecuentes (precios orientativos, próxima visita, resultado de la última analítica), agendar visitas en huecos que tú defines y escalar urgencias o casos complejos a tu móvil. Tú validarás el tono antes de activarlo.",
   },
   {
     q: "¿Funciona si mi técnico está en un chalet sin cobertura?",

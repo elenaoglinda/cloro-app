@@ -72,7 +72,7 @@ const FAQS = [
   },
   {
     q: "¿El agente de WhatsApp habla con mis clientes en mi nombre?",
-    a: "Sí, usa el número de WhatsApp Business de tu empresa y responde 24/7 a preguntas frecuentes (precios orientativos, próxima visita, resultado de la última analítica), agenda visitas en huecos que tú defines y escala automáticamente urgencias o casos complejos a tu móvil. Tú validas el tono antes de activarlo.",
+    a: "Lo hará muy pronto: el agente de WhatsApp está en desarrollo. Usará el número de WhatsApp Business de tu empresa para responder 24/7 a preguntas frecuentes (precios orientativos, próxima visita, resultado de la última analítica), agendar visitas en huecos que tú defines y escalar urgencias o casos complejos a tu móvil. Tú validarás el tono antes de activarlo.",
   },
   {
     q: "¿Funciona si mi técnico está en un chalet sin cobertura?",
@@ -190,8 +190,8 @@ function Hero() {
             .
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl text-balance">
-            Gestiona rutas, parámetros químicos, partes digitales, facturación VeriFactu e informes SILOÉ desde un único lugar. Con un
-            agente de WhatsApp que capta y agenda nuevos clientes mientras atiendes los actuales.
+            Gestiona rutas, parámetros químicos, partes digitales, facturación VeriFactu e informes SILOÉ desde un único lugar. Y muy pronto,
+            un agente de WhatsApp que capta y agenda nuevos clientes mientras atiendes los actuales.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
@@ -513,12 +513,12 @@ function WhatsAppAgent() {
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
         <div>
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[color:var(--whatsapp)]/15 text-[color:var(--whatsapp)] text-xs font-medium">
-            <MessageCircle className="size-3.5" /> Nuevo · Agente IA en WhatsApp
+            <MessageCircle className="size-3.5" /> Próximamente · Agente IA en WhatsApp
           </span>
           <h2 className="mt-4 text-4xl lg:text-5xl">El cliente escribe a WhatsApp. Cloro reserva la visita.</h2>
           <p className="mt-4 text-muted-foreground">
-            En España todo se hace por WhatsApp. Nuestro agente conversacional atiende a tus clientes 24/7, entiende lo
-            que necesitan, propone huecos reales en tu calendario y reserva la visita con un brief completo para el
+            En España todo se hace por WhatsApp. Nuestro agente conversacional, que llega muy pronto, atenderá a tus clientes 24/7, entenderá lo
+            que necesitan, propondrá huecos reales en tu calendario y reservará la visita con un brief completo para el
             técnico.
           </p>
           <ul className="mt-6 space-y-4">
@@ -769,7 +769,7 @@ function Comparison() {
     { feature: "Informe SILOÉ (XML + Excel)", cloro: true, autocontrol: true, evisane: true, eisi: true, jobber: false },
     { feature: "Optimización de rutas con IA", cloro: true, autocontrol: false, evisane: false, eisi: false, jobber: true },
     { feature: "App offline para técnicos", cloro: true, autocontrol: "Parcial", evisane: false, eisi: "Parcial", jobber: "Parcial" },
-    { feature: "Agente WhatsApp con calendario", cloro: true, autocontrol: false, evisane: false, eisi: false, jobber: "Solo SMS" },
+    { feature: "Agente WhatsApp con calendario", cloro: "Próximamente", autocontrol: false, evisane: false, eisi: false, jobber: "Solo SMS" },
     { feature: "Facturación VeriFactu (AEAT)", cloro: true, autocontrol: false, evisane: true, eisi: false, jobber: false },
     { feature: "Portal cliente y comunidades", cloro: true, autocontrol: false, evisane: false, eisi: "Hoteles", jobber: true },
     { feature: "En castellano nativo + soporte ES", cloro: true, autocontrol: true, evisane: true, eisi: true, jobber: "Parcial" },
@@ -864,7 +864,7 @@ function Pricing() {
       desc: "Empresas familiares de 2–5 técnicos con comunidades y residencial recurrente (20–200 piscinas).",
       features: [
         "Todo lo del plan Solo",
-        "Agente WhatsApp con IA 24/7",
+        "Agente WhatsApp con IA 24/7 (próximamente)",
         "Control horario y kilometraje",
         "Portal cliente y comunidades",
         "Optimización de rutas con Google Routes",
