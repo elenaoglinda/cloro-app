@@ -38,7 +38,7 @@ function Page() {
         "Mismo cumplimiento SILOÉ y XML del Anexo IV",
         "Cloro añade rutas, partes y firma digital del técnico",
         "Facturación con VeriFactu a partir de los servicios realizados",
-        "Agente WhatsApp 24/7 para responder a clientes",
+        "Agente WhatsApp 24/7 para responder a clientes (próximamente)",
       ]}
       sections={[
         {
@@ -67,7 +67,7 @@ function Page() {
             { feature: "Facturación conectada con VeriFactu (AEAT)", cloro: true, competitor: false },
             { feature: "Facturas generadas desde los servicios realizados (mensual, puntual o anual)", cloro: true, competitor: false },
             { feature: "Portal del cliente y comunidad de propietarios", cloro: true, competitor: false },
-            { feature: "Agente WhatsApp 24/7", cloro: true, competitor: false },
+            { feature: "Agente WhatsApp 24/7", cloro: "Próximamente", competitor: false },
             { feature: "Recordatorios automáticos y avisos de visita", cloro: true, competitor: "partial" },
           ],
         },

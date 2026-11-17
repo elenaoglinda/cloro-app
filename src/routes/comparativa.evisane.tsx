@@ -38,7 +38,7 @@ function Page() {
         "Foco total en piscinas, sin módulos que no usarás",
         "Implantación en menos de una semana",
         "Precio plano por técnico, sin consultoría obligatoria",
-        "Agente WhatsApp y portal del cliente incluidos",
+        "Portal del cliente incluido y agente WhatsApp próximamente",
       ]}
       sections={[
         {
@@ -67,7 +67,7 @@ function Page() {
             { feature: "Facturación conectada con VeriFactu (AEAT)", cloro: true, competitor: true },
             { feature: "Facturas generadas desde los servicios realizados (mensual, puntual o anual)", cloro: true, competitor: true },
             { feature: "Portal del cliente y comunidad de propietarios", cloro: true, competitor: "partial" },
-            { feature: "Agente WhatsApp 24/7", cloro: true, competitor: false },
+            { feature: "Agente WhatsApp 24/7", cloro: "Próximamente", competitor: false },
           ],
         },
         {
